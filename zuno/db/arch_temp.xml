@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 19-12-2019 a las 16:44:59
+- Versión del servidor: 10.1.37-MariaDB
+- Versión de PHP: 7.3.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="phpmy1_pizarronesguadalajara_com" collation="utf8_spanish2_ci" charset="utf8">
+            <pma:table name="arch_temp">
+                CREATE TABLE `arch_temp` (
+                  `idarch_temp` int(11) NOT NULL AUTO_INCREMENT,
+                  `nombre` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+                  PRIMARY KEY (`idarch_temp`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'pizarrones_db'
+    -->
+    <database name="pizarrones_db">
+        <!-- Tabla arch_temp -->
+    </database>
+</pma_xml_export>

@@ -1,0 +1,16 @@
+.img_fondo {
+	width: 50%;
+	height: 50%;
+	background: #ccc;
+	position: relative;
+
+}
+
+.img_arriba{
+	width: 20%;
+	height: 20%;
+	background: #000;
+	position: absolute;
+	top: 10%;
+	left: 10%;
+}

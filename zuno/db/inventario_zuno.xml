@@ -1,0 +1,1255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 29-11-2019 a las 00:42:57
+- Versión del servidor: 10.1.37-MariaDB
+- Versión de PHP: 7.3.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="phpmy1_pizarronesguadalajara_com" collation="utf8_spanish2_ci" charset="utf8">
+            <pma:table name="inventario_zuno">
+                CREATE TABLE `inventario_zuno` (
+                  `idinventario_zuno` int(11) NOT NULL AUTO_INCREMENT,
+                  `codigo_producto` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  `nombre` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  `descripcion` varchar(256) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  `existencia` int(11) DEFAULT NULL,
+                  `imagen` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  `comentario` varchar(256) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  PRIMARY KEY (`idinventario_zuno`)
+                ) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'pizarrones_db'
+    -->
+    <database name="pizarrones_db">
+        <!-- Tabla inventario_zuno -->
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">1</column>
+            <column name="codigo_producto">BS1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz bco mel 6 mm </column>
+            <column name="existencia">1</column>
+            <column name="imagen">pg_secundaria_paleta.png</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">2</column>
+            <column name="codigo_producto">BS2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz bco mel 6 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">3</column>
+            <column name="codigo_producto">BS3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x60 Piz bco mel 6 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">4</column>
+            <column name="codigo_producto">BS4</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz bco mel 6 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">5</column>
+            <column name="codigo_producto">BS5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz bco mel 6 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">6</column>
+            <column name="codigo_producto">BSG5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz bco mel 6 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">7</column>
+            <column name="codigo_producto">BSG6</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">8</column>
+            <column name="codigo_producto">BSG7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">9</column>
+            <column name="codigo_producto">BSG8</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">10</column>
+            <column name="codigo_producto">BSG9</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x180 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">11</column>
+            <column name="codigo_producto">BSG10</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x240 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">12</column>
+            <column name="codigo_producto">BSG11</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x150 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">13</column>
+            <column name="codigo_producto">BSG12</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x180 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">14</column>
+            <column name="codigo_producto">BSG13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz bco mel 8 mm </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">15</column>
+            <column name="codigo_producto">BSG13 R</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz bco 12 mm en R</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">16</column>
+            <column name="codigo_producto">BSG5cuad</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Pizarr?n mel 8 mm cuad laser</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">17</column>
+            <column name="codigo_producto">BSP2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz bco marco pl?stico </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">18</column>
+            <column name="codigo_producto">BC1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz comb bco corcho </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">19</column>
+            <column name="codigo_producto">BC2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz comb bco corcho </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">20</column>
+            <column name="codigo_producto">BC3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz comb bco corcho </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">21</column>
+            <column name="codigo_producto">BC4</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz comb bco corcho </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">22</column>
+            <column name="codigo_producto">BC5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz comb bco corcho </column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">23</column>
+            <column name="codigo_producto">RB69</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Rotafolio blanco mel</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">24</column>
+            <column name="codigo_producto">RB79</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70x90 Rotafolio blanco mel</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">25</column>
+            <column name="codigo_producto">RBP69</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Rotafolio porcel bco</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">26</column>
+            <column name="codigo_producto">RBP79</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70x90 Rotafolio porcel bco</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">27</column>
+            <column name="codigo_producto">CORK1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">28</column>
+            <column name="codigo_producto">CORK2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">29</column>
+            <column name="codigo_producto">CORK3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x60 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">30</column>
+            <column name="codigo_producto">CORK4</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">31</column>
+            <column name="codigo_producto">CORK5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">32</column>
+            <column name="codigo_producto">CORK6</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">33</column>
+            <column name="codigo_producto">CORK7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">34</column>
+            <column name="codigo_producto">CORK8</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">35</column>
+            <column name="codigo_producto">CORK9</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x180 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">36</column>
+            <column name="codigo_producto">CORK10</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x240 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">37</column>
+            <column name="codigo_producto">CORK11</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x150 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">38</column>
+            <column name="codigo_producto">CORK12</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x180 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">39</column>
+            <column name="codigo_producto">CORK13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz corcho</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">40</column>
+            <column name="codigo_producto">PAN1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">41</column>
+            <column name="codigo_producto">PAN2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">42</column>
+            <column name="codigo_producto">PAN3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x60 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">43</column>
+            <column name="codigo_producto">PAN4</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">44</column>
+            <column name="codigo_producto">PAN5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">45</column>
+            <column name="codigo_producto">PAN6</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">46</column>
+            <column name="codigo_producto">PAN7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">47</column>
+            <column name="codigo_producto">PAN8</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">48</column>
+            <column name="codigo_producto">PAN9</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x180 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">49</column>
+            <column name="codigo_producto">PAN10</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x240 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">50</column>
+            <column name="codigo_producto">PAN11</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x150 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">51</column>
+            <column name="codigo_producto">PAN12</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x180 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">52</column>
+            <column name="codigo_producto">PAN13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz pa?o verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">53</column>
+            <column name="codigo_producto">PAN1n</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz pa?o negro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">54</column>
+            <column name="codigo_producto">PAN1t</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz pa?o tinto</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">55</column>
+            <column name="codigo_producto">PAN1b</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz pa?o blanco</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">56</column>
+            <column name="codigo_producto">PAN4n</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz pa?o negro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">57</column>
+            <column name="codigo_producto">PAN5n</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz pa?o negro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">58</column>
+            <column name="codigo_producto">PAN6n</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz pa?o negro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">59</column>
+            <column name="codigo_producto">PAN7n</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz pa?o negro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">60</column>
+            <column name="codigo_producto">RAN1V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">61</column>
+            <column name="codigo_producto">RAN2V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">62</column>
+            <column name="codigo_producto">RAN3V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x60 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">63</column>
+            <column name="codigo_producto">RAN4V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">64</column>
+            <column name="codigo_producto">RAN5V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">50x80 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">65</column>
+            <column name="codigo_producto">RAN6V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x80 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">66</column>
+            <column name="codigo_producto">RAN7V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">67</column>
+            <column name="codigo_producto">RAN8V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">68</column>
+            <column name="codigo_producto">RAN9V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">80x120 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">69</column>
+            <column name="codigo_producto">RAN10V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">70</column>
+            <column name="codigo_producto">RAN11V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">71</column>
+            <column name="codigo_producto">RAN12V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x180 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">72</column>
+            <column name="codigo_producto">RAN13V</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz ranurado vert</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">73</column>
+            <column name="codigo_producto">RAN1H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">20x30 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">74</column>
+            <column name="codigo_producto">RAN2H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">75</column>
+            <column name="codigo_producto">RAN3H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x60 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">76</column>
+            <column name="codigo_producto">RAN4H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">40x60 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">77</column>
+            <column name="codigo_producto">RAN5H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">50x80 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">78</column>
+            <column name="codigo_producto">RAN6H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x80 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">79</column>
+            <column name="codigo_producto">RAN7H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x90 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">80</column>
+            <column name="codigo_producto">RAN8H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">60x120 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">81</column>
+            <column name="codigo_producto">RAN9H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">80x120 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">82</column>
+            <column name="codigo_producto">RAN10H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">83</column>
+            <column name="codigo_producto">RAN11H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x150 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">84</column>
+            <column name="codigo_producto">RAN12H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x180 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">85</column>
+            <column name="codigo_producto">RAN13H</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Piz ranurado horz</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">86</column>
+            <column name="codigo_producto">CL13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">13 mm Caja de letra pl?stica</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">87</column>
+            <column name="codigo_producto">CL19</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion"> 19mm Caja de letra pl?stica</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">88</column>
+            <column name="codigo_producto">CL25</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">25 mm Caja de letra pl?stica</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">89</column>
+            <column name="codigo_producto">PFP2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">30x40 Piz verde marco pl?stico</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">90</column>
+            <column name="codigo_producto">F8</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120x240 Pizarr?n verde fib bastidor</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">91</column>
+            <column name="codigo_producto">TR1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">120 Tripi? mini</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">92</column>
+            <column name="codigo_producto">TR2</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">150 Tripi? chico</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">93</column>
+            <column name="codigo_producto">TR3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">170 Tripi? est?ndar</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">94</column>
+            <column name="codigo_producto">TR4</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">170 Tripi? doble</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">95</column>
+            <column name="codigo_producto">BRCH</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">9x4 Borrador mini</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">96</column>
+            <column name="codigo_producto">    BRPL</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">13x5 Borrador pl?stico</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">97</column>
+            <column name="codigo_producto">BRF</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">13x5 Borrador fibromadera</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">98</column>
+            <column name="codigo_producto">    BRMG</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">13x5 Borrador im?n</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">99</column>
+            <column name="codigo_producto">BCO MA 7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70 cm Banco met asiento madera est bca</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">100</column>
+            <column name="codigo_producto">BCO MA 7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70 cm Banco met asiento madera est negra</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">101</column>
+            <column name="codigo_producto">BCO MA 5</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">50 cm Banco met asiento madera</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">102</column>
+            <column name="codigo_producto">BCO PP 7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70 cm Banco met asiento polipro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">103</column>
+            <column name="codigo_producto">BCO PP 7</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">70 cm Banco met asiento pp  est negra</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">104</column>
+            <column name="codigo_producto">MB4 AGL</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">90x120 Piz porcel 6 mm pautado</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">105</column>
+            <column name="codigo_producto">PME</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Paquete marcador Expo 4 pzas</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">106</column>
+            <column name="codigo_producto">LL</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">L?quido limpiador 250 ml</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">107</column>
+            <column name="codigo_producto">CHT</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Chinches transparentes 100 pzas</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">108</column>
+            <column name="codigo_producto">CHS</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Chinches color solido 100 pzas</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">109</column>
+            <column name="codigo_producto">SKCOAZP</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de concha kinder azul promoci?n</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">110</column>
+            <column name="codigo_producto">SKCOVEP</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de concha kinder verde promoci?n</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">111</column>
+            <column name="codigo_producto">SKPGAZ</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG kinder azul</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">112</column>
+            <column name="codigo_producto">SKCOBLAP</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de concha kinder blanco promoci?n</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">113</column>
+            <column name="codigo_producto">SBPGPAR13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG primaria con parrilla</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">114</column>
+            <column name="codigo_producto">SBPGPAR13</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG primaria con parrilla</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">115</column>
+            <column name="codigo_producto">SBPGSOLAZ</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG primaria con solera</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">116</column>
+            <column name="codigo_producto">SBABPARNA</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas Abanico prim parrilla 46 naranja</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">117</column>
+            <column name="codigo_producto">SSAB</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas Abanico secundaria naranja</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">118</column>
+            <column name="codigo_producto">SSPG</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG secundaria amarilla</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">119</column>
+            <column name="codigo_producto">SSPG</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG secundaria verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">120</column>
+            <column name="codigo_producto">SMCO</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de concha maestro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">121</column>
+            <column name="codigo_producto">SMPGAM</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG maestro amarillo</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">122</column>
+            <column name="codigo_producto">SMPGRO</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas PG maestro rojo</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">123</column>
+            <column name="codigo_producto">SMNENA</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pzas Ne?n maestro naranja</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">124</column>
+            <column name="codigo_producto">SMABNA</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla 2 pizas Abanico maestro naranja</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">125</column>
+            <column name="codigo_producto">SMTAPNE</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla tapizada maestro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">126</column>
+            <column name="codigo_producto">SMCOPESAZ</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de concha pesada</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">127</column>
+            <column name="codigo_producto">SBPPPP1</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla pal prim 2 pzas pp paleta raq chica verde</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">128</column>
+            <column name="codigo_producto">SPPGP11AZ</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de paleta 2 pzas PG paleta 40x48 azul</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">129</column>
+            <column name="codigo_producto">SP PG P3</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de paleta 2 pzas PG paleta raqueta</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">130</column>
+            <column name="codigo_producto">SP PG P11</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de paleta 2 pzas PG paleta 40x48 roja</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">131</column>
+            <column name="codigo_producto">SPOXPMAZ</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de paleta 2 pzas Oxford azul</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">132</column>
+            <column name="codigo_producto">SPCOP11RO</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Silla de paleta concha paleta 40x48</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">133</column>
+            <column name="codigo_producto">MBPP46AM</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Mesa binaria pp primaria 46 40x120x70 am</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">134</column>
+            <column name="codigo_producto">MBPP46RO</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Mesa binaria pp primaria 46 40x120x70 ro</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+        <table name="inventario_zuno">
+            <column name="idinventario_zuno">135</column>
+            <column name="codigo_producto">MCOMP</column>
+            <column name="nombre">Pendiente</column>
+            <column name="descripcion">Mesa computadora 60x100x75</column>
+            <column name="existencia">0</column>
+            <column name="imagen">NULL</column>
+            <column name="comentario">-</column>
+        </table>
+    </database>
+</pma_xml_export>

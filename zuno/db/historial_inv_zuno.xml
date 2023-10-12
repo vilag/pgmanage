@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+- phpMyAdmin XML Dump
+- version 4.8.4
+- https://www.phpmyadmin.net
+-
+- Servidor: 127.0.0.1
+- Tiempo de generación: 09-12-2019 a las 19:55:20
+- Versión del servidor: 10.1.37-MariaDB
+- Versión de PHP: 7.3.1
+-->
+
+<pma_xml_export version="1.0" xmlns:pma="https://www.phpmyadmin.net/some_doc_url/">
+    <!--
+    - Structure schemas
+    -->
+    <pma:structure_schemas>
+        <pma:database name="phpmy1_pizarronesguadalajara_com" collation="utf8_spanish2_ci" charset="utf8">
+            <pma:table name="historial_inv_zuno">
+                CREATE TABLE `historial_inv_zuno` (
+                  `idhistorial_inv_zuno` int(11) NOT NULL AUTO_INCREMENT,
+                  `fecha_hora` datetime DEFAULT NULL,
+                  `codigo_prod` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  `exist_actual` int(11) DEFAULT NULL,
+                  `exist_nueva` int(11) DEFAULT NULL,
+                  `tipo` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                  PRIMARY KEY (`idhistorial_inv_zuno`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+            </pma:table>
+        </pma:database>
+    </pma:structure_schemas>
+
+    <!--
+    - Base de datos: 'pizarrones_db'
+    -->
+    <database name="pizarrones_db">
+        <!-- Tabla historial_inv_zuno -->
+    </database>
+</pma_xml_export>

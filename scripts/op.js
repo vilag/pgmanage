@@ -57,7 +57,10 @@ function init()
 
 	ver_ultima_op();
 
-	
+	var idusuario = $("#idusuario").text();
+	if (idusuario==1) {
+		document.getElementById("btn_addProd_op1").style.display="block";
+	}
 	
 
 }
@@ -1968,6 +1971,65 @@ function upd_cant_avance_prod(idavance_prod)
 						});
 }
 
+function addProdOp(){
+	$("#modal_agregar_prod_op").modal("show");
+
+		$.post("ajax/op.php?op=addProdOp",function(r){
+		$("#div_prod_sin_op").html(r);
+					
+		});
+}
+
+function addProd_op(idpg_detped,no_control,codigo,descripcion,empaque,cantidad,fecha_pedido,fecha_entrega,observaciones,estatus,medida,color,iddetalle_pedido){
+	var idop = $("#idop").val();
+
+
+	bootbox.confirm({
+		message: "¿Esta seguro de agregar este producto a la OP?",
+		buttons: {
+			confirm: {
+				label: 'Si',
+				className: 'btn-success'
+			},
+			cancel: {
+				label: 'No',
+				className: 'btn-danger'
+			}
+		},
+		callback: function (result) {
+			
+			if (result==true) {
+
+				
+				$.post("ajax/op.php?op=addProd_op",{
+					idop:idop,
+					idpg_detped:idpg_detped,
+					no_control:no_control,
+					codigo:codigo,
+					descripcion:descripcion,
+					empaque:empaque,
+					cantidad:cantidad,
+					fecha_pedido:fecha_pedido,
+					fecha_entrega:fecha_entrega,
+					observaciones:observaciones,
+					estatus:estatus,
+					medida:medida,
+					color:color,
+					iddetalle_pedido:iddetalle_pedido
+				},function(data, status)
+				{
+					data = JSON.parse(data);
+					bootbox.alert("Producto agregado a OP");
+				});
+
+
+
+
+			}
+		}
+	});
+
 	
+}	
 
 init();

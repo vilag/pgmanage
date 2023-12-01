@@ -2562,6 +2562,47 @@ switch ($_GET["op"])
 						';
 			
 		break;
+
+		case 'addProdOp':
+
+			$rspta = $opr->addProdOp();
+
+			while ($reg = $rspta->fetch_object())
+
+
+
+					{
+
+						echo '
+							<p class="add_prod_op" onclick="addProd_op('.$reg->idpg_detped.',\''.$reg->no_control.'\',\''.$reg->codigo.'\',\''.$reg->descripcion.'\',\''.$reg->empaque.'\',\''.$reg->cantidad.'\',\''.$reg->fecha_pedido.'\',\''.$reg->fecha_entrega.'\',\''.$reg->observaciones.'\',\''.$reg->estatus.'\',\''.$reg->medida.'\',\''.$reg->color.'\',\''.$reg->iddetalle_pedido.'\');">No. Control: '.$reg->no_control.', Codigo: '.$reg->codigo.', Nombre: '.$reg->descripcion.', Cantidad: '.$reg->cantidad.'</p>
+						';	
+					}
+
+			
+		break;
+
+		case 'addProd_op':
+		
+			$idop = $_POST['idop'];
+			$idpg_detped = $_POST['idpg_detped'];
+			$no_control = $_POST['no_control'];
+			$codigo = $_POST['codigo'];
+			$descripcion = $_POST['descripcion'];
+			$empaque = $_POST['empaque'];
+			$cantidad = $_POST['cantidad'];
+			$fecha_pedido = $_POST['fecha_pedido'];
+			$fecha_entrega = $_POST['fecha_entrega'];
+			$observaciones = $_POST['observaciones'];
+			$estatus = $_POST['estatus'];
+			$medida = $_POST['medida'];
+			$color = $_POST['color'];
+			$iddetalle_pedido = $_POST['iddetalle_pedido'];
+
+
+			$rspta=$opr->addProd_op($idop,$idpg_detped,$no_control,$codigo,$descripcion,$empaque,$cantidad,$fecha_pedido,$fecha_entrega,$observaciones,$estatus,$medida,$color,$iddetalle_pedido);
+			echo json_encode($rspta);
+	 		//echo $rspta ? "Anulada" : "No se puede anular";
+		break;
 		
 
 	}

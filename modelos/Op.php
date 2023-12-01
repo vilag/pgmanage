@@ -844,6 +844,21 @@ Class Opr
 		ORDER BY (SELECT fecha_entrega FROM pg_pedidos WHERE no_control=odp.no_control) ASC";
 		return ejecutarConsulta($sql);
 	}
+
+	public function addProdOp()
+	{
+		$sql="SELECT pd.idpg_detped, pd.select_op,p.no_control,pdp.codigo,pdp.descripcion,pd.cantidad,pd.op,pd.estatus,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,p.empaque,pd.fecha_hora,pdp.color,pdp.observacion,p.idpg_pedidos,p.observaciones,pd.iddetalle_pedido,pdp.medida,pd.observ_enlace,pd.no_op_temp, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND tipo > 1) as documentos_ped,
+				(SELECT estatus FROM pg_pedidos WHERE idpg_pedidos=pd.idpedido) as estatus_pedido,
+				(SELECT tipo FROM pg_pedidos WHERE idpg_pedidos=pd.idpedido) as tipo_pedido  
+				FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos INNER JOIN pg_pedidos p ON pdp.idpg_pedidos=p.idpg_pedidos  WHERE pd.estatus='Produccion' AND pd.op='' AND p.estatus<>'CANCELADO' ORDER BY p.no_control DESC";
+				return ejecutarConsulta($sql);
+	}
+
+	public function addProd_op($idop,$idpg_detped,$no_control,$codigo,$descripcion,$empaque,$cantidad,$fecha_pedido,$fecha_entrega,$observaciones,$estatus,$medida,$color,$iddetalle_pedido)
+	{
+		$sql="INSERT INTO op_detalle_prod (idop,idpg_detped,no_control,codigo,producto,empaque,cant_tot,fecha_inicio,fecha_term,observ,medida,color,iddetalle_pedido) VALUES('$idop','$idpg_detped','$no_control','$codigo','$descripcion','$empaque','$cantidad','$fecha_pedido','$fecha_entrega','$observaciones','$medida','$color','$iddetalle_pedido')";
+		return ejecutarConsulta($sql);
+	}
 	
 
 }

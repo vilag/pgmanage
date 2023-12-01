@@ -234,6 +234,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                               <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                               <button type="button" class="btn btn-primary" onclick="cancelar_op();" id="btn_cancelar">Cancelar</button>
                                               <button type="button" class="btn btn-primary" onclick="activar_op();" id="btn_activar">Activar</button>
+                                              <button type="button" class="btn btn-primary" id="btn_addProd_op1" style="display: none;" onclick="addProdOp();">Agregar producto</button>
                                               </div>
                                                 
                                               <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -827,6 +828,49 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
           </div>
       </div>
     </div>
+
+
+    <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" id="modal_agregar_prod_op">
+      <div class="modal-dialog modal-md">
+          <div class="modal-content">
+
+                        <div class="modal-header">
+                          <h4 class="modal-title" id="myModalLabel2">Agregar producto a OP</h4>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          
+                              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                 <label>Productos en produccion sin OP:</label>                 
+                              </div>
+
+                              <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_prod_sin_op" style="height: 400px; overflow: scroll">
+                                                 
+                              </div>
+                             
+
+                        </div>
+                        <div class="modal-footer">
+                          
+                          
+                        </div>
+
+          </div>
+      </div>
+    </div>
+
+    <style>
+      .add_prod_op{
+        cursor: pointer; 
+        border: 20px;
+      }
+      .add_prod_op:hover{
+        cursor: pointer; 
+        border: 20px;
+        background-color: #ccc;
+      }
+    </style>
 
 
       </div>

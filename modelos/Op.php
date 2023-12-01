@@ -857,6 +857,9 @@ Class Opr
 	public function addProd_op($idop,$idpg_detped,$no_control,$codigo,$descripcion,$empaque,$cantidad,$fecha_pedido,$fecha_entrega,$observaciones,$estatus,$medida,$color,$iddetalle_pedido)
 	{
 		$sql="INSERT INTO op_detalle_prod (idop,idpg_detped,no_control,codigo,producto,empaque,cant_tot,fecha_inicio,fecha_term,observ,medida,color,iddetalle_pedido) VALUES('$idop','$idpg_detped','$no_control','$codigo','$descripcion','$empaque','$cantidad','$fecha_pedido','$fecha_entrega','$observaciones','$medida','$color','$iddetalle_pedido')";
+		$idingresonew=ejecutarConsulta_retornarID($sql);
+
+		$sql="UPDATE pg_detped SET op=(SELECT no_op FROM op WHERE idop='$idop') WHERE idpg_detped='$idpg_detped'";
 		return ejecutarConsulta($sql);
 	}
 	

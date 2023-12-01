@@ -1,3 +1,4 @@
+var idusuario=$("#idusuario").text();
 function init()
 {
 
@@ -1828,7 +1829,9 @@ function mostrar_det_ped(idpg_detalle_pedidos)
 	$("#cantidad_dividir").text(data.cantidad);
 	$("#no_control_dividir").text(data.no_control);
 
-			$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+	var idusuario=$("#idusuario").text();
+
+			$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 				$("#tbl_detalle_prod_tbl").html(r);
 
 					        
@@ -1840,6 +1843,7 @@ function mostrar_det_ped(idpg_detalle_pedidos)
 
 function dividir_prod_ped()
 {
+	var idusuario = $("#idusuario").text();
 	//var idpg_detalle_pedidos = id;
 	var cantidad_total = $("#cantidad_dividir").text();
 	var idpg_detalle_pedidos = $("#iddetalle_pedido").val();
@@ -1864,7 +1868,7 @@ function dividir_prod_ped()
 				//alert("agregado");
 
 
-					$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+					$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 						$("#tbl_detalle_prod_tbl").html(r);
 
 							        
@@ -1945,7 +1949,7 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 
 														var idpg_detalle_pedidos=iddetalle_pedido;
 
-														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 															$("#tbl_detalle_prod_tbl").html(r);
 
 																bootbox.alert("División borrada exitosamente");	        
@@ -2020,7 +2024,7 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 
 														var idpg_detalle_pedidos=iddetalle_pedido;
 
-														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 															$("#tbl_detalle_prod_tbl").html(r);
 
 																bootbox.alert("División borrada exitosamente");	        
@@ -2221,16 +2225,14 @@ function edit_cant(idpg_detped,op)
 
 function edit_cant_off(idpg_detped)
 {
-	$("#eti_cant_prod"+idpg_detped).show();
-	$("#cant_prod_seg"+idpg_detped).hide();
-	var cant = $("#cant_prod_seg"+idpg_detped).val();
-	$("#eti_cant_prod"+idpg_detped).text(cant);
-		
-	/*$.post("ajax/diseno.php?op=guardar_cant_prod",{idpg_detped:idpg_detped,cant:cant},function(data, status)
-	{
-	data = JSON.parse(data);
-
-	});*/
+	var idusuario = $("#idusuario").text();
+	if (idusuario>1) {
+		$("#eti_cant_prod"+idpg_detped).show();
+		$("#cant_prod_seg"+idpg_detped).hide();
+		var cant = $("#cant_prod_seg"+idpg_detped).val();
+		$("#eti_cant_prod"+idpg_detped).text(cant);
+	}
+	
 	
 }
 
@@ -2412,7 +2414,7 @@ function guardar_det_ped(idpg_detped,iddetalle_pedido,idpg_pedidos)
 
 				var idpg_detalle_pedidos=iddetalle_pedido;
 
-				$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+				$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 					$("#tbl_detalle_prod_tbl").html(r);
 
 																														
@@ -2535,7 +2537,7 @@ function pasar_prod_vale()
 
 													var idpg_detalle_pedidos=iddetalle_pedido;
 
-															$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+															$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 																$("#tbl_detalle_prod_tbl").html(r);
 																																				//$("#subtitulo_vale").text("VALE ACTUAL");
 																	bootbox.alert("El producto se ha asignado al vale correctamente.");
@@ -2639,7 +2641,7 @@ function pasar_prod_vale()
 
 													var idpg_detalle_pedidos=iddetalle_pedido;
 
-															$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos,function(r){
+															$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 																$("#tbl_detalle_prod_tbl").html(r);
 																																				//$("#subtitulo_vale").text("VALE ACTUAL");
 																	bootbox.alert("El producto se ha asignado al vale correctamente.");
@@ -2701,7 +2703,7 @@ function pasar_prod_vale()
 
 
 
-function edit_obs(idpg_detped)
+function edit_obs(idpg_detped,op)
 {
 	
 

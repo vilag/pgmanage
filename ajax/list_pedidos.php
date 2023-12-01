@@ -958,6 +958,7 @@ switch ($_GET["op"]){
 			//Recibimos el idingreso
 			//$id=$_GET['id'];
 			$id=$_GET['id'];
+			$idusuario=$_GET['idusuario'];
 
 			$rspta = $list_pedidos->listar_pg_detped($id);
 
@@ -1015,6 +1016,12 @@ switch ($_GET["op"]){
 							$visib_estat2="hidden";
 						}
 
+						if ($idusuario==1) {
+							$display_update_c = "block";
+						}else{
+							$display_update_c = "none";
+						}
+
 						echo '
 								
 								<tr>
@@ -1026,7 +1033,7 @@ switch ($_GET["op"]){
 	                                <td>
 	                                	
 	                                	<b id="eti_cant_prod'.$reg->idpg_detped.'" onmouseover="edit_cant('.$reg->idpg_detped.',\''.$reg->op.'\');">'.$reg->cantidad.'</b>
-	                                	<textarea class="form-control" id="cant_prod_seg'.$reg->idpg_detped.'" cols="40" rows="3" style="display: none;" onmouseout="edit_cant_off('.$reg->idpg_detped.');" onkeyup="set_nosave('.$reg->idpg_detped.',\''.$reg->iddetalle_pedido.'\');">'.$reg->cantidad.'</textarea>
+	                                	<textarea class="form-control" id="cant_prod_seg'.$reg->idpg_detped.'" cols="40" rows="3" style="display: '.$display_update_c.';" onmouseout="edit_cant_off('.$reg->idpg_detped.');" onkeyup="set_nosave('.$reg->idpg_detped.',\''.$reg->iddetalle_pedido.'\');">'.$reg->cantidad.'</textarea>
 
 	                                </td>
 

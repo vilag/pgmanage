@@ -1815,29 +1815,33 @@ function quitar_prod_ped_list(idpg_detalle_pedidos,idproducto,precio_total)
 
 function mostrar_det_ped(idpg_detalle_pedidos)
 {
-	$("#iddetalle_pedido").val(idpg_detalle_pedidos);
-	$("#modal_asign_estatus").modal("show");
+	if (idusuario!=26) {
+		$("#iddetalle_pedido").val(idpg_detalle_pedidos);
+		$("#modal_asign_estatus").modal("show");
 
-	$.post("ajax/list_pedidos.php?op=consul_datos_prod",{idpg_detalle_pedidos:idpg_detalle_pedidos},function(data, status)
-	{
-	data = JSON.parse(data);
+		$.post("ajax/list_pedidos.php?op=consul_datos_prod",{idpg_detalle_pedidos:idpg_detalle_pedidos},function(data, status)
+		{
+		data = JSON.parse(data);
 
-	$("#codigo_dividir").text(data.codigo);
-	$("#descrip_dividir").text(data.descripcion);
-	$("#medidas_dividir").text(data.medida);
-	$("#color_dividir").text(data.color);
-	$("#cantidad_dividir").text(data.cantidad);
-	$("#no_control_dividir").text(data.no_control);
+		$("#codigo_dividir").text(data.codigo);
+		$("#descrip_dividir").text(data.descripcion);
+		$("#medidas_dividir").text(data.medida);
+		$("#color_dividir").text(data.color);
+		$("#cantidad_dividir").text(data.cantidad);
+		$("#no_control_dividir").text(data.no_control);
 
-	var idusuario=$("#idusuario").text();
+		var idusuario=$("#idusuario").text();
 
-			$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
-				$("#tbl_detalle_prod_tbl").html(r);
+				$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
+					$("#tbl_detalle_prod_tbl").html(r);
 
-					        
-			});
+								
+				});
 
-	});
+		});
+	}
+
+	
 }
 
 
@@ -2770,17 +2774,22 @@ function edit_obs_off(idpg_detped)
 
 function abrir_terminados()
 {
+	if (idusuario==26) {
 
-	var lugar_user = $("#lugar_user").text();
-
-
-	if (lugar_user=="Fabrica") {
-
-		listar_terminados();
-
+		bootbox.alert("No tienes permisos para realizar esta acción.");
+		
 	}else{
-		abrir_listos();
+		var lugar_user = $("#lugar_user").text();
+		if (lugar_user=="Fabrica") {
+
+			listar_terminados();
+
+		}else{
+			abrir_listos();
+		}
 	}
+
+	
 
 		
 
@@ -3010,15 +3019,20 @@ function cargar_notif()
 
 function pedidos_atencion()
 {
+	if (idusuario==26) {
+		bootbox.alert("No tienes permisos para realizar esta acción.");
+	}else{
+		$("#modal_pedidos_atencion").modal("show");
 
-	$("#modal_pedidos_atencion").modal("show");
+		$.post("ajax/diseno.php?op=listar_sin_estatus",function(r){
+				$("#tbl_pedidos_pendientes").html(r);
 
-	$.post("ajax/diseno.php?op=listar_sin_estatus",function(r){
-	        $("#tbl_pedidos_pendientes").html(r);
+			//contar_prod_sinrev();
 
-	       //contar_prod_sinrev();
+		});
+	}
 
-	});
+	
 
 }
 
@@ -3043,21 +3057,28 @@ function contar_prod_sinrev()
 
 function pedidos_vencidos()
 {
-	$("#modal_vencidos").modal("show");
+	if (idusuario==26) {
 
-	/*var dato_filtro = $("#dato_filtro").val();
+		bootbox.alert("No tienes permisos para realizar esta acción.");
+		
+	}else{
+		$("#modal_vencidos").modal("show");
 
-	if (dato_filtro==undefined) {
-		dato_filtro=0;
-	}*/
+		/*var dato_filtro = $("#dato_filtro").val();
 
-	var dato_filtro=0;
+		if (dato_filtro==undefined) {
+			dato_filtro=0;
+		}*/
 
-	$.post("ajax/list_pedidos.php?op=pedidos_vencidos&id="+dato_filtro,function(r){
-	        $("#tbl_vencidos").html(r);
+		var dato_filtro=0;
 
-	       
-	});
+		$.post("ajax/list_pedidos.php?op=pedidos_vencidos&id="+dato_filtro,function(r){
+				$("#tbl_vencidos").html(r);
+
+			
+		});
+	}
+	
 }
 
 
@@ -3435,33 +3456,44 @@ function listar_listos()
 
 function abrir_seg_ped()
 {
-	$("#modal_seguim_ped").modal("show");
 
-	//alert(idpg_pedidos);
-	//alert(porc_avance);
+	if (idusuario==26) {
 
-	//$("#idpedido").val(idpg_pedidos);
-	/*$("#porc_av_p").val(porc_avance);
-	$("#coment_ped_motivo").val(coment_vencim);*/
+		bootbox.alert("No tienes permisos para realizar esta acción");
+		
+	}else{
 
-	var idpedido = $("#idpedido").val();
-	var idpg_pedidos = idpedido;
+		$("#modal_seguim_ped").modal("show");
 
-	//alert(idpedido);
+		//alert(idpg_pedidos);
+		//alert(porc_avance);
 
-		$.post("ajax/diseno.php?op=abrir_seg_ped&id="+idpg_pedidos,function(r){
-		$("#tbl_seguim_ped").html(r);
+		//$("#idpedido").val(idpg_pedidos);
+		/*$("#porc_av_p").val(porc_avance);
+		$("#coment_ped_motivo").val(coment_vencim);*/
 
-			/*var dias_faltantes = $("#dias_restantes"+idpg_pedidos).text();
+		var idpedido = $("#idpedido").val();
+		var idpg_pedidos = idpedido;
 
-			if (dias_faltantes<0) {
+		//alert(idpedido);
 
-				$("#btn_entregado").show();
-			}else{
-				$("#btn_entregado").show();
-			}*/
+			$.post("ajax/diseno.php?op=abrir_seg_ped&id="+idpg_pedidos,function(r){
+			$("#tbl_seguim_ped").html(r);
 
-		});		  
+				/*var dias_faltantes = $("#dias_restantes"+idpg_pedidos).text();
+
+				if (dias_faltantes<0) {
+
+					$("#btn_entregado").show();
+				}else{
+					$("#btn_entregado").show();
+				}*/
+
+			});	
+
+	}
+
+		  
 }
 
 function pasar_texto1()
@@ -3667,24 +3699,27 @@ function guardar_coment_ped()
 
 function abrir_documentos()
 {
-	//$("#modal_doc_ped").modal("show");
-	var idpg_pedidos = $("#idpedido").val();
+	if (idusuario!=26) {
+			//$("#modal_doc_ped").modal("show");
+			var idpg_pedidos = $("#idpedido").val();
 
-	$("#modal_doc_ped").modal("show");
-	$("#modal_listos").modal("hide");
-	$("#modal_terminados").modal("hide");
-	$("#regresar_total").show();
-	$("#regresar_listos").hide();
-
-	$("#idpedido_doc").val(idpg_pedidos);
-
-		$.post("ajax/diseno.php?op=abrir_doc_ped&id="+idpg_pedidos,function(r){
-		$("#tbl_doc_ped").html(r);
-
-
-				
-
-		});	
+			$("#modal_doc_ped").modal("show");
+			$("#modal_listos").modal("hide");
+			$("#modal_terminados").modal("hide");
+			$("#regresar_total").show();
+			$("#regresar_listos").hide();
+	
+			$("#idpedido_doc").val(idpg_pedidos);
+	
+				$.post("ajax/diseno.php?op=abrir_doc_ped&id="+idpg_pedidos,function(r){
+				$("#tbl_doc_ped").html(r);
+	
+	
+						
+	
+				});	
+	}
+	
 }
 
 
@@ -3962,20 +3997,24 @@ function contar_sin_coment_venc()
 
 function abrir_modal_doc_salidas()
 {
-	$("#modal_salidas_pedidos").modal("show");
+	if (idusuario!=26) {
+		$("#modal_salidas_pedidos").modal("show");
 
-	var idpg_pedidos = $("#idpedido_header").val();
-	var fecha=moment().format('YYYY-MM-DD');
+		var idpg_pedidos = $("#idpedido_header").val();
+		var fecha=moment().format('YYYY-MM-DD');
 
-	if (idpg_pedidos>0) {
-		$.post("ajax/list_pedidos.php?op=abrir_doc_salidas&idpg_pedidos="+idpg_pedidos+"&fecha="+fecha,function(r){
-		$("#tbl_salidas_pedido").html(r);
+		if (idpg_pedidos>0) {
+			$.post("ajax/list_pedidos.php?op=abrir_doc_salidas&idpg_pedidos="+idpg_pedidos+"&fecha="+fecha,function(r){
+			$("#tbl_salidas_pedido").html(r);
+
+		
+			});	
+		}else{
+			bootbox.alert("Error al mostrar salidas del pedido");
+		}
+	}
 
 	
-		});	
-	}else{
-		bootbox.alert("Error al mostrar salidas del pedido");
-	}
 
 		
 }
@@ -3987,18 +4026,26 @@ function abrir_modal_doc_salidas()
 
 function abrir_vale()
 {
-	$("#datos_enc_vale").hide();
-	$("#btns_vale").hide();
-	$("#modal_vale_alm").modal("show");
+	var idusuario = $("#idusuario").text();
 
-	var estatus_vale_alm = $("#estatus_vale_alm").val();
-	$.post("ajax/list_pedidos.php?op=listar_vales_alm&estatus="+estatus_vale_alm,function(r){
-		$("#box_vales_salida").html(r);
-		$.post("ajax/list_pedidos.php?op=listar_vale&id="+0,function(r){
-		$("#tbl_productos_vale").html(r);
+	if (idusuario==26) {
+		bootbox.alert("No tienes permisos para realizar esta acción.");
+	}else{
+		$("#datos_enc_vale").hide();
+		$("#btns_vale").hide();
+		$("#modal_vale_alm").modal("show");
 
+		var estatus_vale_alm = $("#estatus_vale_alm").val();
+		$.post("ajax/list_pedidos.php?op=listar_vales_alm&estatus="+estatus_vale_alm,function(r){
+			$("#box_vales_salida").html(r);
+			$.post("ajax/list_pedidos.php?op=listar_vale&id="+0,function(r){
+			$("#tbl_productos_vale").html(r);
+
+			});
 		});
-	});
+	}
+
+	
 
 }
 
@@ -4468,7 +4515,10 @@ function edit_cant_total()
 
 function abrir_modal_fecha_modif()
 {
-	$("#modal_fecha_prod").modal("show");
+	if (idusuario!=26) {
+		$("#modal_fecha_prod").modal("show");
+	}
+	
 }
 
 

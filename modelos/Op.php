@@ -800,6 +800,12 @@ Class Opr
 		return ejecutarConsulta($sql);
 	}
 
+	public function borrar_excedente($idop_detalle_exc)
+	{
+		$sql="DELETE FROM op_detalle_exc WHERE idop_detalle_exc='$idop_detalle_exc'";
+		return ejecutarConsulta($sql);
+	}
+
 	public function upd_cant_avance_prod($idavance_prod,$cantidad)
 	{
 		$sql="UPDATE op_avance_prod SET cant_capt='$cantidad' WHERE idavance_prod='$idavance_prod'";

@@ -1955,6 +1955,47 @@ function borrar_avance(idavance_prod)
 					
 }
 
+function borrar_excedente(idop_detalle_exc)
+{
+
+	var idusuario = $("#idusuario").text();
+
+	if (idusuario==1) {
+
+		bootbox.confirm({
+		    message: "¿Esta seguro de eliminar el registro de excedente?",
+		    buttons: {
+		        confirm: {
+		            label: 'Si',
+		            className: 'btn-success'
+		        },
+		        cancel: {
+		            label: 'No',
+		            className: 'btn-danger'
+		        }
+		    },
+		    callback: function (result) {
+		        
+		        if (result==true) {
+
+		        		$.post("ajax/op.php?op=borrar_excedente",{idop_detalle_exc:idop_detalle_exc},function(data, status)
+						{
+						data = JSON.parse(data);
+
+							bootbox.alert("Excedente borrado exitosamente");
+		
+
+						});
+		        }
+		    }
+		});
+
+	}else{
+		bootbox.alert("No tiene permisos para realizar esta acción");
+	}
+					
+}
+
 function upd_cant_avance_prod(idavance_prod)
 {
 	var cantidad = $("#cant_entregada"+idavance_prod).val();

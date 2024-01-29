@@ -1210,6 +1210,7 @@ switch ($_GET["op"])
 	                              	<th>Fecha/hora</th>
 	                              	<th>Cantidad excedente</th>
 	                              	<th>Lote</th>
+									<th>Eliminar</th>
 	                              
 	                              	
 	                              	
@@ -1233,7 +1234,7 @@ switch ($_GET["op"])
 	                                
 	                                <td>'.$reg->cantidad.'</td>
 	                                <td>'.$reg->lote.'</td>
-	                                
+	                                <td><button type="button" class="btn btn-dark" id="" onclick="borrar_excedente('.$reg->idop_detalle_exc.');"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: white;"></span></button></td>
 	                                
 	                             </tr>
 
@@ -2439,6 +2440,15 @@ switch ($_GET["op"])
 			$idavance_prod = $_POST['idavance_prod'];
 	
 			$rspta=$opr->borrar_avance($idavance_prod);
+			echo json_encode($rspta);
+	 		//echo $rspta ? "Anulada" : "No se puede anular";
+		break;
+
+		case 'borrar_excedente':
+			
+			$idop_detalle_exc = $_POST['idop_detalle_exc'];
+	
+			$rspta=$opr->borrar_excedente($idop_detalle_exc);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;

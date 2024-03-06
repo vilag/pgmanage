@@ -33,7 +33,7 @@
 				$estatus_2 = 'AND p.estatus="CANCELADO"';
 			}
 
-			if ($lugar=='Fabrica') {
+			if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
 				
 				$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest,p.observaciones,
 				(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,
@@ -42,22 +42,13 @@
 				//return ejecutarConsultaSimpleFila($sql);
 				return ejecutarConsulta($sql);
 
-			}elseif ($lugar<>'Fabrica') {
+			}elseif ($lugar<>'Fabrica' AND $lugar<>'Ventas Alterno') {
 
 				$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 $estatus $estatus_2 AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc";
 				//return ejecutarConsultaSimpleFila($sql);
 				return ejecutarConsulta($sql);
 
-				if ($lugar=='Ventas Alterno') {
-
-					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest,p.observaciones,
-					(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,
-					(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod 
-					FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.fecha_pedido desc";
-					//return ejecutarConsultaSimpleFila($sql);
-					return ejecutarConsulta($sql);
-					# code...
-				}
+				
 				
 			}
 
@@ -70,24 +61,19 @@
 			if ($valor_consulta==1) {
 				
 
-				if ($lugar=='Fabrica') {
+				if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
 					
 					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND DATE(p.fecha_pedido)>='$fecha1_consul' AND DATE(p.fecha_pedido)<='$fecha2_consul' ORDER BY p.fecha_pedido desc";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 
-				}elseif ($lugar<>'Fabrica') {
+				}elseif ($lugar<>'Fabrica' AND $lugar<>'Ventas Alterno') {
 
 					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND DATE(p.fecha_pedido)>='$fecha1_consul' AND DATE(p.fecha_pedido)<='$fecha2_consul' AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 
-					if ($lugar=='Ventas Alterno') {
-						$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND DATE(p.fecha_pedido)>='$fecha1_consul' AND DATE(p.fecha_pedido)<='$fecha2_consul' ORDER BY p.fecha_pedido desc";
-						//return ejecutarConsultaSimpleFila($sql);
-						return ejecutarConsulta($sql);
-						# code...
-					}
+					
 					
 				}
 

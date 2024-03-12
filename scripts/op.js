@@ -2021,9 +2021,25 @@ function addProdOp(){
 		});
 }
 
-function addProd_op(idpg_detped,no_control,codigo,descripcion,empaque,cantidad,fecha_pedido,fecha_entrega,observaciones,estatus,medida,color,iddetalle_pedido){
+function addProd_op(idpg_detped){
+	console.log("idpg_detped");
+	console.log(idpg_detped);
+	
 	var idop = $("#idop").val();
+	var no_control = $("#no_control_p"+idpg_detped).text();
+	var codigo = $("#codigo_p"+idpg_detped).text();
+	var descripcion = $("#descripcion_p"+idpg_detped).text();
+	var empaque = $("#empaque_p"+idpg_detped).text();
+	var cantidad = $("#cantidad_p"+idpg_detped).text();
+	var fecha_pedido = $("#fecha_pedido_p"+idpg_detped).text();
+	var fecha_entrega = $("#fecha_entrega_p"+idpg_detped).text();
+	var observaciones = $("#observaciones_p"+idpg_detped).text();
+	var estatus = $("#estatus_p"+idpg_detped).text();
+	var medida = $("#medida_p"+idpg_detped).text();
+	var color = $("#color_p"+idpg_detped).text();
+	var iddetalle_pedido = $("#iddetalle_pedido_p"+idpg_detped).text();
 
+	//alert(idop);
 
 	bootbox.confirm({
 		message: "¿Esta seguro de agregar este producto a la OP?",

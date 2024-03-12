@@ -2584,12 +2584,40 @@ switch ($_GET["op"])
 					{
 
 						echo '
-							<p class="add_prod_op" onclick="addProd_op('.$reg->idpg_detped.',\''.$reg->no_control.'\',\''.$reg->codigo.'\',\''.$reg->descripcion.'\',\''.$reg->empaque.'\',\''.$reg->cantidad.'\',\''.$reg->fecha_pedido.'\',\''.$reg->fecha_entrega.'\',\''.$reg->observaciones.'\',\''.$reg->estatus.'\',\''.$reg->medida.'\',\''.$reg->color.'\',\''.$reg->iddetalle_pedido.'\');">No. Control: '.$reg->no_control.', Codigo: '.$reg->codigo.', Nombre: '.$reg->descripcion.', Cantidad: '.$reg->cantidad.'</p>
+							<p class="add_prod_op" onclick="addProd_op('.$reg->idpg_detped.');">No. Control: '.$reg->no_control.', Codigo: '.$reg->codigo.', Nombre: '.$reg->descripcion.', Cantidad: '.$reg->cantidad.'</p>
+							<p style="display: none;">
+								<b id="no_control_p'.$reg->idpg_detped.'">'.$reg->no_control.'</b>
+								<b id="codigo_p'.$reg->idpg_detped.'">'.$reg->codigo.'</b>
+								<b id="descripcion_p'.$reg->idpg_detped.'">'.$reg->descripcion.'</b>
+								<b id="empaque_p'.$reg->idpg_detped.'">'.$reg->empaque.'</b>
+								<b id="cantidad_p'.$reg->idpg_detped.'">'.$reg->cantidad.'</b>
+								<b id="fecha_pedido_p'.$reg->idpg_detped.'">'.$reg->fecha_pedido.'</b>
+								<b id="fecha_entrega_p'.$reg->idpg_detped.'">'.$reg->fecha_entrega.'</b>
+								<b id="observaciones_p'.$reg->idpg_detped.'">'.$reg->observaciones.'</b>
+								<b id="estatus_p'.$reg->idpg_detped.'">'.$reg->estatus.'</b>
+								<b id="medida_p'.$reg->idpg_detped.'">'.$reg->medida.'</b>
+								<b id="color_p'.$reg->idpg_detped.'">'.$reg->color.'</b>
+								<b id="iddetalle_pedido_p'.$reg->idpg_detped.'">'.$reg->iddetalle_pedido.'</b>
+							</p>
 						';	
 					}
 
 			
 		break;
+
+		// <p style="padding: 5px; background-color: #ccc;">idpg_detped: '.$reg->idpg_detped.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">no_control: '.$reg->no_control.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">codigo: '.$reg->codigo.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">descripcion: '.$reg->descripcion.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">empaque: '.$reg->empaque.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">cantidad: '.$reg->cantidad.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">fecha_pedido: '.$reg->fecha_pedido.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">fecha_entrega: '.$reg->fecha_entrega.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">observaciones: '.$reg->observaciones.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">estatus: '.$reg->estatus.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">medida: '.$reg->medida.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">color: '.$reg->color.'</p>
+		// 					<p style="padding: 5px; background-color: #ccc;">iddetalle_pedido: '.$reg->iddetalle_pedido.'</p>
 
 		case 'addProd_op':
 		

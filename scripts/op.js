@@ -1960,7 +1960,7 @@ function borrar_excedente(idop_detalle_exc)
 
 	var idusuario = $("#idusuario").text();
 
-	if (idusuario==1) {
+	if (idusuario==1 || idusuario==22) {
 
 		bootbox.confirm({
 		    message: "¿Esta seguro de eliminar el registro de excedente?",

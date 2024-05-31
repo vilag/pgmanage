@@ -823,7 +823,7 @@ function buscar_control()
 		var idpg_pedidos = data.idpg_pedidos;
 		var lugar = data.lugar;
 
-		if (lugar_user==lugar || lugar_user=="Fabrica") {
+		if (lugar_user==lugar || lugar_user=="Fabrica" || lugar_user=="Ventas Alterno") {
 
 
 			if (idusuario==1) {

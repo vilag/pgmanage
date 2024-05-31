@@ -316,7 +316,7 @@
                         
 
 
-                      if (($_SESSION['idusuario']>=1 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']==24) OR ( $_SESSION['idusuario']==26)) {
+                      if (($_SESSION['idusuario']>=1 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']==24) OR ($_SESSION['idusuario']==25) OR ( $_SESSION['idusuario']==26)) {
                           echo '     
                                   
                               </ul>
@@ -331,7 +331,7 @@
                   <?php
                       
 
-                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']>=4 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']>=14 AND $_SESSION['idusuario']<=21) OR ($_SESSION['idusuario']==24)) {
+                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']>=4 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']>=14 AND $_SESSION['idusuario']<=21) OR ($_SESSION['idusuario']==24)  OR ($_SESSION['idusuario']==25)) {
                           echo '    
                                 <li><a><i class="fa fa-plus-square-o"></i> Producción <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
@@ -362,7 +362,7 @@
                         ';                        
                     }
 
-                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']>=4 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==18) OR ($_SESSION['idusuario']>=22) OR ($_SESSION['idusuario']==24)) {
+                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']>=4 AND $_SESSION['idusuario']<=5) OR ($_SESSION['idusuario']>=7 AND $_SESSION['idusuario']<=12) OR ($_SESSION['idusuario']==14) OR ($_SESSION['idusuario']==18) OR ($_SESSION['idusuario']>=22) OR ($_SESSION['idusuario']==24) OR ($_SESSION['idusuario']==25)) {
                           echo '     
                                   </ul>
                                 </li>

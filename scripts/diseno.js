@@ -9447,16 +9447,17 @@ init();
 
 function capturar_cant(idproducto)
 {
-	bootbox.prompt('Captura la cantidad',
+	bootbox.prompt('Capturar cantidad',
 	function(result) {
 
-		if (result!="") {
-			
+		if (result=="") {
+			return;
+		}else{
 			var input_cant_prod = result;
 			var id_ped_temp = $("#id_ped_temp").val();
 			//alert(id_ped_temp);
 			var cantidad = input_cant_prod;
-		// alert(cantidad);
+		
 
 			$.post("ajax/diseno.php?op=buscar_reg_prod",{id_ped_temp:id_ped_temp,idproducto:idproducto},function(data, status)
 			{
@@ -9481,13 +9482,8 @@ function capturar_cant(idproducto)
 			});
 		}
 
-
-
-	console.log(result);
+		
 	});
-
-	return;
-
 		
 }
 

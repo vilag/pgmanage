@@ -23,7 +23,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
 
         
-        <div id="signup-notification" class="">
+        <div id="signup-notification" class="" >
             
             <div class="col-md-12 col-sm-12">
               <hr width="100%">
@@ -112,7 +112,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
               box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
               background: #fff;
               position: fixed;
-              z-index: 100001;
+              z-index: 1041;
               color: #000;
               transition: 1s;
 
@@ -127,7 +127,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
               box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
               background: #fff;
               position: fixed;
-              z-index: 100001;
+              z-index: 1041;
               color: #000;
               transition: 1s;
           }

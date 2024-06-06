@@ -7134,7 +7134,7 @@ function view_section_selectprod()
 					$("#div_filtro_prod").show();
 					$("#div_pedido").hide();
 
-					$("#etiqueta_tipo_ped").text("Pedido de Licitación");
+					$("#etiqueta_tipo_ped").text("Pedido de Muestras");
 					$("#select_tipo_pedido").hide();
 					//$("#doc_req_lic").hide();
 					//$("#doc_rec_mue").show();
@@ -9445,7 +9445,51 @@ init();
 	});
 }*/
 
+function capturar_cant(idproducto)
+{
+	bootbox.prompt('Captura la cantidad',
+	function(result) {
 
+		if (result!="") {
+			
+			var input_cant_prod = result;
+			var id_ped_temp = $("#id_ped_temp").val();
+			//alert(id_ped_temp);
+			var cantidad = input_cant_prod;
+		// alert(cantidad);
+
+			$.post("ajax/diseno.php?op=buscar_reg_prod",{id_ped_temp:id_ped_temp,idproducto:idproducto},function(data, status)
+			{
+			data = JSON.parse(data);
+
+				var precio = data.precio;
+				var importe = parseFloat(precio)*parseInt(cantidad);
+
+
+					$.post("ajax/diseno.php?op=update_cant",{id_ped_temp:id_ped_temp,idproducto:idproducto,cantidad:cantidad,importe:importe},function(data, status)
+					{
+					data = JSON.parse(data);
+
+
+						var notificator = new Notification(document.querySelector('.notification'));
+						notificator.info('Cantidad actualizada');
+						tbl_prod_ped();
+
+					});
+
+
+			});
+		}
+
+
+
+	console.log(result);
+	});
+
+	return;
+
+		
+}
 
 
 

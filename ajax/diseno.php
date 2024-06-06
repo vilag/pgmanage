@@ -537,8 +537,9 @@ switch ($_GET["op"])
 				                          <textarea class="form-control" cols="40" rows="3" id="input_color_prod'.$reg->idproducto.'" disabled>'. $reg->color .'</textarea>
 				                          </td>
 				                          <td style="width: 15%;">
+				                          <input type="number" class="form-control" value="'. $reg->cantidad .'" disabled>
+										  <button style="width: 100%; margin-top: 5px; border: none; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); padding: 5px;" onclick="capturar_cant('.$reg->idproducto.');">Editar</button>
 				                          
-				                          <textarea class="form-control" cols="40" rows="3" onchange="cantidad_prod('.$reg->idproducto.');" id="input_cant_prod'.$reg->idproducto.'">'. $reg->cantidad .'</textarea>
 				                          </td>
 				                          
 				                          <td style="width: 20%;">

@@ -332,7 +332,12 @@ switch ($_GET["op"])
 
 						}
 
-				
+						if ($reg->tamano_new>0) {
+							$color_clas = "#028939";
+							
+						}else{
+							$color_clas = "#AC0D06";
+						}
 
 						echo '
 
@@ -371,7 +376,8 @@ switch ($_GET["op"])
 									</td>
 									<td>
 										<button type="button" class="btn btn-sm btn-dark" onclick="borrar_prod_consul1('.$reg->idproductos_clasif.');" id="btn_delete_prod'.$reg->idproductos_clasif.'"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ></span></button>
-										<button type="button" class="btn btn-sm" style="background-color: '.$back.'; color: '.$color.';" onclick="desactivar_producto1('.$reg->idproductos_clasif.',\''.$reg->estatus.'\');" id="btn_desac_prod'.$reg->idproductos_clasif.'"><b>'.$eti_status_prod.'</b></button>
+										<button type="button" class="btn btn-sm" style="background-color: '.$back.'; color: '.$color.';" onclick="desactivar_producto1('.$reg->idproductos_clasif.',\''.$reg->estatus.'\');" id="btn_desac_prod'.$reg->idproductos_clasif.'"><b style="font-size: 10px;">'.$eti_status_prod.'</b></button>
+										<button type="button" class="btn btn-sm" style="background-color: '.$color_clas.'; color: #fff; font-size: 10px;" onclick="abrir_reclasif('.$reg->idproductos_clasif.',\''.$reg->codigo_match.'\',\''.$reg->descripcion.'\');">Clasif.</button>
 									</td>
 	                                
 	                             </tr>	
@@ -439,6 +445,12 @@ switch ($_GET["op"])
 
 						}
 
+						if ($reg->tamano_new>0) {
+							$color_clas = "#028939";
+							
+						}else{
+							$color_clas = "#AC0D06";
+						}
 				
 
 						echo '
@@ -479,6 +491,7 @@ switch ($_GET["op"])
 									<td>
 										<button type="button" class="btn btn-sm btn-dark" onclick="borrar_prod_consul2('.$reg->idproductos_clasif.');" id="btn_delete_prod'.$reg->idproductos_clasif.'"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ></span></button>
 										<button type="button" class="btn btn-sm" style="background-color: '.$back.'; color: '.$color.';" onclick="desactivar_producto2('.$reg->idproductos_clasif.',\''.$reg->estatus.'\');" id="btn_desac_prod'.$reg->idproductos_clasif.'"><b>'.$eti_status_prod.'</b></button>
+										<button type="button" class="btn btn-sm" style="background-color: '.$color_clas.'; color: #fff; font-size: 10px;" onclick="abrir_reclasif('.$reg->idproductos_clasif.',\''.$reg->codigo_match.'\',\''.$reg->descripcion.'\');">Clasif.</button>
 									</td>
 	                                
 	                             </tr>	
@@ -538,7 +551,12 @@ switch ($_GET["op"])
 
 						}
 
-				
+						if ($reg->tamano_new>0) {
+							$color_clas = "#028939";
+							
+						}else{
+							$color_clas = "#AC0D06";
+						}
 
 						echo '
 
@@ -578,6 +596,7 @@ switch ($_GET["op"])
 									<td>
 										<button type="button" class="btn btn-sm btn-dark" onclick="borrar_prod_consul3('.$reg->idproductos_clasif.');" id="btn_delete_prod'.$reg->idproductos_clasif.'"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ></span></button>
 										<button type="button" class="btn btn-sm" style="background-color: '.$back.'; color: '.$color.';" onclick="desactivar_producto3('.$reg->idproductos_clasif.',\''.$reg->estatus.'\');" id="btn_desac_prod'.$reg->idproductos_clasif.'"><b>'.$eti_status_prod.'</b></button>
+										<button type="button" class="btn btn-sm" style="background-color: '.$color_clas.'; color: #fff; font-size: 10px;" onclick="abrir_reclasif('.$reg->idproductos_clasif.',\''.$reg->codigo_match.'\',\''.$reg->descripcion.'\');">Clasif.</button>
 									</td>
 	                                
 	                             </tr>	
@@ -954,6 +973,13 @@ switch ($_GET["op"])
 
 						}
 
+						if ($reg->tamano_new>0) {
+							$color_clas = "#028939";
+							
+						}else{
+							$color_clas = "#AC0D06";
+						}
+
 
 						echo '
 
@@ -993,6 +1019,7 @@ switch ($_GET["op"])
 	                                <td>
 	                                	<button type="button" class="btn btn-sm btn-dark" onclick="borrar_prod_consul4('.$reg->idproductos_clasif.');" id="btn_delete_prod'.$reg->idproductos_clasif.'"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ></span></button>
 	                                	<button type="button" class="btn btn-sm" style="background-color: '.$back.'; color: '.$color.';" onclick="desactivar_producto4('.$reg->idproductos_clasif.',\''.$reg->estatus.'\');" id="btn_desac_prod'.$reg->idproductos_clasif.'"><b>'.$eti_status_prod.'</b></button>
+										<button type="button" class="btn btn-sm" style="background-color: '.$color_clas.'; color: #fff; font-size: 10px;" onclick="abrir_reclasif('.$reg->idproductos_clasif.',\''.$reg->codigo_match.'\',\''.$reg->descripcion.'\');">Clasif.</button>
 	                                </td>
 
 	                                
@@ -1190,7 +1217,88 @@ switch ($_GET["op"])
 	 		
 		break;
 
+		case 'guardar_nuevo_tipo':
+
+			$nombre = $_POST['nombre'];
+			$tipo_action = $_POST['tipo_action'];
+			$idtipo = $_POST['idtipo'];
+			// $idproductos_clasif = $_POST['idproductos_clasif'];
+			$rspta=$productos->guardar_nuevo_tipo($nombre,$tipo_action,$idtipo);
+	 		echo json_encode($rspta);
+	 		
+		break;
+
+
+		case 'listar_tipos_new':		
 		
+			$rspta = $productos->listar_tipos_new();						
+			while ($reg = $rspta->fetch_object())
+					{
+						echo '
+							<option value="'.$reg->idtipo.'">'.$reg->nombre.'</option> 
+						';						
+					}
+		break;
+
+		case 'mostrar_modelos_new':	
+			
+			$idtipo = $_GET['idtipo'];
+		
+			$rspta = $productos->mostrar_modelos_new($idtipo);						
+			while ($reg = $rspta->fetch_object())
+					{
+						echo '
+							<option value="'.$reg->idmodelo.'">'.$reg->nombre.'</option> 
+						';						
+					}
+		break;
+
+		case 'mostrar_tamano_new':	
+			
+			$idmodelo = $_GET['idmodelo'];
+		
+			$rspta = $productos->mostrar_tamano_new($idmodelo);						
+			while ($reg = $rspta->fetch_object())
+					{
+						echo '
+							<option value="'.$reg->idtamano.'">'.$reg->nombre.'</option> 
+						';						
+					}
+		break;
+
+		case 'guardar_nuevo_modelo':
+
+			$nombre_m = $_POST['nombre_m'];
+			$tipo_action = $_POST['tipo_action'];
+			$idtipo = $_POST['idtipo'];
+			$idmodelo = $_POST['idmodelo'];
+			$rspta=$productos->guardar_nuevo_modelo($nombre_m,$tipo_action,$idtipo,$idmodelo);
+	 		echo json_encode($rspta);
+	 		
+		break;
+
+		case 'guardar_nuevo_tamano':
+
+			$nombre_t = $_POST['nombre_t'];
+			$tipo_action = $_POST['tipo_action'];			
+			$idmodelo = $_POST['idmodelo'];
+			$idtamano = $_POST['idtamano'];
+			$rspta=$productos->guardar_nuevo_tamano($nombre_t,$tipo_action,$idmodelo,$idtamano);
+	 		echo json_encode($rspta);
+	 		
+		break;
+
+		case 'guardar_nueva_clasificacion':
+
+			$idprod = $_POST['idprod'];
+			$idtipo = $_POST['idtipo'];			
+			$idmodelo = $_POST['idmodelo'];
+			$idtam = $_POST['idtam'];
+
+			$rspta=$productos->guardar_nueva_clasificacion($idprod,$idtipo,$idmodelo,$idtam);
+	 		echo json_encode($rspta);
+	 		
+		break;
 
 
 	}

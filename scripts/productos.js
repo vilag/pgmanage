@@ -1,7 +1,10 @@
+var tipo_action = "";
 function init()
 {
 	//listar_productos();
 	listar_tipos();
+	disabled_enabled();
+	
 
 	var idusuario=$("#idusuario").text();
 	$("#btn_save_prod").hide();
@@ -21,6 +24,14 @@ function init()
 	$("#consuta_productos").show();
 	$("#consulta_fabricados").hide();
 	$("#consulta_vendidos").hide();
+
+	mostrar_tipos_new();
+	setTimeout(() => {
+		mostrar_modelos_new();
+		setTimeout(() => {
+			mostrar_tamano_new();
+		}, 500);
+	}, 500);
 
 }
 
@@ -1203,6 +1214,280 @@ function guardar_producto_nuevo()
 
 }
 
+function open_nuevo_clase_dato(dato, action)
+{
+	tipo_action = action;
+	if (dato==1) {
+
+		document.getElementById("div_new_tipo").style.display="block";
+		document.getElementById("div_new_modelo").style.display="none";
+		document.getElementById("div_new_tamano").style.display="none";
+
+	}
+	if (dato==2) {
+
+		var idtip = $("#select_tipo_new").val();
+
+		if (idtip>0) {
+			document.getElementById("div_new_tipo").style.display="none";
+			document.getElementById("div_new_modelo").style.display="block";
+			document.getElementById("div_new_tamano").style.display="none";
+		}else{
+			bootbox.alert("No se ha seleccionado el tipo");
+		}
+
+		
+				
+	}
+	if (dato==3) {
+
+		var idmod = $("#select_modelo_new").val();
+
+		if (idmod>0) {
+			document.getElementById("div_new_tipo").style.display="none";
+			document.getElementById("div_new_modelo").style.display="none";
+			document.getElementById("div_new_tamano").style.display="block";
+		}else{
+			bootbox.alert("No se ha seleccionado el modelo");
+		}
+		
+		
+		
+	}
+}
+
+function close_nuevo_clase_dato(dato)
+{
+	if (dato==1) {
+		document.getElementById("div_new_tipo").style.display="none";
+		$("#input_new_tipo").val("");
+	}
+	if (dato==2) {
+		document.getElementById("div_new_modelo").style.display="none";
+		$("#input_new_modelo").val("");
+	}
+	if (dato==3) {
+		document.getElementById("div_new_tamano").style.display="none";
+		$("#input_new_tamano").val("");
+	}
+	
+}
+
+function guardar_nuevo_valor_clasif(dato)
+{
+	if (dato==1) {
+		var idtipo = $("#select_tipo_new").val();
+		var nombre = $("#input_new_tipo").val();
+
+		if (nombre!="") {
+			$.post("ajax/productos.php?op=guardar_nuevo_tipo",{nombre:nombre,tipo_action:tipo_action,idtipo:idtipo},function(data, status)
+			{
+				data = JSON.parse(data);
+				$("#input_new_tipo").val("");
+				if (tipo_action=="Nuevo") {
+					bootbox.alert("Tipo guardado exitosamente");
+				}
+				if (tipo_action=="Editar") {
+					bootbox.alert("Tipo actualizado exitosamente");
+				}
+				
+				document.getElementById("div_new_tipo").style.display="none";
+				
+
+				mostrar_tipos_new();
+				disabled_enabled();
+				setTimeout(() => {
+					mostrar_modelos_new();
+					setTimeout(() => {
+						mostrar_tamano_new();
+					}, 500);
+				}, 500);
+								
+			});
+		}else{
+			bootbox.alert("Por favor escriba el nombre del nuevo registro");
+		}
+
+		
+	}
+
+	if (dato==2) {
+		var idtipo = $("#select_tipo_new").val();
+		var idmodelo = $("#select_modelo_new").val();
+		var nombre_m = $("#input_new_modelo").val();
+
+		if (nombre_m!="") {
+			$.post("ajax/productos.php?op=guardar_nuevo_modelo",{nombre_m:nombre_m,tipo_action:tipo_action,idtipo:idtipo,idmodelo:idmodelo},function(data, status)
+			{
+				data = JSON.parse(data);
+				$("#input_new_modelo").val("");
+				if (tipo_action=="Nuevo") {
+					bootbox.alert("Modelo guardado exitosamente");
+				}
+				if (tipo_action=="Editar") {
+					bootbox.alert("Modelo actualizado exitosamente");
+				}
+				
+				document.getElementById("div_new_modelo").style.display="none";
+				disabled_enabled();
+				setTimeout(() => {
+					mostrar_modelos_new();
+					setTimeout(() => {
+						mostrar_tamano_new();
+					}, 500);
+				}, 500);
+								
+			});
+		}else{
+			bootbox.alert("Por favor escriba el nombre del nuevo registro");
+		}
+		
+		
+	}
+
+	if (dato==3) {
+		var idmodelo = $("#select_modelo_new").val();
+		var idtamano = $("#select_tamano_new").val();
+		var nombre_t = $("#input_new_tamano").val();
+
+		if (nombre_t!="") {
+			$.post("ajax/productos.php?op=guardar_nuevo_tamano",{nombre_t:nombre_t,tipo_action:tipo_action,idmodelo:idmodelo,idtamano:idtamano},function(data, status)
+			{
+				data = JSON.parse(data);
+				$("#input_new_tamano").val("");
+				if (tipo_action=="Nuevo") {
+					bootbox.alert("Tamaño guardado exitosamente");
+				}
+				if (tipo_action=="Editar") {
+					bootbox.alert("Tamaño actualizado exitosamente");
+				}
+				
+				document.getElementById("div_new_tamano").style.display="none";
+				disabled_enabled();
+				mostrar_tamano_new();
+								
+			});
+		}else{
+			bootbox.alert("Por favor escriba el nombre del nuevo registro");
+		}
+
+		
+	}
+	
+}
+
+
+function open_editar_clase_dato(action)
+{
+	tipo_action = action;
+	var nombre = $("#select_tipo_new").find('option:selected').text();
+	// var nombre = document.getElementById("select_tipo_new");
+	document.getElementById("div_new_tipo").style.display="block";
+	$("#input_new_tipo").val(nombre);
+	
+}
+
+function open_editar_clase_dato_m(action)
+{
+	tipo_action = action;
+	var nombre = $("#select_modelo_new").find('option:selected').text();
+	// var nombre = document.getElementById("select_tipo_new");
+	document.getElementById("div_new_modelo").style.display="block";
+	$("#input_new_modelo").val(nombre);
+	
+}
+
+function open_editar_clase_dato_t(action)
+{
+	tipo_action = action;
+	var nombre = $("#select_tamano_new").find('option:selected').text();
+	// var nombre = document.getElementById("select_tipo_new");
+	document.getElementById("div_new_tamano").style.display="block";
+	$("#input_new_tamano").val(nombre);
+	
+}
+
+function mostrar_tipos_new()
+{
+	$.post("ajax/productos.php?op=listar_tipos_new",function(r){
+	$("#select_tipo_new").html(r);
+
+		disabled_enabled();
+		setTimeout(() => {
+			mostrar_modelos_new();
+			setTimeout(() => {
+				mostrar_tamano_new();
+			}, 500);
+		}, 500);
+					   
+	});
+}
+
+function mostrar_modelos_new()
+{
+	var idtipo = $("#select_tipo_new").val();
+	$.post("ajax/productos.php?op=mostrar_modelos_new&idtipo="+idtipo,function(r){
+	$("#select_modelo_new").html(r);
+		
+		disabled_enabled();
+		setTimeout(() => {
+			mostrar_tamano_new();
+		}, 500);		
+						   
+	});
+}
+
+function mostrar_tamano_new()
+{
+	var idmodelo = $("#select_modelo_new").val();
+	$.post("ajax/productos.php?op=mostrar_tamano_new&idmodelo="+idmodelo,function(r){
+	$("#select_tamano_new").html(r);
+		disabled_enabled();				   
+	});
+}
+
+function disabled_enabled()
+{
+	$("#new_div_clasif").addClass("disabled_div");
+	setTimeout(() => {
+		$("#new_div_clasif").removeClass("disabled_div");
+	}, 1500);
+}
+
+function abrir_reclasif(idproductos_clasif,codigo_match,descripcion)
+{
+	var idusuario=$("#idusuario").text();
+	if (idusuario==1) {
+		$("#modal_reclasif").modal("show");
+		$("#b_prod_new_clasif").text(codigo_match+" - "+descripcion);
+		$("#id_prod_new_c").val(idproductos_clasif);
+	}
+	
+}
+
+function cerrar_modal_clasif()
+{
+	$("#modal_reclasif").modal("hide");
+}
+
+function guardar_nueva_clasificacion()
+{
+	var idprod = $("#id_prod_new_c").val();
+	var idtipo = $("#select_tipo_new").val();
+	var idmodelo = $("#select_modelo_new").val();
+	var idtam = $("#select_tamano_new").val();
+
+			$.post("ajax/productos.php?op=guardar_nueva_clasificacion",{
+				idprod:idprod,
+				idtipo:idtipo,
+				idmodelo:idmodelo,
+				idtam:idtam
+			},function(data, status)
+			{
+				data = JSON.parse(data);
+				
+			});
+}
 
 
 init();

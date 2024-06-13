@@ -89,9 +89,97 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                                                     </div>
                                                   </div>-->
-                                                    
+                                                  <style>
+                                                    .disabled_div{
+                                                      pointer-events: none; 
+                                                      opacity: 1;
+                                                    }
+                                                  </style>  
 
                                                   <div class="col-md-12 col-sm-12">
+                                                    <!-- <div id="new_div_clasif" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #EDF4F9; padding-bottom: 30px; padding-top: 20px;">
+                                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                          <b>Nueva clasificación</b>
+                                                        </div>
+                                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 20px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Tipos:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_tipo_new" class="form-control selectpicker" style="width: 200px;" onclick="mostrar_modelos_new();">
+                                                              
+                                                            </select>
+                                                            
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(1,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato('Editar');">Editar</button>
+                                                            <div id="div_new_tipo" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo tipo:</label>
+                                                                  <input type="text" class="form-control" id="input_new_tipo">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(1);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(1);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+                                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 20px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Modelos:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_modelo_new" class="form-control selectpicker" style="width: 200px;" onclick="mostrar_tamano_new();">
+                                                              
+                                                            </select>
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(2,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato_m('Editar');">Editar</button>
+                                                            <div id="div_new_modelo" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo modelo:</label>
+                                                                  <input type="text" class="form-control" id="input_new_modelo">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(2);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(2);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+
+                                                        <div class="form-group col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top: 20px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Tamaño:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_tamano_new" class="form-control selectpicker" style="width: 200px;">
+                                                              
+                                                            </select>
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(3,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato_t('Editar');">Editar</button>
+                                                            <div id="div_new_tamano" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo tamaño:</label>
+                                                                  <input type="text" class="form-control" id="input_new_tamano">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(3);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(3);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+
+                                                    </div> -->
                                                     <div class="col-md-12 col-sm-12">
                                                       <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" align="left">
                                                         <h2>PRODUCTOS</h2>
@@ -106,6 +194,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                         <!--<button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="" onclick="update_prod_clasif();" id="act_product">Actualizar</button>-->
                                                                       
                                                       </div>
+                                                      
                                                     </div>
                                                   </div>
 
@@ -121,7 +210,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                         
                                                         <div class="col-md-3 col-sm-3">
                                                           <label>Buscar</label>
-                                                          <input type="text" class="form-control" id="buscar_prod_fil" value="" onkeyup="listar_productos_busqueda();">    
+                                                          <div class="btn-group">
+                                                            <input type="text" class="form-control" id="buscar_prod_fil" value=""> 
+                                                            <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Buscar" onclick="listar_productos_busqueda();">Buscar</button>
+                                                          </div>    
+                                                             
                                                         </div>
                                                         <div class="col-md-3 col-sm-3">
                                                           <label>Tipo</label>
@@ -138,6 +231,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                           <select id="select_busqueda_tamano" class="form-control selectpicker" onchange="select_tamano();">    
                                                           </select>  
                                                         </div>
+                                                        
                                                       </div>
                                                       
                                                       <div class="col-md-12 col-sm-12" style="display: none;">
@@ -472,7 +566,113 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                       </div>
       </div>
     </div>
+    
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="modal_reclasif">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
 
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Asignar nueva clasificación</h4>
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                                                      <div id="new_div_clasif" class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background-color: #EDF4F9; padding-bottom: 30px; padding-top: 20px;">
+                                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                          <b>Nueva clasificación</b>
+                                                        </div>
+                                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Tipos:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_tipo_new" class="form-control selectpicker" style="width: 300px;" onclick="mostrar_modelos_new();">
+                                                              
+                                                            </select>
+                                                            
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(1,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato('Editar');">Editar</button>
+                                                            <div id="div_new_tipo" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo tipo:</label>
+                                                                  <input type="text" class="form-control" id="input_new_tipo">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(1);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(1);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+                                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Modelos:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_modelo_new" class="form-control selectpicker" style="width: 300px;" onclick="mostrar_tamano_new();">
+                                                              
+                                                            </select>
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(2,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato_m('Editar');">Editar</button>
+                                                            <div id="div_new_modelo" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo modelo:</label>
+                                                                  <input type="text" class="form-control" id="input_new_modelo">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(2);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(2);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+
+                                                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-top: 10px;">
+                                                          <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                            <label>Tamaño:</label>
+                                                          </div>
+                                                          <div class="btn-group" style="margin-top: -10px;">
+                                                            <select id="select_tamano_new" class="form-control selectpicker" style="width: 300px;">
+                                                              
+                                                            </select>
+                                                            <button type="button" class="btn btn-dark" onclick="open_nuevo_clase_dato(3,'Nuevo');">+</button>
+                                                            <button style="margin-left: 2px;" type="button" class="btn btn-dark" onclick="open_editar_clase_dato_t('Editar');">Editar</button>
+                                                            <div id="div_new_tamano" style="display: none; width: 250px; height: 150px; top: -80px; background-color: #fff; position: absolute; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); padding-top: 15px; z-index: 5;">
+                                                                
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <label>Nuevo tamaño:</label>
+                                                                  <input type="text" class="form-control" id="input_new_tamano">
+                                                                </div>
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                  <div class="btn-group">
+                                                                    <button class="form-control" onclick="close_nuevo_clase_dato(3);">Cancelar</button>  
+                                                                    <button class="form-control" onclick="guardar_nuevo_valor_clasif(3);">Guardar</button>
+                                                                  </div>   
+                                                                </div>
+                                                            </div>
+                                                          </div> 
+                                                        </div>
+                                                        <div class="col-lg-12 col-md-11 col-sm-11 col-xs-11" style="margin-top: 20px; padding: 15px;">
+                                                          <label for="">Producto a clasificar</label><br>
+                                                          <b id="b_prod_new_clasif" style="font-size: 16px;"></b>
+                                                          <input type="hidden" id="id_prod_new_c">
+                                                        </div>
+                                                      </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark" onclick="cerrar_modal_clasif();">Cancelar</button>
+            <button type="button" class="btn btn-primary" onclick="guardar_nueva_clasificacion();">Guardar</button>             
+          </div>
+
+        </div>
+      </div>
+    </div>
 
     
               

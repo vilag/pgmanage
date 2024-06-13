@@ -42,7 +42,7 @@ Class Productos
 
 	public function listar_productos_resul_tipo($id)
 	{
-		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp 
+		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp, pc.tamano_new 
 		FROM productos_clasif pc WHERE pc.idtipo='$id' ORDER BY pc.idproductos_clasif ASC";
 		return ejecutarConsulta($sql);
 	}
@@ -55,7 +55,7 @@ Class Productos
 
 	public function listar_productos_resul_modelo($id,$id2)
 	{
-		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp FROM productos_clasif pc WHERE pc.idtipo='$id' AND pc.idmodelo=(SELECT idprod_modelo FROM prod_modelo WHERE nombre='$id2') ORDER BY pc.idproductos_clasif ASC";
+		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp, pc.tamano_new FROM productos_clasif pc WHERE pc.idtipo='$id' AND pc.idmodelo=(SELECT idprod_modelo FROM prod_modelo WHERE nombre='$id2') ORDER BY pc.idproductos_clasif ASC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -80,7 +80,7 @@ Class Productos
 
 	public function listar_productos_resul($id,$id2,$id3)
 	{
-		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp FROM productos_clasif pc WHERE idtipo='$id' AND idmodelo=(SELECT idprod_modelo FROM prod_modelo WHERE nombre='$id2') AND idtamano=(SELECT idprod_tamano FROM prod_tamano WHERE nombre='$id3') ORDER BY pc.idproductos_clasif ASC";
+		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_modelo WHERE idprod_modelo=pc.idmodelo) as nom_modelo, (SELECT nombre FROM prod_modelo2 WHERE idprod_modelo2=pc.idmodelo2) as nom_modelo2, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp, pc.tamano_new FROM productos_clasif pc WHERE idtipo='$id' AND idmodelo=(SELECT idprod_modelo FROM prod_modelo WHERE nombre='$id2') AND idtamano=(SELECT idprod_tamano FROM prod_tamano WHERE nombre='$id3') ORDER BY pc.idproductos_clasif ASC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -104,7 +104,7 @@ Class Productos
 
 	public function listar_productos_busqueda($id)
 	{
-		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp  FROM productos_clasif pc WHERE pc.descripcion LIKE '%".$id."%' OR pc.codigo_match LIKE '%".$id."%' ORDER BY pc.descripcion asc";
+		$sql="SELECT pc.estatus, pc.idproductos_clasif, pc.idproductos as idproducto,(SELECT precio_total FROM productos WHERE idproducto=pc.idproductos) as precio_total, pc.codigo_match, pc.descripcion, (SELECT nombre FROM prod_tamano WHERE idprod_tamano=pc.idtamano) as nom_tamano, pc.esp, pc.tamano_new  FROM productos_clasif pc WHERE pc.descripcion LIKE '%".$id."%' OR pc.codigo_match LIKE '%".$id."%' ORDER BY pc.descripcion asc";
 		return ejecutarConsulta($sql);
 	}
 
@@ -211,6 +211,100 @@ Class Productos
          
     }
 
+	public function guardar_nuevo_tipo($nombre,$tipo_action,$idtipo)
+    {
+		if ($tipo_action=="Nuevo") {
+			$sql="INSERT INTO tbl_tipo_new (nombre) VALUES ('$nombre')";
+			return ejecutarConsulta($sql);
+		}
+
+		if ($tipo_action=="Editar") {
+			$sql="UPDATE tbl_tipo_new SET nombre = '$nombre' WHERE idtipo = '$idtipo'";
+			return ejecutarConsulta($sql);
+		}
+			 
+    }
+
+	public function listar_tipos_new()
+    {
+        $sql="SELECT * FROM tbl_tipo_new ORDER BY nombre ASC";
+        return ejecutarConsulta($sql); 
+    }
+
+	public function mostrar_modelos_new($idtipo)
+    {
+        $sql="SELECT * FROM tbl_modelo_new WHERE idtipo='$idtipo' AND idtipo>0 ORDER BY nombre ASC";
+        return ejecutarConsulta($sql); 
+    }
+
+	public function mostrar_tamano_new($idmodelo)
+    {
+        $sql="SELECT * FROM tbl_tamano_new WHERE idmodelo='$idmodelo' AND idmodelo>0 ORDER BY nombre ASC";
+        return ejecutarConsulta($sql); 
+    }
+
+	public function guardar_nuevo_modelo($nombre_m,$tipo_action,$idtipo,$idmodelo)
+    {
+		if ($tipo_action=="Nuevo") {
+			$sql="INSERT INTO tbl_modelo_new (idtipo, nombre) VALUES ('$idtipo','$nombre_m')";
+			return ejecutarConsulta($sql);
+		}
+
+		if ($tipo_action=="Editar") {
+			$sql="UPDATE tbl_modelo_new SET nombre = '$nombre_m' WHERE idmodelo = '$idmodelo'";
+			return ejecutarConsulta($sql);
+		}
+			 
+    }
+
+	public function guardar_nuevo_tamano($nombre_t,$tipo_action,$idmodelo,$idtamano)
+    {
+		if ($tipo_action=="Nuevo") {
+			$sql="INSERT INTO tbl_tamano_new (idmodelo, nombre) VALUES ('$idmodelo','$nombre_t')";
+			return ejecutarConsulta($sql);
+		}
+
+		if ($tipo_action=="Editar") {
+			$sql="UPDATE tbl_tamano_new SET nombre = '$nombre_t' WHERE idtamano = '$idtamano'";
+			return ejecutarConsulta($sql);
+		}
+			 
+    }
+
+	public function prueba()
+    {
+        $sql="SELECT
+
+		a.codigo_match,
+		a.descripcion,
+		b.nombre as nombre_tipo,
+		c.nombre as nombre_modelo,
+		d.nombre as nombre_tamano 
+		
+		FROM productos_clasif a INNER JOIN prod_tipo b ON a.idtipo = b.idprod_tipo INNER JOIN prod_modelo c ON a.idmodelo=c.idprod_modelo INNER JOIN prod_tamano d ON a.idtamano = d.idprod_tamano";
+        return ejecutarConsulta($sql); 
+    }
+
+	public function prueba2()
+    {
+        $sql="SELECT
+
+		codigo_match,
+		descripcion,
+		(SELECT nombre FROM prod_tipo WHERE idprod_tipo=a.idtipo) as nombre_tipo,
+		(SELECT nombre FROM prod_modelo WHERE idprod_modelo=a.idmodelo) as nombre_modelo,
+		(SELECT nombre FROM prod_tamano WHERE idprod_tamano=a.idtamano) as nombre_tamano,
+		estatus
+		
+		FROM productos_clasif a ";
+        return ejecutarConsulta($sql); 
+    }
+
+	public function guardar_nueva_clasificacion($idprod,$idtipo,$idmodelo,$idtam)
+    {
+        $sql="UPDATE productos_clasif SET tipo_new='$idtipo', modelo_new='$idmodelo', tamano_new='$idtam' WHERE idproductos_clasif = '$idprod'";
+        return ejecutarConsulta($sql); 
+    }
 
 }
 ?>

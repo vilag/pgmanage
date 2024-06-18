@@ -187,6 +187,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                       <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" align="right">
                                                
                                                         <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Agregar producto" onclick="nuevo_producto();">Nuevo</button>
+                                                        <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Agregar producto" onclick="abrir_reclasif_blank();">Clasif.</button>
                                                         <!--<button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ver productos fabricados" onclick="abrir_consultar();">Consultar</button>
                                                         <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ver productos fabricados" onclick="listar_productos_fabricados();">Fabricados</button>
                                                         <button type="button" class="btn btn-dark" onclick="abrir_pro_vendidos();" id="">Pedidos</button>-->
@@ -572,7 +573,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
         <div class="modal-content">
 
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Asignar nueva clasificación</h4>
+            <h4 class="modal-title" id="myModalLabel">Nueva clasificación</h4>
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
           </div>
@@ -667,7 +668,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-dark" onclick="cerrar_modal_clasif();">Cancelar</button>
-            <button type="button" class="btn btn-primary" onclick="guardar_nueva_clasificacion();">Guardar</button>             
+            <button id="btn_save_reclasif" type="button" class="btn btn-primary" onclick="guardar_nueva_clasificacion();">Guardar</button>             
           </div>
 
         </div>

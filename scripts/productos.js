@@ -1461,8 +1461,18 @@ function abrir_reclasif(idproductos_clasif,codigo_match,descripcion)
 		$("#modal_reclasif").modal("show");
 		$("#b_prod_new_clasif").text(codigo_match+" - "+descripcion);
 		$("#id_prod_new_c").val(idproductos_clasif);
+		document.getElementById("btn_save_reclasif").style.display="block";
 	}
 	
+}
+
+function abrir_reclasif_blank()
+{
+	var idusuario=$("#idusuario").text();
+	if (idusuario==1) {
+		$("#modal_reclasif").modal("show");
+		document.getElementById("btn_save_reclasif").style.display="none";
+	}
 }
 
 function cerrar_modal_clasif()

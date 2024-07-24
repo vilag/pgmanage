@@ -259,7 +259,7 @@
                   
                   
                   <?php 
-                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']==10) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']==5) OR ($_SESSION['idusuario']==4) OR ($_SESSION['idusuario']==23) OR ($_SESSION['idusuario']==24)) {
+                      if (($_SESSION['idusuario']==1) OR ($_SESSION['idusuario']==10) OR ($_SESSION['idusuario']==22) OR ($_SESSION['idusuario']==5) OR ($_SESSION['idusuario']==4) OR ($_SESSION['idusuario']==23) OR ($_SESSION['idusuario']==24)  OR ($_SESSION['idusuario']==27)) {
 
                           echo '
                               

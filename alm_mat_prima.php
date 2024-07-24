@@ -52,10 +52,10 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     <label for="">Descripción</label>
                                     <textarea id="descripcion" class="form-control"></textarea>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6">     
+                                <!-- <div class="form-group col-md-6 col-sm-6">     
                                     <label for="">Cantidad*</label>
                                     <input type="text" class="form-control" id="cantidad">
-                                </div>
+                                </div> -->
                                 <div class="form-group col-md-6 col-sm-6">     
                                     <label for="">Tipo*</label>
                                     <select id="tipo" class="form-control">
@@ -77,7 +77,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     <textarea id="observaciones" class="form-control"></textarea>
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12" style="display: flex; justify-content: center; padding-top: 25px;">     
-                                    <button class="btn btn-block" style="background-color: #063A5D; color: #fff;" onclick="guardar_producto();">Guardar</button>
+                                    <button class="btn btn-block" style="background-color: #063A5D; color: #fff;" onclick="validar();">Guardar</button>
                                 </div>
                             </div>
                             <div id="div_form_tipo" class="form-group col-md-4 col-sm-4" style="display: none;">  
@@ -125,6 +125,53 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     </tbody>
                                 </table>
                             </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <div class="form-group col-md-12 col-sm-12">
+                                            <label for="">Entradas y salidas</label>
+                                </div>
+                                <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 300px;">
+                                        <div class="form-group col-md-12 col-sm-12">
+                                                <label for="">ENTRADAS</label>
+                                        </div>
+                                        <table class="table table-hover table-fixed">
+                                            <thead>	
+                                                <tr>
+                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>TIPO MOV.</b></small></th>
+                                                    <th><small><b>NOMBRE</b></small></th>
+                                                    <th><small><b>CANTIDAD</b></small></th>
+                                                    <th><small><b>PROVEEDOR</b></small></th>
+                                                    <th><small><b>LOTE</b></small></th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_entradas_gen">
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div class="form-group col-md-7 col-sm-7" style="border-left: #ccc 1px solid; overflow-y: scroll; height: 300px;">
+                                        <div class="form-group col-md-12 col-sm-12">
+                                                <label for="">SALIDAS</label>
+                                        </div>
+                                        <table class="table table-hover table-fixed">
+                                            <thead>	
+                                                <tr>
+                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>TIPO MOV.</b></small></th>
+                                                    <th><small><b>NOMBRE</b></small></th>
+                                                    <th><small><b>CANTIDAD</b></small></th>
+                                                    <th><small><b>PROVEEDOR</b></small></th>
+                                                    <th><small><b>LOTE</b></small></th>
+                                                    <th><small><b>NO. CONTROL</b></small></th>
+                                                    <th><small><b>OP</b></small></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_salidas_gen">
+                                            </tbody>
+                                        </table>
+                                </div>
+                            </div>
                             
                         </div>
                         <div class="form-group col-md-12 col-sm-12" id="div_ent_sal_prod_mat" style="display: none;">
@@ -138,7 +185,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <button class="btn" style="background-color: #063A5D; color: #fff;" onclick="registrar_salida();">Salida</button>
                                     </div>
                                     <div class="form-group col-md-4 col-sm-4">
-                                        <button class="btn" style="background-color: #063A5D; color: #fff;" onclick="back_list();">Ver lista</button>
+                                        <button class="btn" style="background-color: #038a5b; color: #fff;" onclick="back_list();">Ver lista</button>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-9 col-sm-9" id="div_producto_alm_mat">
@@ -243,7 +290,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                                 <div class="form-group col-md-12 col-sm-12" id="div_registros">
                                     <div class="form-group col-md-12 col-sm-12">
-                                            <label for="">Registro de entradas y salidas</label>
+                                            <label for="">Entradas y alidas de producto</label>
                                     </div>
                                     <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 300px;">
                                         <div class="form-group col-md-12 col-sm-12">
@@ -347,6 +394,37 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
           </div>
         </div>
         <!-- /page content -->
+
+        <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true" id="modal_coin">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Coincidencias encontradas</h4>
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group col-md-12 col-sm-12" style="height: 200px; overflow-y: scroll;">
+                            <table class="table table-hover table-fixed">
+                                <thead>	
+                                    <tr>
+                                        <th><small><b>NOMBRE</b></small></th>
+                                                   
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl_coin_prod_alm_mp">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Corregir</button> 
+                        <button type="button" class="btn btn-primary" onclick="guardar_producto();">Guardar producto</button>  
+                    </div>
+
+                </div>
+            </div>
+        </div> 
 
 
       </div>

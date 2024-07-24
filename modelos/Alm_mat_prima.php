@@ -22,7 +22,9 @@ Class Alm_mat_prima
 		a.consec,
 		a.observaciones,
 		a.ubicacion,
-		a.folio_prov 
+		a.folio_prov,
+		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
+		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas
 		
 		FROM 10_prod_alm_mat a ORDER BY a.consec DESC";
 		return ejecutarConsulta($sql);
@@ -71,7 +73,9 @@ Class Alm_mat_prima
 		a.consec,
 		a.observaciones,
 		a.ubicacion,
-		a.folio_prov 
+		a.folio_prov,
+		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
+		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas
 		
 		FROM 10_prod_alm_mat a WHERE a.nombre LIKE '%".$texto."%' ORDER BY a.consec DESC";
 		return ejecutarConsulta($sql);
@@ -89,8 +93,9 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
-	public function listar_movimientos_entradas()
+	public function listar_movimientos_entradas_gen()
 	{
+		
 		$sql="SELECT  
 		
 		a.identrada,
@@ -100,6 +105,21 @@ Class Alm_mat_prima
 		a.lote
 		
 		FROM 10_entrada_alm_mat a ORDER BY a.identrada ASC";
+		return ejecutarConsulta($sql);
+	}
+
+	public function listar_movimientos_entradas($idprod)
+	{
+
+		$sql="SELECT  
+		
+		a.identrada,
+		(SELECT nombre FROM 10_prod_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as nombre,
+		a.cantidad,
+		a.proveedor,
+		a.lote
+		
+		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada ASC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -117,7 +137,7 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
-	public function listar_movimientos_salidas()
+	public function listar_movimientos_salidas_gen()
 	{
 		$sql="SELECT  
 		
@@ -130,6 +150,22 @@ Class Alm_mat_prima
 		a.op
 		
 		FROM 10_salida_alm_mat a ORDER BY a.idsalida ASC";
+		return ejecutarConsulta($sql);
+	}
+
+	public function listar_movimientos_salidas($idprod)
+	{
+		$sql="SELECT  
+		
+		a.idsalida,
+		(SELECT nombre FROM 10_prod_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as nombre,
+		a.cantidad,
+		a.proveedor,
+		a.lote,
+		a.no_control,
+		a.op
+		
+		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida ASC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -158,6 +194,18 @@ Class Alm_mat_prima
 		
 		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$id_prod_alm_mat'";
 		return ejecutarConsultaSimpleFila($sql);
+	}
+
+	public function coincidencias($nombre)
+	{
+		$sql="SELECT * FROM 10_prod_alm_mat WHERE nombre LIKE '%".$nombre."%'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function borrar_producto($id_prod_alm_mat)
+	{
+		$sql="DELETE FROM 10_prod_alm_mat WHERE id_prod_alm_mat='$id_prod_alm_mat'";
+		return ejecutarConsulta($sql);
 	}
 
 }

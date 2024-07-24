@@ -2,6 +2,7 @@ function init()
 {
     listar_productos_mat();
     listar_tipos_select();
+    listar_movimientos_gen();
 }
 
 function listar_productos_mat()
@@ -21,18 +22,38 @@ function listar_tipos_select()
     });
 }
 
+function validar()
+{
+    var nombre = $("#nombre").val();
+
+    if (nombre!="") {
+        $.post("ajax/alm_mat_prima.php?op=coincidencias&nombre="+nombre,function(r){
+            $("#tbl_coin_prod_alm_mp").html(r);
+            
+            $("#modal_coin").modal("show");
+        
+        });
+    }else{
+        bootbox.alert("Por favor capture el nombre");
+    }
+
+    
+
+}
+
 function guardar_producto()
 {
     var nombre = $("#nombre").val();
     var descripcion = $("#descripcion").val();
-    var cantidad = $("#cantidad").val();
+    var cantidad = 0;
     var tipo = $("#tipo").val();
     //var lote = $("#lote").val();
     var ubicacion = $("#ubicacion").val();
     var folio_prov = $("#folio_prov").val();
     var observaciones = $("#observaciones").val();
 
-    if (nombre!="" && cantidad!="" && tipo!="" && ubicacion!="") {
+    if (nombre!="" && tipo!="" && ubicacion!="") {
+
         $.post("ajax/alm_mat_prima.php?op=max_consec",function(data, status)
         {
             data = JSON.parse(data);
@@ -55,10 +76,12 @@ function guardar_producto()
                 data = JSON.parse(data);
                 var notificator = new Notification(document.querySelector('.notification'));
                 notificator.info('Producto guardado exitosamente.');
+
+                $("#modal_coin").modal("hide");
             
                 $("#nombre").val("");
                 $("#descripcion").val("");
-                $("#cantidad").val("");
+                //$("#cantidad").val("");
                 $("#tipo").val("");
                 $("#ubicacion").val("");
                 $("#folio_prov").val("");
@@ -137,12 +160,13 @@ function back_list(){
     document.getElementById("div_ent_sal_prod_mat").style.display="none";
     $("#id_select_prod").val("");
     listar_movimientos();
+    listar_movimientos_gen();
 }
 
 function ver_producto(id_prod_alm_mat, nombre, descripcion, cantidad, tipo, idtipo, consec, observaciones, ubicacion, folio_prov){
     document.getElementById("div_reg_prod_mat").style.display="none";
     document.getElementById("div_ent_sal_prod_mat").style.display="block";
-    listar_movimientos();
+    
 
     $("#nombre_select_prod").val(nombre);
     $("#nombre_entrada").val(nombre);
@@ -174,6 +198,7 @@ function ver_producto(id_prod_alm_mat, nombre, descripcion, cantidad, tipo, idti
     document.getElementById("div_reg_salidas").style.display="none";
 
     contar_existencia();
+    listar_movimientos();
 
 }
 
@@ -202,6 +227,8 @@ function habilitar_edicion(){
     document.getElementById("div_registros").style.display="block";
     document.getElementById("div_reg_entradas").style.display="none";
     document.getElementById("div_reg_salidas").style.display="none";
+
+    listar_movimientos();
    
 }
 
@@ -295,15 +322,29 @@ function guardar_salida(){
 }
 
 function listar_movimientos(){
-    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_entradas",function(r){
+    var id_prod_alm_mat = $("#id_select_prod").val();
+    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_entradas&idprod="+id_prod_alm_mat,function(r){
         $("#tbl_entradas").html(r);        
     });
 
-    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_salidas",function(r){
+    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_salidas&idprod="+id_prod_alm_mat,function(r){
         $("#tbl_salidas").html(r);        
     });
 
-    contar_existencia();
+    
+}
+
+function listar_movimientos_gen(){
+    //var id_prod_alm_mat = 0;
+    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_entradas_gen",function(r){
+        $("#tbl_entradas_gen").html(r);        
+    });
+
+    $.post("ajax/alm_mat_prima.php?op=listar_movimientos_salidas_gen",function(r){
+        $("#tbl_salidas_gen").html(r);        
+    });
+
+    
 }
 
 function contar_existencia()
@@ -313,12 +354,57 @@ function contar_existencia()
     {
         data = JSON.parse(data);
 
-        // alert(data.entradas);
-        // alert(data.salidas);
+        if (data.entradas==null) {
+            var entradas = 0;
+        }else{
+            var entradas = data.entradas;
+        }
 
-        $("#cantidad_select_prod").text(parseInt(data.entradas)-parseInt(data.salidas));
+        if (data.salidas==null) {
+            var salidas = 0;
+        }else{
+            var salidas = data.salidas;
+        }
+
+      
+
+        $("#cantidad_select_prod").text(parseInt(entradas)-parseInt(salidas));
     
     });
+}
+
+function borrar_producto(id_prod_alm_mat)
+{
+
+    bootbox.confirm({
+        message: '¿Esta seguro de eliminar este producto?, se perderan todas las entradas y salidas.',
+        buttons: {
+        confirm: {
+        label: 'Si',
+        className: 'btn-success'
+        },
+        cancel: {
+        label: 'No',
+        className: 'btn-danger'
+        }
+        },
+        callback: function (result) {
+            if (result) {
+
+                $.post("ajax/alm_mat_prima.php?op=borrar_producto",{id_prod_alm_mat:id_prod_alm_mat},function(data, status)
+                {
+                    data = JSON.parse(data);
+                    var notificator = new Notification(document.querySelector('.notification'));
+                    notificator.info('Producto borrado exitosamente.');
+                    listar_productos_mat();
+                });
+                
+            }
+        }
+    });
+
+
+    
 }
 
 init();

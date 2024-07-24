@@ -43,55 +43,58 @@ function validar()
 
 function guardar_producto()
 {
-    var nombre = $("#nombre").val();
-    var descripcion = $("#descripcion").val();
-    var cantidad = 0;
-    var tipo = $("#tipo").val();
-    //var lote = $("#lote").val();
-    var ubicacion = $("#ubicacion").val();
-    var folio_prov = $("#folio_prov").val();
-    var observaciones = $("#observaciones").val();
+    if (idusuario==27 || idusuario==1) {
+        var nombre = $("#nombre").val();
+        var descripcion = $("#descripcion").val();
+        var cantidad = 0;
+        var tipo = $("#tipo").val();
+        //var lote = $("#lote").val();
+        var ubicacion = $("#ubicacion").val();
+        var folio_prov = $("#folio_prov").val();
+        var observaciones = $("#observaciones").val();
 
-    if (nombre!="" && tipo!="" && ubicacion!="") {
+        if (nombre!="" && tipo!="" && ubicacion!="") {
 
-        $.post("ajax/alm_mat_prima.php?op=max_consec",function(data, status)
-        {
-            data = JSON.parse(data);
-
-            var next_consec = parseInt(data.max)+1;
-
-            //alert(next_consec);
-
-            $.post("ajax/alm_mat_prima.php?op=guardar_producto",{
-                nombre:nombre,
-                descripcion:descripcion,
-                cantidad:cantidad,
-                tipo:tipo,
-                next_consec:next_consec,
-                ubicacion:ubicacion,
-                folio_prov:folio_prov,
-                observaciones:observaciones
-            },function(data, status)
+            $.post("ajax/alm_mat_prima.php?op=max_consec",function(data, status)
             {
                 data = JSON.parse(data);
-                var notificator = new Notification(document.querySelector('.notification'));
-                notificator.info('Producto guardado exitosamente.');
 
-                $("#modal_coin").modal("hide");
-            
-                $("#nombre").val("");
-                $("#descripcion").val("");
-                //$("#cantidad").val("");
-                $("#tipo").val("");
-                $("#ubicacion").val("");
-                $("#folio_prov").val("");
-                $("#observaciones").val("");
-                listar_productos_mat("");
+                var next_consec = parseInt(data.max)+1;
+
+                //alert(next_consec);
+
+                $.post("ajax/alm_mat_prima.php?op=guardar_producto",{
+                    nombre:nombre,
+                    descripcion:descripcion,
+                    cantidad:cantidad,
+                    tipo:tipo,
+                    next_consec:next_consec,
+                    ubicacion:ubicacion,
+                    folio_prov:folio_prov,
+                    observaciones:observaciones
+                },function(data, status)
+                {
+                    data = JSON.parse(data);
+                    var notificator = new Notification(document.querySelector('.notification'));
+                    notificator.info('Producto guardado exitosamente.');
+
+                    $("#modal_coin").modal("hide");
+                
+                    $("#nombre").val("");
+                    $("#descripcion").val("");
+                    //$("#cantidad").val("");
+                    $("#tipo").val("");
+                    $("#ubicacion").val("");
+                    $("#folio_prov").val("");
+                    $("#observaciones").val("");
+                    listar_productos_mat("");
+                });
             });
-        });
-    }else{
-        bootbox.alert("Es necesario capturar los datos obligatorios");
+        }else{
+            bootbox.alert("Es necesario capturar los datos obligatorios");
+        }
     }
+    
 
     
 
@@ -274,28 +277,28 @@ function listar_mov_salida(){
 function guardar_entrada(){
     if (idusuario==27 || idusuario==1) {
 
+        var id_select_prod = $("#id_select_prod").val();
+        var cantidad_entrada = $("#cantidad_entrada").val();
+        var proveedor_entrada = $("#proveedor_entrada").val();
+        var lote_entrada = $("#lote_entrada").val();
+
+        $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
+            id_select_prod:id_select_prod,
+            cantidad_entrada:cantidad_entrada,
+            proveedor_entrada:proveedor_entrada,
+            lote_entrada:lote_entrada
+        },function(data, status)
+        {
+            data = JSON.parse(data);
+            var notificator = new Notification(document.querySelector('.notification'));
+            notificator.info('Entrada guardada exitosamente.');
+
+            listar_mov_entrada();
+            contar_existencia();
         
+        });
     }
-    var id_select_prod = $("#id_select_prod").val();
-    var cantidad_entrada = $("#cantidad_entrada").val();
-    var proveedor_entrada = $("#proveedor_entrada").val();
-    var lote_entrada = $("#lote_entrada").val();
-
-    $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
-        id_select_prod:id_select_prod,
-        cantidad_entrada:cantidad_entrada,
-        proveedor_entrada:proveedor_entrada,
-        lote_entrada:lote_entrada
-    },function(data, status)
-    {
-        data = JSON.parse(data);
-        var notificator = new Notification(document.querySelector('.notification'));
-        notificator.info('Entrada guardada exitosamente.');
-
-        listar_mov_entrada();
-        contar_existencia();
     
-    });
 }
 
 function guardar_salida(){

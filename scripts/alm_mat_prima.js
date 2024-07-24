@@ -1,3 +1,4 @@
+var idusuario = $("#idusuario").text();
 function init()
 {
     listar_productos_mat();
@@ -24,21 +25,20 @@ function listar_tipos_select()
 
 function validar()
 {
-    var nombre = $("#nombre").val();
+    if (idusuario==27 || idusuario==1) {
+        var nombre = $("#nombre").val();
 
-    if (nombre!="") {
-        $.post("ajax/alm_mat_prima.php?op=coincidencias&nombre="+nombre,function(r){
-            $("#tbl_coin_prod_alm_mp").html(r);
+        if (nombre!="") {
+            $.post("ajax/alm_mat_prima.php?op=coincidencias&nombre="+nombre,function(r){
+                $("#tbl_coin_prod_alm_mp").html(r);
+                
+                $("#modal_coin").modal("show");
             
-            $("#modal_coin").modal("show");
-        
-        });
-    }else{
-        bootbox.alert("Por favor capture el nombre");
+            });
+        }else{
+            bootbox.alert("Por favor capture el nombre");
+        }
     }
-
-    
-
 }
 
 function guardar_producto()
@@ -130,28 +130,28 @@ function listar_tipos()
 
 function guardar_tipo()
 {
-    var nombre = $("#nombre_tipo").val();
-    var descripcion = $("#descripcion_tipo").val();
+    if (idusuario==27 || idusuario==1) {
+        var nombre = $("#nombre_tipo").val();
+        var descripcion = $("#descripcion_tipo").val();
 
-    if (nombre!="") {
-        $.post("ajax/alm_mat_prima.php?op=guardar_tipo",{
-            nombre:nombre,
-            descripcion:descripcion
-        },function(data, status)
-        {
-            data = JSON.parse(data);
-            var notificator = new Notification(document.querySelector('.notification'));
-            notificator.info('Tipo agregado correctamente.');
-            // bootbox.alert("Tipo guardado exitosamente");
-            $("#nombre_tipo").val("");
-            $("#descripcion_tipo").val("");
-            listar_tipos();
-        });
-    }else{
-        bootbox.alert("Es necesario capturar el nombre");
+        if (nombre!="") {
+            $.post("ajax/alm_mat_prima.php?op=guardar_tipo",{
+                nombre:nombre,
+                descripcion:descripcion
+            },function(data, status)
+            {
+                data = JSON.parse(data);
+                var notificator = new Notification(document.querySelector('.notification'));
+                notificator.info('Tipo agregado correctamente.');
+                // bootbox.alert("Tipo guardado exitosamente");
+                $("#nombre_tipo").val("");
+                $("#descripcion_tipo").val("");
+                listar_tipos();
+            });
+        }else{
+            bootbox.alert("Es necesario capturar el nombre");
+        }
     }
-
-    
     
 }
 
@@ -272,6 +272,10 @@ function listar_mov_salida(){
 }
 
 function guardar_entrada(){
+    if (idusuario==27 || idusuario==1) {
+
+        
+    }
     var id_select_prod = $("#id_select_prod").val();
     var cantidad_entrada = $("#cantidad_entrada").val();
     var proveedor_entrada = $("#proveedor_entrada").val();
@@ -295,30 +299,33 @@ function guardar_entrada(){
 }
 
 function guardar_salida(){
-    var id_select_prod = $("#id_select_prod").val();
-    var cantidad_salida = $("#cantidad_salida").val();
-    var proveedor_salida = $("#proveedor_salida").val();
-    var lote_salida = $("#lote_salida").val();
-    var no_control_salida = $("#no_control_salida").val();
-    var op_salida = $("#op_salida").val();
+    if (idusuario==27 || idusuario==1) {
+        var id_select_prod = $("#id_select_prod").val();
+        var cantidad_salida = $("#cantidad_salida").val();
+        var proveedor_salida = $("#proveedor_salida").val();
+        var lote_salida = $("#lote_salida").val();
+        var no_control_salida = $("#no_control_salida").val();
+        var op_salida = $("#op_salida").val();
 
-    $.post("ajax/alm_mat_prima.php?op=guardar_salida",{
-        id_select_prod:id_select_prod,
-        cantidad_salida:cantidad_salida,
-        proveedor_salida:proveedor_salida,
-        lote_salida:lote_salida,
-        no_control_salida:no_control_salida,
-        op_salida:op_salida
-    },function(data, status)
-    {
-        data = JSON.parse(data);
-        var notificator = new Notification(document.querySelector('.notification'));
-        notificator.info('Salida guardada exitosamente.');
+        $.post("ajax/alm_mat_prima.php?op=guardar_salida",{
+            id_select_prod:id_select_prod,
+            cantidad_salida:cantidad_salida,
+            proveedor_salida:proveedor_salida,
+            lote_salida:lote_salida,
+            no_control_salida:no_control_salida,
+            op_salida:op_salida
+        },function(data, status)
+        {
+            data = JSON.parse(data);
+            var notificator = new Notification(document.querySelector('.notification'));
+            notificator.info('Salida guardada exitosamente.');
 
-        listar_mov_salida();
-        contar_existencia();
+            listar_mov_salida();
+            contar_existencia();
+        
+        });
+    }
     
-    });
 }
 
 function listar_movimientos(){
@@ -375,33 +382,35 @@ function contar_existencia()
 
 function borrar_producto(id_prod_alm_mat)
 {
-
-    bootbox.confirm({
-        message: '¿Esta seguro de eliminar este producto?, se perderan todas las entradas y salidas.',
-        buttons: {
-        confirm: {
-        label: 'Si',
-        className: 'btn-success'
-        },
-        cancel: {
-        label: 'No',
-        className: 'btn-danger'
-        }
-        },
-        callback: function (result) {
-            if (result) {
-
-                $.post("ajax/alm_mat_prima.php?op=borrar_producto",{id_prod_alm_mat:id_prod_alm_mat},function(data, status)
-                {
-                    data = JSON.parse(data);
-                    var notificator = new Notification(document.querySelector('.notification'));
-                    notificator.info('Producto borrado exitosamente.');
-                    listar_productos_mat();
-                });
-                
+    if (idusuario==27 || idusuario==1) {
+        bootbox.confirm({
+            message: '¿Esta seguro de eliminar este producto?, se perderan todas las entradas y salidas.',
+            buttons: {
+            confirm: {
+            label: 'Si',
+            className: 'btn-success'
+            },
+            cancel: {
+            label: 'No',
+            className: 'btn-danger'
             }
-        }
-    });
+            },
+            callback: function (result) {
+                if (result) {
+
+                    $.post("ajax/alm_mat_prima.php?op=borrar_producto",{id_prod_alm_mat:id_prod_alm_mat},function(data, status)
+                    {
+                        data = JSON.parse(data);
+                        var notificator = new Notification(document.querySelector('.notification'));
+                        notificator.info('Producto borrado exitosamente.');
+                        listar_productos_mat();
+                    });
+                    
+                }
+            }
+        });
+    }
+    
 
 
     

@@ -201,7 +201,10 @@ function ver_producto(id_prod_alm_mat, nombre, descripcion, cantidad, tipo, idti
     document.getElementById("div_reg_salidas").style.display="none";
 
     contar_existencia();
-    listar_movimientos();
+    setTimeout(() => {
+        listar_movimientos();
+    }, 2000);
+    
 
 }
 

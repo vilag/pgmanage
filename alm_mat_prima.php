@@ -130,11 +130,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 <div class="form-group col-md-12 col-sm-12">
                                             <label for="">Entradas y salidas</label>
                                 </div>
-                                <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 300px;">
+                                <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">ENTRADAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed">
+                                        <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>FOLIO</b></small></th>
@@ -150,11 +150,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                             </tbody>
                                         </table>
                                 </div>
-                                <div class="form-group col-md-7 col-sm-7" style="border-left: #ccc 1px solid; overflow-y: scroll; height: 300px;">
+                                <div class="form-group col-md-7 col-sm-7" style="border-left: #ccc 1px solid; overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">SALIDAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed">
+                                        <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>FOLIO</b></small></th>
@@ -292,11 +292,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     <div class="form-group col-md-12 col-sm-12">
                                             <label for="">Entradas y alidas de producto</label>
                                     </div>
-                                    <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 300px;">
+                                    <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">ENTRADAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed">
+                                        <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>FOLIO</b></small></th>
@@ -312,11 +312,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="form-group col-md-7 col-sm-7" style="border-left: #ccc 1px solid; overflow-y: scroll; height: 300px;">
+                                    <div class="form-group col-md-7 col-sm-7" style="border-left: #ccc 1px solid; overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">SALIDAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed">
+                                        <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>FOLIO</b></small></th>
@@ -336,7 +336,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12" id="div_reg_entradas">
                                    
-                                    <div class="form-group col-md-12 col-sm-12" style="overflow-y: scroll; height: 300px;">
+                                    <div class="form-group col-md-12 col-sm-12" style="overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">ENTRADAS</label>
                                         </div>
@@ -360,7 +360,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12" id="div_reg_salidas">
                                    
-                                    <div class="form-group col-md-12 col-sm-12" style="overflow-y: scroll; height: 300px;">
+                                    <div class="form-group col-md-12 col-sm-12" style="overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">SALIDAS</label>
                                         </div>

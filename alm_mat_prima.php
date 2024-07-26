@@ -48,10 +48,10 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     <label for="">Nombre*</label>
                                     <input type="text" class="form-control" id="nombre">
                                 </div>
-                                <div class="form-group col-md-12 col-sm-12">     
+                                <!-- <div class="form-group col-md-12 col-sm-12">     
                                     <label for="">Descripción</label>
                                     <textarea id="descripcion" class="form-control"></textarea>
-                                </div>
+                                </div> -->
                                 <!-- <div class="form-group col-md-6 col-sm-6">     
                                     <label for="">Cantidad*</label>
                                     <input type="text" class="form-control" id="cantidad">
@@ -68,7 +68,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     <label for="">Ubicación*</label>
                                     <input type="text" class="form-control" id="ubicacion">
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6">     
+                                <div class="form-group col-md-12 col-sm-12">     
                                     <label for="">Folio (Proveedor)</label>
                                     <input type="text" class="form-control" id="folio_prov">
                                 </div>
@@ -434,7 +434,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
         .estilo_prod_mat{
             box-shadow: 5px 5px 10px rgba(0,0,0,0.2); 
             padding: 10px; 
-            margin-top: 2px;
+            margin-top: 15px;
             background-color: #fff;
             cursor: pointer;
             transition: all 0.2s;
@@ -443,7 +443,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
         .estilo_prod_mat:hover{
             box-shadow: 5px 5px 10px rgba(0,0,0,0.2); 
             padding: 10px; 
-            margin-top: 2px;
+            margin-top: 10px;
             background-color: #F1F3F5;
             cursor: pointer;
             transition: all 0.2s;

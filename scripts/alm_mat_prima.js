@@ -45,7 +45,7 @@ function guardar_producto()
 {
     if (idusuario==27 || idusuario==1) {
         var nombre = $("#nombre").val();
-        var descripcion = $("#descripcion").val();
+        var descripcion = "";
         var cantidad = 0;
         var tipo = $("#tipo").val();
         //var lote = $("#lote").val();
@@ -81,7 +81,7 @@ function guardar_producto()
                     $("#modal_coin").modal("hide");
                 
                     $("#nombre").val("");
-                    $("#descripcion").val("");
+                    // $("#descripcion").val("");
                     //$("#cantidad").val("");
                     $("#tipo").val("");
                     $("#ubicacion").val("");

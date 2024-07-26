@@ -23,34 +23,38 @@ switch ($_GET["op"])
                         $existencias = $entradas-$salidas;
 						echo ' 					
 							<div class="form-group col-md-12 col-sm-12 estilo_prod_mat" >
-                                <div class="form-group col-md-12 col-sm-12" style="text-align: right;">
-                                   <button type="button" class="btn"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
-                                   <button type="button" class="btn btn-secondary" onclick="ver_producto('.$reg->id_prod_alm_mat.',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->cantidad.'\',\''.$reg->tipo.'\',\''.$reg->idtipo.'\',\''.$reg->consec.'\',\''.$reg->observaciones.'\',\''.$reg->ubicacion.'\',\''.$reg->folio_prov.'\');">Ver</button>   
+                                <div class="form-group col-md-10 col-sm-10">
+                                    <div class="form-group col-md-2 col-sm-2">
+                                        Lote: <br> <b>'.$reg->consec.'</b>  
+                                    </div> 
+                                    <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
+                                        Nombre: <br> <b>'.$reg->nombre.'</b>  <br>
+                                         
+                                    </div>
+                                    
+                                    <div class="form-group col-md-2 col-sm-2">
+                                        Cantidad: <br> <b>'.$existencias.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Tipo: <br> <b>'.$reg->tipo.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Ubicación: <br> <b>'.$reg->ubicacion.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Folio (Proveedor): <br> <b>'.$reg->folio_prov.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        Observaciones: <br> <b>'.$reg->observaciones.'</b>  
+                                    </div>  
                                 </div>
 
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Lote: <br> <b>'.$reg->consec.'</b>  
-                                </div> 
-                                <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
-                                    Nombre: <b>'.$reg->nombre.'</b>  <br>
-                                    Descripción: <b>'.$reg->descripcion.'</b> 
+                                <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
+                                   <button type="button" class="btn btn-secondary" style="background-color: #ca150c;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
+                                   <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->cantidad.'\',\''.$reg->tipo.'\',\''.$reg->idtipo.'\',\''.$reg->consec.'\',\''.$reg->observaciones.'\',\''.$reg->ubicacion.'\',\''.$reg->folio_prov.'\');">Ver</button>   
                                 </div>
+
                                 
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Cantidad: <br> <b>'.$existencias.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Tipo: <br> <b>'.$reg->tipo.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Ubicación: <br> <b>'.$reg->ubicacion.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Folio (Proveedor): <br> <b>'.$reg->folio_prov.'</b>  
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6">
-                                    Observaciones: <br> <b>'.$reg->observaciones.'</b>  
-                                </div>
                             </div>
 						';						
 					}
@@ -160,35 +164,40 @@ switch ($_GET["op"])
                             $salidas = $reg->salidas;
                         }
                         $existencias = $entradas-$salidas;
-						echo '						
+						echo ' 					
 							<div class="form-group col-md-12 col-sm-12 estilo_prod_mat" >
-                                <div class="form-group col-md-12 col-sm-12" style="text-align: right;">
+                                <div class="form-group col-md-10 col-sm-10">
+                                    <div class="form-group col-md-2 col-sm-2">
+                                        Lote: <br> <b>'.$reg->consec.'</b>  
+                                    </div> 
+                                    <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
+                                        Nombre: <br> <b>'.$reg->nombre.'</b>  <br>
+                                         
+                                    </div>
+                                    
+                                    <div class="form-group col-md-2 col-sm-2">
+                                        Cantidad: <br> <b>'.$existencias.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Tipo: <br> <b>'.$reg->tipo.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Ubicación: <br> <b>'.$reg->ubicacion.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4">
+                                        Folio (Proveedor): <br> <b>'.$reg->folio_prov.'</b>  
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
+                                        Observaciones: <br> <b>'.$reg->observaciones.'</b>  
+                                    </div>  
+                                </div>
+
+                                <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
                                    <button type="button" class="btn"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: red;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
                                    <button type="button" class="btn btn-secondary" onclick="ver_producto('.$reg->id_prod_alm_mat.',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->cantidad.'\',\''.$reg->tipo.'\',\''.$reg->idtipo.'\',\''.$reg->consec.'\',\''.$reg->observaciones.'\',\''.$reg->ubicacion.'\',\''.$reg->folio_prov.'\');">Ver</button>   
                                 </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Lote: <br> <b>'.$reg->consec.'</b>  
-                                </div> 
-                                <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
-                                    Nombre: <b>'.$reg->nombre.'</b>  <br>
-                                    Descripción: <b>'.$reg->descripcion.'</b> 
-                                </div>
+
                                 
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Cantidad: <br> <b>'.$existencias.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Tipo: <br> <b>'.$reg->tipo.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Ubicación: <br> <b>'.$reg->ubicacion.'</b>  
-                                </div>
-                                <div class="form-group col-md-2 col-sm-2">
-                                    Folio (Proveedor): <br> <b>'.$reg->folio_prov.'</b>  
-                                </div>
-                                <div class="form-group col-md-6 col-sm-6">
-                                    Observaciones: <br> <b>'.$reg->observaciones.'</b>  
-                                </div>
                             </div>
 						';						
 					}

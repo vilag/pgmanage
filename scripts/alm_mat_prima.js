@@ -41,6 +41,46 @@ function validar()
     }
 }
 
+function update_producto()
+{
+    if (idusuario==27 || idusuario==1) {
+        var nombre = $("#nombre_select_prod").val();
+        var descripcion = "";
+        var cantidad = 0;
+        var tipo = $("#tipo_select_prod").val();
+        //var lote = $("#lote").val();
+        var ubicacion = $("#ubicacion_select_prod").val();
+        var folio_prov = $("#folio_select_prod").val();
+        var observaciones = $("#observacion_select_prod").val();
+
+        var id_prod_alm_mat = $("#id_select_prod").val();
+
+        if (nombre!="" && tipo!="" && ubicacion!="") {
+
+
+                $.post("ajax/alm_mat_prima.php?op=update_producto",{
+                    nombre:nombre,
+                    descripcion:descripcion,
+                    cantidad:cantidad,
+                    tipo:tipo,
+                    ubicacion:ubicacion,
+                    folio_prov:folio_prov,
+                    observaciones:observaciones,
+                    id_prod_alm_mat:id_prod_alm_mat
+                },function(data, status)
+                {
+                    data = JSON.parse(data);
+                    var notificator = new Notification(document.querySelector('.notification'));
+                    notificator.info('Producto actualizado exitosamente.');
+                    listar_productos_mat();
+                });
+           
+        }else{
+            bootbox.alert("Es necesario capturar los datos obligatorios");
+        }
+    }
+}
+
 function guardar_producto()
 {
     if (idusuario==27 || idusuario==1) {
@@ -87,7 +127,7 @@ function guardar_producto()
                     $("#ubicacion").val("");
                     $("#folio_prov").val("");
                     $("#observaciones").val("");
-                    listar_productos_mat("");
+                    listar_productos_mat();
                 });
             });
         }else{
@@ -218,13 +258,13 @@ function buscar_prod_mat(){
 
 function habilitar_edicion(){
     document.getElementById("nombre_select_prod").disabled = false;
-    document.getElementById("descripcion_select_prod").disabled = false;
+    // document.getElementById("descripcion_select_prod").disabled = false;
     document.getElementById("tipo_select_prod").disabled = false;
     document.getElementById("ubicacion_select_prod").disabled = false;
-    document.getElementById("lote_select_prod").disabled = false;
+    // document.getElementById("lote_select_prod").disabled = false;
     document.getElementById("folio_select_prod").disabled = false;
     document.getElementById("observacion_select_prod").disabled = false;
-    document.getElementById("cantidad_select_prod").disabled = false;
+    // document.getElementById("cantidad_select_prod").disabled = false;
     document.getElementById("btn_save_update_prod_almp").disabled = false;
 
     document.getElementById("div_producto_alm_mat").style.display = "block";

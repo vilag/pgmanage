@@ -112,6 +112,23 @@ switch ($_GET["op"])
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 		break;
 
+        case 'update_producto':
+		
+			$nombre = $_POST['nombre'];
+            $descripcion = $_POST['descripcion'];
+            $cantidad = $_POST['cantidad'];
+            $tipo = $_POST['tipo'];
+            // $next_consec = $_POST['next_consec'];
+            $ubicacion = $_POST['ubicacion'];
+            $folio_prov = $_POST['folio_prov'];
+            $observaciones = $_POST['observaciones'];
+            $id_prod_alm_mat = $_POST['id_prod_alm_mat'];
+
+	 		$rspta=$alm_mat_prima->update_producto($nombre,$descripcion,$cantidad,$tipo,$ubicacion,$folio_prov,$observaciones,$id_prod_alm_mat);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+		break;
+
         case 'listar_tipos':
 
 			$rspta = $alm_mat_prima->listar_tipos();

@@ -37,6 +37,13 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
+	public function update_producto($nombre,$descripcion,$cantidad,$tipo,$ubicacion,$folio_prov,$observaciones,$id_prod_alm_mat)
+	{
+
+		$sql="UPDATE 10_prod_alm_mat SET nombre='$nombre', idtipo='$tipo', ubicacion='$ubicacion', folio_prov='$folio_prov', observaciones='$observaciones' WHERE id_prod_alm_mat = '$id_prod_alm_mat'";
+		return ejecutarConsulta($sql);
+	}
+
 	public function listar_tipos()
 	{
 		$sql="SELECT

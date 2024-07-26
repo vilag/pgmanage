@@ -189,15 +189,15 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                     </div>
                                 </div>
                                 <div class="form-group col-md-9 col-sm-9" id="div_producto_alm_mat">
-                                    <div class="form-group col-md-4 col-sm-4">
+                                    <div class="form-group col-md-8 col-sm-8">
                                         <label for="">Nombre</label>
                                         <input type="text" class="form-control" id="nombre_select_prod" disabled>
                                         <input type="hidden" class="form-control" id="id_select_prod">
                                     </div>
-                                    <div class="form-group col-md-8 col-sm-8">
+                                    <!-- <div class="form-group col-md-8 col-sm-8">
                                         <label for="">Descripción</label>
                                         <input type="text" class="form-control" id="descripcion_select_prod" disabled>
-                                    </div>
+                                    </div> -->
                                     <div class="form-group col-md-4 col-sm-4">
                                         <label for="">Tipo</label>
                                         <!-- <input type="text" class="form-control" id="tipo_select_prod"> -->
@@ -217,12 +217,12 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <label for="">Folio (Proveedor):</label>
                                         <input type="text" class="form-control" id="folio_select_prod" disabled>
                                     </div>
-                                    <div class="form-group col-md-8 col-sm-8">
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <label for="">Observación</label>
                                         <input type="text" class="form-control" id="observacion_select_prod" disabled>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12" style="text-align: right;">
-                                        <button id="btn_save_update_prod_almp" class="btn btn-primary" disabled>Guardar</button>
+                                        <button id="btn_save_update_prod_almp" class="btn btn-primary" disabled onclick="update_producto();">Guardar</button>
                                     </div>
                                 </div>
 

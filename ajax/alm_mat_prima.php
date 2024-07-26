@@ -33,7 +33,13 @@ switch ($_GET["op"])
                                     </div>
                                     
                                     <div class="form-group col-md-2 col-sm-2">
-                                        Cantidad: <br> <b>'.$existencias.'</b>  
+                                        <div style="width: 100%;">
+                                            Existencia:
+                                        </div>
+                                        <div style="width: 100%; margin-top: 5px;">
+                                            <b style="padding: 5px 10px; background-color: #032780; color: #fff;">'.$existencias.'</b>
+                                        </div>
+                                           
                                     </div>
                                     <div class="form-group col-md-4 col-sm-4">
                                         Tipo: <br> <b>'.$reg->tipo.'</b>  
@@ -176,7 +182,7 @@ switch ($_GET["op"])
                                     </div>
                                     
                                     <div class="form-group col-md-2 col-sm-2">
-                                        Cantidad: <br> <b>'.$existencias.'</b>  
+                                        Existencia: <br> <b>'.$existencias.'</b>  
                                     </div>
                                     <div class="form-group col-md-4 col-sm-4">
                                         Tipo: <br> <b>'.$reg->tipo.'</b>  

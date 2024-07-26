@@ -221,7 +221,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <label for="">Observación</label>
                                         <input type="text" class="form-control" id="observacion_select_prod" disabled>
                                     </div>
-                                    
+                                    <div class="form-group col-md-12 col-sm-12" style="text-align: right;">
+                                        <button id="btn_save_update_prod_almp" class="btn btn-primary" disabled>Guardar</button>
+                                    </div>
                                 </div>
 
                                 <div class="form-group col-md-9 col-sm-9" id="div_producto_alm_mat_ent">

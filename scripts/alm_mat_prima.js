@@ -225,6 +225,7 @@ function habilitar_edicion(){
     document.getElementById("folio_select_prod").disabled = false;
     document.getElementById("observacion_select_prod").disabled = false;
     document.getElementById("cantidad_select_prod").disabled = false;
+    document.getElementById("btn_save_update_prod_almp").disabled = false;
 
     document.getElementById("div_producto_alm_mat").style.display = "block";
     document.getElementById("div_producto_alm_mat_ent").style.display = "none";

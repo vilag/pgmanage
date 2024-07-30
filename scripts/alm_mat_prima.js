@@ -422,7 +422,7 @@ function contar_existencia()
 
       
 
-        $("#cantidad_select_prod").text(parseInt(entradas)-parseInt(salidas));
+        $("#cantidad_select_prod").text(parseFloat(entradas)-parseFloat(salidas));
     
     });
 }

@@ -326,11 +326,16 @@ function guardar_entrada(){
         var proveedor_entrada = $("#proveedor_entrada").val();
         var lote_entrada = $("#lote_entrada").val();
 
+        var fecha=moment().format('YYYY-MM-DD');
+        var hora=moment().format('HH:mm:ss');
+        var fecha_hora=fecha+" "+hora;
+
         $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
             id_select_prod:id_select_prod,
             cantidad_entrada:cantidad_entrada,
             proveedor_entrada:proveedor_entrada,
-            lote_entrada:lote_entrada
+            lote_entrada:lote_entrada,
+            fecha_hora:fecha_hora
         },function(data, status)
         {
             data = JSON.parse(data);
@@ -354,13 +359,18 @@ function guardar_salida(){
         var no_control_salida = $("#no_control_salida").val();
         var op_salida = $("#op_salida").val();
 
+        var fecha=moment().format('YYYY-MM-DD');
+        var hora=moment().format('HH:mm:ss');
+        var fecha_hora=fecha+" "+hora;
+
         $.post("ajax/alm_mat_prima.php?op=guardar_salida",{
             id_select_prod:id_select_prod,
             cantidad_salida:cantidad_salida,
             proveedor_salida:proveedor_salida,
             lote_salida:lote_salida,
             no_control_salida:no_control_salida,
-            op_salida:op_salida
+            op_salida:op_salida,
+            fecha_hora:fecha_hora
         },function(data, status)
         {
             data = JSON.parse(data);

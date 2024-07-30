@@ -143,7 +143,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
-                                                    
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas_gen">
@@ -165,6 +165,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas_gen">
@@ -307,7 +308,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
-                                                    
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas">
@@ -329,6 +330,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas">
@@ -351,7 +353,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
-                                                    
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas_prod">
@@ -377,6 +379,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
+                                                    <th><small><b>FECHA</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas_prod">

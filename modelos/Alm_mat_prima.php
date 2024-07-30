@@ -88,15 +88,15 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
-	public function guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada)
+	public function guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada,$fecha_hora)
 	{
-		$sql="INSERT INTO 10_entrada_alm_mat (id_prod_alm_mat, cantidad, proveedor, lote) VALUES('$id_select_prod','$cantidad_entrada','$proveedor_entrada','$lote_entrada')";
+		$sql="INSERT INTO 10_entrada_alm_mat (id_prod_alm_mat, cantidad, proveedor, lote, fecha) VALUES('$id_select_prod','$cantidad_entrada','$proveedor_entrada','$lote_entrada','$fecha_hora')";
 		return ejecutarConsulta($sql);
 	}
 
-	public function guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida)
+	public function guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida,$fecha_hora)
 	{
-		$sql="INSERT INTO 10_salida_alm_mat (id_prod_alm_mat, cantidad, proveedor, lote, no_control, op) VALUES('$id_select_prod','$cantidad_salida','$proveedor_salida','$lote_salida','$no_control_salida','$op_salida')";
+		$sql="INSERT INTO 10_salida_alm_mat (id_prod_alm_mat, cantidad, proveedor, lote, no_control, op, fecha) VALUES('$id_select_prod','$cantidad_salida','$proveedor_salida','$lote_salida','$no_control_salida','$op_salida','$fecha_hora')";
 		return ejecutarConsulta($sql);
 	}
 
@@ -109,7 +109,8 @@ Class Alm_mat_prima
 		(SELECT nombre FROM 10_prod_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as nombre,
 		a.cantidad,
 		a.proveedor,
-		a.lote
+		a.lote,
+		a.fecha
 		
 		FROM 10_entrada_alm_mat a ORDER BY a.identrada ASC";
 		return ejecutarConsulta($sql);
@@ -124,7 +125,8 @@ Class Alm_mat_prima
 		(SELECT nombre FROM 10_prod_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as nombre,
 		a.cantidad,
 		a.proveedor,
-		a.lote
+		a.lote,
+		a.fecha
 		
 		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada ASC";
 		return ejecutarConsulta($sql);
@@ -138,7 +140,8 @@ Class Alm_mat_prima
 		(SELECT nombre FROM 10_prod_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as nombre,
 		a.cantidad,
 		a.proveedor,
-		a.lote
+		a.lote,
+		a.fecha
 		
 		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada ASC";
 		return ejecutarConsulta($sql);
@@ -154,7 +157,8 @@ Class Alm_mat_prima
 		a.proveedor,
 		a.lote,
 		a.no_control,
-		a.op
+		a.op,
+		a.fecha
 		
 		FROM 10_salida_alm_mat a ORDER BY a.idsalida ASC";
 		return ejecutarConsulta($sql);
@@ -170,7 +174,8 @@ Class Alm_mat_prima
 		a.proveedor,
 		a.lote,
 		a.no_control,
-		a.op
+		a.op,
+		a.fecha
 		
 		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida ASC";
 		return ejecutarConsulta($sql);
@@ -186,7 +191,8 @@ Class Alm_mat_prima
 		a.proveedor,
 		a.lote,
 		a.no_control,
-		a.op
+		a.op,
+		a.fecha
 		
 		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida ASC";
 		return ejecutarConsulta($sql);

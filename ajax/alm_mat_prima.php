@@ -235,8 +235,9 @@ switch ($_GET["op"])
             $cantidad_entrada = $_POST['cantidad_entrada'];
             $proveedor_entrada = $_POST['proveedor_entrada'];
             $lote_entrada = $_POST['lote_entrada'];
+            $fecha_hora = $_POST['fecha_hora'];
 
-	 		$rspta=$alm_mat_prima->guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada);
+	 		$rspta=$alm_mat_prima->guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada,$fecha_hora);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 
@@ -251,8 +252,9 @@ switch ($_GET["op"])
             $lote_salida = $_POST['lote_salida'];
             $no_control_salida = $_POST['no_control_salida'];
             $op_salida = $_POST['op_salida'];
+            $fecha_hora = $_POST['fecha_hora'];
 
-	 		$rspta=$alm_mat_prima->guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida);
+	 		$rspta=$alm_mat_prima->guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida,$fecha_hora);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 
@@ -274,7 +276,7 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                                               
+                                <td>'.$reg->fecha.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -296,7 +298,7 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                                               
+                                <td>'.$reg->fecha.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -318,7 +320,7 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                                               
+                                <td>'.$reg->fecha.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -341,7 +343,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
-                                <td>'.$reg->op.'</td>                             
+                                <td>'.$reg->op.'</td> 
+                                <td>'.$reg->fecha.'</td>                            
 	                        </tr>
 						';						
 					}
@@ -364,7 +367,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
-                                <td>'.$reg->op.'</td>                             
+                                <td>'.$reg->op.'</td>  
+                                <td>'.$reg->fecha.'</td>                           
 	                        </tr>
 						';						
 					}
@@ -387,7 +391,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
-                                <td>'.$reg->op.'</td>                             
+                                <td>'.$reg->op.'</td>  
+                                <td>'.$reg->fecha.'</td>                            
 	                        </tr>
 						';						
 					}

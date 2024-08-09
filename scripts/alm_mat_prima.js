@@ -329,6 +329,7 @@ function guardar_entrada(){
         var fecha=moment().format('YYYY-MM-DD');
         var hora=moment().format('HH:mm:ss');
         var fecha_hora=fecha+" "+hora;
+        var folio_c = 'MP'+
 
         $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
             id_select_prod:id_select_prod,

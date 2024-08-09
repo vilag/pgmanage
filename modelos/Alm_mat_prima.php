@@ -112,7 +112,7 @@ Class Alm_mat_prima
 		a.lote,
 		a.fecha
 		
-		FROM 10_entrada_alm_mat a ORDER BY a.identrada ASC";
+		FROM 10_entrada_alm_mat a ORDER BY a.identrada DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -128,7 +128,7 @@ Class Alm_mat_prima
 		a.lote,
 		a.fecha
 		
-		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada ASC";
+		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -143,7 +143,7 @@ Class Alm_mat_prima
 		a.lote,
 		a.fecha
 		
-		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada ASC";
+		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.identrada DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -160,7 +160,7 @@ Class Alm_mat_prima
 		a.op,
 		a.fecha
 		
-		FROM 10_salida_alm_mat a ORDER BY a.idsalida ASC";
+		FROM 10_salida_alm_mat a ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -177,7 +177,7 @@ Class Alm_mat_prima
 		a.op,
 		a.fecha
 		
-		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida ASC";
+		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -194,7 +194,7 @@ Class Alm_mat_prima
 		a.op,
 		a.fecha
 		
-		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida ASC";
+		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 

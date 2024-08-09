@@ -43,7 +43,7 @@ function validar()
 
 function update_producto()
 {
-    if (idusuario==27 || idusuario==1) {
+    if (idusuario==1) {
         var nombre = $("#nombre_select_prod").val();
         var descripcion = "";
         var cantidad = 0;
@@ -257,26 +257,28 @@ function buscar_prod_mat(){
 }
 
 function habilitar_edicion(){
-    document.getElementById("nombre_select_prod").disabled = false;
-    // document.getElementById("descripcion_select_prod").disabled = false;
-    document.getElementById("tipo_select_prod").disabled = false;
-    document.getElementById("ubicacion_select_prod").disabled = false;
-    // document.getElementById("lote_select_prod").disabled = false;
-    document.getElementById("folio_select_prod").disabled = false;
-    document.getElementById("observacion_select_prod").disabled = false;
-    // document.getElementById("cantidad_select_prod").disabled = false;
-    document.getElementById("btn_save_update_prod_almp").disabled = false;
+    if (idusuario==1) {
+        document.getElementById("nombre_select_prod").disabled = false;
+        // document.getElementById("descripcion_select_prod").disabled = false;
+        document.getElementById("tipo_select_prod").disabled = false;
+        document.getElementById("ubicacion_select_prod").disabled = false;
+        // document.getElementById("lote_select_prod").disabled = false;
+        document.getElementById("folio_select_prod").disabled = false;
+        document.getElementById("observacion_select_prod").disabled = false;
+        // document.getElementById("cantidad_select_prod").disabled = false;
+        document.getElementById("btn_save_update_prod_almp").disabled = false;
 
-    document.getElementById("div_producto_alm_mat").style.display = "block";
-    document.getElementById("div_producto_alm_mat_ent").style.display = "none";
-    document.getElementById("div_producto_alm_mat_sal").style.display = "none";
+        document.getElementById("div_producto_alm_mat").style.display = "block";
+        document.getElementById("div_producto_alm_mat_ent").style.display = "none";
+        document.getElementById("div_producto_alm_mat_sal").style.display = "none";
 
-    document.getElementById("div_registros").style.display="block";
-    document.getElementById("div_reg_entradas").style.display="none";
-    document.getElementById("div_reg_salidas").style.display="none";
+        document.getElementById("div_registros").style.display="block";
+        document.getElementById("div_reg_entradas").style.display="none";
+        document.getElementById("div_reg_salidas").style.display="none";
 
-    listar_movimientos();
-   
+        listar_movimientos();
+    }
+    
 }
 
 function registrar_entrada(){

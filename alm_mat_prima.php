@@ -62,14 +62,16 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         
                                     </select>
                                 </div>
-                                
-                                
+                                <div class="form-group col-md-6 col-sm-6">     
+                                    <label for="">Unidad de medida*</label>
+                                    <input type="text" class="form-control" id="unidad">
+                                </div>
                                 <div class="form-group col-md-6 col-sm-6">     
                                     <label for="">Ubicación*</label>
                                     <input type="text" class="form-control" id="ubicacion">
                                 </div>
-                                <div class="form-group col-md-12 col-sm-12">     
-                                    <label for="">Folio (Proveedor)</label>
+                                <div class="form-group col-md-6 col-sm-6">     
+                                    <label for="">Proveedor</label>
                                     <input type="text" class="form-control" id="folio_prov">
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12">     
@@ -137,13 +139,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas_gen">
@@ -157,7 +160,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
@@ -166,6 +169,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas_gen">
@@ -194,6 +198,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <label for="">Nombre</label>
                                         <input type="text" class="form-control" id="nombre_select_prod" disabled>
                                         <input type="hidden" class="form-control" id="id_select_prod">
+                                        <input type="hidden" class="form-control" id="unidad_medida">
                                     </div>
                                     <!-- <div class="form-group col-md-8 col-sm-8">
                                         <label for="">Descripción</label>
@@ -211,7 +216,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <input type="text" class="form-control" id="ubicacion_select_prod" disabled>
                                     </div>
                                     <div class="form-group col-md-4 col-sm-4">
-                                        <label for="">Lote</label>
+                                        <label for="">ID</label>
                                         <input type="text" class="form-control" id="lote_select_prod" disabled>
                                     </div>
                                     <div class="form-group col-md-4 col-sm-4">
@@ -248,6 +253,10 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <input type="text" class="form-control" id="lote_entrada">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <label for="">Observación (200 caracteres)</label>
+                                        <input type="text" class="form-control" id="observ_entrada">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <button class="btn" style="background-color: #063A5D; color: #fff;" onclick="guardar_entrada();">Guardar Entrada</button>
                                     </div>
                                 </div>
@@ -281,6 +290,10 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <input type="number" class="form-control" id="op_salida">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <label for="">Observación (200 caracteres)</label>
+                                        <input type="text" class="form-control" id="observ_salida">
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <button class="btn" style="background-color: #063A5D; color: #fff;" onclick="guardar_salida();">Guardar Salida</button>
                                     </div>
                                 </div>
@@ -302,13 +315,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas">
@@ -322,7 +336,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed" style="width: 700px;">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
@@ -331,6 +345,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas">
@@ -347,13 +362,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
                                                     <th><small><b>PROVEEDOR</b></small></th>
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas_prod">
@@ -371,7 +387,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <table class="table table-hover table-fixed">
                                             <thead>	
                                                 <tr>
-                                                    <th><small><b>FOLIO</b></small></th>
+                                                    <th><small><b>ID</b></small></th>
                                                     <th><small><b>TIPO MOV.</b></small></th>
                                                     <th><small><b>NOMBRE</b></small></th>
                                                     <th><small><b>CANTIDAD</b></small></th>
@@ -380,6 +396,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>NO. CONTROL</b></small></th>
                                                     <th><small><b>OP</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
+                                                    <th><small><b>OBSERVACIÓN</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas_prod">

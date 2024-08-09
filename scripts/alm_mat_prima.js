@@ -92,8 +92,9 @@ function guardar_producto()
         var ubicacion = $("#ubicacion").val();
         var folio_prov = $("#folio_prov").val();
         var observaciones = $("#observaciones").val();
+        var unidad = $("#unidad").val();
 
-        if (nombre!="" && tipo!="" && ubicacion!="") {
+        if (nombre!="" && tipo!="" && ubicacion!="" && unidad!="") {
 
             $.post("ajax/alm_mat_prima.php?op=max_consec",function(data, status)
             {
@@ -111,7 +112,8 @@ function guardar_producto()
                     next_consec:next_consec,
                     ubicacion:ubicacion,
                     folio_prov:folio_prov,
-                    observaciones:observaciones
+                    observaciones:observaciones,
+                    unidad:unidad
                 },function(data, status)
                 {
                     data = JSON.parse(data);
@@ -206,9 +208,20 @@ function back_list(){
     listar_movimientos_gen();
 }
 
-function ver_producto(id_prod_alm_mat, nombre, descripcion, cantidad, tipo, idtipo, consec, observaciones, ubicacion, folio_prov){
+function ver_producto(id_prod_alm_mat){
     document.getElementById("div_reg_prod_mat").style.display="none";
     document.getElementById("div_ent_sal_prod_mat").style.display="block";
+
+    var nombre = $("#nombre_pmp").text();
+    var descripcion = $("#descripcion_pmp").text();
+    var cantidad = $("#cantidad_pmp").text();
+    var tipo = $("#tipo_pmp").text();
+    var idtipo = $("#idtipo_pmp").text();
+    var consec = $("#consec_pmp").text();
+    var observaciones = $("#observaciones_pmp").text();
+    var ubicacion = $("#ubicacion_pmp").text();
+    var folio_prov = $("#folio_prov_pmp").text();
+    var unidad = $("#unidad_pmp").text();
     
 
     $("#nombre_select_prod").val(nombre);
@@ -222,6 +235,7 @@ function ver_producto(id_prod_alm_mat, nombre, descripcion, cantidad, tipo, idti
     $("#observacion_select_prod").val(observaciones);
     // $("#cantidad_select_prod").text(cantidad);
     $("#id_select_prod").val(id_prod_alm_mat);
+    $("#unidad_medida").val(unidad);
 
     document.getElementById("div_producto_alm_mat").style.display = "block";
     document.getElementById("div_producto_alm_mat_ent").style.display = "none";
@@ -331,23 +345,27 @@ function guardar_entrada(){
         var cantidad_entrada = $("#cantidad_entrada").val();
         var proveedor_entrada = $("#proveedor_entrada").val();
         var lote_entrada = $("#lote_entrada").val();
+        var observacion = $("#observ_entrada").val();
 
         var fecha=moment().format('YYYY-MM-DD');
         var hora=moment().format('HH:mm:ss');
         var fecha_hora=fecha+" "+hora;
-        var folio_c = 'MP'+
+        
 
         $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
             id_select_prod:id_select_prod,
             cantidad_entrada:cantidad_entrada,
             proveedor_entrada:proveedor_entrada,
             lote_entrada:lote_entrada,
-            fecha_hora:fecha_hora
+            fecha_hora:fecha_hora,
+            observacion:observacion
         },function(data, status)
         {
             data = JSON.parse(data);
             var notificator = new Notification(document.querySelector('.notification'));
             notificator.info('Entrada guardada exitosamente.');
+
+            // bootbox.alert("Registro creado exitosamente. FOLIO: "+data.identrada);
 
             listar_mov_entrada();
             contar_existencia();
@@ -365,6 +383,7 @@ function guardar_salida(){
         var lote_salida = $("#lote_salida").val();
         var no_control_salida = $("#no_control_salida").val();
         var op_salida = $("#op_salida").val();
+        var observacion = $("#observ_salida").val();
 
         var fecha=moment().format('YYYY-MM-DD');
         var hora=moment().format('HH:mm:ss');
@@ -377,7 +396,8 @@ function guardar_salida(){
             lote_salida:lote_salida,
             no_control_salida:no_control_salida,
             op_salida:op_salida,
-            fecha_hora:fecha_hora
+            fecha_hora:fecha_hora,
+            observacion:observacion
         },function(data, status)
         {
             data = JSON.parse(data);
@@ -421,6 +441,7 @@ function listar_movimientos_gen(){
 function contar_existencia()
 {
     var id_prod_alm_mat = $("#id_select_prod").val();
+    var unidad_medida = $("#unidad_medida").val();
     $.post("ajax/alm_mat_prima.php?op=contar_existencia",{id_prod_alm_mat:id_prod_alm_mat},function(data, status)
     {
         data = JSON.parse(data);
@@ -437,9 +458,9 @@ function contar_existencia()
             var salidas = data.salidas;
         }
 
-      
+       // alert((parseFloat(entradas)-parseFloat(salidas))+" "+unidad_medida);
 
-        $("#cantidad_select_prod").text(parseFloat(entradas)-parseFloat(salidas));
+        $("#cantidad_select_prod").text((parseFloat(entradas)-parseFloat(salidas))+" "+unidad_medida);
     
     });
 }

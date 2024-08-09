@@ -25,7 +25,7 @@ switch ($_GET["op"])
 							<div class="form-group col-md-12 col-sm-12 estilo_prod_mat" >
                                 <div class="form-group col-md-10 col-sm-10">
                                     <div class="form-group col-md-2 col-sm-2">
-                                        Lote: <br> <b>'.$reg->consec.'</b>  
+                                        ID: <br> <b>'.$reg->consec.'</b>  
                                     </div> 
                                     <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
                                         Nombre: <br> <b>'.$reg->nombre.'</b>  <br>
@@ -37,7 +37,7 @@ switch ($_GET["op"])
                                             Existencia:
                                         </div>
                                         <div style="width: 100%; margin-top: 5px;">
-                                            <b style="padding: 5px 10px; background-color: #032780; color: #fff;">'.$existencias.'</b>
+                                            <b style="padding: 5px 10px; background-color: #032780; color: #fff;">'.$existencias.'  '.$reg->unidad.'</b>
                                         </div>
                                            
                                     </div>
@@ -57,7 +57,17 @@ switch ($_GET["op"])
 
                                 <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
                                    <button type="button" class="btn btn-secondary" style="background-color: #ca150c;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
-                                   <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->cantidad.'\',\''.$reg->tipo.'\',\''.$reg->idtipo.'\',\''.$reg->consec.'\',\''.$reg->observaciones.'\',\''.$reg->ubicacion.'\',\''.$reg->folio_prov.'\');">Ver</button>   
+                                   <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.');">Ver</button>   
+                                   <b style="display: none;" id="nombre_pmp">'.$reg->nombre.'</b> 
+                                   <b style="display: none;" id="descripcion_pmp">'.$reg->descripcion.'</b>
+                                   <b style="display: none;" id="cantidad_pmp">'.$reg->cantidad.'</b>
+                                   <b style="display: none;" id="tipo_pmp">'.$reg->tipo.'</b>
+                                   <b style="display: none;" id="idtipo_pmp">'.$reg->idtipo.'</b>
+                                   <b style="display: none;" id="consec_pmp">'.$reg->consec.'</b>
+                                   <b style="display: none;" id="observaciones_pmp">'.$reg->observaciones.'</b>
+                                   <b style="display: none;" id="ubicacion_pmp">'.$reg->ubicacion.'</b>
+                                   <b style="display: none;" id="folio_prov_pmp">'.$reg->folio_prov.'</b>
+                                   <b style="display: none;" id="unidad_pmp">'.$reg->unidad.'</b>
                                 </div>
 
                                 
@@ -106,8 +116,9 @@ switch ($_GET["op"])
             $ubicacion = $_POST['ubicacion'];
             $folio_prov = $_POST['folio_prov'];
             $observaciones = $_POST['observaciones'];
+            $unidad = $_POST['unidad'];
 
-	 		$rspta=$alm_mat_prima->guardar_producto($nombre,$descripcion,$cantidad,$tipo,$next_consec,$ubicacion,$folio_prov,$observaciones);
+	 		$rspta=$alm_mat_prima->guardar_producto($nombre,$descripcion,$cantidad,$tipo,$next_consec,$ubicacion,$folio_prov,$observaciones,$unidad);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 		break;
@@ -242,8 +253,9 @@ switch ($_GET["op"])
             $proveedor_entrada = $_POST['proveedor_entrada'];
             $lote_entrada = $_POST['lote_entrada'];
             $fecha_hora = $_POST['fecha_hora'];
+            $observacion = $_POST['observacion'];
 
-	 		$rspta=$alm_mat_prima->guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada,$fecha_hora);
+	 		$rspta=$alm_mat_prima->guardar_entrada($id_select_prod,$cantidad_entrada,$proveedor_entrada,$lote_entrada,$fecha_hora,$observacion);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 
@@ -259,8 +271,9 @@ switch ($_GET["op"])
             $no_control_salida = $_POST['no_control_salida'];
             $op_salida = $_POST['op_salida'];
             $fecha_hora = $_POST['fecha_hora'];
+            $observacion = $_POST['observacion'];
 
-	 		$rspta=$alm_mat_prima->guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida,$fecha_hora);
+	 		$rspta=$alm_mat_prima->guardar_salida($id_select_prod,$cantidad_salida,$proveedor_salida,$lote_salida,$no_control_salida,$op_salida,$fecha_hora,$observacion);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 
@@ -282,7 +295,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                <td>'.$reg->fecha.'</td>                               
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -304,7 +318,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                <td>'.$reg->fecha.'</td>                               
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -326,7 +341,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->cantidad.'</td> 
                                 <td>'.$reg->proveedor.'</td>
                                 <td>'.$reg->lote.'</td>
-                                <td>'.$reg->fecha.'</td>                               
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                               
 	                        </tr>
 						';						
 					}
@@ -350,7 +366,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
                                 <td>'.$reg->op.'</td> 
-                                <td>'.$reg->fecha.'</td>                            
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                            
 	                        </tr>
 						';						
 					}
@@ -374,7 +391,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
                                 <td>'.$reg->op.'</td>  
-                                <td>'.$reg->fecha.'</td>                           
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                           
 	                        </tr>
 						';						
 					}
@@ -398,7 +416,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->lote.'</td>
                                 <td>'.$reg->no_control.'</td> 
                                 <td>'.$reg->op.'</td>  
-                                <td>'.$reg->fecha.'</td>                            
+                                <td>'.$reg->fecha.'</td>
+                                <td>'.$reg->observacion.'</td>                            
 	                        </tr>
 						';						
 					}

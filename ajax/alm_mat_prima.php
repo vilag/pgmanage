@@ -202,7 +202,7 @@ switch ($_GET["op"])
                     <div class="form-group col-md-12 col-sm-12 estilo_prod_mat" >
                         <div class="form-group col-md-10 col-sm-10">
                             <div class="form-group col-md-2 col-sm-2">
-                                Lote: <br> <b>'.$reg->consec.'</b>  
+                                ID: <br> <b>'.$reg->consec.'</b>  
                             </div> 
                             <div class="form-group col-md-8 col-sm-8" style="word-break:break-all; padding-right: 10px;">
                                 Nombre: <br> <b>'.$reg->nombre.'</b>  <br>
@@ -214,7 +214,7 @@ switch ($_GET["op"])
                                     Existencia:
                                 </div>
                                 <div style="width: 100%; margin-top: 5px;">
-                                    <b style="padding: 5px 10px; background-color: #032780; color: #fff;">'.$existencias.'</b>
+                                    <b style="padding: 5px 10px; background-color: #032780; color: #fff;">'.$existencias.'  '.$reg->unidad.'</b>
                                 </div>
                                    
                             </div>
@@ -234,7 +234,17 @@ switch ($_GET["op"])
 
                         <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
                            <button type="button" class="btn btn-secondary" style="background-color: #ca150c;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
-                           <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.',\''.$reg->nombre.'\',\''.$reg->descripcion.'\',\''.$reg->cantidad.'\',\''.$reg->tipo.'\',\''.$reg->idtipo.'\',\''.$reg->consec.'\',\''.$reg->observaciones.'\',\''.$reg->ubicacion.'\',\''.$reg->folio_prov.'\');">Ver</button>   
+                           <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.');">Ver</button>   
+                           <b style="display: none;" id="nombre_pmp">'.$reg->nombre.'</b> 
+                           <b style="display: none;" id="descripcion_pmp">'.$reg->descripcion.'</b>
+                           <b style="display: none;" id="cantidad_pmp">'.$reg->cantidad.'</b>
+                           <b style="display: none;" id="tipo_pmp">'.$reg->tipo.'</b>
+                           <b style="display: none;" id="idtipo_pmp">'.$reg->idtipo.'</b>
+                           <b style="display: none;" id="consec_pmp">'.$reg->consec.'</b>
+                           <b style="display: none;" id="observaciones_pmp">'.$reg->observaciones.'</b>
+                           <b style="display: none;" id="ubicacion_pmp">'.$reg->ubicacion.'</b>
+                           <b style="display: none;" id="folio_prov_pmp">'.$reg->folio_prov.'</b>
+                           <b style="display: none;" id="unidad_pmp">'.$reg->unidad.'</b>
                         </div>
 
                         

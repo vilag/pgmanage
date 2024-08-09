@@ -82,6 +82,7 @@ Class Alm_mat_prima
 		a.observaciones,
 		a.ubicacion,
 		a.folio_prov,
+		a.unidad,
 		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
 		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas
 		

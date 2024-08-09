@@ -261,10 +261,10 @@ function habilitar_edicion(){
         document.getElementById("nombre_select_prod").disabled = false;
         // document.getElementById("descripcion_select_prod").disabled = false;
         document.getElementById("tipo_select_prod").disabled = false;
-        document.getElementById("ubicacion_select_prod").disabled = false;
+        
         // document.getElementById("lote_select_prod").disabled = false;
         document.getElementById("folio_select_prod").disabled = false;
-        document.getElementById("observacion_select_prod").disabled = false;
+        
         // document.getElementById("cantidad_select_prod").disabled = false;
         document.getElementById("btn_save_update_prod_almp").disabled = false;
 
@@ -276,8 +276,12 @@ function habilitar_edicion(){
         document.getElementById("div_reg_entradas").style.display="none";
         document.getElementById("div_reg_salidas").style.display="none";
 
-        listar_movimientos();
+        
     }
+
+    listar_movimientos();
+    document.getElementById("ubicacion_select_prod").disabled = false;
+    document.getElementById("observacion_select_prod").disabled = false;
     
 }
 

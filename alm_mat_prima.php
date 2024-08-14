@@ -257,6 +257,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <input type="text" class="form-control" id="observ_entrada">
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12">
+                                        <p><b>* El lote se captura despues del registro.</b></p>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12">
                                         <button class="btn" style="background-color: #063A5D; color: #fff;" onclick="guardar_entrada();">Guardar Entrada</button>
                                     </div>
                                 </div>

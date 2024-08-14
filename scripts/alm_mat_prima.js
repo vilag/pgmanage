@@ -337,7 +337,8 @@ function listar_mov_salida(){
         $("#tbl_salidas_prod").html(r);        
     });
 }
-
+let dialog_li;
+var idnew;
 function guardar_entrada(){
     if (idusuario==27 || idusuario==1) {
 
@@ -350,29 +351,84 @@ function guardar_entrada(){
         var fecha=moment().format('YYYY-MM-DD');
         var hora=moment().format('HH:mm:ss');
         var fecha_hora=fecha+" "+hora;
+
+        var mes = moment().format('MM');
+        var anio = moment().format('YY');
+
+        if (cantidad_entrada>0) {
+
+            $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
+                id_select_prod:id_select_prod,
+                cantidad_entrada:cantidad_entrada,
+                proveedor_entrada:proveedor_entrada,
+                lote_entrada:lote_entrada,
+                fecha_hora:fecha_hora,
+                observacion:observacion
+            },function(data, status)
+            {
+                data = JSON.parse(data);
+                var notificator = new Notification(document.querySelector('.notification'));
+                notificator.info('Entrada guardada exitosamente.');
+
+                // bootbox.alert("Registro creado exitosamente. FOLIO: "+data.identrada);
+
+                listar_mov_entrada();
+                contar_existencia();
+
+                idnew = data.identrada;
+                dialog_li = bootbox.dialog({
+                    message: '<div>'+
+                                '<div>'+
+                                    '<p>ID creado: '+idnew+'</p>'+
+                                    '<p>¿Desea actualizar a lote interno?</p>'+
+                                '</div>'+
+                                '<div>'+
+                                    '<label>Folio sugerido</label>'+
+                                    '<input type="text" class="form-control" id="lote_interno_upd" value="MP'+idnew+mes+anio+'">'+
+                                '</div>'+
+                                '<div style="margin-top: 10px;">'+
+                                    '<button class="btn btn-secondary" onclick="cerrar_dialog();">No Actualizar</button>'+
+                                    '<button class="btn btn-primary" onclick="update_lote_int('+idnew+');">Actualizar</button>'+
+                                '</div>'+
+                                
+                            '</div>',
+                    closeButton: false
+                    });
+
+                    // do something in the background
+                    
+
+                
+            
+            });
+        }else{
+            bootbox.alert("Es necesario capturar la cantidad");
+        }
         
 
-        $.post("ajax/alm_mat_prima.php?op=guardar_entrada",{
-            id_select_prod:id_select_prod,
-            cantidad_entrada:cantidad_entrada,
-            proveedor_entrada:proveedor_entrada,
-            lote_entrada:lote_entrada,
-            fecha_hora:fecha_hora,
-            observacion:observacion
-        },function(data, status)
-        {
-            data = JSON.parse(data);
-            var notificator = new Notification(document.querySelector('.notification'));
-            notificator.info('Entrada guardada exitosamente.');
-
-            // bootbox.alert("Registro creado exitosamente. FOLIO: "+data.identrada);
-
-            listar_mov_entrada();
-            contar_existencia();
         
-        });
     }
     
+}
+
+function update_lote_int(idnew)
+{
+    var newlote = $("#lote_interno_upd").val();
+
+    $.post("ajax/alm_mat_prima.php?op=update_lote_int",{idnew:idnew,newlote:newlote},function(data, status)
+    {
+        data = JSON.parse(data);
+        var notificator = new Notification(document.querySelector('.notification'));
+        notificator.info('Lote actualizado correctamente.');
+        dialog_li.modal('hide');
+        listar_mov_entrada();
+    });
+    
+}
+
+function cerrar_dialog()
+{
+    dialog_li.modal('hide');
 }
 
 function guardar_salida(){

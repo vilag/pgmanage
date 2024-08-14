@@ -455,6 +455,18 @@ switch ($_GET["op"])
 
 
 		break;
+
+        case 'update_lote_int':
+		
+			$idnew = $_POST['idnew'];
+            $newlote = $_POST['newlote'];
+
+	 		$rspta=$alm_mat_prima->update_lote_int($idnew,$newlote);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+
+
+		break;
 	}
 
 

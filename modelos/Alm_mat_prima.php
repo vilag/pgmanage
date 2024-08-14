@@ -232,6 +232,12 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
+	public function update_lote_int($idnew,$newlote)
+	{
+		$sql="UPDATE 10_entrada_alm_mat SET lote = '$newlote' WHERE identrada='$idnew'";
+		return ejecutarConsulta($sql);
+	}
+
 }
 
 ?>

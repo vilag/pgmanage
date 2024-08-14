@@ -345,7 +345,7 @@ function guardar_entrada(){
         var id_select_prod = $("#id_select_prod").val();
         var cantidad_entrada = $("#cantidad_entrada").val();
         var proveedor_entrada = $("#proveedor_entrada").val();
-        var lote_entrada = $("#lote_entrada").val();
+        var lote_entrada = "";
         var observacion = $("#observ_entrada").val();
 
         var fecha=moment().format('YYYY-MM-DD');
@@ -415,14 +415,20 @@ function update_lote_int(idnew)
 {
     var newlote = $("#lote_interno_upd").val();
 
-    $.post("ajax/alm_mat_prima.php?op=update_lote_int",{idnew:idnew,newlote:newlote},function(data, status)
-    {
-        data = JSON.parse(data);
-        var notificator = new Notification(document.querySelector('.notification'));
-        notificator.info('Lote actualizado correctamente.');
-        dialog_li.modal('hide');
-        listar_mov_entrada();
-    });
+    if (newlote!="") {
+        $.post("ajax/alm_mat_prima.php?op=update_lote_int",{idnew:idnew,newlote:newlote},function(data, status)
+        {
+            data = JSON.parse(data);
+            var notificator = new Notification(document.querySelector('.notification'));
+            notificator.info('Lote actualizado correctamente.');
+            dialog_li.modal('hide');
+            listar_mov_entrada();
+        });
+    }else{
+        bootbox.alert("Por favor capture el lote.");
+    }
+
+    
     
 }
 

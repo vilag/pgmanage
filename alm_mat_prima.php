@@ -244,15 +244,15 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <label for="">Cantidad</label>
                                         <input type="number" class="form-control" id="cantidad_entrada">
                                     </div>
-                                    <div class="form-group col-md-6 col-sm-6">
+                                    <div class="form-group col-md-4 col-sm-4">
                                         <label for="">Proveedor</label>
                                         <input type="text" class="form-control" id="proveedor_entrada">
                                     </div>
-                                    <div class="form-group col-md-6 col-sm-6">
+                                    <!-- <div class="form-group col-md-6 col-sm-6">
                                         <label for="">Lote (Proveedor/Interno)</label>
                                         <input type="text" class="form-control" id="lote_entrada">
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12">
+                                    </div> -->
+                                    <div class="form-group col-md-8 col-sm-8">
                                         <label for="">Observación (200 caracteres)</label>
                                         <input type="text" class="form-control" id="observ_entrada">
                                     </div>

@@ -212,16 +212,16 @@ function ver_producto(id_prod_alm_mat){
     document.getElementById("div_reg_prod_mat").style.display="none";
     document.getElementById("div_ent_sal_prod_mat").style.display="block";
 
-    var nombre = $("#nombre_pmp").text();
-    var descripcion = $("#descripcion_pmp").text();
-    var cantidad = $("#cantidad_pmp").text();
-    var tipo = $("#tipo_pmp").text();
-    var idtipo = $("#idtipo_pmp").text();
-    var consec = $("#consec_pmp").text();
-    var observaciones = $("#observaciones_pmp").text();
-    var ubicacion = $("#ubicacion_pmp").text();
-    var folio_prov = $("#folio_prov_pmp").text();
-    var unidad = $("#unidad_pmp").text();
+    var nombre = $("#nombre_pmp"+id_prod_alm_mat).text();
+    var descripcion = $("#descripcion_pmp"+id_prod_alm_mat).text();
+    var cantidad = $("#cantidad_pmp"+id_prod_alm_mat).text();
+    var tipo = $("#tipo_pmp"+id_prod_alm_mat).text();
+    var idtipo = $("#idtipo_pmp"+id_prod_alm_mat).text();
+    var consec = $("#consec_pmp"+id_prod_alm_mat).text();
+    var observaciones = $("#observaciones_pmp"+id_prod_alm_mat).text();
+    var ubicacion = $("#ubicacion_pmp"+id_prod_alm_mat).text();
+    var folio_prov = $("#folio_prov_pmp"+id_prod_alm_mat).text();
+    var unidad = $("#unidad_pmp"+id_prod_alm_mat).text();
     
 
     $("#nombre_select_prod").val(nombre);
@@ -504,6 +504,7 @@ function contar_existencia()
 {
     var id_prod_alm_mat = $("#id_select_prod").val();
     var unidad_medida = $("#unidad_medida").val();
+    $("#cantidad_select_prod").text("");
     $.post("ajax/alm_mat_prima.php?op=contar_existencia",{id_prod_alm_mat:id_prod_alm_mat},function(data, status)
     {
         data = JSON.parse(data);

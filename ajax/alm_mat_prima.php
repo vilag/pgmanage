@@ -58,16 +58,16 @@ switch ($_GET["op"])
                                 <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
                                    <button type="button" class="btn btn-secondary" style="background-color: #ca150c;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
                                    <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.');">Ver</button>   
-                                   <b style="display: none;" id="nombre_pmp">'.$reg->nombre.'</b> 
-                                   <b style="display: none;" id="descripcion_pmp">'.$reg->descripcion.'</b>
-                                   <b style="display: none;" id="cantidad_pmp">'.$reg->cantidad.'</b>
-                                   <b style="display: none;" id="tipo_pmp">'.$reg->tipo.'</b>
-                                   <b style="display: none;" id="idtipo_pmp">'.$reg->idtipo.'</b>
-                                   <b style="display: none;" id="consec_pmp">'.$reg->consec.'</b>
-                                   <b style="display: none;" id="observaciones_pmp">'.$reg->observaciones.'</b>
-                                   <b style="display: none;" id="ubicacion_pmp">'.$reg->ubicacion.'</b>
-                                   <b style="display: none;" id="folio_prov_pmp">'.$reg->folio_prov.'</b>
-                                   <b style="display: none;" id="unidad_pmp">'.$reg->unidad.'</b>
+                                   <b style="display: none;" id="nombre_pmp'.$reg->id_prod_alm_mat.'">'.$reg->nombre.'</b> 
+                                   <b style="display: none;" id="descripcion_pmp'.$reg->id_prod_alm_mat.'">'.$reg->descripcion.'</b>
+                                   <b style="display: none;" id="cantidad_pmp'.$reg->id_prod_alm_mat.'">'.$reg->cantidad.'</b>
+                                   <b style="display: none;" id="tipo_pmp'.$reg->id_prod_alm_mat.'">'.$reg->tipo.'</b>
+                                   <b style="display: none;" id="idtipo_pmp'.$reg->id_prod_alm_mat.'">'.$reg->idtipo.'</b>
+                                   <b style="display: none;" id="consec_pmp'.$reg->id_prod_alm_mat.'">'.$reg->consec.'</b>
+                                   <b style="display: none;" id="observaciones_pmp'.$reg->id_prod_alm_mat.'">'.$reg->observaciones.'</b>
+                                   <b style="display: none;" id="ubicacion_pmp'.$reg->id_prod_alm_mat.'">'.$reg->ubicacion.'</b>
+                                   <b style="display: none;" id="folio_prov_pmp'.$reg->id_prod_alm_mat.'">'.$reg->folio_prov.'</b>
+                                   <b style="display: none;" id="unidad_pmp'.$reg->id_prod_alm_mat.'">'.$reg->unidad.'</b>
                                 </div>
 
                                 
@@ -235,16 +235,16 @@ switch ($_GET["op"])
                         <div class="form-group col-md-2 col-sm-2" style="text-align: right;">
                            <button type="button" class="btn btn-secondary" style="background-color: #ca150c;"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;" onclick="borrar_producto('.$reg->id_prod_alm_mat.');"></span></button>
                            <button type="button" class="btn btn-primary" onclick="ver_producto('.$reg->id_prod_alm_mat.');">Ver</button>   
-                           <b style="display: none;" id="nombre_pmp">'.$reg->nombre.'</b> 
-                           <b style="display: none;" id="descripcion_pmp">'.$reg->descripcion.'</b>
-                           <b style="display: none;" id="cantidad_pmp">'.$reg->cantidad.'</b>
-                           <b style="display: none;" id="tipo_pmp">'.$reg->tipo.'</b>
-                           <b style="display: none;" id="idtipo_pmp">'.$reg->idtipo.'</b>
-                           <b style="display: none;" id="consec_pmp">'.$reg->consec.'</b>
-                           <b style="display: none;" id="observaciones_pmp">'.$reg->observaciones.'</b>
-                           <b style="display: none;" id="ubicacion_pmp">'.$reg->ubicacion.'</b>
-                           <b style="display: none;" id="folio_prov_pmp">'.$reg->folio_prov.'</b>
-                           <b style="display: none;" id="unidad_pmp">'.$reg->unidad.'</b>
+                           <b style="display: none;" id="nombre_pmp'.$reg->id_prod_alm_mat.'">'.$reg->nombre.'</b> 
+                           <b style="display: none;" id="descripcion_pmp'.$reg->id_prod_alm_mat.'">'.$reg->descripcion.'</b>
+                           <b style="display: none;" id="cantidad_pmp'.$reg->id_prod_alm_mat.'">'.$reg->cantidad.'</b>
+                           <b style="display: none;" id="tipo_pmp'.$reg->id_prod_alm_mat.'">'.$reg->tipo.'</b>
+                           <b style="display: none;" id="idtipo_pmp'.$reg->id_prod_alm_mat.'">'.$reg->idtipo.'</b>
+                           <b style="display: none;" id="consec_pmp'.$reg->id_prod_alm_mat.'">'.$reg->consec.'</b>
+                           <b style="display: none;" id="observaciones_pmp'.$reg->id_prod_alm_mat.'">'.$reg->observaciones.'</b>
+                           <b style="display: none;" id="ubicacion_pmp'.$reg->id_prod_alm_mat.'">'.$reg->ubicacion.'</b>
+                           <b style="display: none;" id="folio_prov_pmp'.$reg->id_prod_alm_mat.'">'.$reg->folio_prov.'</b>
+                           <b style="display: none;" id="unidad_pmp'.$reg->id_prod_alm_mat.'">'.$reg->unidad.'</b>
                         </div>
 
                         

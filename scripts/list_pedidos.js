@@ -71,7 +71,8 @@ function init()
 
 var conteo_pp = 1;
 function siguiente_bloque(){
-
+	document.getElementById("btn_sig_paginado").disabled = true;
+	document.getElementById("btn_sig_paginado2").disabled = true;
 	// var idusuario=$("#idusuario").text();
 	offset = offset + 20;
 	conteo_pp++;
@@ -92,6 +93,9 @@ function siguiente_bloque(){
 			const element = document.getElementById("div_lista_pedidos");
 			element.scrollTo(0, 0);
 
+			document.getElementById("btn_sig_paginado").disabled = false;
+			document.getElementById("btn_sig_paginado2").disabled = false;
+
 		});
 		
 		
@@ -100,14 +104,15 @@ function siguiente_bloque(){
 }
 
 function anterior_bloque(){
-
+	document.getElementById("btn_ant_paginado").disabled = true;
+	document.getElementById("btn_ant_paginado2").disabled = true;
 	// var idusuario=$("#idusuario").text();
 	//alert(offset);
-	if (offset>=0) {
+	if (offset>0) {
 		offset = offset - 20;
-		if (conteo_pp>1) {
-			conteo_pp--;
-		}
+		
+		conteo_pp--;
+		
 		
 		$("#num_pagina").text(conteo_pp);
 		$("#num_pagina2").text(conteo_pp);
@@ -125,6 +130,9 @@ function anterior_bloque(){
 
 				const element = document.getElementById("div_lista_pedidos");
 				element.scrollTo(0, 0);
+
+				document.getElementById("btn_ant_paginado").disabled = false;
+				document.getElementById("btn_ant_paginado2").disabled = false;
 
 			});
 			

@@ -183,17 +183,17 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                       <div class="col-sm-3">
                           <div class="col-sm-12" style="text-align: center;" id="btn_paginado">
-                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();" style="font-size: 12px;">Anterior</button>
-                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina">1</button>
-                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();" style="font-size: 12px;">Siguiente</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();" style="font-size: 10px;" id="btn_ant_paginado">Anterior</button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina" style="font-size: 10px;">1</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();" style="font-size: 10px;" id="btn_sig_paginado">Siguiente</button>
                           </div>
                           <div class="col-sm-12 mail_list_column" id="div_lista_pedidos" style="overflow:scroll;height:1400px; width:100%;">
 
                           </div>
                           <div class="col-sm-12" style="text-align: center;" id="btn_paginado2">
-                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();" style="font-size: 12px;">Anterior</button>
-                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina2">1</button>
-                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();" style="font-size: 12px;">Siguiente</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();" style="font-size: 10px;" id="btn_ant_paginado2">Anterior</button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina2" style="font-size: 10px;">1</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();" style="font-size: 10px;" id="btn_sig_paginado2">Siguiente</button>
                           </div>
                       </div>
 

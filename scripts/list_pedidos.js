@@ -105,7 +105,10 @@ function anterior_bloque(){
 	//alert(offset);
 	if (offset>=0) {
 		offset = offset - 20;
-		conteo_pp--;
+		if (conteo_pp>1) {
+			conteo_pp--;
+		}
+		
 		$("#num_pagina").text(conteo_pp);
 		$("#num_pagina2").text(conteo_pp);
 

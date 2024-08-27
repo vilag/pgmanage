@@ -5,7 +5,8 @@ var offset = 0;
 function init()
 {
 	
-
+	document.getElementById("btn_paginado").style.display="block";
+	document.getElementById("btn_paginado2").style.display="block";
 	$("#li_buscar_control").show();
 	$("#li_buscar_btns2").show();	
 	$("#li_buscar_btns").hide();
@@ -60,37 +61,7 @@ function init()
 			
 			
 		});
-		return;
-
-
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
-	    $("#div_lista_pedidos").html(r);
-
-	    	var estatus = estatus_tabla;
-
-	    	//alert(estatus);
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
-			{
-			data = JSON.parse(data);
-
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
-
-					buscar_pedido_ini();
-					contar_prod_sinrev();
-					cargar_notif();
-					cont_num_vencidos();
-			    	/*
-			    	
-			    	
-			    	listar_paginas();*/
-			    	//contar_mensajes();
-			    	//det_term();
-
-			});				    	
-	                     
-	    });
+		
 
 	//});
 
@@ -167,6 +138,9 @@ function selec_tipo_busqueda()
 
 	if (selec_busqueda==1) {
 
+		document.getElementById("btn_paginado").style.display="block";
+		document.getElementById("btn_paginado2").style.display="block";
+
 		$("#li_buscar_control").show();
 		$("#li_buscar_btns2").show();	
 		$("#li_buscar_btns").hide();
@@ -178,6 +152,9 @@ function selec_tipo_busqueda()
 
 	if (selec_busqueda==2) {
 
+		document.getElementById("btn_paginado").style.display="none";
+		document.getElementById("btn_paginado2").style.display="none";
+
 		$("#li_buscar_control").hide();
 		$("#li_buscar_btns2").hide();	
 		$("#li_buscar_btns").show();
@@ -187,6 +164,9 @@ function selec_tipo_busqueda()
 	}
 
 	if (selec_busqueda==3) {
+
+		document.getElementById("btn_paginado").style.display="none";
+		document.getElementById("btn_paginado2").style.display="none";
 
 		$("#li_buscar_control").hide();
 		$("#li_buscar_btns2").hide();	
@@ -3231,6 +3211,8 @@ function cont_num_vencidos()
 
 function filtro_option1()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	//$("#estatus_tabla").val("1");
 
 	// var estatus_tabla=1;
@@ -3273,6 +3255,8 @@ function filtro_option1()
 }
 function filtro_option2()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	estatus_tabla=2;
 	$("#estatus_pedido").val("2");
 	var idusuario=$("#idusuario").text();
@@ -3314,6 +3298,8 @@ function filtro_option2()
 }
 function filtro_option3()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	estatus_tabla=3;
 	$("#estatus_pedido").val("3");
 	var idusuario=$("#idusuario").text();
@@ -3355,6 +3341,8 @@ function filtro_option3()
 }
 function filtro_option4()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	estatus_tabla=4;
 	$("#estatus_pedido").val("4");
 	var idusuario=$("#idusuario").text();
@@ -3395,6 +3383,8 @@ function filtro_option4()
 }
 function filtro_option5()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	estatus_tabla=5;
 	$("#estatus_pedido").val("5");
 	var idusuario=$("#idusuario").text();
@@ -3437,6 +3427,8 @@ function filtro_option5()
 
 function filtro_option6()
 {
+	document.getElementById("btn_paginado").style.display="none";
+	document.getElementById("btn_paginado2").style.display="none";
 	estatus_tabla=0;
 	$("#estatus_pedido").val("0");
 	var idusuario=$("#idusuario").text();

@@ -6,71 +6,72 @@ $list_pedidos=new List_pedidos();
 
 
 switch ($_GET["op"]){
+
+	case 'listar_pedidos_ini':
+			
+		$estatus=$_GET['estatus'];
+		$idusuario=$_GET['idusuario'];
+		$lugar=$_GET['lugar'];
+		$offset=$_GET['offset'];
+
+		$rspta = $list_pedidos->listar_pedidos_ini($estatus,$idusuario,$lugar,$offset);
+			
+
+		while ($reg = $rspta->fetch_object())
+				{
+
+					if ($reg->tipo==1) {
+						$tipo = "Comercial";
+					}elseif ($reg->tipo==2) {
+						$tipo = "Licitación";
+					}elseif ($reg->tipo==3) {
+						$tipo = "Muestras";
+					}elseif ($reg->tipo==4) {
+						$tipo = "Exisencias";
+					}elseif ($reg->tipo==0) {
+						$tipo = "";
+					}
+
+					echo '
+						
+					
+							<div class="mail_list hov" onclick="buscar_pedido('.$reg->idpg_pedidos.');" style="cursor: pointer; padding: 15px; 5px;" >
+								
+								<div>
+								  <b style="float: right; font-size: 12px; margin-top:5px;">'.$reg->fecha_pedido.'</b><br>
+								  <p style="margin-bottom: 2px; margin-top: 2px;"><b style="font-size: 20px;">'.$reg->no_control.'</b> - P: '.$reg->no_pedido.'
+									  
+									  <br><small>'.$reg->lugar.' - '.$tipo.'</small>
+									  
+								  </p>
+								  <p style="margin-bottom: 10px;"><b>'.$reg->nom_cliente.'</b></p>
+								 
+								</div> 
+								<div align="left" style="margin-bottom: 10px;">
+								 <b id="estatus_ped'.$reg->idpg_pedidos.'">'.$reg->estatus.'</b>
+							   </div>  
+							</div>
+					
+					
+					';
+				
+					
+				}
+
+	break;
 	
 		case 'listar_pedidos_v2':
 			
 			$estatus=$_GET['estatus'];
 			$idusuario=$_GET['idusuario'];
 			$lugar=$_GET['lugar'];
+			// $offset=$_GET['offset'];
 
 			$rspta = $list_pedidos->listar_pedidos_v2($estatus,$idusuario,$lugar);
 				
 
 			while ($reg = $rspta->fetch_object())
 					{
-						if ($reg->estatus=='ENTREGADO') {
-
-							$dias_totales=$reg->diferencia_total;
-							$porc_avance=$reg->porc_av;
-							$dias_faltantes=$reg->dias_rest;
-							$color_barra=$reg->color_barra;
-
-							if ($dias_faltantes>=0) {
-								$color_barra='#33E228';
-							}
-
-						}elseif ($reg->estatus!='ENTREGADO') {
-							
-							$dias_totales=$reg->diferencia_total;
-							$dias_transcurridos=$reg->avance;
-							$dias_faltantes=$reg->faltan;
-
-							if ($dias_totales==0) {
-								$porc_avance=0;
-							}elseif ($dias_totales>0) {
-								$porc_avance = ($dias_transcurridos*100)/$dias_totales;
-							}
-
-							
-							
-
-							if ($porc_avance==0) {
-								$color_barra='#F18904';
-								
-							}
-
-							if ($porc_avance>=0 && $porc_avance<=50) {
-								$color_barra='#33E228';
-								
-							}
-							if ($porc_avance>=51 && $porc_avance<=75) {
-								$color_barra='#F7E208';
-								
-							}
-							if ($porc_avance>=76 && $porc_avance<=90) {
-								$color_barra='#F18904';
-								
-							}
-							if ($porc_avance>=91 && $porc_avance<=100) {
-								$color_barra='#D60B01';
-								
-							}
-							if ($porc_avance>100) {
-								$color_barra='#9F0B03';
-								
-							}
-						}
-
 
 						if ($reg->tipo==1) {
 							$tipo = "Comercial";
@@ -84,75 +85,171 @@ switch ($_GET["op"]){
 							$tipo = "";
 						}
 
-						$color_status=$reg->color_status;
-						if ($color_status==Null) {
-							$color_status='fff';
-							
-						}
-						
-
-						$documento=$reg->docs;
-
-						if ($documento>0) {
-							$visib_docs = "block:";
-						}elseif ($documento==0) {
-							$visib_docs = "none";
-						}
-
-						$obser_seg=$reg->observaciones;
-
-						if ($obser_seg<>"") {
-							$visib_obser = "block:";
-						}elseif ($obser_seg=="") {
-							$visib_obser = "none";
-						}
-
-						$det_forment=$reg->det_forma_entrega;
-
-						if ($det_forment<>"") {
-							$visib_forment = "block:";
-						}elseif ($det_forment=="") {
-							$visib_forment = "none";
-						}
-
 						echo '
-
-								
-								
-								
-		                          <div class="mail_list hov" onclick="buscar_pedido('.$reg->idpg_pedidos.');" style="cursor: pointer;" >
+							
+						
+								<div class="mail_list hov" onclick="buscar_pedido('.$reg->idpg_pedidos.');" style="cursor: pointer; padding: 15px; 5px;" >
 		                            
 		                            <div>
 		                              <b style="float: right; font-size: 12px; margin-top:5px;">'.$reg->fecha_pedido.'</b><br>
 		                              <p style="margin-bottom: 2px; margin-top: 2px;"><b style="font-size: 20px;">'.$reg->no_control.'</b> - P: '.$reg->no_pedido.'
-		                              	<b style="margin-left: 40%;">
-		                              		<i class="fa fa-file" style="font-size: 15px; display: '.$visib_docs.';" data-toggle="tooltip" data-placement="top" title="Documentos"></i>
-		                              		<i class="fa fa-comments-o" style="margin-left: 5px; font-size: 15px; display: '.$visib_obser.';" data-toggle="tooltip" data-placement="top" title="Observaciones"></i>
-		                              		<i class="fa fa-truck" style="margin-left: 5px; font-size: 15px; display: '.$visib_forment.';" data-toggle="tooltip" data-placement="top" title="Detalles de forma de entrega"></i>
-		                              	</b>
-		                              <br><small>'.$reg->lugar.' - '.$tipo.'</small>
+		                              	
+		                              	<br><small>'.$reg->lugar.' - '.$tipo.'</small>
 		                              	
 		                              </p>
 		                              <p style="margin-bottom: 10px;"><b>'.$reg->nom_cliente.'</b></p>
 		                             
-		                            </div>
-		                            <div class="progress" style="height:5px; width: 80%; margin-bottom: 10px;">
-		                                <div class="progress-bar" role="progressbar" style="width: '.$porc_avance.'%; background: '.$color_barra.';" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-		                                <h6 id="color_barra_s'.$reg->idpg_pedidos.'" style="visibility: hidden;">'.$color_barra.'</h6>
-		                                <h6 id="dias_restantes'.$reg->idpg_pedidos.'" style="visibility: hidden;">'.$dias_faltantes.'</h6>
-					                </div>
-					                <div align="left" style="margin-bottom: 10px;">
-		                              <b id="estatus_ped'.$reg->idpg_pedidos.'" style="color: #'.$color_status.';">'.$reg->estatus.'</b>
-		                            </div>
+		                            </div> 
+									<div align="left" style="margin-bottom: 10px;">
+		                             <b id="estatus_ped'.$reg->idpg_pedidos.'">'.$reg->estatus.'</b>
+		                           </div>  
+		                        </div>
+						
+						
+						';
+
+
+						
+
+
+
+
+
+						// if ($reg->estatus=='ENTREGADO') {
+
+						// 	$dias_totales=$reg->diferencia_total;
+						// 	$porc_avance=$reg->porc_av;
+						// 	$dias_faltantes=$reg->dias_rest;
+						// 	$color_barra=$reg->color_barra;
+
+						// 	if ($dias_faltantes>=0) {
+						// 		$color_barra='#33E228';
+						// 	}
+
+						// }elseif ($reg->estatus!='ENTREGADO') {
+							
+						// 	$dias_totales=$reg->diferencia_total;
+						// 	$dias_transcurridos=$reg->avance;
+						// 	$dias_faltantes=$reg->faltan;
+
+						// 	if ($dias_totales==0) {
+						// 		$porc_avance=0;
+						// 	}elseif ($dias_totales>0) {
+						// 		$porc_avance = ($dias_transcurridos*100)/$dias_totales;
+						// 	}
+
+							
+							
+
+						// 	if ($porc_avance==0) {
+						// 		$color_barra='#F18904';
+								
+						// 	}
+
+						// 	if ($porc_avance>=0 && $porc_avance<=50) {
+						// 		$color_barra='#33E228';
+								
+						// 	}
+						// 	if ($porc_avance>=51 && $porc_avance<=75) {
+						// 		$color_barra='#F7E208';
+								
+						// 	}
+						// 	if ($porc_avance>=76 && $porc_avance<=90) {
+						// 		$color_barra='#F18904';
+								
+						// 	}
+						// 	if ($porc_avance>=91 && $porc_avance<=100) {
+						// 		$color_barra='#D60B01';
+								
+						// 	}
+						// 	if ($porc_avance>100) {
+						// 		$color_barra='#9F0B03';
+								
+						// 	}
+						// }
+
+
+						// if ($reg->tipo==1) {
+						// 	$tipo = "Comercial";
+						// }elseif ($reg->tipo==2) {
+						// 	$tipo = "Licitación";
+						// }elseif ($reg->tipo==3) {
+						// 	$tipo = "Muestras";
+						// }elseif ($reg->tipo==4) {
+						// 	$tipo = "Exisencias";
+						// }elseif ($reg->tipo==0) {
+						// 	$tipo = "";
+						// }
+
+						// $color_status=$reg->color_status;
+						// if ($color_status==Null) {
+						// 	$color_status='fff';
+							
+						// }
+						
+
+						// $documento=$reg->docs;
+
+						// if ($documento>0) {
+						// 	$visib_docs = "block:";
+						// }elseif ($documento==0) {
+						// 	$visib_docs = "none";
+						// }
+
+						// $obser_seg=$reg->observaciones;
+
+						// if ($obser_seg<>"") {
+						// 	$visib_obser = "block:";
+						// }elseif ($obser_seg=="") {
+						// 	$visib_obser = "none";
+						// }
+
+						// $det_forment=$reg->det_forma_entrega;
+
+						// if ($det_forment<>"") {
+						// 	$visib_forment = "block:";
+						// }elseif ($det_forment=="") {
+						// 	$visib_forment = "none";
+						// }
+
+						// echo '
+
+								
+								
+								
+		                //           <div class="mail_list hov" onclick="buscar_pedido('.$reg->idpg_pedidos.');" style="cursor: pointer;" >
 		                            
-		                          </div>
+		                //             <div>
+		                //               <b style="float: right; font-size: 12px; margin-top:5px;">'.$reg->fecha_pedido.'</b><br>
+		                //               <p style="margin-bottom: 2px; margin-top: 2px;"><b style="font-size: 20px;">'.$reg->no_control.'</b> - P: '.$reg->no_pedido.'
+		                //               	<b style="margin-left: 40%;">
+		                //               		<i class="fa fa-file" style="font-size: 15px; display: '.$visib_docs.';" data-toggle="tooltip" data-placement="top" title="Documentos"></i>
+		                //               		<i class="fa fa-comments-o" style="margin-left: 5px; font-size: 15px; display: '.$visib_obser.';" data-toggle="tooltip" data-placement="top" title="Observaciones"></i>
+		                //               		<i class="fa fa-truck" style="margin-left: 5px; font-size: 15px; display: '.$visib_forment.';" data-toggle="tooltip" data-placement="top" title="Detalles de forma de entrega"></i>
+		                //               	</b>
+		                //               <br><small>'.$reg->lugar.' - '.$tipo.'</small>
+		                              	
+		                //               </p>
+		                //               <p style="margin-bottom: 10px;"><b>'.$reg->nom_cliente.'</b></p>
+		                             
+		                //             </div>
+		                //             <div class="progress" style="height:5px; width: 80%; margin-bottom: 10px;">
+		                //                 <div class="progress-bar" role="progressbar" style="width: '.$porc_avance.'%; background: '.$color_barra.';" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+		                //                 <h6 id="color_barra_s'.$reg->idpg_pedidos.'" style="visibility: hidden;">'.$color_barra.'</h6>
+		                //                 <h6 id="dias_restantes'.$reg->idpg_pedidos.'" style="visibility: hidden;">'.$dias_faltantes.'</h6>
+					    //             </div>
+					    //             <div align="left" style="margin-bottom: 10px;">
+		                //               <b id="estatus_ped'.$reg->idpg_pedidos.'" style="color: #'.$color_status.';">'.$reg->estatus.'</b>
+		                //             </div>
+		                            
+		                //           </div>
 		                          
 		                        	 
 
 		                            
 		                          	                            
 
-						';
+						// ';
 
 					
 						

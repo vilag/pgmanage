@@ -8,8 +8,24 @@
 
 		}
 
+		public function listar_pedidos_ini($estatus,$idusuario,$lugar,$offset)
+		{
+
+			$sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus
+				FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario ORDER BY p.fecha_pedido desc LIMIT 20 offset $offset";
+				return ejecutarConsulta($sql);
+							
+		}
+
 		public function listar_pedidos_v2($estatus,$idusuario,$lugar)
 		{
+
+			// $sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus
+			// 	FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario ORDER BY p.fecha_pedido desc LIMIT 20 offset $offset";
+			// 	return ejecutarConsulta($sql);
+
+
+
 			$cant_ini = 0;
 			//$estatus_2 = '';
 
@@ -32,6 +48,8 @@
 				$estatus = "";
 				$estatus_2 = 'AND p.estatus="CANCELADO"';
 			}
+
+
 
 			if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
 				

@@ -181,9 +181,20 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                     <div class="row">
 
-                      <div class="col-sm-3 mail_list_column" id="div_lista_pedidos" style="overflow:scroll;height:1400px;width:100%;">
+                      <div class="col-sm-3">
+                          <div class="col-sm-12">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();">Anterior</button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina">1</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();">Siguiente</button>
+                          </div>
+                          <div class="col-sm-12 mail_list_column" id="div_lista_pedidos" style="overflow:scroll;height:1400px; width:100%;">
 
-
+                          </div>
+                          <div class="col-sm-12">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="anterior_bloque();">Anterior</button>
+                            <button class="btn btn-sm btn-secondary" type="button" id="num_pagina2">1</button>
+                            <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();">Siguiente</button>
+                          </div>
                       </div>
 
                       <style type="text/css">

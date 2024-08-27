@@ -1,6 +1,10 @@
 var idusuario=$("#idusuario").text();
+var estatus_tabla = 1;
+var lugar = $("#lugar_user").text();
+var offset = 0;
 function init()
 {
+	
 
 	$("#li_buscar_control").show();
 	$("#li_buscar_btns2").show();	
@@ -12,7 +16,7 @@ function init()
 	//$("#btn_num_pedidos").hide();
 	//$("#input_buscar").hide();
 
-	var estatus_tabla = 1;
+	//var estatus_tabla = 1;
 	$("#estatus_pedido").val("1");
 	//alert(estatus_tabla);
 	var idusuario=$("#idusuario").text();
@@ -38,7 +42,26 @@ function init()
 		}
 		//alert(lugar);
 
-		
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
+			$("#div_lista_pedidos").html(r);
+
+			var estatus = estatus_tabla;
+
+			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+			{
+			data = JSON.parse(data);
+
+				buscar_pedido_ini();
+				contar_prod_sinrev();
+				cargar_notif();
+				cont_num_vencidos();
+
+			});
+			
+			
+		});
+		return;
+
 
 		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
 	    $("#div_lista_pedidos").html(r);
@@ -73,6 +96,67 @@ function init()
 
 
 		
+}
+
+var conteo_pp = 1;
+function siguiente_bloque(){
+
+	// var idusuario=$("#idusuario").text();
+	offset = offset + 20;
+	conteo_pp++;
+	$("#num_pagina").text(conteo_pp);
+	$("#num_pagina2").text(conteo_pp);
+
+	$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
+		$("#div_lista_pedidos").html(r);
+
+		var estatus = estatus_tabla;
+
+		$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+		{
+		data = JSON.parse(data);
+
+			
+
+			const element = document.getElementById("box_det_buscar");
+			element.scrollTo(0, 0);
+
+		});
+		
+		
+	});
+
+}
+
+function anterior_bloque(){
+
+	// var idusuario=$("#idusuario").text();
+	if (offset>20) {
+		offset = offset - 20;
+		conteo_pp--;
+		$("#num_pagina").text(conteo_pp);
+		$("#num_pagina2").text(conteo_pp);
+
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
+			$("#div_lista_pedidos").html(r);
+
+			var estatus = estatus_tabla;
+
+			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+			{
+			data = JSON.parse(data);
+
+				
+
+				const element = document.getElementById("box_det_buscar");
+				element.scrollTo(0, 0);
+
+			});
+			
+			
+		});
+	}
+
 }
 
 function selec_tipo_busqueda()
@@ -3148,7 +3232,7 @@ function filtro_option1()
 {
 	//$("#estatus_tabla").val("1");
 
-	var estatus_tabla=1;
+	// var estatus_tabla=1;
 	$("#estatus_pedido").val("1");
 	var idusuario=$("#idusuario").text();
 
@@ -3188,7 +3272,7 @@ function filtro_option1()
 }
 function filtro_option2()
 {
-	var estatus_tabla=2;
+	estatus_tabla=2;
 	$("#estatus_pedido").val("2");
 	var idusuario=$("#idusuario").text();
 
@@ -3229,7 +3313,7 @@ function filtro_option2()
 }
 function filtro_option3()
 {
-	var estatus_tabla=3;
+	estatus_tabla=3;
 	$("#estatus_pedido").val("3");
 	var idusuario=$("#idusuario").text();
 
@@ -3270,7 +3354,7 @@ function filtro_option3()
 }
 function filtro_option4()
 {
-	var estatus_tabla=4;
+	estatus_tabla=4;
 	$("#estatus_pedido").val("4");
 	var idusuario=$("#idusuario").text();
 
@@ -3310,7 +3394,7 @@ function filtro_option4()
 }
 function filtro_option5()
 {
-	var estatus_tabla=5;
+	estatus_tabla=5;
 	$("#estatus_pedido").val("5");
 	var idusuario=$("#idusuario").text();
 
@@ -3352,7 +3436,7 @@ function filtro_option5()
 
 function filtro_option6()
 {
-	var estatus_tabla=0;
+	estatus_tabla=0;
 	$("#estatus_pedido").val("0");
 	var idusuario=$("#idusuario").text();
 

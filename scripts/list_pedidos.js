@@ -131,7 +131,8 @@ function siguiente_bloque(){
 function anterior_bloque(){
 
 	// var idusuario=$("#idusuario").text();
-	if (offset>20) {
+	//alert(offset);
+	if (offset>=0) {
 		offset = offset - 20;
 		conteo_pp--;
 		$("#num_pagina").text(conteo_pp);

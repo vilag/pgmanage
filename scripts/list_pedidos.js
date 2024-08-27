@@ -118,7 +118,7 @@ function siguiente_bloque(){
 
 			
 
-			const element = document.getElementById("box_det_buscar");
+			const element = document.getElementById("div_lista_pedidos");
 			element.scrollTo(0, 0);
 
 		});
@@ -148,7 +148,7 @@ function anterior_bloque(){
 
 				
 
-				const element = document.getElementById("box_det_buscar");
+				const element = document.getElementById("div_lista_pedidos");
 				element.scrollTo(0, 0);
 
 			});

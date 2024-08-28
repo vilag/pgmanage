@@ -33,6 +33,8 @@ var offset = 0;
 var conteo_ps = 1;
 function listar_salidas()
 {
+	document.getElementById("btn_paginados").style.display="block";
+	document.getElementById("btn_paginados2").style.display="block";
 	$("#num_pag_salida").text(conteo_ps);
 	$("#num_pag_salida2").text(conteo_ps);
 	$("#div_impr_salida").hide();
@@ -1444,6 +1446,8 @@ function agregar_prod_salida()
 
 function buscar_control_salida()
 {
+	document.getElementById("btn_paginados").style.display="none";
+	document.getElementById("btn_paginados2").style.display="none";
 	var valor1 = $("#fecha_1_buscar").val();
 	var valor2 = $("#fecha_2_buscar").val();
 	var valor3 = $("#no_salida_buscar").val();

@@ -90,7 +90,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <hr>
                             </div>
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados">
                               <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida" onclick="back_pagina_salida();">Anterior</button>
                               <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida">1</button>
                               <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida" onclick="next_pagina_salida();">Siguiente</button>
@@ -101,7 +101,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                   
                               </table>
                             </div>
-                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados2">
                               <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida2" onclick="back_pagina_salida();">Anterior</button>
                               <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida2">1</button>
                               <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida2" onclick="next_pagina_salida();">Siguiente</button>

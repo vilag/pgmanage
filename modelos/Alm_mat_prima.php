@@ -24,7 +24,7 @@ Class Alm_mat_prima
 		a.ubicacion,
 		a.folio_prov,
 		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
-		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas,
+		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat AND estatus=1) as salidas,
 		a.unidad
 		
 		FROM 10_prod_alm_mat a ORDER BY a.consec DESC";
@@ -84,7 +84,7 @@ Class Alm_mat_prima
 		a.folio_prov,
 		a.unidad,
 		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
-		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas
+		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat AND estatus=1) as salidas
 		
 		FROM 10_prod_alm_mat a WHERE a.nombre LIKE '%".$texto."%' ORDER BY a.consec DESC";
 		return ejecutarConsulta($sql);
@@ -169,7 +169,7 @@ Class Alm_mat_prima
 		a.fecha,
 		a.observacion
 		
-		FROM 10_salida_alm_mat a ORDER BY a.idsalida DESC";
+		FROM 10_salida_alm_mat a WHERE a.estatus=1 ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -187,7 +187,7 @@ Class Alm_mat_prima
 		a.fecha,
 		a.observacion
 		
-		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida DESC";
+		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' AND a.estatus=1 ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -205,7 +205,7 @@ Class Alm_mat_prima
 		a.fecha,
 		a.observacion
 		
-		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' ORDER BY a.idsalida DESC";
+		FROM 10_salida_alm_mat a WHERE a.id_prod_alm_mat='$idprod' AND a.estatus=1 ORDER BY a.idsalida DESC";
 		return ejecutarConsulta($sql);
 	}
 
@@ -214,7 +214,7 @@ Class Alm_mat_prima
 		$sql="SELECT 
 		
 		(SELECT sum(cantidad) FROM 10_entrada_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as entradas,
-		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat) as salidas
+		(SELECT sum(cantidad) FROM 10_salida_alm_mat WHERE id_prod_alm_mat=a.id_prod_alm_mat AND estatus=1) as salidas
 		
 		FROM 10_entrada_alm_mat a WHERE a.id_prod_alm_mat='$id_prod_alm_mat'";
 		return ejecutarConsultaSimpleFila($sql);
@@ -235,6 +235,18 @@ Class Alm_mat_prima
 	public function update_lote_int($idnew,$newlote)
 	{
 		$sql="UPDATE 10_entrada_alm_mat SET lote = '$newlote' WHERE identrada='$idnew'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function updateSalidaAmp($idsalida,$cantidad,$proveedor,$lote,$control,$op,$obs)
+	{
+		$sql="UPDATE 10_salida_alm_mat SET cantidad = '$cantidad', proveedor = '$proveedor', lote = '$lote', no_control = '$control', op='$op', observacion='$obs' WHERE idsalida='$idsalida'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function borrar_salida($idsalida)
+	{
+		$sql="UPDATE 10_salida_alm_mat SET estatus = 0 WHERE idsalida='$idsalida'";
 		return ejecutarConsulta($sql);
 	}
 

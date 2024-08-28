@@ -329,6 +329,12 @@ function registrar_salida(){
     document.getElementById("div_reg_salidas").style.display="block";
     listar_mov_salida();
     contar_existencia();
+
+    
+    // var element = document.getElementById("tbl_salidas");
+    // while (element.firstChild) {
+    //     element.removeChild(element.firstChild);
+    // }
 }
 
 function listar_mov_salida(){
@@ -468,6 +474,7 @@ function guardar_salida(){
 
             listar_mov_salida();
             contar_existencia();
+            listar_movimientos();
         
         });
     }
@@ -563,5 +570,140 @@ function borrar_producto(id_prod_alm_mat)
 
     
 }
+
+var dialog_edit_salida;
+function editar_salida(idsalida){
+
+    if (idusuario==1) {
+
+        var cantidad = $("#tbl_sal_cant"+idsalida).text();
+        var proveedor = $("#tbl_sal_prov"+idsalida).text();
+        var lote = $("#tbl_sal_lote"+idsalida).text();
+        var no_control = $("#tbl_sal_cont"+idsalida).text();
+        var op = $("#tbl_sal_op"+idsalida).text();
+        var obs = $("#tbl_sal_obs"+idsalida).text();
+
+        dialog_edit_salida = bootbox.dialog({
+            message: '<div>'+
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<p style="margin: 0px;">Actualizar registro de salida.</p>'+
+                            '<p style="margin: 0px;">ID: '+idsalida+'</p>'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>Cantidad</label>'+
+                            '<input type="text" class="form-control" value="'+cantidad+'" id="input_upd_salida_cant'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>Proveedor</label>'+
+                            '<input type="text" class="form-control" value="'+proveedor+'" id="input_upd_salida_prov'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>Lote</label>'+
+                            '<input type="text" class="form-control" value="'+lote+'" id="input_upd_salida_lote'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>No. Control</label>'+
+                            '<input type="text" class="form-control" value="'+no_control+'" id="input_upd_salida_control'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>OP</label>'+
+                            '<input type="text" class="form-control" value="'+op+'" id="input_upd_salida_op'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-6 col-sm-6">'+
+                            '<label>Observación</label>'+
+                            '<input type="text" class="form-control" value="'+obs+'" id="input_upd_salida_obs'+idsalida+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-12 col-sm-12" style="padding: 20px; text-align: center;">'+
+                            '<button class="btn btn-secondary" onclick="cancelupdateSalidaAmp();">No Actualizar</button>'+
+                            '<button class="btn btn-primary" onclick="updateSalidaAmp('+idsalida+');">Actualizar</button>'+
+                        '</div>'+
+                        
+                    '</div>',
+            closeButton: false
+        });
+
+    }else{
+        bootbox.alert("Por el momento no tienes permisos para realizar esta acción, solicta los permisos con el administrador del sistema.");
+    }
+
+}
+
+function updateSalidaAmp(idsalida){
+    //alert(idsalida);
+    var cantidad = $("#input_upd_salida_cant"+idsalida).val();
+    var proveedor = $("#input_upd_salida_prov"+idsalida).val();
+    var lote = $("#input_upd_salida_lote"+idsalida).val();
+    var control = $("#input_upd_salida_control"+idsalida).val();
+    var op = $("#input_upd_salida_op"+idsalida).val();
+    var obs = $("#input_upd_salida_obs"+idsalida).val();
+
+    $.post("ajax/alm_mat_prima.php?op=updateSalidaAmp",{
+        idsalida:idsalida,
+        cantidad:cantidad,
+        proveedor:proveedor,
+        lote:lote,
+        control:control,
+        op:op,
+        obs:obs
+    },function(data, status)
+    {
+        data = JSON.parse(data);
+        
+        // var notificator = new Notification(document.querySelector('.notification'));
+        // notificator.info('Salida actualizada exitosamente.');
+        bootbox.alert("Salida actualizada exitosamente.");
+        dialog_edit_salida.modal('hide');
+        listar_movimientos();
+        listar_mov_salida();
+                       
+    });
+}
+
+function cancelupdateSalidaAmp(){
+    dialog_edit_salida.modal('hide');
+}
+
+function borrar_salida(idsalida){
+
+    if (idusuario==1) {
+        bootbox.confirm({
+            message: '¿Desea eliminar este registro de salida?',
+            buttons: {
+            confirm: {
+            label: 'Si',
+            className: 'btn-success'
+            },
+            cancel: {
+            label: 'No',
+            className: 'btn-danger'
+            }
+            },
+            callback: function (result) {
+                if (result) {
+
+                    $.post("ajax/alm_mat_prima.php?op=borrar_salida",{idsalida:idsalida},function(data, status)
+                    {
+                        data = JSON.parse(data);
+
+                        listar_movimientos();
+                        listar_mov_salida();
+                        bootbox.alert("Salida borrada exitosamente.");
+                                    
+                    });
+                    
+                }
+            }
+        });
+    }else{
+        bootbox.alert("Por el momento no tienes permisos para realizar esta acción, solicta los permisos con el administrador del sistema.");
+    }
+
+    
+
+
+
+    
+}
+
 
 init();

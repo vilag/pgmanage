@@ -377,7 +377,8 @@ switch ($_GET["op"])
                                 <td>'.$reg->no_control.'</td> 
                                 <td>'.$reg->op.'</td> 
                                 <td>'.$reg->fecha.'</td>
-                                <td>'.$reg->observacion.'</td>                            
+                                <td>'.$reg->observacion.'</td>  
+                                                          
 	                        </tr>
 						';						
 					}
@@ -391,8 +392,9 @@ switch ($_GET["op"])
 			$rspta = $alm_mat_prima->listar_movimientos_salidas($idprod);
 			while ($reg = $rspta->fetch_object())
 					{
-						echo '						
-							<tr>
+						echo '	
+                        
+                            <tr>
                                 <td>'.$reg->idsalida.'</td>
                                 <td>SALIDA</td>
                                 <td>'.$reg->nombre.'</td>	
@@ -402,8 +404,11 @@ switch ($_GET["op"])
                                 <td>'.$reg->no_control.'</td> 
                                 <td>'.$reg->op.'</td>  
                                 <td>'.$reg->fecha.'</td>
-                                <td>'.$reg->observacion.'</td>                           
+                                <td>'.$reg->observacion.'</td> 
+                                                            
 	                        </tr>
+
+							
 						';						
 					}
 
@@ -421,13 +426,23 @@ switch ($_GET["op"])
                                 <td>'.$reg->idsalida.'</td>
                                 <td>SALIDA</td>
                                 <td>'.$reg->nombre.'</td>	
-                                <td>'.$reg->cantidad.'</td> 
-                                <td>'.$reg->proveedor.'</td>
-                                <td>'.$reg->lote.'</td>
-                                <td>'.$reg->no_control.'</td> 
-                                <td>'.$reg->op.'</td>  
+                                <td id="tbl_sal_cant'.$reg->idsalida.'">'.$reg->cantidad.'</td> 
+                                <td id="tbl_sal_prov'.$reg->idsalida.'">'.$reg->proveedor.'</td>
+                                <td id="tbl_sal_lote'.$reg->idsalida.'">'.$reg->lote.'</td>
+                                <td id="tbl_sal_cont'.$reg->idsalida.'">'.$reg->no_control.'</td> 
+                                <td id="tbl_sal_op'.$reg->idsalida.'">'.$reg->op.'</td>  
                                 <td>'.$reg->fecha.'</td>
-                                <td>'.$reg->observacion.'</td>                            
+                                <td id="tbl_sal_obs'.$reg->idsalida.'">'.$reg->observacion.'</td> 
+                                <td>
+                                    
+                                    <button type="button" class="btn" style="background-color: #283d61;" onclick="editar_salida('.$reg->idsalida.');">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true" style="color: #fff;"></span>
+                                    </button>
+                                    <button type="button" class="btn" style="background-color: #cb0404;" onclick="borrar_salida('.$reg->idsalida.');">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;"></span>
+                                    </button>
+                                    
+                                </td>                            
 	                        </tr>
 						';						
 					}
@@ -462,6 +477,34 @@ switch ($_GET["op"])
             $newlote = $_POST['newlote'];
 
 	 		$rspta=$alm_mat_prima->update_lote_int($idnew,$newlote);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+
+
+		break;
+
+        case 'updateSalidaAmp':
+		
+			$idsalida = $_POST['idsalida'];
+            $cantidad = $_POST['cantidad'];
+            $proveedor = $_POST['proveedor'];
+            $lote = $_POST['lote'];
+            $control = $_POST['control'];
+            $op = $_POST['op'];
+            $obs = $_POST['obs'];
+
+	 		$rspta=$alm_mat_prima->updateSalidaAmp($idsalida,$cantidad,$proveedor,$lote,$control,$op,$obs);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+
+
+		break;
+
+        case 'borrar_salida':
+		
+			$idsalida = $_POST['idsalida'];
+
+	 		$rspta=$alm_mat_prima->borrar_salida($idsalida);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 

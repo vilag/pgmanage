@@ -309,7 +309,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                                 <div class="form-group col-md-12 col-sm-12" id="div_registros">
                                     <div class="form-group col-md-12 col-sm-12">
-                                            <label for="">Entradas y alidas de producto</label>
+                                            <label for="">Entradas y Salidas de producto</label>
                                     </div>
                                     <div class="form-group col-md-5 col-sm-5" style="overflow-y: scroll; height: 500px;">
                                         <div class="form-group col-md-12 col-sm-12">
@@ -336,7 +336,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">SALIDAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed" style="width: 700px;">
+                                        <table class="table table-hover table-fixed" style="width: 1200px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>ID</b></small></th>
@@ -349,6 +349,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>OP</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
                                                     <th><small><b>OBSERVACIÓN</b></small></th>
+                                                   
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas">
@@ -387,7 +388,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <div class="form-group col-md-12 col-sm-12">
                                                 <label for="">SALIDAS</label>
                                         </div>
-                                        <table class="table table-hover table-fixed">
+                                        <table class="table table-hover table-fixed" style="width: 1200px;">
                                             <thead>	
                                                 <tr>
                                                     <th><small><b>ID</b></small></th>
@@ -400,6 +401,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>OP</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
                                                     <th><small><b>OBSERVACIÓN</b></small></th>
+                                                    <th><small><b>OPCIONES</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_salidas_prod">

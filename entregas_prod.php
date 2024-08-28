@@ -87,13 +87,24 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 <button  type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Limpiar" onclick="init();" style="margin-left: -5px;"><i class="fa fa-refresh"></i></button>
                             </div>
                             
-
-                           
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <hr>
+                            </div>
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                              <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida" onclick="back_pagina_salida();">Anterior</button>
+                              <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida">1</button>
+                              <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida" onclick="next_pagina_salida();">Siguiente</button>
+                            </div>
                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="" style="border:0px solid #e5e5e5; overflow:scroll;height:auto; max-height: 500px;">
 
                               <table id="tbl_salidas" class="table table-hover" style="width: 100%;">
                                                   
                               </table>
+                            </div>
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;">
+                              <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida2" onclick="back_pagina_salida();">Anterior</button>
+                              <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida2">1</button>
+                              <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida2" onclick="next_pagina_salida();">Siguiente</button>
                             </div>
                               
                           </div>

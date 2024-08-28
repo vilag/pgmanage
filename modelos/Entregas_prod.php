@@ -8,10 +8,10 @@
 
 		}
 
-		public function listar_salidas()
+		public function listar_salidas($offset)
 		{
 			
-				$sql="SELECT s.idsalida,s.no_salida,s.fecha_salida,sr.nombre as nom_repartidor, sv.nombre as nom_vehiculo,s.estatus FROM salidas s INNER JOIN salidas_repartidores sr ON s.idusuario = sr.idrepartidor INNER JOIN salidas_vehiculos sv ON s.idvehiculo=sv.idvehiculo ORDER BY s.no_salida DESC";
+				$sql="SELECT s.idsalida,s.no_salida,s.fecha_salida,sr.nombre as nom_repartidor, sv.nombre as nom_vehiculo,s.estatus FROM salidas s INNER JOIN salidas_repartidores sr ON s.idusuario = sr.idrepartidor INNER JOIN salidas_vehiculos sv ON s.idvehiculo=sv.idvehiculo ORDER BY s.no_salida DESC LIMIT 5 OFFSET $offset";
 				//return ejecutarConsultaSimpleFila($sql);
 				return ejecutarConsulta($sql);
 			

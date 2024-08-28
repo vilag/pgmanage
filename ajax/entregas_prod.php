@@ -10,8 +10,9 @@ switch ($_GET["op"])
 
 		case 'listar_salidas':
 			
+			$offset = $_GET['offset'];
 
-			$rspta = $entregas_prod->listar_salidas();
+			$rspta = $entregas_prod->listar_salidas($offset);
 
 
 

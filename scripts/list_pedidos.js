@@ -104,11 +104,12 @@ function siguiente_bloque(){
 }
 
 function anterior_bloque(){
-	document.getElementById("btn_ant_paginado").disabled = true;
-	document.getElementById("btn_ant_paginado2").disabled = true;
+	
 	// var idusuario=$("#idusuario").text();
 	//alert(offset);
 	if (offset>0) {
+		document.getElementById("btn_ant_paginado").disabled = true;
+		document.getElementById("btn_ant_paginado2").disabled = true;
 		offset = offset - 20;
 		
 		conteo_pp--;

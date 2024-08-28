@@ -29,18 +29,57 @@ function init(){
 
 }
 
-
+var offset = 0;
+var conteo_ps = 1;
 function listar_salidas()
 {
+	$("#num_pag_salida").text(conteo_ps);
+	$("#num_pag_salida2").text(conteo_ps);
 	$("#div_impr_salida").hide();
-
-	$.post("ajax/entregas_prod.php?op=listar_salidas",function(r){
+	$.post("ajax/entregas_prod.php?op=listar_salidas&offset="+offset,function(r){
 	$("#tbl_salidas").html(r);
 
 	});
-
 }
 
+function next_pagina_salida(){
+	document.getElementById("btn_siguiente_salida").disabled = true;
+	document.getElementById("btn_siguiente_salida2").disabled = true;
+	offset = offset+5;
+	conteo_ps++;
+	$("#num_pag_salida").text(conteo_ps);
+	$("#num_pag_salida2").text(conteo_ps);
+	$.post("ajax/entregas_prod.php?op=listar_salidas&offset="+offset,function(r){
+	$("#tbl_salidas").html(r);
+
+		const element = document.getElementById("tbl_salidas");
+		element.scrollTo(0, 0);
+		document.getElementById("btn_siguiente_salida").disabled = false;
+		document.getElementById("btn_siguiente_salida2").disabled = false;
+	
+	});
+}
+
+function back_pagina_salida(){
+	if (offset>0) {
+		document.getElementById("btn_anterior_salida").disabled = true;
+		document.getElementById("btn_anterior_salida2").disabled = true;
+		offset = offset-5;
+		conteo_ps--;
+		$("#num_pag_salida").text(conteo_ps);
+		$("#num_pag_salida2").text(conteo_ps);
+		$.post("ajax/entregas_prod.php?op=listar_salidas&offset="+offset,function(r){
+		$("#tbl_salidas").html(r);
+			
+			const element = document.getElementById("tbl_salidas");
+			element.scrollTo(0, 0);
+			document.getElementById("btn_anterior_salida").disabled = false;
+			document.getElementById("btn_anterior_salida2").disabled = false;
+		
+		});
+	}
+	
+}
 
 
 	/*$(document).ready(function(){

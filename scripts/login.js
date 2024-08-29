@@ -36,7 +36,7 @@ function login()
                     if (idusuario==22) {
                         $(location).attr("href","almacen_pt.php");
                     }else{
-                        $(location).attr("href","welcome.php");
+                        $(location).attr("href","list_pedidos.php");
                     }
                      
                 }

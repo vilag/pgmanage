@@ -1191,15 +1191,15 @@ function guardar_producto_nuevo()
 
 				bootbox.alert("Producto guardado, idproductos_clasif: "+data.idproductos_clasif);
 
-				$("#modal_nuevo_producto").modal("hide");
+				// $("#modal_nuevo_producto").modal("hide");
 
-				$("#codigo_nuevo_reg").val("");
-				$("#nombre_nuevo_reg").val("");
-				$("#select_busqueda_tipo_nuevo").val("");
-				$("#select_busqueda_modelo_nuevo").val("");
-				$("#select_busqueda_tamano_nuevo").val("");
-				$("#estatus_nuevo_reg").val("");
-				$("#tipo_prod_esp_lin").val("");
+				// $("#codigo_nuevo_reg").val("");
+				// $("#nombre_nuevo_reg").val("");
+				// $("#select_busqueda_tipo_nuevo").val("");
+				// $("#select_busqueda_modelo_nuevo").val("");
+				// $("#select_busqueda_tamano_nuevo").val("");
+				// $("#estatus_nuevo_reg").val("");
+				// $("#tipo_prod_esp_lin").val("");
 
 
 			});

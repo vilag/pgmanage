@@ -206,8 +206,8 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 </table>
 
 <?php 
-    
-    if ($id2==4 OR $id2==5 OR $id2==8 OR $id2==10) {
+    // $id2==4 OR $id2==5 OR $id2==8 OR $id2==10
+    if ($id2==0) {
         
         echo '
 
@@ -291,8 +291,8 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
     $cantidad=0;
     $subtotal=0;
 
-
-    if ($id2==4 OR $id2==5 OR $id2==8 OR $id2==10) {
+    // $id2==4 OR $id2==5 OR $id2==8 OR $id2==10
+    if ($id2==0) {
         
         while ($regd = $rsptad->fetch_object()) {
             echo "<tr>";
@@ -340,8 +340,8 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
 
 <?php
-    
-    if ($id2==4 OR $id2==5 OR $id2==8 OR $id2==10)
+    // $id2==4 OR $id2==5 OR $id2==8 OR $id2==10
+    if ($id2==0)
 
     {
 
@@ -426,8 +426,8 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
     ?>
 
     <?php
-
-        if ($id2==4 OR $id2==5 OR $id2==8 OR $id2==10) {
+        // $id2==4 OR $id2==5 OR $id2==8 OR $id2==10
+        if ($id2==0) {
             # code...
         }else{
 

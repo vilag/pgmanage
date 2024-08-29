@@ -11,9 +11,23 @@
 		public function listar_pedidos_ini($estatus,$idusuario,$lugar,$offset)
 		{
 
-			$sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus
+			if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
+				
+				$sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus
 				FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.fecha_pedido desc LIMIT 20 offset $offset";
 				return ejecutarConsulta($sql);
+
+			}elseif ($lugar<>'Fabrica' AND $lugar<>'Ventas Alterno') {
+
+				$sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus 
+				FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus2=1 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc LIMIT 20 offset $offset";
+				//return ejecutarConsultaSimpleFila($sql);
+				return ejecutarConsulta($sql);
+
+			}
+
+
+			
 							
 		}
 

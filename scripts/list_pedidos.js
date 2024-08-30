@@ -54,7 +54,7 @@ function init()
 
 				buscar_pedido_ini();
 				contar_prod_sinrev();
-				//cargar_notif();
+				cargar_notif();
 				cont_num_vencidos();
 
 			});
@@ -3249,14 +3249,10 @@ function filtro_option1()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
+
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
+			    	
 
 			});
 	                     
@@ -3292,14 +3288,10 @@ function filtro_option2()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
+			
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
+			    	
 
 			});
 	                     
@@ -3335,14 +3327,9 @@ function filtro_option3()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
+			    	
 
 			});
 	                     
@@ -3377,15 +3364,9 @@ function filtro_option4()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
-
+			  
 			});
 	                     
 	    });
@@ -3419,14 +3400,9 @@ function filtro_option5()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
+			    	
 
 			});
 	                     
@@ -3463,14 +3439,10 @@ function filtro_option6()
 			{
 			data = JSON.parse(data);
 
-				//alert(data.num_pedidos);
-				//$("#cant_pedidos").text(data.num_pedidos);
+
 
 					buscar_pedido_ini();
-			    	/*cont_num_vencidos();
-			    	contar_prod_sinrev();
-			    	cargar_notif();
-			    	listar_paginas();*/
+			    
 
 			});
 	                     
@@ -3954,48 +3926,6 @@ function det_term()
 }
 
 
-/*function cargar_notif_part()
-{
-
-	var idusuario=$("#idusuario").text();
-
-	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
-	{
-	data = JSON.parse(data);
-
-			//var lugar = data.lugar;
-			
-
-			var lugar_user=data.lugar;
-			$("#lugar_user").text(lugar_user);
-			//alert(lugar_user);
-
-			$.post("ajax/diseno.php?op=cargar_notif_part",{lugar_user:lugar_user},function(data, status)
-			{
-			data = JSON.parse(data);
-
-				var num_notif = data.num_notif;
-
-				//alert(num_notif);
-
-				if (num_notif>0) {
-
-					
-
-					$("#num_notif_ped").text(num_notif);
-				}
-
-				
-
-			});
-
-	});
-
-
-
-
-			
-}*/
 
 
 function revisar_sinfecha()

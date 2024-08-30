@@ -36,13 +36,7 @@ if ($_SESSION['administrador']==1)
                             </style>
 
         <script type="text/javascript">
-          /*var intevalo = setInterval('cargar_notif()',5000);
-          var intevalo2 = setInterval('cargar_notif_part()',5000);
-          var intevalo3 = setInterval('notif_observ()',5000);
-          var intevalo4 = setInterval('contar_prod_sinrev()',5000);
-          var intevalo5 = setInterval('det_term()',60000);
-          var intevalo6 = setInterval('revisar_sinfecha()',20000);
-          var intevalo7 = setInterval('contar_sin_coment_venc()',30000);*/
+    
 
         </script>
         <!-- page content -->

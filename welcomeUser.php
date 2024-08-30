@@ -35,10 +35,7 @@ require 'header.php';
                             </style>
 
         <script type="text/javascript">
-          var intevalo4 = setInterval('contar_prod_sinrev()',100000);
-          var intevalo = setInterval('cargar_notif()',100000);
-          var intevalo3 = setInterval('notif_observ()',100000);
-
+          
 
       
 

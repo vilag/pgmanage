@@ -6444,6 +6444,7 @@ function listar_terminados()
 
 function cargar_notif()
 {
+	console.log("Entra a cargar_notif en diseno");
 	$.post("ajax/diseno.php?op=cargar_notif",function(data, status)
 	{
 	data = JSON.parse(data);
@@ -6488,7 +6489,7 @@ function listar_listos()
 
 function cargar_notif_part()
 {
-
+	console.log("Entra a cargar_notif_part en diseno");
 	var idusuario=$("#idusuario").text();
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)

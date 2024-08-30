@@ -54,7 +54,7 @@ function init()
 
 				buscar_pedido_ini();
 				contar_prod_sinrev();
-				cargar_notif();
+				//cargar_notif();
 				cont_num_vencidos();
 
 			});
@@ -3028,6 +3028,7 @@ function cargar_doc()
 
 function cargar_notif()
 {
+	console.log("Entra a cargar_notif en list_pedidos");
 
 	var idusuario=$("#idusuario").text();
 	var lugar_user=$("#lugar_user").text();

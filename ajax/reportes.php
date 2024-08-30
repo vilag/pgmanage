@@ -1,5 +1,5 @@
 <?php
-require_once "../modelos/Reportes.php";
+require_once "../modelos/reportes.php";
 
 $reportes=new Reportes();
 

@@ -28,18 +28,19 @@ function login()
 
             if (data!=null)
             {
+                $(location).attr("href","welcomeUser.php");
 
-                if (idusuario>=15 && idusuario<=21) {
+                // if (idusuario>=15 && idusuario<=21) {
 
-                    $(location).attr("href","op.php");
-                }else{
-                    if (idusuario==22) {
-                        $(location).attr("href","almacen_pt.php");
-                    }else{
-                        $(location).attr("href","list_pedidos.php");
-                    }
+                //     $(location).attr("href","op.php");
+                // }else{
+                //     if (idusuario==22) {
+                //         $(location).attr("href","almacen_pt.php");
+                //     }else{
+                //         $(location).attr("href","list_pedidos.php");
+                //     }
                      
-                }
+                // }
                 
                
                                 

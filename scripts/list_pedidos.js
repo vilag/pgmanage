@@ -53,9 +53,9 @@ function init()
 			data = JSON.parse(data);
 
 				buscar_pedido_ini();
-				contar_prod_sinrev();
+				//contar_prod_sinrev();
 				//cargar_notif();
-				cont_num_vencidos();
+				//cont_num_vencidos();
 
 			});
 			

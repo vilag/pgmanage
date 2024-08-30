@@ -44,7 +44,8 @@ require 'header.php';
         <!-- page content -->
         <div class="right_col" role="main">
 
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/BCm_p8wTEH0?si=kJEUIsjI0BuJzg6h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/BCm_p8wTEH0?si=kJEUIsjI0BuJzg6h" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+            <img style="width: 80vw;" src="https://res.cloudinary.com/ddcszcshl/image/upload/v1725046537/imagen_bienvenida_pg_xrbbk7.jpg" alt="">
           
         </div>
         <!-- /page content -->

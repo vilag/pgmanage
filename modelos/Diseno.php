@@ -2141,7 +2141,7 @@ Class Diseno
 		$sql1="UPDATE pg_detped SET cantidad='$cant',observ_enlace='$obs_enl',estatus='$estatus',fecha_hora='$fecha_hora',idpedido='$id_ped_temp',fecha_hora2='0000-00-00 00:00:00', guardado=1, coment='$result' WHERE idpg_detped='$idpg_detped'";
 		ejecutarConsulta($sql1);
 
-		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
+		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
 		ejecutarConsulta($sql2);
 
 		$sql3="UPDATE op_detalle_prod SET cant_tot='$cant' WHERE idpg_detped='$idpg_detped'";
@@ -2183,7 +2183,7 @@ Class Diseno
 		$sql="DELETE FROM pg_detped WHERE idpg_detped='$idpg_detped'";
 		ejecutarConsulta($sql);
 
-		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
+		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
 		return ejecutarConsulta($sql2);
 
 		

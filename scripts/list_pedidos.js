@@ -2033,7 +2033,8 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 															$("#tbl_detalle_prod_tbl").html(r);
 
-																bootbox.alert("División borrada exitosamente");	        
+																bootbox.alert("División borrada exitosamente");	 
+																contar_prod_sinrev();       
 														});
 
 															
@@ -2108,7 +2109,8 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 														$.post("ajax/list_pedidos.php?op=listar_pg_detped&id="+idpg_detalle_pedidos+"&idusuario="+idusuario,function(r){
 															$("#tbl_detalle_prod_tbl").html(r);
 
-																bootbox.alert("División borrada exitosamente");	        
+																bootbox.alert("División borrada exitosamente");	   
+																contar_prod_sinrev();     
 														});
 
 															
@@ -2500,7 +2502,7 @@ function guardar_det_ped(idpg_detped,iddetalle_pedido,idpg_pedidos)
 
 																														
 						bootbox.alert("Estatus guardado");
-																															
+						contar_prod_sinrev();																									
 
 					});
 
@@ -2635,7 +2637,7 @@ function pasar_prod_vale()
 																	$("#datos_prod_add").hide();
 
 																	listar_prod_select_vale();
-																																				
+																	contar_prod_sinrev();																			
 
 															});
 
@@ -2740,7 +2742,7 @@ function pasar_prod_vale()
 																	$("#datos_prod_add").hide();
 
 																	listar_prod_select_vale();
-																																				
+																	contar_prod_sinrev();																			
 
 															});
 

@@ -261,7 +261,8 @@
 
 		public function consul_datos_prod($idpg_detalle_pedidos)
 		{
-		$sql="SELECT pdp.codigo,pdp.descripcion,pdp.medida,pdp.color,pdp.cantidad, (SELECT no_control FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) as no_control FROM pg_detalle_pedidos pdp  WHERE idpg_detalle_pedidos='$idpg_detalle_pedidos'";
+		$sql="SELECT pdp.codigo,pdp.descripcion,pdp.medida,pdp.color,pdp.cantidad, (SELECT no_control FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) as no_control
+		FROM pg_detalle_pedidos pdp  WHERE idpg_detalle_pedidos='$idpg_detalle_pedidos'";
 		return ejecutarConsultaSimpleFila($sql);
 		}
 

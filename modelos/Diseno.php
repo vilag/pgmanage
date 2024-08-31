@@ -2128,20 +2128,24 @@ Class Diseno
 		return ejecutarConsulta($sql);
 	}
 
-	public function guardar_det_ped($idpg_detped,$cant,$obs_enl,$estatus,$fecha_hora,$id_ped_temp,$result)
+	public function guardar_det_ped($idpg_detped,$cant,$obs_enl,$estatus,$fecha_hora,$id_ped_temp,$result,$iddetalle_pedido)
 	{
-		$sql2="UPDATE pg_detalle_pedidos pdp SET pdp.estatus='$estatus', 
-		pdp.cantidad=IF(pdp.cantidad > (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=pdp.idpg_detalle_pedidos),
-		pdp.cantidad,(SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=pdp.idpg_detalle_pedidos))
+		// $sql2="UPDATE pg_detalle_pedidos pdp SET pdp.estatus='$estatus', 
+		// pdp.cantidad=IF(pdp.cantidad > (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=pdp.idpg_detalle_pedidos),
+		// pdp.cantidad,(SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=pdp.idpg_detalle_pedidos))
 		
-		WHERE pdp.idpg_detalle_pedidos=(SELECT iddetalle_pedido FROM pg_detped WHERE idpg_detped='$idpg_detped')";
-		ejecutarConsulta($sql2);
-		
-		$sql="UPDATE pg_detped SET cantidad='$cant',observ_enlace='$obs_enl',estatus='$estatus',fecha_hora='$fecha_hora',idpedido='$id_ped_temp',fecha_hora2='0000-00-00 00:00:00', guardado=1, coment='$result' WHERE idpg_detped='$idpg_detped'";
-		ejecutarConsulta($sql);
+		// WHERE pdp.idpg_detalle_pedidos=(SELECT iddetalle_pedido FROM pg_detped WHERE idpg_detped='$idpg_detped')";
+		// ejecutarConsulta($sql2);
 
-		$sql="UPDATE op_detalle_prod SET cant_tot='$cant' WHERE idpg_detped='$idpg_detped'";
-		return ejecutarConsulta($sql);
+		
+		$sql1="UPDATE pg_detped SET cantidad='$cant',observ_enlace='$obs_enl',estatus='$estatus',fecha_hora='$fecha_hora',idpedido='$id_ped_temp',fecha_hora2='0000-00-00 00:00:00', guardado=1, coment='$result' WHERE idpg_detped='$idpg_detped'";
+		ejecutarConsulta($sql1);
+
+		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
+		ejecutarConsulta($sql2);
+
+		$sql3="UPDATE op_detalle_prod SET cant_tot='$cant' WHERE idpg_detped='$idpg_detped'";
+		return ejecutarConsulta($sql3);
 	}
 
 

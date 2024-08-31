@@ -4073,8 +4073,9 @@ switch ($_GET["op"])
 			$fecha_hora = $_POST['fecha_hora'];
 			$id_ped_temp = $_POST['id_ped_temp'];
 			$result = $_POST['result'];
+			$iddetalle_pedido = $_POST['iddetalle_pedido'];
 
-			$rspta=$diseno->guardar_det_ped($idpg_detped,$cant,$obs_enl,$estatus,$fecha_hora,$id_ped_temp,$result);
+			$rspta=$diseno->guardar_det_ped($idpg_detped,$cant,$obs_enl,$estatus,$fecha_hora,$id_ped_temp,$result,$iddetalle_pedido);
 	 		echo json_encode($rspta);
 		break;
 

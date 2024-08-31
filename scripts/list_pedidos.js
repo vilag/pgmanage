@@ -2489,7 +2489,7 @@ function guardar_det_ped(idpg_detped,iddetalle_pedido,idpg_pedidos)
 				var fecha_hora=fecha+" "+hora;
 				var id_ped_temp = idpg_pedidos
 
-				$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp,result:result},function(data, status)
+				$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp,result:result,iddetalle_pedido:iddetalle_pedido},function(data, status)
 				{
 				data = JSON.parse(data);
 
@@ -2611,8 +2611,9 @@ function pasar_prod_vale()
 										var hora=moment().format('HH:mm:ss');
 										var fecha_hora=fecha+" "+hora;
 										var id_ped_temp = idpg_pedidos
+										var iddetalle_pedido = $("#iddetalle_pedido_select_vale").val();
 
-												$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp},function(data, status)
+												$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp,iddetalle_pedido:iddetalle_pedido},function(data, status)
 												{
 												data = JSON.parse(data);
 
@@ -2715,8 +2716,9 @@ function pasar_prod_vale()
 										var hora=moment().format('HH:mm:ss');
 										var fecha_hora=fecha+" "+hora;
 										var id_ped_temp = idpg_pedidos
+										var iddetalle_pedido = $("#iddetalle_pedido_select_vale").val();
 
-												$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp},function(data, status)
+												$.post("ajax/diseno.php?op=guardar_det_ped",{idpg_detped:idpg_detped,cant:cant,obs_enl:obs_enl,estatus:estatus,fecha_hora:fecha_hora,id_ped_temp:id_ped_temp,iddetalle_pedido:iddetalle_pedido},function(data, status)
 												{
 												data = JSON.parse(data);
 
@@ -3126,9 +3128,9 @@ function contar_prod_sinrev()
 
 				$("#num_notif_ped_sr").text(data.num_sinrev);
 			}else{
-
+				$("#num_notif_ped_sr").text("");
 			}
-				$("#num_notif_ped_sr").text();
+				
 					
 			});
 }

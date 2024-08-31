@@ -53,13 +53,9 @@ function init()
 	cambiar_buscar();
 	listar_seguim_prod();
 
-	//alert(id_ped_temp2);
-	//$("#btn_abrir_op").hide();
-	//$("#notif_term").hide();
-	//$("#num_notif").hide();
 	$("#notif_term_ped").hide();
 	//cargar_notif();
-	cargar_notif_part();
+	//cargar_notif_part();
 
 	var idusuario=$("#idusuario").text();
 

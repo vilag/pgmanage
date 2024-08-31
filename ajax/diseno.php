@@ -4116,8 +4116,9 @@ switch ($_GET["op"])
 
 			
 			$idpg_detped = $_POST['idpg_detped'];
+			$iddetalle_pedido = $_POST['iddetalle_pedido'];
 
-			$rspta=$diseno->borrar_det_ped($idpg_detped);
+			$rspta=$diseno->borrar_det_ped($idpg_detped,$iddetalle_pedido);
 	 		echo json_encode($rspta);
 		break;
 

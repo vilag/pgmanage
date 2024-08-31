@@ -2178,10 +2178,15 @@ Class Diseno
 		return ejecutarConsulta($sql);
 	}
 
-	public function borrar_det_ped($idpg_detped)
+	public function borrar_det_ped($idpg_detped,$iddetalle_pedido)
 	{
 		$sql="DELETE FROM pg_detped WHERE idpg_detped='$idpg_detped'";
-		return ejecutarConsulta($sql);
+		ejecutarConsulta($sql);
+
+		$sql2="UPDATE pg_detalle_pedidos a SET cant_procesada = (SELECT sum(cantidad) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE a.idpg_detalle_pedidos='$iddetalle_pedido'";
+		return ejecutarConsulta($sql2);
+
+		
 	}
 
 	public function guardar_estatus_prod($idpg_detped,$estatus,$fecha_hora)
@@ -2509,11 +2514,14 @@ Class Diseno
 		FROM pg_detalle_pedidos dp INNER JOIN pg_pedidos p ON dp.idpg_pedidos=p.idpg_pedidos WHERE
 		(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=dp.idpg_detalle_pedidos)<dp.cantidad AND p.estatus2=1 AND p.estatus<>'CANCELADO' AND p.estatus<>'ENTREGADO' ORDER BY p.fecha_pedido DESC";*/
 
-		$sql="SELECT r.cant_sinp as cant_sin,
-		(SELECT no_control FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) as no_control,
-		(SELECT codigo FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=r.iddetalle_pedidos) as codigo,
-		(SELECT descripcion FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=r.iddetalle_pedidos) as descripcion
-		FROM result_tbl_sinp r INNER JOIN pg_detalle_pedidos pdp ON r.iddetalle_pedidos = pdp.idpg_detalle_pedidos ORDER BY (SELECT fecha_pedido FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) DESC";
+		// $sql="SELECT r.cant_sinp as cant_sin,
+		// (SELECT no_control FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) as no_control,
+		// (SELECT codigo FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=r.iddetalle_pedidos) as codigo,
+		// (SELECT descripcion FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=r.iddetalle_pedidos) as descripcion
+		// FROM result_tbl_sinp r INNER JOIN pg_detalle_pedidos pdp ON r.iddetalle_pedidos = pdp.idpg_detalle_pedidos ORDER BY (SELECT fecha_pedido FROM pg_pedidos WHERE idpg_pedidos=pdp.idpg_pedidos) DESC";
+
+		$sql="SELECT b.no_control, a.codigo, a.descripcion, (a.cantidad-a.cant_procesada) as cant_sin FROM pg_detalle_pedidos a INNER JOIN pg_pedidos b ON a.idpg_pedidos = b.idpg_pedidos
+		WHERE a.cant_procesada<a.cantidad AND b.estatus2=1 AND b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO';";
 
 
 		return ejecutarConsulta($sql);
@@ -2524,8 +2532,9 @@ Class Diseno
 
 	public function contar_prod_sinrev()
 	{
-
-		$sql="SELECT num_sinrev FROM result_notif WHERE idresult_notif=1";
+		$sql="SELECT count(b.no_control) as num_sinrev FROM pg_detalle_pedidos a INNER JOIN pg_pedidos b ON a.idpg_pedidos = b.idpg_pedidos
+		WHERE a.cant_procesada<a.cantidad AND b.estatus2=1 AND b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO';";
+		// $sql="SELECT num_sinrev FROM result_notif WHERE idresult_notif=1";
 		return ejecutarConsultaSimpleFila($sql);
 
 

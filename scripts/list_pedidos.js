@@ -53,7 +53,7 @@ function init()
 			data = JSON.parse(data);
 
 				buscar_pedido_ini();
-				//contar_prod_sinrev();
+				contar_prod_sinrev();
 				cargar_notif();
 				//cont_num_vencidos();
 
@@ -2024,7 +2024,7 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 												if (num_exist==0) {
 
 
-													$.post("ajax/diseno.php?op=borrar_det_ped",{idpg_detped:idpg_detped},function(data, status)
+													$.post("ajax/diseno.php?op=borrar_det_ped",{idpg_detped:idpg_detped,iddetalle_pedido:iddetalle_pedido},function(data, status)
 													{
 													data = JSON.parse(data);
 
@@ -2099,7 +2099,7 @@ function borrar_det_ped(idpg_detped,iddetalle_pedido,op,estatus)
 												if (num_exist==0) {
 
 
-													$.post("ajax/diseno.php?op=borrar_det_ped",{idpg_detped:idpg_detped},function(data, status)
+													$.post("ajax/diseno.php?op=borrar_det_ped",{idpg_detped:idpg_detped,iddetalle_pedido:iddetalle_pedido},function(data, status)
 													{
 													data = JSON.parse(data);
 

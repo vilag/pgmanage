@@ -54,7 +54,7 @@ function init()
 
 				buscar_pedido_ini();
 				//contar_prod_sinrev();
-				//cargar_notif();
+				cargar_notif();
 				//cont_num_vencidos();
 
 			});

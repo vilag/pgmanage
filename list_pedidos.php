@@ -37,7 +37,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
         <script type="text/javascript">
           var intevalo4 = setInterval('contar_prod_sinrev()',50000);
-          var intevalo = setInterval('cargar_notif()',50000);
+          //var intevalo = setInterval('cargar_notif()',50000);
           var intevalo3 = setInterval('notif_observ()',50000);
         </script>
 

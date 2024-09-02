@@ -1,10 +1,10 @@
 <?php
 $servername = 'localhost';
-$username = 'u690371019_pgmanage';
+$username = 'u690371019_pruebas';
 //$username = 'root';
-$password = "A=tSXZ4z";
+$password = ";v5X;fMf8$";
 //$password = "";
-$dbname = "u690371019_pgmanage";
+$dbname = "u690371019_pruebas";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

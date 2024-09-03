@@ -2,7 +2,7 @@
 $servername = 'localhost';
 $username = 'u690371019_pruebas';
 //$username = 'root';
-$password = ";v5X;fMf8$";
+$password = ":dpHd^VvJ8a";
 //$password = "";
 $dbname = "u690371019_pruebas";
 

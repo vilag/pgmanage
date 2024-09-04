@@ -5184,7 +5184,7 @@ function listar_seguim_prod()
 	});
 
 	var num_orden = $("#num_orden").val();
-	var valor_filtro = $("#num_filtro").val();
+	var valor_filtro = 3;
 	
 	$.post("ajax/diseno.php?op=listar_seguim_prod&id="+valor_filtro+"&id2="+num_orden,function(r){
 		$("#tbl_seguim_prod").html(r);

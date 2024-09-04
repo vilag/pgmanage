@@ -977,7 +977,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 																									//alert(num_prod+'total peddido');
 
 
-																									if (tot_detped>=num_prod) {
+																									if (tot_detped >= num_prod) {
 
 																										var idusuario=$("#idusuario").text();
 																										var fecha=moment().format('YYYY-MM-DD');

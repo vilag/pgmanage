@@ -890,7 +890,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 
 																	//alert(sum_areas);
 
-																	if (sum_areas<total_req) {
+																	if (sum_areas==total_req) {
 
 
 

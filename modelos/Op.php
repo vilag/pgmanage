@@ -279,16 +279,47 @@ Class Opr
 	public function cargar_campos_avance($id,$area)
 	{
 		/*$sql="SELECT idop_detalle_prod,no_control,codigo,producto,cant_tot,(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance FROM op_detalle_prod WHERE idop_detalle_prod='$id'";*/
+		$sql="SELECT odp.idop,
+		odp.idop_detalle_prod,
+		odp.no_control,
+		odp.codigo,
+		odp.producto,
+		odp.cant_tot,
+		(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance,
+		odp.idpg_detped,
+		pdp.idpg_detalle_pedidos,
+		pdp.idpg_pedidos,
+		odp.estatus,
+		a.estatus as estatus_op,
+		(SELECT IFNULL(count(idop_detalle),0) FROM op_detalle WHERE idop = odp.idop) as areas_avance
+		FROM op_detalle_prod odp 
+		INNER JOIN pg_detalle_pedidos pdp ON odp.iddetalle_pedido=pdp.idpg_detalle_pedidos 
+		INNER JOIN op a ON odp.idop = a.idop
+		WHERE odp.idop_detalle_prod='$id'";
 
-		$sql="SELECT odp.idop,odp.idop_detalle_prod,odp.no_control,odp.codigo,odp.producto,odp.cant_tot,(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance,pd.idpg_detped,pdp.idpg_detalle_pedidos,pdp.idpg_pedidos,odp.estatus FROM op_detalle_prod odp INNER JOIN pg_detped pd ON odp.idpg_detped=pd.idpg_detped INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE odp.idop_detalle_prod='$id'";
+		// $sql="SELECT odp.idop,
+		// odp.idop_detalle_prod,
+		// odp.no_control,
+		// odp.codigo,
+		// odp.producto,
+		// odp.cant_tot,
+		// (SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance,
+		// pd.idpg_detped,
+		// pdp.idpg_detalle_pedidos,
+		// pdp.idpg_pedidos,
+		// odp.estatus 
+		// FROM op_detalle_prod odp INNER JOIN 
+		// pg_detped pd ON odp.idpg_detped=pd.idpg_detped INNER JOIN 
+		// pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos 
+		// WHERE odp.idop_detalle_prod='$id'";
 		return ejecutarConsulta($sql);
 	}
 
-	public function cargar_campos_avance2($area)
-	{
-		$sql="SELECT o.idop_detalle_prod,o.no_control,o.codigo,o.producto,o.cant_tot,(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod=o.idop_detalle_prod AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance FROM op_detalle_prod o";
-		return ejecutarConsulta($sql);
-	}
+	// public function cargar_campos_avance2($area)
+	// {
+	// 	$sql="SELECT o.idop_detalle_prod,o.no_control,o.codigo,o.producto,o.cant_tot,(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod=o.idop_detalle_prod AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance FROM op_detalle_prod o";
+	// 	return ejecutarConsulta($sql);
+	// }
 	
 	public function listar_prod_rep($id)
 	{
@@ -401,21 +432,55 @@ Class Opr
 
 	public function cantidades($pedido)
 	{
-		$sql="SELECT idpg_pedidos,(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos='$pedido') as num_prod, (SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='Apartado')  as num_prod_apart, (SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='Fabricado')  as num_prod_fab,(SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='EXISTENCIA') as num_prod_exis, (SELECT count(idpedido) FROM notif WHERE idpedido = '$pedido')  as num_pedido FROM pg_pedidos WHERE idpg_pedidos='$pedido'";
+		$sql="SELECT a.idpg_pedidos,
+		(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=a.idpg_pedidos) as num_prod,
+		(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE (idpedido=a.idpg_pedidos AND estatus='Apartado') OR (idpedido=a.idpg_pedidos AND estatus='Fabricado') OR (idpedido=a.idpg_pedidos AND estatus='EXISTENCIA')) as sum_cumplido, 
+		(SELECT count(idpedido) FROM notif WHERE idpedido = a.idpg_pedidos)  as num_pedido 
+		FROM pg_pedidos a WHERE a.idpg_pedidos='$pedido'";
 		return ejecutarConsultaSimpleFila($sql);
+
+		
+
+		// $sql="SELECT idpg_pedidos,
+		// (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos='$pedido') as num_prod, 
+		// (SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='Apartado')  as num_prod_apart, 
+		// (SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='Fabricado')  as num_prod_fab,
+		// (SELECT sum(pd.cantidad) FROM pg_detped pd INNER JOIN pg_detalle_pedidos pdp ON pd.iddetalle_pedido=pdp.idpg_detalle_pedidos WHERE pdp.idpg_pedidos='$pedido' AND pd.estatus='EXISTENCIA') as num_prod_exis, 
+		// (SELECT count(idpedido) FROM notif WHERE idpedido = '$pedido')  as num_pedido 
+		// FROM pg_pedidos WHERE idpg_pedidos='$pedido'";
+		// return ejecutarConsultaSimpleFila($sql);
 	}
 
 
 	public function buscar_cant_areas($idop_detalle_prod)
 	{
-		$sql="SELECT (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=1) as area1, (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=2) as area2, (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=3) as area3, (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=5) as area5,(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=6) as area6, (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=7) as area7, (SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=8) as area8 FROM op_detalle_prod odp WHERE odp.idop_detalle_prod='$idop_detalle_prod'";
+
+		$sql="SELECT * FROM op_detalle WHERE ";
+
+		$sql="SELECT 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=1) as area1, 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=2) as area2, 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=3) as area3, 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=5) as area5,
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=6) as area6, 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=7) as area7, 
+		(SELECT COUNT(area) FROM op_detalle WHERE idop=odp.idop AND area=8) as area8 
+		FROM op_detalle_prod odp WHERE odp.idop_detalle_prod='$idop_detalle_prod'";
 		return ejecutarConsultaSimpleFila($sql);
 		
 	}
 
 	public function contar_avance_tot($idop_detalle_prod)
 	{
-		$sql="SELECT IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=1 ORDER BY avance DESC LIMIT 1),0) as sum_area1, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=2 ORDER BY avance DESC LIMIT 1),0) as sum_area2, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=3 ORDER BY avance DESC LIMIT 1),0) as sum_area3, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=5 ORDER BY avance DESC LIMIT 1),0) as sum_area5, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=6 ORDER BY avance DESC LIMIT 1),0) as sum_area6, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=7 ORDER BY avance DESC LIMIT 1),0) as sum_area7, IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=8 ORDER BY avance DESC LIMIT 1),0) as sum_area8 FROM op_detalle_prod odp WHERE idop_detalle_prod='$idop_detalle_prod'";
+		$sql="SELECT 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=1 ORDER BY avance DESC LIMIT 1),0) as sum_area1, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=2 ORDER BY avance DESC LIMIT 1),0) as sum_area2, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=3 ORDER BY avance DESC LIMIT 1),0) as sum_area3, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=5 ORDER BY avance DESC LIMIT 1),0) as sum_area5, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=6 ORDER BY avance DESC LIMIT 1),0) as sum_area6, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=7 ORDER BY avance DESC LIMIT 1),0) as sum_area7, 
+		IFNULL((SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area=8 ORDER BY avance DESC LIMIT 1),0) as sum_area8 
+		FROM op_detalle_prod odp WHERE idop_detalle_prod='$idop_detalle_prod'";
 		return ejecutarConsultaSimpleFila($sql);
 		
 	}
@@ -829,7 +894,7 @@ Class Opr
 		}elseif ($select_area_prod=='EM') {
 			$area=7;
 		}
-
+		//Query lenta identificada
 		$sql="SELECT odp.idop_detalle_prod,odp.no_control,odp.cant_tot,odp.observ,
 		(SELECT codigo FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as codigo,
 		(SELECT descripcion FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as descripcion,

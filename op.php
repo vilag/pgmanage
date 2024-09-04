@@ -685,6 +685,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                               <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                                 <label>No. OP:</label>
                                                 <input type="text" class="form-control" id="op_a" value="" disabled="">
+                                                <input type="hidden" id="idop_detalle_actual">
                                               </div>
 
                                               <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">

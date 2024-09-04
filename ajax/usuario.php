@@ -53,6 +53,7 @@ switch ($_GET["op"]){
 	        $_SESSION['imagen']=$fetch->imagen;
 	        $_SESSION['login']=$fetch->login;
 	        $_SESSION['lugar']=$fetch->lugar;
+			$_SESSION['area']=$fetch->area;
 
 	        //Obtenemos los permisos del usuario
 	    	$marcados = $usuario->listarmarcados($fetch->idusuario);

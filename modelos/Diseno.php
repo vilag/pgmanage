@@ -2361,16 +2361,13 @@ Class Diseno
 
 	}
 
-	public function save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido)
+	public function save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod)
 	{
 
-		$sql="INSERT INTO notif (idpedido,idusuario,mensaje,fecha_hora,estatus,estatus2) VALUES ('$idpedido','$idusuario','Pedido completado','$fecha_hora','1','1')";
+		$sql="INSERT INTO notif (idpedido,idusuario,mensaje,fecha_hora,estatus,estatus2,idavance_prod) VALUES ('$idpedido','$idusuario','Pedido completado','$fecha_hora','1','1','$idavance_prod')";
 		ejecutarConsulta($sql);
 
-
 		if ($estatus_pedido<>'ENTREGADO') {
-
-
 			$sql="UPDATE pg_pedidos SET estatus='LISTO PARA ENTREGA', color_status='09A004' WHERE idpg_pedidos='$idpedido'";
 			return ejecutarConsulta($sql);
 			# code...
@@ -2388,7 +2385,7 @@ Class Diseno
 		/*$sql="SELECT n.idnotif,p.idpg_pedidos,p.no_control,n.fecha_hora as fecha_notif,DATE(n.fecha_hora) as fecha, TIME(n.fecha_hora) as hora,n.estatus, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs, (SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente, (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as prod_total, IFNULL((SELECT sum(cantidad) FROM entregas_detalle WHERE idpedido=p.idpg_pedidos),0) as prod_entregados FROM notif n INNER JOIN pg_pedidos p ON n.idpedido=p.idpg_pedidos WHERE p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO'  ORDER BY n.idnotif DESC";
 		return ejecutarConsulta($sql);*/
 
-
+		//Query lenta identificada
 		$sql="SELECT p.no_control,p.idpg_pedidos,
 		(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
 		(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
@@ -2403,7 +2400,7 @@ Class Diseno
 
 	public function listar_listos($id)
 	{
-
+		//Query lenta identificada
 		$sql="SELECT p.no_control,p.idpg_pedidos,
 		(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
 		(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
@@ -2462,7 +2459,7 @@ Class Diseno
 		/*$sql="SELECT count(n.idnotif) as num_notif FROM notif n INNER JOIN pg_pedidos p ON n.idpedido=p.idpg_pedidos INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE n.estatus2='1' AND u.lugar='$lugar_user' AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO'";
 		return ejecutarConsultaSimpleFila($sql);*/
 
-
+		//Query lenta identificada
 		$sql="SELECT count(p.idpg_pedidos) as num_notif FROM pg_pedidos p INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND u.lugar='$lugar_user'";
 		return ejecutarConsultaSimpleFila($sql);
 	}

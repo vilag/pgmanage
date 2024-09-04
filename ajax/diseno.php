@@ -4781,7 +4781,7 @@ switch ($_GET["op"])
 		case 'guardar_estatus_prod2':
 
 			
-			$idpg_detped = $_POST['idpg_detped'];
+			$idpg_detped = $_POST['idpg_detped_actual'];
 			$estatus = $_POST['estatus'];
 			$fecha_hora = $_POST['fecha_hora'];
 			$lote = $_POST['lote'];
@@ -5074,8 +5074,10 @@ switch ($_GET["op"])
 			$idusuario = $_POST['idusuario'];
 			$fecha_hora = $_POST['fecha_hora'];
 			$estatus_pedido = $_POST['estatus_pedido'];
+			$idavance_prod = $_POST['idavance_prod'];
+			
 
-			$rspta=$diseno->save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido);
+			$rspta=$diseno->save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod);
 	 		echo json_encode($rspta);
 	 		
 		break;

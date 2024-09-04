@@ -137,6 +137,7 @@
                 <h2 id="idusuario" style="display: none;"><?php echo $_SESSION['idusuario']; ?></h2>
                 <h2 id="lugar_user" style="display: none;"><?php echo $_SESSION['lugar']; ?></h2>
                 <h2 id="idarea" style="display: none;"><?php echo $_SESSION['idarea']; ?></h2>
+                <h2 id="area_p" style="display: none;"><?php echo $_SESSION['area']; ?></h2>
                
               </div>
             </div>

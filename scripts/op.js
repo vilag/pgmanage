@@ -556,6 +556,7 @@ function mostrar_opdet(idop_detalle)
 function registro_avance(idop_detalle,idop,area)
 {	
 	$("#modal_avances").modal("show");
+	$("#idop_detalle_actual").val(idop_detalle);
 
 						$("#area_num").val(area);
 
@@ -622,19 +623,19 @@ function registro_avance(idop_detalle,idop,area)
 			
 }
 
-function ver_id_todo()
-{
-	//var idop_detalle_prod = $("#heard").val();
-	var area_num = $("#area_num").val();
+// function ver_id_todo()
+// {
+// 	//var idop_detalle_prod = $("#heard").val();
+// 	var area_num = $("#area_num").val();
 
-	//alert(idop_detalle_prod);
+// 	//alert(idop_detalle_prod);
 
-			$.post("ajax/op.php?op=cargar_campos_avance2&id="+area_num,function(r){
-			$("#box_productos_avance").html(r);
+// 			$.post("ajax/op.php?op=cargar_campos_avance2&id="+area_num,function(r){
+// 			$("#box_productos_avance").html(r);
 
 
-			});
-}
+// 			});
+// }
 
 function ver_id()
 {
@@ -642,7 +643,8 @@ function ver_id()
 	var area_num = $("#area_num").val();
 	var idusuario=$("#idusuario").text();
 
-	//alert(idop_detalle_prod);
+	// alert(idop_detalle_prod);
+	// alert(area_num);
 
 			$.post("ajax/op.php?op=cargar_campos_avance&id="+idop_detalle_prod+"&area="+area_num+"&idusuario="+idusuario,function(r){
 			$("#box_productos_avance").html(r);
@@ -776,16 +778,20 @@ function abrir_modal_reg_areas(idop)
 }
 
 
-function guardar_avance_prod(idop_detalle_prod,idop)
+function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 {
+	
 
-	$.post("ajax/op.php?op=consul_estatus_op",{idop:idop},function(data, status)
-	{
-	data = JSON.parse(data);
+	// $.post("ajax/op.php?op=consul_estatus_op",{idop:idop},function(data, status)
+	// {
+	// data = JSON.parse(data);
 
-		var estatus_op = data.estatus;
+		// var estatus_op = data.estatus;
+		var idpg_detped_actual = idpg_detped;
+		var estatus_op = estatus_op;
 		//alert(estatus_op);
-
+		//alert(estatus_op);
+		//return;
 		if (estatus_op==2) {
 			bootbox.alert("Esta Orden de Producción esta cancelada.");
 		}else{
@@ -799,6 +805,9 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 			var avance_ant = $("#cantidad_avance_ant"+idop_detalle_prod).val();
 			var pedido = $("#pedido_avance"+idop_detalle_prod).val();
 			var idpg_detalle_pedidos = $("#detalle_ped_avance"+idop_detalle_prod).val();
+			var cantareas_avance = $("#cantareas_avance"+idop_detalle_prod).val();
+			var idop_detalle_actual = $("#idop_detalle_actual").val();
+			// var avance_actual = $("#avance_fabricados"+idop_detalle_actual).text();
 			var fecha=moment().format('YYYY-MM-DD');
 			var hora=moment().format('HH:mm:ss');
 			var fecha_hora=fecha+" "+hora;
@@ -807,21 +816,24 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 			var cantidad_indep_avance = $("#cantidad_indep_avance"+idop_detalle_prod).val();
 
-			//alert(cantidad_indep_avance);
+			//alert(avance_actual);
+
+			//return;
 
 			if (cantidad_indep_avance>0) {
 
 
 				//alert(idusuario);
-				$.post("ajax/op.php?op=consul_area_avance",{idusuario:idusuario},function(data, status)
-				{
-				data = JSON.parse(data);
+				// $.post("ajax/op.php?op=consul_area_avance",{idusuario:idusuario},function(data, status)
+				// {
+				// data = JSON.parse(data);
 
-				var area_avance = data.area;
+				// 	var area_avance = data.area;
 
-				//alert(area_avance+" a");
+					//alert(area_avance+" a");
+					var area_p=$("#area_p").text();
 
-					if (area_avance==area_num) {
+					if (area_p==area_num) {
 
 
 							if ((idusuario>=15 && idusuario<=21)) 
@@ -849,27 +861,22 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 												if (lote!="") {
 
+													
+
 
 													$.post("ajax/op.php?op=guardar_avance_prod",{idop_detalle_prod:idop_detalle_prod,avance:avance,fecha_hora:fecha_hora,area_num:area_num,pedido:pedido,idpg_detalle_pedidos:idpg_detalle_pedidos,lote:lote,coment_avance:coment_avance,cantidad_indep_avance:cantidad_indep_avance,idop:idop},function(data, status)
 													{
 													data = JSON.parse(data);
 
 													var idavance_prod = data.idavance_prod;
+													// var nuevo_avance = parseInt(avance_actual)+
 
+														// $.post("ajax/op.php?op=buscar_cant_areas",{idop_detalle_prod:idop_detalle_prod},function(data, status)
+														// {
+														// data = JSON.parse(data);
 
-
-													//alert(area_avance);
-
-
-																			
-
-
-
-														$.post("ajax/op.php?op=buscar_cant_areas",{idop_detalle_prod:idop_detalle_prod},function(data, status)
-														{
-														data = JSON.parse(data);
-
-																var num_areas = parseInt(data.area1)+parseInt(data.area2)+parseInt(data.area3)+parseInt(data.area5)+parseInt(data.area6)+parseInt(data.area7)+parseInt(data.area8);
+																// var num_areas = parseInt(data.area1)+parseInt(data.area2)+parseInt(data.area3)+parseInt(data.area5)+parseInt(data.area6)+parseInt(data.area7)+parseInt(data.area8);
+																var num_areas = cantareas_avance;
 																var total_req = parseInt(requeridos)*parseInt(num_areas);
 
 																//alert(total_req);
@@ -883,16 +890,18 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 																	//alert(sum_areas);
 
-
-																	if (sum_areas==total_req) {
-
+																	if (sum_areas<total_req) {
 
 
-																			$.post("ajax/op.php?op=consultar_iddetped",{idop_detalle_prod:idop_detalle_prod},function(data, status)
-																			{
-																			data = JSON.parse(data);
 
-																				var idpg_detped = data.idpg_detped;
+																			// $.post("ajax/op.php?op=consultar_iddetped",{idop_detalle_prod:idop_detalle_prod},function(data, status)
+																			// {
+																			// data = JSON.parse(data);
+
+																				// console.log(data.idpg_detped);
+																				// console.log(idpg_detped_actual);
+																				//return;
+																				//var idpg_detped = data.idpg_detped;
 																				var estatus="Fabricado";
 
 
@@ -926,45 +935,43 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 
 
-																					$.post("ajax/diseno.php?op=guardar_estatus_prod2",{idpg_detped:idpg_detped,estatus:estatus,fecha_hora:fecha_hora,lote:lote},function(data, status)
+																					$.post("ajax/diseno.php?op=guardar_estatus_prod2",{idpg_detped_actual:idpg_detped_actual,estatus:estatus,fecha_hora:fecha_hora,lote:lote},function(data, status)
 																					{
 																					data = JSON.parse(data);
 
 																							$.post("ajax/op.php?op=cargar_campos_avance&id="+idop_detalle_prod+"&area="+area_num+"&idusuario="+idusuario,function(r){
 																							$("#box_productos_avance").html(r);
 
-
-
-
 																								$.post("ajax/op.php?op=cantidades",{pedido:pedido},function(data, status)
 																								{
 																								data = JSON.parse(data);
 
 																									var num_pedido = data.num_pedido;
-
 																									var num_prod = data.num_prod;
-																									var num_prod_apart = data.num_prod_apart;
 
-																									if (num_prod_apart==null) {
-																										num_prod_apart=0;
-																									}
+																									// var num_prod_apart = data.num_prod_apart;
 
-
-																									var num_prod_fab = data.num_prod_fab;
-
-																									if (num_prod_fab==null) {
-																										num_prod_fab=0;
-																									}
+																									// if (num_prod_apart==null) {
+																									// 	num_prod_apart=0;
+																									// }
 
 
-																									var num_prod_exis = data.num_prod_exis;
+																									// var num_prod_fab = data.num_prod_fab;
 
-																									if (num_prod_exis==null) {
-																										num_prod_exis=0;
-																									}
+																									// if (num_prod_fab==null) {
+																									// 	num_prod_fab=0;
+																									// }
 
 
-																									var tot_detped = parseInt(num_prod_apart)+parseInt(num_prod_fab)+parseInt(num_prod_exis);
+																									// var num_prod_exis = data.num_prod_exis;
+
+																									// if (num_prod_exis==null) {
+																									// 	num_prod_exis=0;
+																									// }
+
+
+																									// var tot_detped = parseInt(num_prod_apart)+parseInt(num_prod_fab)+parseInt(num_prod_exis);
+																									var tot_detped = data.sum_cumplido;
 
 																									//alert(tot_detped+'total prod');
 																									//alert(num_prod+'total peddido');
@@ -981,11 +988,11 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 																										//alert(idpedido);
 
-																										$.post("ajax/diseno.php?op=consul_exist_notif",{idpedido:idpedido},function(data, status)
-																										{
-																										data = JSON.parse(data);
+																										// $.post("ajax/diseno.php?op=consul_exist_notif",{idpedido:idpedido},function(data, status)
+																										// {
+																										// data = JSON.parse(data);
 
-																											var num_pedido = data.num_pedido;
+																											// var num_pedido = data.num_pedido;
 
 																											//alert(num_pedido);
 
@@ -1003,17 +1010,12 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 																														
 
 
-																														$.post("ajax/diseno.php?op=save_notif",{idpedido:idpedido,idusuario:idusuario,fecha_hora:fecha_hora},function(data, status)
+																														$.post("ajax/diseno.php?op=save_notif",{idpedido:idpedido,idusuario:idusuario,fecha_hora:fecha_hora,estatus_pedido:estatus_pedido,idavance_prod:idavance_prod},function(data, status)
 																														{
 																														data = JSON.parse(data);
 
 
-																																
-																																			
-																																
-																																
-
-																																			
+																								
 
 																																			$.post("ajax/op.php?op=cargar_historial_avances&id="+idop_detalle_prod+"&area="+area_num,function(r){
 																																			$("#tbl_hist_avances").html(r);
@@ -1030,11 +1032,6 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 																																				
 																																		
-																																
-
-																																
-
-
 
 
 																														});
@@ -1050,7 +1047,7 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 
 
-																										});
+																										// });
 
 
 
@@ -1094,7 +1091,7 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 																					});
 
 
-																			});
+																			//});
 
 
 
@@ -1156,7 +1153,7 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 															});
 
 
-														});
+														// });
 						
 						
 
@@ -1203,7 +1200,7 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 					}
 
 
-				});	
+				// });	
 
 
 			}else{
@@ -1213,7 +1210,7 @@ function guardar_avance_prod(idop_detalle_prod,idop)
 
 		}
 
-	});
+	// });
 
 
 	

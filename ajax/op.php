@@ -882,7 +882,7 @@ switch ($_GET["op"])
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                       <label>Cantidad a ingresar</label>
                                                       <input type="number" class="form-control" id="cantidad_indep_avance'.$reg->idop_detalle_prod.'" onchange="calcular_avance('.$reg->idop_detalle_prod.',\''.$reg->idop.'\');">
-                                                      
+                                                      <input type="hidden" id="cantareas_avance'.$reg->idop_detalle_prod.'" value="'.$reg->areas_avance.'">
                                                     </div>
 
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -910,7 +910,7 @@ switch ($_GET["op"])
                                                     
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                       
-                                                      <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.',\''.$reg->idop.'\')" disabled><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button>
+                                                      <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.',\''.$reg->idop.'\',\''.$reg->estatus_op.'\',\''.$reg->idpg_detped.'\')" disabled><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button>
 
                                                       <button type="button" class="btn btn-primary"  id="btn_extra'.$reg->idop_detalle_prod.'" onclick="abrir_extra('.$reg->idop_detalle_prod.')" '.$disabled_ex.'>Excedente</button>
 
@@ -944,73 +944,73 @@ switch ($_GET["op"])
 		break;
 
 
-		case 'cargar_campos_avance2':
+		// case 'cargar_campos_avance2':
 
-			//$id=$_GET['id'];
-			$area=$_GET['area'];
+		// 	//$id=$_GET['id'];
+		// 	$area=$_GET['area'];
 
-			$rspta = $opr->cargar_campos_avance2($area);
+		// 	$rspta = $opr->cargar_campos_avance2($area);
 
-			while ($reg = $rspta->fetch_object())
-					{
+		// 	while ($reg = $rspta->fetch_object())
+		// 			{
 
-						$requeridos = $reg->cant_tot;
-						$avance = $reg->avance;
+		// 				$requeridos = $reg->cant_tot;
+		// 				$avance = $reg->avance;
 
-						$porcentaje = ($avance/$requeridos)*100;
+		// 				$porcentaje = ($avance/$requeridos)*100;
 
-						echo '
+		// 				echo '
 							
 
 
-												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		// 										<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                                                    <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                      <label>Codigo</label>
-                                                      <input type="text" class="form-control" id="codigo_avance'.$reg->idop_detalle_prod.'" value="'.$reg->codigo.'" disabled="">
-                                                    </div>
-                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                      <label>Requeridos</label>
-                                                      <input type="number" class="form-control" id="requeridos_avance'.$reg->idop_detalle_prod.'" value="'.$reg->cant_tot.'" disabled="">
-                                                    </div>
+        //                                             <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        //                                               <label>Codigo</label>
+        //                                               <input type="text" class="form-control" id="codigo_avance'.$reg->idop_detalle_prod.'" value="'.$reg->codigo.'" disabled="">
+        //                                             </div>
+        //                                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        //                                               <label>Requeridos</label>
+        //                                               <input type="number" class="form-control" id="requeridos_avance'.$reg->idop_detalle_prod.'" value="'.$reg->cant_tot.'" disabled="">
+        //                                             </div>
 
-                                                     <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                                                      <label>Avance</label>
-                                                      <input type="number" class="form-control" id="cantidad_avance'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
-                                                      <input type="hidden" class="form-control" id="cantidad_avance_ant'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
-                                                    </div>
+        //                                              <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+        //                                               <label>Avance</label>
+        //                                               <input type="number" class="form-control" id="cantidad_avance'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
+        //                                               <input type="hidden" class="form-control" id="cantidad_avance_ant'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
+        //                                             </div>
                                                     
                                                     
-                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                      <label>_</label>
-                                                      <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.')">Guardar</button>
-                                                    </div>
-                                                    <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                                                      <label>_</label>
-                                                      <button type="button" class="btn btn-primary"  id="" onclick="cargar_historial_avances('.$reg->idop_detalle_prod.')">Historial</button>
-                                                    </div>
+        //                                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        //                                               <label>_</label>
+        //                                               <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.')">Guardar</button>
+        //                                             </div>
+        //                                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
+        //                                               <label>_</label>
+        //                                               <button type="button" class="btn btn-primary"  id="" onclick="cargar_historial_avances('.$reg->idop_detalle_prod.')">Historial</button>
+        //                                             </div>
 
-                                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
-                                                        <div class="progress">
-                                                          <div class="progress-bar progress-bar-striped" role="progressbar" style="width: '.$porcentaje.'%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        </div>
-                                                    </div>
+        //                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+        //                                                 <div class="progress">
+        //                                                   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: '.$porcentaje.'%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        //                                                 </div>
+        //                                             </div>
 
-                                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
-                                                        <label>_</label>
+        //                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
+        //                                                 <label>_</label>
                                                        
-                                                    </div>
+        //                                             </div>
 
-                                                 </div>
-
-
+        //                                          </div>
 
 
-						';	
-					}
+
+
+		// 				';	
+		// 			}
 
 			
-		break;
+		// break;
 
 		case 'buscar_op':
 		
@@ -1955,7 +1955,7 @@ switch ($_GET["op"])
 									<h1>'.$est_op.'</h1>
 									<strong style="font-size: 15px;">'.$reg->nom_area.'</strong><br>
 									Requeridos: <b>'.$reg->cant_req.'</b> --
-									Fabricados: <b>'.$reg->avance_op.'</b>
+									Fabricados: <b id="avance_fabricados'.$reg->idop_detalle.'">'.$reg->avance_op.'</b>
 									
                                 	<div class="progress" style="height:10px; width: 70%; margin-bottom: 10px; position: absolute;">
 		                                <div class="progress-bar" role="progressbar" style="width: '.$avance.'%; background: #'.$color_avance.';" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">

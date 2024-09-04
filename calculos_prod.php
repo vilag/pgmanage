@@ -40,12 +40,15 @@ $id1 = $row['id1']-1;
 // $id1 = $row['id1'];
 
 $sql_pd2 = "
-SELECT a.idpg_detped as id1
+SELECT a.idpg_detped as id2
 FROM pg_detped a INNER JOIN pg_pedidos b ON a.idpedido=b.idpg_pedidos
 WHERE (a.estatus='Produccion' AND b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO') 
 OR (a.estatus='Fabricado' AND b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO')
 ORDER BY b.fecha_pedido DESC LIMIT 1
 ";
+$result_pd2 = mysqli_query($conn, $sql_pd2);
+$row = mysqli_fetch_assoc($result_pd2);
+$id2 = $row['id2']+1;
 
 // $sql_pd2 = "
 // SELECT pd.idpg_detped as id2
@@ -58,9 +61,9 @@ ORDER BY b.fecha_pedido DESC LIMIT 1
 // 			(SELECT estatus FROM pg_pedidos WHERE idpg_pedidos=pd.idpedido)<>'CANCELADO') 
 // ORDER BY (SELECT fecha_pedido FROM pg_pedidos WHERE idpg_pedidos=pd.idpedido) DESC LIMIT 1
 // ";
-$result_pd2 = mysqli_query($conn, $sql_pd2);
-$row = mysqli_fetch_assoc($result_pd2);
-$id2 = $row['id2']+1;
+// $result_pd2 = mysqli_query($conn, $sql_pd2);
+// $row = mysqli_fetch_assoc($result_pd2);
+// $id2 = $row['id2']+1;
 
 
 //$id_ini_base = $row['id_ini'];

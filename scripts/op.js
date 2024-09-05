@@ -820,7 +820,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 
 			//return;
 
-			if (cantidad_indep_avance>0) {
+			if (parseInt(cantidad_indep_avance)>0) {
 
 
 				//alert(idusuario);
@@ -833,10 +833,10 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 					//alert(area_avance+" a");
 					var area_p=$("#area_p").text();
 
-					if (area_p==area_num) {
+					if (parseInt(area_p)==parseInt(area_num)) {
 
 
-							if ((idusuario>=15 && idusuario<=21)) 
+							if ((parseInt(idusuario)>=15 && parseInt(idusuario)<=21)) 
 							{
 
 
@@ -890,7 +890,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 
 																	//alert(sum_areas);
 
-																	if (sum_areas==total_req) {
+																	if (parseInt(sum_areas)==parseInt(total_req)) {
 
 
 
@@ -977,7 +977,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 																									//alert(num_prod+'total peddido');
 
 
-																									if (tot_detped >= num_prod) {
+																									if (parseInt(tot_detped) >= parseInt(num_prod)) {
 
 																										var idusuario=$("#idusuario").text();
 																										var fecha=moment().format('YYYY-MM-DD');
@@ -996,7 +996,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 
 																											//alert(num_pedido);
 
-																												if (num_pedido==0) {
+																												if (parseInt(num_pedido)==0) {
 
 																													//var idpedido = pedido;
 

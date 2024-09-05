@@ -695,13 +695,13 @@ Class Diseno
         return ejecutarConsultaSimpleFila($sql_id);		
 	}
 
-	public function guardar_pedido($id_ped_temp,$fecha_pedido,$id_cliente,$no_pedido_lugar,$condiciones,$ultimo_control,$asesor,$persona_pedido,$cliente_nuevo,$medio,$lab,$autorizacion,$id_retorno_ent,$fecha_entrega,$hora_entrega,$hora_entrega2,$forma_entrega,$det_forma_ent,$id_retorno_fac,$reglamentos,$empaque,$metodo_pago,$forma_pago,$uso_cfdi,$fecha_envio_enlace,$salida,$factura,$otros,$idusuario,$max_ped_cli)
+	public function guardar_pedido($id_ped_temp,$fecha_pedido,$id_cliente,$no_pedido_lugar,$condiciones,$ultimo_control,$asesor,$persona_pedido,$cliente_nuevo,$medio,$lab,$autorizacion,$id_retorno_ent,$fecha_entrega,$hora_entrega,$hora_entrega2,$forma_entrega,$det_forma_ent,$id_retorno_fac,$reglamentos,$empaque,$metodo_pago,$forma_pago,$uso_cfdi,$fecha_envio_enlace,$salida,$factura,$otros,$idusuario,$max_ped_cli,$cant_prod_ped_new)
 	{
 
 		$sql2="UPDATE clientes_detalle SET num_ped_cli='$max_ped_cli'+1 WHERE idpedido='$id_ped_temp'";
 		ejecutarConsulta($sql2);
 
-		$sql="UPDATE pg_pedidos SET fecha_pedido='$fecha_pedido',estatus='Control PG',idcliente='$id_cliente',no_pedido='$no_pedido_lugar',condiciones='$condiciones',no_control='$ultimo_control',asesor='$asesor',levanto_pedido='$persona_pedido',cliente_nuevo='$cliente_nuevo',medio='$medio',lab='$lab',autorizacion='$autorizacion',id_entrega='$id_retorno_ent',fecha_entrega='$fecha_entrega',hora_entrega='$hora_entrega',hora_entrega2='$hora_entrega2',forma_entrega='$forma_entrega',det_forma_ent='$det_forma_ent',idfacturacion='$id_retorno_fac',reglamentos='$reglamentos',empaque='$empaque',metodo_pago='$metodo_pago',forma_pago='$forma_pago',uso_cfdi='$uso_cfdi',fecha_envio_enlace='$fecha_envio_enlace',salida='$salida',factura='$factura',otros='$otros',firma_cliente='',firma_prod='',reviso='',observaciones='',idusuario='$idusuario',aplicar_iva='Si',estatus2='1' WHERE idpg_pedidos='$id_ped_temp' ";
+		$sql="UPDATE pg_pedidos SET fecha_pedido='$fecha_pedido',estatus='Control PG',idcliente='$id_cliente',no_pedido='$no_pedido_lugar',condiciones='$condiciones',no_control='$ultimo_control',asesor='$asesor',levanto_pedido='$persona_pedido',cliente_nuevo='$cliente_nuevo',medio='$medio',lab='$lab',autorizacion='$autorizacion',id_entrega='$id_retorno_ent',fecha_entrega='$fecha_entrega',hora_entrega='$hora_entrega',hora_entrega2='$hora_entrega2',forma_entrega='$forma_entrega',det_forma_ent='$det_forma_ent',idfacturacion='$id_retorno_fac',reglamentos='$reglamentos',empaque='$empaque',metodo_pago='$metodo_pago',forma_pago='$forma_pago',uso_cfdi='$uso_cfdi',fecha_envio_enlace='$fecha_envio_enlace',salida='$salida',factura='$factura',otros='$otros',firma_cliente='',firma_prod='',reviso='',observaciones='',idusuario='$idusuario',aplicar_iva='Si',estatus2='1', cant_prod_pedido='$cant_prod_ped_new' WHERE idpg_pedidos='$id_ped_temp' ";
 		return ejecutarConsulta($sql);
 		
 	}
@@ -3871,6 +3871,14 @@ Class Diseno
 		ejecutarConsulta($sql);
 
 		$sql_2="DELETE FROM salidas_entregas_detalles WHERE identrega = '$identrega'";
+		return ejecutarConsulta($sql_2);
+
+	}
+
+	public function consul_prod_capt($id_ped_temp)
+	{
+
+		$sql_2="SELECT IFNULL(SUM(cantidad),0) cant_prod FROM pg_detalle_pedidos WHERE idpg_pedidos='$id_ped_temp'";
 		return ejecutarConsulta($sql_2);
 
 	}

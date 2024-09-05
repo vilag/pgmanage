@@ -1881,181 +1881,193 @@ function guardar_pedido()
 	var identregas = $("#identregas").val();
 	var idfacturacion = $("#idfacturacion").val();
 
-	//alert(identregas);
-	//alert(idfacturacion);
-
-	if (identregas!="") {
-
-		$.post("ajax/diseno.php?op=guardar_dir_entrega",{id_ped_temp:id_ped_temp,identregas:identregas},function(data, status)
-		{
+	$.post("ajax/diseno.php?op=consul_prod_capt",{id_ped_temp:id_ped_temp},function(data, status)
+	{
 		data = JSON.parse(data);
 
-		     var id_retorno_ent = data.identregas;
+		var cant_prod_ped_new = data.cant_prod;
 
-		     //alert(id_retorno_ent);
+		if (identregas!="") {
 
-		     if (id_retorno_ent>0) {
+			$.post("ajax/diseno.php?op=guardar_dir_entrega",{id_ped_temp:id_ped_temp,identregas:identregas},function(data, status)
+			{
+			data = JSON.parse(data);
 
-		     	if (idfacturacion!="") {
+				var id_retorno_ent = data.identregas;
 
-		     		$.post("ajax/diseno.php?op=guardar_dir_fact",{id_ped_temp:id_ped_temp,idfacturacion:idfacturacion},function(data, status)
-					{
-					data = JSON.parse(data);
+				//alert(id_retorno_ent);
+
+				if (id_retorno_ent>0) {
+
+					if (idfacturacion!="") {
+
+						$.post("ajax/diseno.php?op=guardar_dir_fact",{id_ped_temp:id_ped_temp,idfacturacion:idfacturacion},function(data, status)
+						{
+						data = JSON.parse(data);
 
 
-							var id_retorno_fac = data.iddir_facturacion_esp;
+								var id_retorno_fac = data.iddir_facturacion_esp;
 
-							//alert(id_retorno_fac);
+								//alert(id_retorno_fac);
 
-							if (id_retorno_fac>0) {
+								if (id_retorno_fac>0) {
 
 
-							$.post("ajax/diseno.php?op=ultimo_control",function(data, status)
-							{
-							data = JSON.parse(data);
-
-								var ultimo_control = parseInt(data.no_control)+1;
-
-								//alert(ultimo_control);
-
-								var lugar = $("#lugar_user").text();
-
-								//alert(lugar);
-
-								$.post("ajax/diseno.php?op=ultimo_pedido_lugar",{lugar:lugar},function(data, status)
+								$.post("ajax/diseno.php?op=ultimo_control",function(data, status)
 								{
 								data = JSON.parse(data);
 
+									var ultimo_control = parseInt(data.no_control)+1;
 
+									//alert(ultimo_control);
 
-									if (lugar=="AJM") {
+									var lugar = $("#lugar_user").text();
 
-										var no_pedido_lugar = parseInt(data.no_pedido_lugar)+3;
-									}else{
+									//alert(lugar);
 
-										var no_pedido_lugar = parseInt(data.no_pedido_lugar)+1;
-									}		
-											
-
-									var fecha_ped = $("#fecha_pedido").val();
-									var hora=moment().format('HH:mm:ss');
-
-									var fecha_pedido=fecha_ped+" "+hora;
-									var id_cliente = $("#id_cliente").val();
-									//var no_pedido = $("#no_pedido").val();
-									var condiciones = $("#condiciones").val();
-									//var no_control = $("#no_control").val();
-									var asesor = $("#asesor").val();
-									var persona_pedido = $("#persona_pedido").val();
-
-									var cliente_nuevo=0;
-
-									var medio = $("#medio").val();
-									var lab = $("#lab").val();
-									var autorizacion = $("#autorizacion").val();
-									
-									var fecha_entrega = $("#fecha_ent").text();
-									var hora_entrega = $("#hora_ent").text();
-									var hora_entrega2 = $("#hora_ent2").text();
-									var forma_entrega = $("#forma_ent").text();
-									var det_forma_ent = $("#det_forma_ent").text();
-									//var idfacturacion = $("#idfacturacion").val();
+									$.post("ajax/diseno.php?op=ultimo_pedido_lugar",{lugar:lugar},function(data, status)
+									{
+									data = JSON.parse(data);
 
 
 
-									
+										if (lugar=="AJM") {
 
-										var reglamentos = $("#reglamentos").val();
-										var empaque = $("#empaque").val();
-										var metodo_pago = $("#metodo_pago").val();
-										var forma_pago = $("#forma_pago").val();
-										var uso_cfdi = $("#uso_cfdi").val();
-										var fecha_envio_enlace = $("#fecha_envio_enlace").val();
-										var fecha_envio_enlace = fecha_envio_enlace + " " + hora;
-										var salida = $("#salida").val();
-										var factura = $("#factura").val();
-										var otros = $("#otros").val();
-										var idusuario=$("#idusuario").text();
-										var max_ped_cli=$("#max_ped_cli").val();
+											var no_pedido_lugar = parseInt(data.no_pedido_lugar)+3;
+										}else{
 
-										$.post("ajax/diseno.php?op=guardar_pedido",{
-											id_ped_temp:id_ped_temp,
-											fecha_pedido:fecha_pedido,
-											id_cliente:id_cliente,
-											no_pedido_lugar:no_pedido_lugar,
-											condiciones:condiciones,
-											ultimo_control:ultimo_control,
-											asesor:asesor,
-											persona_pedido:persona_pedido,
-											cliente_nuevo:cliente_nuevo,
-											medio:medio,
-											lab:lab,
-											autorizacion:autorizacion,
-											id_retorno_ent:id_retorno_ent,
-											fecha_entrega:fecha_entrega,
-											hora_entrega:hora_entrega,
-											hora_entrega2:hora_entrega2,
-											forma_entrega:forma_entrega,
-											det_forma_ent:det_forma_ent,
-											id_retorno_fac:id_retorno_fac,
-											reglamentos:reglamentos,
-											empaque:empaque,
-											metodo_pago:metodo_pago,
-											forma_pago:forma_pago,
-											uso_cfdi:uso_cfdi,
-											fecha_envio_enlace:fecha_envio_enlace,
-											salida:salida,
-											factura:factura,
-											otros:otros,
-											idusuario:idusuario,
-											max_ped_cli:max_ped_cli},function(data, status)
-										{
-										data = JSON.parse(data);
+											var no_pedido_lugar = parseInt(data.no_pedido_lugar)+1;
+										}		
+												
 
-														limpiar_form_pedido();
-														document.getElementById('btn_save_pedido').disabled = false;
-														var id_ped_temp = $("#id_ped_temp").val();
-														bootbox.alert("Pedido guardado exitosamente", function(){ 
-    														//$(location).attr("href","sale_product.php?pedido="+id_ped_temp);
-    														$(location).attr("href","list_pedidos.php?pedido="+id_ped_temp);
-														});
+										var fecha_ped = $("#fecha_pedido").val();
+										var hora=moment().format('HH:mm:ss');
 
-											       
-								  	
+										var fecha_pedido=fecha_ped+" "+hora;
+										var id_cliente = $("#id_cliente").val();
+										//var no_pedido = $("#no_pedido").val();
+										var condiciones = $("#condiciones").val();
+										//var no_control = $("#no_control").val();
+										var asesor = $("#asesor").val();
+										var persona_pedido = $("#persona_pedido").val();
+
+										var cliente_nuevo=0;
+
+										var medio = $("#medio").val();
+										var lab = $("#lab").val();
+										var autorizacion = $("#autorizacion").val();
+										
+										var fecha_entrega = $("#fecha_ent").text();
+										var hora_entrega = $("#hora_ent").text();
+										var hora_entrega2 = $("#hora_ent2").text();
+										var forma_entrega = $("#forma_ent").text();
+										var det_forma_ent = $("#det_forma_ent").text();
+										//var idfacturacion = $("#idfacturacion").val();
 
 
-										});
 
-								});	
+										
+
+											var reglamentos = $("#reglamentos").val();
+											var empaque = $("#empaque").val();
+											var metodo_pago = $("#metodo_pago").val();
+											var forma_pago = $("#forma_pago").val();
+											var uso_cfdi = $("#uso_cfdi").val();
+											var fecha_envio_enlace = $("#fecha_envio_enlace").val();
+											var fecha_envio_enlace = fecha_envio_enlace + " " + hora;
+											var salida = $("#salida").val();
+											var factura = $("#factura").val();
+											var otros = $("#otros").val();
+											var idusuario=$("#idusuario").text();
+											var max_ped_cli=$("#max_ped_cli").val();
+
+											$.post("ajax/diseno.php?op=guardar_pedido",{
+												id_ped_temp:id_ped_temp,
+												fecha_pedido:fecha_pedido,
+												id_cliente:id_cliente,
+												no_pedido_lugar:no_pedido_lugar,
+												condiciones:condiciones,
+												ultimo_control:ultimo_control,
+												asesor:asesor,
+												persona_pedido:persona_pedido,
+												cliente_nuevo:cliente_nuevo,
+												medio:medio,
+												lab:lab,
+												autorizacion:autorizacion,
+												id_retorno_ent:id_retorno_ent,
+												fecha_entrega:fecha_entrega,
+												hora_entrega:hora_entrega,
+												hora_entrega2:hora_entrega2,
+												forma_entrega:forma_entrega,
+												det_forma_ent:det_forma_ent,
+												id_retorno_fac:id_retorno_fac,
+												reglamentos:reglamentos,
+												empaque:empaque,
+												metodo_pago:metodo_pago,
+												forma_pago:forma_pago,
+												uso_cfdi:uso_cfdi,
+												fecha_envio_enlace:fecha_envio_enlace,
+												salida:salida,
+												factura:factura,
+												otros:otros,
+												idusuario:idusuario,
+												max_ped_cli:max_ped_cli,
+												cant_prod_ped_new:cant_prod_ped_new
+											},function(data, status)
+											{
+											data = JSON.parse(data);
+
+															limpiar_form_pedido();
+															document.getElementById('btn_save_pedido').disabled = false;
+															var id_ped_temp = $("#id_ped_temp").val();
+															bootbox.alert("Pedido guardado exitosamente", function(){ 
+																//$(location).attr("href","sale_product.php?pedido="+id_ped_temp);
+																$(location).attr("href","list_pedidos.php?pedido="+id_ped_temp);
+															});
+
+													
+										
 
 
-								    
+											});
 
-							});		
-
-
-							}else{
-								bootbox.alert("Verificar dirección de facturación");
-							}
-					});
-
-		     	}else{
-		     		bootbox.alert("Por favor capture una dirección de facturación");
-		     	}
+									});	
 
 
-		     }else{
+										
+
+								});		
 
 
-		     	bootbox.alert("Verificar dirección de entrega");
+								}else{
+									bootbox.alert("Verificar dirección de facturación");
+								}
+						});
 
-		     }
+					}else{
+						bootbox.alert("Por favor capture una dirección de facturación");
+					}
 
-		});
 
-	}else{
-		bootbox.alert("Por favor capture una dirección de entrega");
-	}
+				}else{
+
+
+					bootbox.alert("Verificar dirección de entrega");
+
+				}
+
+			});
+
+		}else{
+			bootbox.alert("Por favor capture una dirección de entrega");
+		}
+	
+	});
+
+	//alert(identregas);
+	//alert(idfacturacion);
+
+	
 	//alert(id_ped_temp);
 
 		

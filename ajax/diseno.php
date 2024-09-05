@@ -951,9 +951,10 @@ switch ($_GET["op"])
 			$otros = $_POST['otros'];
 			$idusuario = $_POST['idusuario'];
 			$max_ped_cli = $_POST['max_ped_cli'];
+			$cant_prod_ped_new = $_POST['cant_prod_ped_new'];
 
 			
-			$rspta=$diseno->guardar_pedido($id_ped_temp,$fecha_pedido,$id_cliente,$no_pedido_lugar,$condiciones,$ultimo_control,$asesor,$persona_pedido,$cliente_nuevo,$medio,$lab,$autorizacion,$id_retorno_ent,$fecha_entrega,$hora_entrega,$hora_entrega2,$forma_entrega,$det_forma_ent,$id_retorno_fac,$reglamentos,$empaque,$metodo_pago,$forma_pago,$uso_cfdi,$fecha_envio_enlace,$salida,$factura,$otros,$idusuario,$max_ped_cli);
+			$rspta=$diseno->guardar_pedido($id_ped_temp,$fecha_pedido,$id_cliente,$no_pedido_lugar,$condiciones,$ultimo_control,$asesor,$persona_pedido,$cliente_nuevo,$medio,$lab,$autorizacion,$id_retorno_ent,$fecha_entrega,$hora_entrega,$hora_entrega2,$forma_entrega,$det_forma_ent,$id_retorno_fac,$reglamentos,$empaque,$metodo_pago,$forma_pago,$uso_cfdi,$fecha_envio_enlace,$salida,$factura,$otros,$idusuario,$max_ped_cli,$cant_prod_ped_new);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
@@ -9310,7 +9311,14 @@ switch ($_GET["op"])
 	 		
 		break;
 
+		case 'consul_prod_capt':
 
+			$id_ped_temp = $_POST['id_ped_temp'];
+
+			$rspta=$diseno->consul_prod_capt($id_ped_temp);
+	 		echo json_encode($rspta);
+	 		
+		break;
 
 
 	}

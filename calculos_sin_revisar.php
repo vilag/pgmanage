@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 }
 
 // echo date('l jS \of F Y h:i:s A');
-$sql_limp_det = "UPDATE pg_detalle_pedidos a INNER JOIN pg_pedidos b ON a.idpg_pedidos=b.idpg_pedidos SET cant_procesada = (SELECT IFNULL(SUM(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE b.estatus<>'CANCELADO' AND b.estatus <> 'ENTREGADO';";
+$sql_limp_det = "UPDATE pg_detalle_pedidos a INNER JOIN pg_pedidos b ON a.idpg_pedidos=b.idpg_pedidos SET cant_procesada = (SELECT IFNULL(SUM(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=a.idpg_detalle_pedidos) WHERE b.estatus<>'CANCELADO' AND b.estatus <> 'ENTREGADO' AND b.estatus <> '0';";
 $result_limp_det = $conn->query($sql_limp_det);
 
 

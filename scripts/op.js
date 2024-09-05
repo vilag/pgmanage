@@ -1010,7 +1010,7 @@ function guardar_avance_prod(idop_detalle_prod,idop,estatus_op,idpg_detped)
 																														
 
 
-																														$.post("ajax/diseno.php?op=save_notif",{idpedido:idpedido,idusuario:idusuario,fecha_hora:fecha_hora,estatus_pedido:estatus_pedido,idavance_prod:idavance_prod},function(data, status)
+																														$.post("ajax/diseno.php?op=save_notif",{idpedido:idpedido,idusuario:idusuario,fecha_hora:fecha_hora,estatus_pedido:estatus_pedido,idavance_prod:idavance_prod,tot_detped:tot_detped,num_prod:num_prod},function(data, status)
 																														{
 																														data = JSON.parse(data);
 

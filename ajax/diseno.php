@@ -5075,9 +5075,11 @@ switch ($_GET["op"])
 			$fecha_hora = $_POST['fecha_hora'];
 			$estatus_pedido = $_POST['estatus_pedido'];
 			$idavance_prod = $_POST['idavance_prod'];
+			$completados = $_POST['tot_detped'];
+			$requeridos = $_POST['num_prod'];
 			
 
-			$rspta=$diseno->save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod);
+			$rspta=$diseno->save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod,$completados,$requeridos);
 	 		echo json_encode($rspta);
 	 		
 		break;

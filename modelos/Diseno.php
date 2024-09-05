@@ -2361,10 +2361,10 @@ Class Diseno
 
 	}
 
-	public function save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod)
+	public function save_notif($idpedido,$idusuario,$fecha_hora,$estatus_pedido,$idavance_prod,$completados,$requeridos)
 	{
 
-		$sql="INSERT INTO notif (idpedido,idusuario,mensaje,fecha_hora,estatus,estatus2,idavance_prod) VALUES ('$idpedido','$idusuario','Pedido completado','$fecha_hora','1','1','$idavance_prod')";
+		$sql="INSERT INTO notif (idpedido,idusuario,mensaje,fecha_hora,estatus,estatus2,idavance_prod,requeridos,completados) VALUES ('$idpedido','$idusuario','Pedido completado','$fecha_hora','1','1','$idavance_prod','$requeridos'.'$completados')";
 		ejecutarConsulta($sql);
 
 		if ($estatus_pedido<>'ENTREGADO') {

@@ -278,6 +278,25 @@
 		public function abrir_terminados()
 		{
 
+			$sql="UPDATE pg_pedidos a 
+			SET cant_prod_pedido=(SELECT IFNULL(sum(cantidad),0) FROM pg_detalle_pedidos WHERE idpg_pedidos=a.idpg_pedidos), 
+			productos_terminados = (SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE (idpedido=a.idpg_pedidos AND estatus='Surtido') OR (idpedido=a.idpg_pedidos AND estatus='Fabricado') OR (idpedido=a.idpg_pedidos AND estatus='Existencia') OR (idpedido=a.idpg_pedidos AND estatus='Cancelado')) 
+			WHERE (a.estatus<>'ENTREGADO' AND a.estatus<>'CANCELADO' AND a.estatus<>'0') OR (a.estatus<>'ENTREGADO' AND a.estatus<>'CANCELADO' AND a.estatus<>'0')";
+			ejecutarConsulta($sql);
+
+			$sql_2="SELECT p.idpg_pedidos, p.no_control, p.fecha_valid_term as fecha_entrega,
+			(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
+			(SELECT IFNULL(sum(cantidad),0) FROM salidas_entregas_detalles WHERE idpedido=p.idpg_pedidos) as cant_entrega,
+ 			(SELECT IFNULL(sum(cantidad),0) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_pendiente,
+			(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente
+			FROM pg_pedidos p 
+			INNER JOIN usuario u 
+			ON p.idusuario=u.idusuario 
+			WHERE p.cant_prod_pedido=p.productos_terminados AND p.cant_prod_pedido>0 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND p.estatus<>'0'";
+			return ejecutarConsulta($sql_2);
+
+
+
 			/*$sql="SELECT p.no_control,p.idpg_pedidos, p.fecha_valid_term as fecha_entrega,
 			(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
 			(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
@@ -288,8 +307,8 @@
 			(SELECT IFNULL(sum(cantidad),0) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_pendiente
 			FROM pg_pedidos p WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND p.no_control<>1646 ORDER BY p.estatus_docs DESC";*/
 
-			$sql="SELECT * FROM result_tbl_term ORDER BY estatus_docs DESC";
-			return ejecutarConsulta($sql);
+			// $sql="SELECT * FROM result_tbl_term ORDER BY estatus_docs DESC";
+			// return ejecutarConsulta($sql);
 
 		}
 

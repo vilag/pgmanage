@@ -3054,12 +3054,11 @@ function cargar_notif()
 
 				var num_notif = data.num_term;
 
-				//alert(num_notif);
+			
 
 				if (num_notif>0) {
 
-					//$("#notif_term").show();
-					//$("#num_notif").show();
+					
 
 					$("#num_notif").text(num_notif);
 				}
@@ -3074,9 +3073,9 @@ function cargar_notif()
 			{
 			data = JSON.parse(data);
 
-				var num_notif = data.num_notif;
+				var num_notif = data.num_term;
 
-				//alert(num_notif);
+			
 
 				if (num_notif>0) {
 
@@ -3497,14 +3496,15 @@ function abrir_listos()
 function listar_listos()
 {
 	var idusuario=$("#idusuario").text();
+	var lugar_user=$("#lugar_user").text();
 
 	//$("#text_estatus").text("Cancelados");
 
-	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
-	{
-	data = JSON.parse(data);
+	// $.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
+	// {
+	// data = JSON.parse(data);
 
-		var lugar_user = data.lugar;
+		//var lugar_user = data.lugar;
 
 		$.post("ajax/diseno.php?op=listar_listos&id="+lugar_user,function(r){
 		$("#tbl_listos").html(r);
@@ -3513,7 +3513,7 @@ function listar_listos()
 		});
 
 
-	});	
+	// });	
 
 
 		

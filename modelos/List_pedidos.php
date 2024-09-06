@@ -319,11 +319,51 @@
 
 			if ($id==0) {
 
-				$sql="SELECT p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos) as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,p.coment_vencim FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2='1' AND DATEDIFF(DATE(p.fecha_entrega),NOW())<0 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.idpg_pedidos ASC, p.coment_vencim asc";
+				$sql="SELECT 
+				p.estatus,
+				DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,
+				p.porc_av,
+				p.dias_rest,
+				p.color_barra,
+				DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance,
+				DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,
+				p.color_status,
+				p.coment_vencim,
+				p.no_control,
+				p.idpg_pedidos
+				FROM pg_pedidos p 
+				INNER JOIN clientes c ON p.idcliente = c.idcliente 
+				INNER JOIN usuario u ON p.idusuario=u.idusuario  
+				WHERE p.estatus2='1' AND DATEDIFF(DATE(p.fecha_entrega),NOW())<0 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.idpg_pedidos ASC, p.coment_vencim asc";
 				return ejecutarConsulta($sql);
 				# code...
 			}elseif ($id==1) {
-				$sql="SELECT p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos) as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,p.coment_vencim FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2='1' AND DATEDIFF(DATE(p.fecha_entrega),NOW())<0 AND p.estatus='ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.idpg_pedidos ASC, p.coment_vencim asc";
+				$sql="SELECT 
+				p.idpg_pedidos,
+				DATE(p.fecha_pedido) as fecha_pedido,
+				DATE(p.fecha_entrega) as fecha_entrega,
+				c.nombre as nom_cliente,
+				p.estatus, 
+				DATEDIFF(DATE(p.fecha_entrega),
+				DATE(p.fecha_pedido)) as diferencia_total,
+				DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, 
+				DATEDIFF(DATE(p.fecha_entrega),
+				NOW()) as faltan,
+				p.no_pedido,
+				p.color_status,
+				u.lugar,
+				p.no_control,
+				p.color_barra,
+				p.porc_av,
+				p.dias_rest, 
+				(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos) as docs,
+				p.observaciones,
+				(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,
+				p.coment_vencim 
+				FROM pg_pedidos p 
+				INNER JOIN clientes c ON p.idcliente = c.idcliente 
+				INNER JOIN usuario u ON p.idusuario=u.idusuario  
+				WHERE p.estatus2='1' AND DATEDIFF(DATE(p.fecha_entrega),NOW())<0 AND p.estatus='ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.idpg_pedidos ASC, p.coment_vencim asc";
 				return ejecutarConsulta($sql);
 			}
 

@@ -2637,8 +2637,8 @@ Class Diseno
 
 	public function cont_num_vencidos()
 	{
-
-		$sql="SELECT num_vencidos FROM result_notif WHERE idresult_notif=1";
+		$sql="SELECT count(idpg_pedidos) as num_vencidos FROM pg_pedidos WHERE estatus<>'ENTREGADO' AND estatus<>'CANCELADO'AND estatus<>'0' AND estatus2='1' AND DATEDIFF(DATE(fecha_entrega),NOW())<0";
+		// $sql="SELECT num_vencidos FROM result_notif WHERE idresult_notif=1";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 

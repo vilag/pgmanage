@@ -1575,38 +1575,38 @@ function actualizar_exc()
 
 function mostrar_op()
 {
-	$("#div_op").show();
-	$("#div_panel_prod").hide();
-	// var idusuario=$("#idusuario").text();
-	// var no_op_buscar=$("#no_op_buscar").val();
-	// //var fecha_buscar=$("#fecha_buscar").val();
+	// $("#div_op").show();
+	// $("#div_panel_prod").hide();
+	var idusuario=$("#idusuario").text();
+	var no_op_buscar=$("#no_op_buscar").val();
+	//var fecha_buscar=$("#fecha_buscar").val();
 
 
-	// $.post("ajax/op.php?op=buscar_idop",{no_op_buscar:no_op_buscar},function(data, status)
-	// {
-	// data = JSON.parse(data);
+	$.post("ajax/op.php?op=buscar_idop",{no_op_buscar:no_op_buscar},function(data, status)
+	{
+	data = JSON.parse(data);
 
-	// 	var idop = data.idop;
-	// 	var estatus = data.estatus;
-	// 	var estat = "";
+		var idop = data.idop;
+		var estatus = data.estatus;
+		var estat = "";
 
-	// 	$("#idop").val(idop);
+		$("#idop").val(idop);
 
-	// 	if (estatus==2) {
-	// 		var estat = "Cancelado";
-	// 	}
+		if (estatus==2) {
+			var estat = "Cancelado";
+		}
 		
-	// 	//alert(idop);
+		//alert(idop);
 
-	// 	$.post("ajax/op.php?op=mostrar_op&idop="+idop+"&idusuario="+idusuario+"&no_op="+no_op_buscar+"&estat="+estat,function(r){
-	// 	$("#box_detalle_op").html(r);
+		$.post("ajax/op.php?op=mostrar_op&idop="+idop+"&idusuario="+idusuario+"&no_op="+no_op_buscar+"&estat="+estat,function(r){
+		$("#box_detalle_op").html(r);
 
 				
 	     
-	// 	});
+		});
 
 
-	// });
+	});
 
 
 

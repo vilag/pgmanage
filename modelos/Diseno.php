@@ -2379,24 +2379,7 @@ Class Diseno
 
 	}
 
-	public function abrir_terminados()
-	{
-
-		/*$sql="SELECT n.idnotif,p.idpg_pedidos,p.no_control,n.fecha_hora as fecha_notif,DATE(n.fecha_hora) as fecha, TIME(n.fecha_hora) as hora,n.estatus, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs, (SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente, (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as prod_total, IFNULL((SELECT sum(cantidad) FROM entregas_detalle WHERE idpedido=p.idpg_pedidos),0) as prod_entregados FROM notif n INNER JOIN pg_pedidos p ON n.idpedido=p.idpg_pedidos WHERE p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO'  ORDER BY n.idnotif DESC";
-		return ejecutarConsulta($sql);*/
-
-		//Query lenta identificada
-		$sql="SELECT p.no_control,p.idpg_pedidos,
-		(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
-		(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
-		(SELECT pdp.fecha_hora2 FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora2 DESC LIMIT 1) as fecha_entrega_fab,
-		(SELECT pdp.fecha_hora FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora DESC LIMIT 1) as fecha_entrega_set,
-		(SELECT IFNULL(sum(cantidad),0) FROM salidas_entregas_detalles WHERE idpedido=p.idpg_pedidos) as cant_entrega,
-		(SELECT IFNULL(sum(cantidad),0) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_pendiente
-		FROM pg_pedidos p WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.estatus_docs DESC";
-		return ejecutarConsulta($sql);
-
-	}
+	
 
 	public function listar_listos($id)
 	{
@@ -2420,29 +2403,6 @@ Class Diseno
 			WHERE p.cant_prod_pedido=p.productos_terminados AND p.cant_prod_pedido>0 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND p.estatus<>'0' AND u.lugar='$id'";
 			return ejecutarConsulta($sql_2);
 
-
-
-
-
-
-		//Query lenta identificada
-		// $sql="SELECT p.no_control,p.idpg_pedidos,
-		// (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
-		// (SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
-		// (SELECT razon_fac FROM dir_facturacion_esp WHERE idpedido=p.idpg_pedidos) as razon_fac,
-		// (SELECT pdp.fecha_hora2 FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora2 DESC LIMIT 1) as fecha_entrega_fab,
-		// (SELECT pdp.fecha_hora FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora DESC LIMIT 1) as fecha_entrega_set,
-		// (SELECT IFNULL(sum(cantidad),0) FROM salidas_entregas_detalles WHERE idpedido=p.idpg_pedidos) as cant_entrega,
-		// (SELECT IFNULL(sum(cantidad),0) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_pendiente
-		// FROM pg_pedidos p INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND u.lugar='$id' ORDER BY p.estatus_docs DESC";
-		// return ejecutarConsulta($sql);
-
-
-		/*$sql="SELECT p.no_control,p.idpg_pedidos,
-		(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
-		(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente 
-		FROM pg_pedidos p INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND u.lugar='$id' ORDER BY p.estatus_docs ASC";
-		return ejecutarConsulta($sql);*/
 
 	}
 
@@ -2495,8 +2455,7 @@ Class Diseno
 		WHERE p.cant_prod_pedido=p.productos_terminados AND p.cant_prod_pedido>0 AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND p.estatus<>'0' AND u.lugar='$lugar_user'";
 		return ejecutarConsultaSimpleFila($sql);
 
-		// $sql="SELECT count(p.idpg_pedidos) as num_notif FROM pg_pedidos p INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' AND u.lugar='$lugar_user'";
-		// return ejecutarConsultaSimpleFila($sql);
+		
 	}
 
 
@@ -3060,88 +3019,6 @@ Class Diseno
 		return ejecutarConsultaSimpleFila($sql);
 	}
 
-	public function det_term($id,$id2,$fecha_hora)
-	{
-		//$contador = 0;
-		$id_1=$id;
-		$id_2=$id2;
-		$fecha_h=$fecha_hora;
-
-
-					$sql="UPDATE pg_pedidos p SET 
-					p.cant_est=
-					IF(p.cant_est<(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos),
-					(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE idpedido=p.idpg_pedidos AND estatus='Apartado')+
-					(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE idpedido=p.idpg_pedidos AND estatus='Fabricado')+
-					(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE idpedido=p.idpg_pedidos AND estatus='Existencia'),
-					p.cant_est),
-					p.estatus_docs = (SELECT IFNULL(count(iddocumentos),0) FROM documentos WHERE tipo=1 AND nombre<>'' AND idpedido=p.idpg_pedidos)
-					WHERE p.estatus2=1 AND p.estatus<>'CANCELADO'
-					";
-					ejecutarConsulta($sql);
-
-					$sql2="UPDATE pg_pedidos p SET 
-					p.fecha_valid_term=
-					IF(p.cant_est>=(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos),
-					IF((SELECT fecha_hora FROM pg_detped WHERE idpedido=p.idpg_pedidos ORDER BY fecha_hora DESC LIMIT 1)>
-					(SELECT fecha_hora2 FROM pg_detped WHERE idpedido=p.idpg_pedidos ORDER BY fecha_hora2 DESC LIMIT 1),
-					(SELECT fecha_hora FROM pg_detped WHERE idpedido=p.idpg_pedidos ORDER BY fecha_hora DESC LIMIT 1),
-					(SELECT fecha_hora2 FROM pg_detped WHERE idpedido=p.idpg_pedidos ORDER BY fecha_hora2 DESC LIMIT 1)),'0000-00-00 00:00:00')
-					WHERE p.estatus2=1 AND p.estatus<>'CANCELADO'
-					";
-					ejecutarConsulta($sql2);
-
-					$sql3="UPDATE pg_pedidos p SET p.estatus_vencim=IF(p.fecha_valid_term<=p.fecha_entrega AND p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos),1,0) WHERE 
-					(p.estatus2=1 AND p.estatus<>'CANCELADO' AND p.idcliente<>2509 AND p.idcliente<>2511 AND p.idcliente<>2512 AND p.tipo<>4)";
-					ejecutarConsulta($sql3);
-
-					$sql4="UPDATE pg_pedidos p SET 
-					p.fecha_entr_mas1=IF(CONCAT(ELT(WEEKDAY(p.fecha_valid_term) + 1, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'))='Viernes',
-					(DATE_ADD(p.fecha_valid_term,INTERVAL 3 DAY)),
-					(DATE_ADD(p.fecha_valid_term,INTERVAL 1 DAY))
-					) WHERE 
-					(p.estatus2=1 AND p.estatus<>'CANCELADO' AND p.idcliente<>2509 AND p.idcliente<>2511 AND p.idcliente<>2512 AND p.tipo<>4)";
-					ejecutarConsulta($sql4);
-
-					$sql5="UPDATE pg_pedidos p SET p.ent_tiempo=IF(DATEDIFF((SELECT fecha FROM estatus_pedido_fab WHERE idpedido=p.idpg_pedidos AND color='0BF6BF' OR color='7E0CA8' ORDER BY fecha DESC LIMIT 1),DATE(p.fecha_entr_mas1))<=1,1,0) WHERE 
-					(p.estatus2=1 AND p.estatus<>'CANCELADO' AND p.idcliente<>2509 AND p.idcliente<>2511 AND p.idcliente<>2512 AND p.tipo<>4)";
-					return ejecutarConsulta($sql5);
-
-
-
-
-		/*while ($id <= $id2) {
-
-			$sql1="SELECT idpg_pedidos FROM pg_pedidos WHERE idpg_pedidos='$id' AND estatus<>'ENTREGADO' AND estatus<>'CANCELADO' AND estatus2=1";
-			$result = ejecutarConsultaSimpleFila($sql1);
-
-			if ($result > 0) {*/
-
-				//$contador = $contador+1;
-					
-					/*$sql="UPDATE pg_pedidos SET 
-					cant_est=(SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE idpedido='$id' AND estatus='Apartado')+
-					(SELECT IFNULL(sum(cantidad),0) FROM pg_detped pd WHERE idpedido='$id' AND estatus='Fabricado')+
-					(SELECT IFNULL(sum(cantidad),0) FROM pg_detped pd WHERE idpedido='$id' AND estatus='Existencia'), 
-					estatus_docs = (SELECT IFNULL(count(iddocumentos),0) FROM documentos WHERE tipo=1 AND nombre<>'' AND idpedido='$id'), 
-					fecha_valid_term=(IF((SELECT fecha_hora FROM pg_detped WHERE idpedido='$id' ORDER BY fecha_hora DESC LIMIT 1)>(SELECT fecha_hora2 FROM pg_detped WHERE idpedido='$id' ORDER BY fecha_hora2 DESC LIMIT 1),(SELECT fecha_hora FROM pg_detped WHERE idpedido='$id' ORDER BY fecha_hora DESC LIMIT 1),(SELECT fecha_hora2 FROM pg_detped WHERE idpedido='$id' ORDER BY fecha_hora2 DESC LIMIT 1))) 
-					WHERE idpg_pedidos='$id'";
-					ejecutarConsulta($sql);*/ 
-
-
-					
-				/*}						
-
-			$id = $id + 1;
-
-			if ($id>$id2) {
-				return;
-			}
-
-		}*/
-		
-			
-	}
 
 	public function set_idpedido($id1,$id2)
 	{

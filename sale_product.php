@@ -14,12 +14,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 {
 ?>
 
-        <script type="text/javascript">
-          /*var intevalo = setInterval('notif_observ()',5000);
-          var intevalo2 = setInterval('det_term()',60000);
-          var intevalo6 = setInterval('revisar_sinfecha()',20000);
-          var intevalo7 = setInterval('contar_sin_coment_venc()',30000);*/
-        </script>
+        
 
 
         

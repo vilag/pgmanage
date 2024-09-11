@@ -10,7 +10,7 @@
 
 		public function codigos_alm_pt($id)
 		{
-			
+				//Query lenta identificada
 				$sql="SELECT ap.idalmacen_pt,ap.idproducto,ap.codigo,ap.nombre,ap.cantidad,
 				(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Entrada') as cant_entrada, 
 				(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Salida') as cant_salida
@@ -240,24 +240,7 @@
 		}
 
 
-		public function abrir_terminados2()
-		{
-
-			/*$sql="SELECT n.idnotif,p.idpg_pedidos,p.no_control,n.fecha_hora as fecha_notif,DATE(n.fecha_hora) as fecha, TIME(n.fecha_hora) as hora,n.estatus, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs, (SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente, (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as prod_total, IFNULL((SELECT sum(cantidad) FROM entregas_detalle WHERE idpedido=p.idpg_pedidos),0) as prod_entregados FROM notif n INNER JOIN pg_pedidos p ON n.idpedido=p.idpg_pedidos WHERE p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO'  ORDER BY n.idnotif DESC";
-			return ejecutarConsulta($sql);*/
-
-
-			$sql="SELECT p.no_control,p.idpg_pedidos,
-			(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'' AND tipo='1') as num_docs,
-			(SELECT nombre FROM clientes WHERE idcliente=p.idcliente) as nom_cliente,
-			(SELECT pdp.fecha_hora2 FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora2 DESC LIMIT 1) as fecha_entrega_fab,
-			(SELECT pdp.fecha_hora FROM pg_detped pdp WHERE (SELECT idpg_pedidos FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=pdp.iddetalle_pedido LIMIT 1) = p.idpg_pedidos ORDER BY pdp.fecha_hora DESC LIMIT 1) as fecha_entrega_set,
-			(SELECT sum(cantidad) FROM salidas_entregas_detalles WHERE idpedido=p.idpg_pedidos) as cant_entrega,
-			(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_pendiente
-			FROM pg_pedidos p WHERE p.cant_est >= (SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) AND p.estatus<>'ENTREGADO' AND p.estatus<>'CANCELADO' ORDER BY p.estatus_docs DESC";
-			return ejecutarConsulta($sql);
-
-		}
+		
 
 		public function abrir_terminados()
 		{

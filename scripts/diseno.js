@@ -37,7 +37,7 @@ function init()
 		
 
 		//listar_pedidos();
-		//det_term();
+		
 
 	}
 
@@ -4315,56 +4315,7 @@ function abrir_seg_ped(idpg_pedidos,porc_avance,coment_vencim)
 		});		  
 }
 
-function guardar_coment_ped()
-{
-	var idpedido = $("#idpedido").val();
-	var idusuario=$("#idusuario").text();
-	var color_barra_s = $("#color_barra_s"+idpedido).text();
-	var porc_av_p = $("#porc_av_p").val();
-	var dias_restantes = $("#dias_restantes"+idpedido).text();
 
-	var coment = $("#coment_ped").val();
-	var color = $("#color").val();
-	var estatus = $("#estatus").val();
-	
-
-	var fecha1=moment().format('YYYY-MM-DD');
-	var hora_hoy=moment().format('HH:mm:ss');
-
-	var fecha = fecha1+" "+hora_hoy;
-
-	if (idusuario==4 || idusuario==1) {
-
-		$.post("ajax/diseno.php?op=consul_exist_notif",{idpedido:idpedido},function(data, status)
-		{
-			data = JSON.parse(data);
-
-			var num_pedido = data.num_pedido;
-
-
-			$.post("ajax/diseno.php?op=guardar_coment_ped",{coment:coment,color:color,idpedido:idpedido,fecha:fecha,estatus:estatus,color_barra_s:color_barra_s,porc_av_p:porc_av_p,dias_restantes:dias_restantes,idusuario:idusuario,num_pedido:num_pedido},function(data, status)
-			{
-			data = JSON.parse(data);
-
-				$.post("ajax/diseno.php?op=abrir_seg_ped&id="+idpedido,function(r){
-				$("#tbl_seguim_ped").html(r);
-
-				listar_pedidos();
-
-
-				});	
-
-			});
-
-
-		});	
-
-	}else{
-		bootbox.alert("No tienes permiso para realizar esta acción");
-	}
-		
-
-}
 
 
 function abrir_docs(idpg_pedidos)
@@ -8325,35 +8276,7 @@ function cambiar_prod_ped_list(idpg_detalle_pedidos)
 	});
 }
 
-function det_term()
-{
 
-	$.post("ajax/diseno.php?op=consul_idpgpedidos",function(data, status)
-	{
-		data = JSON.parse(data);
-
-		var id = data.idmin;
-		var id2 = data.idmax;
-
-		var fecha=moment().format('YYYY-MM-DD');
-		var hora=moment().format('HH:mm:ss');
-		var fecha_hora=fecha+" "+hora;
-
-		//alert(id+" "+id2);
-
-		$.post("ajax/diseno.php?op=det_term",{id:id,id2:id2,fecha_hora:fecha_hora},function(data, status)
-		{
-			data = JSON.parse(data);
-
-			//alert("ok");
-
-		});
-
-	});
-
-
-		
-}
 
 function set_idpedido()
 {

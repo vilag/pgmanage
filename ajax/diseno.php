@@ -5445,125 +5445,7 @@ switch ($_GET["op"])
 			
 		break;
 
-		case 'abrir_terminados2':
-			
-
-			$rspta = $diseno->abrir_terminados();
-
-
-
-						echo '	<thead>
-	                              <tr>
-
-	                              	<th>No. Control<br>|Cliente</th>
-	                              	
-	                              	<th>Fecha|Hora</th>
-	                              	<th>Estatus</th>
-	                              	<th>Opciones</th>
-	                              	
-	                              
-	                              </tr>
-	                            </thead>
-	                            <tbody>';
-
-			//$total=0;
-			while ($reg = $rspta->fetch_object())
-					{
-
-						/*if ($reg->estatus==1) {
-							$color = "#92F48F";
-						}elseif ($reg->estatus==2) {
-							$color = "";
-						}*/
-
-
-						if ($reg->num_docs==0) {
-
-							if ($reg->estatus==1) {
-								$color = "#D2E7E2";
-							}elseif ($reg->estatus==2) {
-								$color = "";
-							}
-
-							$mensaje="En espera de documentos...";
-							
-						}elseif ($reg->num_docs>0) {
-
-
-							if ($reg->estatus==1) {
-								$color = "#92F48F";
-							}elseif ($reg->estatus==2) {
-								$color = "";
-							}
-
-							$mensaje="Listo para entrega";
-
-
-
-						}
-
-							$avance_porc = ($reg->prod_entregados/$reg->prod_total)*100;
-
-							if ($avance_porc==100) {
-								$mensaje="Entrega programada";
-							}
-
-						
-
-						echo '
-
-								<tr style="background: '.$color.'">
-									<td style="width:30%">
-
-											<a>'.$reg->no_control.'</a>
-			                            	<br />
-			                            	<small>'.$reg->nom_cliente.'</small>
-
-									
-
-									</td>
-
-									<td>'.$reg->fecha_notif.'</td>
-	                                
-									
-									<td style="width:30%">
-											<div>
-						                    	
-						                    	<strong>'.$mensaje.'</strong>
-						                    	
-						                    </div>
-											
-
-									</td>
-									<td>
-
-                                        <a href="sale_product.php?pedido='.$reg->idpg_pedidos.'" onclick="abrir_pedido_notif('.$reg->idpg_pedidos.');">
-							               <button type="button" class="btn btn-dark"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button>
-									    </a>
-
-									    <a href="#" onclick="abrir_docs('.$reg->idpg_pedidos.');">
-							               <button type="button" class="btn btn-dark"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></button>
-									    </a>
-
-											           
-
-									</td style="width:20%">
-									
-	                                
-	                             </tr>	
-
-						';
-
-
-						
-					}
-
-						echo '</tbody>
-							  
-
-						';
-			
-		break;
+		
 
 		case 'abrir_pedido_notif':
 			
@@ -7596,16 +7478,7 @@ switch ($_GET["op"])
 	 		
 		break;
 
-		case 'det_term':
-
-			$id = $_POST['id'];
-			$id2 = $_POST['id2'];
-			$fecha_hora = $_POST['fecha_hora'];
-
-			$rspta=$diseno->det_term($id,$id2,$fecha_hora);
-	 		echo json_encode($rspta);
-	 		
-		break;
+		
 
 		case 'set_idpedido':
 

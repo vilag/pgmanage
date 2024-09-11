@@ -3900,35 +3900,7 @@ function set_fecha_hora_entr()
 }
 
 
-function det_term()
-{
 
-	$.post("ajax/diseno.php?op=consul_idpgpedidos",function(data, status)
-	{
-		data = JSON.parse(data);
-
-		var id = data.idmin;
-		var id2 = data.idmax;
-
-		var fecha=moment().format('YYYY-MM-DD');
-		var hora=moment().format('HH:mm:ss');
-		var fecha_hora=fecha+" "+hora;
-
-		//alert(id+" "+id2);
-
-		$.post("ajax/diseno.php?op=det_term",{id:id,id2:id2,fecha_hora:fecha_hora},function(data, status)
-		{
-			data = JSON.parse(data);
-
-			//alert("ok");
-
-		});
-
-	});
-
-
-		
-}
 
 
 

@@ -1572,11 +1572,15 @@ function actualizar_exc()
 				
 }
 
+function mostrar_op_list()
+{
+	$("#div_op").show();
+	$("#div_panel_prod").hide();
+}
 
 function mostrar_op()
 {
-	// $("#div_op").show();
-	// $("#div_panel_prod").hide();
+	
 	var idusuario=$("#idusuario").text();
 	var no_op_buscar=$("#no_op_buscar").val();
 	//var fecha_buscar=$("#fecha_buscar").val();

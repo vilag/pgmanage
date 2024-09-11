@@ -59,7 +59,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                 </div>
                                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                   <div class="form-group col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                                                    <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ordenes de producción" onclick="mostrar_op();" id="">OP</button>
+                                                    <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ordenes de producción" onclick="mostrar_op_list();" id="">OP</button>
                                                     <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Productos" onclick="mostrar_prod_detalle();" id="">Productos</button>
                                                     <!-- <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Productos pendientes de fabricación" onclick="" id="">Pendientes</button> -->
                                                     

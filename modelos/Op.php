@@ -877,43 +877,156 @@ Class Opr
 		return ejecutarConsulta($sql);
 	}
 
-	public function listar_productos_produccion($select_area_prod)
+	public function listar_productos_produccion($select_area_prod,$estatus,$offset,$estatus_pedido)
 	{
-		if ($select_area_prod=='HE') {
-			$area=1;
-		}elseif ($select_area_prod=='PI') {
-			$area=2;
-		}elseif ($select_area_prod=='PL') {
-			$area=3;
-		}elseif ($select_area_prod=='HO') {
-			$area=8;
-		}elseif ($select_area_prod=='EP') {
-			$area=5;
-		}elseif ($select_area_prod=='EC') {
-			$area=6;
-		}elseif ($select_area_prod=='EM') {
-			$area=7;
+		$area=$select_area_prod;
+		if ($area==1) {
+			$sQuery = "a.area1 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='1' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area1";
 		}
+		if ($area==2) {
+			$sQuery = "a.area2 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='2' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area2";
+		}
+		if ($area==3) {
+			$sQuery = "a.area3 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='3' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area3";
+		}
+		if ($area==8) {
+			$sQuery = "a.area8 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='8' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area8";
+		}
+		if ($area==5) {
+			$sQuery = "a.area5 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='5' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area5";
+		}
+		if ($area==6) {
+			$sQuery = "a.area6 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='6' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area6";
+		}
+		if ($area==7) {
+			$sQuery = "a.area7 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='7' AND idop_detalle_prod=a.idop_detalle_prod) WHERE b.estatus<>'CANCELADO' AND b.estatus<>'ENTREGADO' AND b.estatus<>'0'";
+			$sQueryC = "odp.area7";
+		}
+
+		if ($estatus_pedido==1) {
+			$estatus_ped = " b.estatus='ENTREGADO'";
+		}else{
+			$estatus_ped = " b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO' AND b.estatus<>'0'";
+		}
+		
+
+		$sql_2="UPDATE op_detalle_prod a INNER JOIN pg_pedidos b ON a.no_control=b.no_control SET $sQuery";
+		ejecutarConsulta($sql_2);
 		//Query lenta identificada
-		$sql="SELECT odp.idop_detalle_prod,odp.no_control,odp.cant_tot,odp.observ,
-		(SELECT codigo FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as codigo,
-		(SELECT descripcion FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as descripcion,
-		(SELECT medida FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as medida,
-		(SELECT color FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as color,
 
-		(SELECT area FROM op_detalle WHERE idop=odp.idop AND area='$area') as area,
-		(SELECT no_op FROM op WHERE idop=odp.idop) as op,
-		(SELECT fecha_entrega FROM pg_pedidos WHERE no_control=odp.no_control) as fecha_entrega,
+		if ($estatus==1) {
 
-		(SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area') as sum_capt,
-		(SELECT IFNULL(avance,0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area' ORDER BY fecha_hora DESC LIMIT 1) as av_capt
+			$sql="SELECT 
+			odp.idop_detalle_prod,
+			odp.no_control,
+			odp.cant_tot,
+			odp.observ,
+			a.codigo,
+			a.descripcion,
+			a.medida,
+			a.color,
+			(SELECT area FROM op_detalle WHERE idop=odp.idop AND area='$area') as area,
+			c.no_op as op,
+			b.fecha_entrega,
+			(SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area') as sum_capt,
+			(SELECT IFNULL(avance,0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area' ORDER BY fecha_hora DESC LIMIT 1) as av_capt,
+			b.estatus
+			FROM op_detalle_prod odp 
+			INNER JOIN pg_detalle_pedidos a ON odp.iddetalle_pedido=a.idpg_detalle_pedidos
+			INNER JOIN pg_pedidos b ON odp.no_control = b.no_control
+			INNER JOIN op c ON odp.idop = c.idop
+			WHERE 
+			$sQueryC>=odp.cant_tot
+			AND (SELECT count(area) FROM op_detalle WHERE area='$area' AND idop=odp.idop)>0 
+			AND $estatus_ped
+			ORDER BY b.fecha_entrega ASC";
+			return ejecutarConsulta($sql);
+		}else{
+
+			$sql="SELECT 
+			odp.idop_detalle_prod,
+			odp.no_control,
+			odp.cant_tot,
+			odp.observ,
+			a.codigo,
+			a.descripcion,
+			a.medida,
+			a.color,
+			(SELECT area FROM op_detalle WHERE idop=odp.idop AND area='$area') as area,
+			c.no_op as op,
+			b.fecha_entrega,
+			(SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area') as sum_capt,
+			(SELECT IFNULL(avance,0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area' ORDER BY fecha_hora DESC LIMIT 1) as av_capt,
+			b.estatus
+			FROM op_detalle_prod odp 
+			INNER JOIN pg_detalle_pedidos a ON odp.iddetalle_pedido=a.idpg_detalle_pedidos
+			INNER JOIN pg_pedidos b ON odp.no_control = b.no_control
+			INNER JOIN op c ON odp.idop = c.idop
+			WHERE 
+			$sQueryC<odp.cant_tot
+			AND (SELECT count(area) FROM op_detalle WHERE area='$area' AND idop=odp.idop)>0 
+			AND $estatus_ped
+			ORDER BY b.fecha_entrega ASC";
+			return ejecutarConsulta($sql);
+		}
+		
+
+
+		// $sql="UPDATE op_detalle_prod a SET area1 = (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE area='1' AND idop_detalle_prod=a.idop_detalle_prod)";
+
+
+		
+		// "SELECT 
+		// 	odp.idop_detalle_prod,
+		// 	odp.no_control,
+		// 	odp.cant_tot,
+		// 	odp.observ,
+		// 	a.codigo,
+		// 	a.descripcion,
+		// 	a.medida,
+		// 	a.color,
+		// 	(SELECT area FROM op_detalle WHERE idop=odp.idop AND area='$area') as area,
+		// 	c.no_op as op,
+		// 	b.fecha_entrega,
+		// 	(SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area') as sum_capt,
+		// 	(SELECT IFNULL(avance,0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area' ORDER BY fecha_hora DESC LIMIT 1) as av_capt,
+		// 	b.estatus
+		// 	FROM op_detalle_prod odp 
+		// 	INNER JOIN pg_detalle_pedidos a ON odp.iddetalle_pedido=a.idpg_detalle_pedidos
+		// 	INNER JOIN pg_pedidos b ON odp.no_control = b.no_control
+		// 	INNER JOIN op c ON odp.idop = c.idop
+		// 	WHERE 
+		// 	odp.area1>=odp.cant_tot
+		// 	AND (SELECT count(area) FROM op_detalle WHERE area='$area' AND idop=odp.idop)>0 
+		// 	AND b.estatus<>'ENTREGADO' AND b.estatus<>'CANCELADO' AND b.estatus<>'0'
+		// 	ORDER BY b.fecha_entrega ASC"
+		
+		
+		// $sql="SELECT odp.idop_detalle_prod,odp.no_control,odp.cant_tot,odp.observ,
+		// (SELECT codigo FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as codigo,
+		// (SELECT descripcion FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as descripcion,
+		// (SELECT medida FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as medida,
+		// (SELECT color FROM pg_detalle_pedidos WHERE idpg_detalle_pedidos=odp.iddetalle_pedido) as color,
+
+		// (SELECT area FROM op_detalle WHERE idop=odp.idop AND area='$area') as area,
+		// (SELECT no_op FROM op WHERE idop=odp.idop) as op,
+		// (SELECT fecha_entrega FROM pg_pedidos WHERE no_control=odp.no_control) as fecha_entrega,
+
+		// (SELECT IFNULL(sum(cant_capt),0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area') as sum_capt,
+		// (SELECT IFNULL(avance,0) FROM op_avance_prod WHERE idop_detalle_prod=odp.idop_detalle_prod AND area='$area' ORDER BY fecha_hora DESC LIMIT 1) as av_capt
 				
-		FROM op_detalle_prod odp 
-		WHERE (SELECT count(area) FROM op_detalle WHERE area='$area' AND idop=odp.idop)>0 AND 
-			  (SELECT estatus FROM pg_pedidos WHERE no_control=odp.no_control)<>'ENTREGADO' AND
-			  (SELECT estatus FROM pg_pedidos WHERE no_control=odp.no_control)<>'CANCELADO'
-		ORDER BY (SELECT fecha_entrega FROM pg_pedidos WHERE no_control=odp.no_control) ASC";
-		return ejecutarConsulta($sql);
+		// FROM op_detalle_prod odp 
+		// WHERE (SELECT count(area) FROM op_detalle WHERE area='$area' AND idop=odp.idop)>0 AND 
+		// 	  (SELECT estatus FROM pg_pedidos WHERE no_control=odp.no_control)<>'ENTREGADO' AND
+		// 	  (SELECT estatus FROM pg_pedidos WHERE no_control=odp.no_control)<>'CANCELADO'
+		// ORDER BY (SELECT fecha_entrega FROM pg_pedidos WHERE no_control=odp.no_control) ASC LIMIT 10 offset $offset";
+		// return ejecutarConsulta($sql);
 	}
 
 	public function addProdOp()

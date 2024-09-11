@@ -1289,16 +1289,27 @@ function calcular_avance2(idop_detalle_prod)
 	    }
 }
 
-
+var offset = 0;
+// var conteo_ps = 1;
 function listar_productos_produccion()
 {
-	
+	// document.getElementById("btn_paginados").style.display="block";
+	// document.getElementById("btn_paginados2").style.display="block";
+	// $("#num_pag_salida").text(conteo_ps);
+	// $("#num_pag_salida2").text(conteo_ps);
 	var select_area_prod = $("#select_area_prod").val();
+	var select_estatus = $("#select_estatus").val();
+	var select_estatus_pedido = $("#select_estatus_pedido").val();
+	// alert(select_area_prod);
+	// alert(select_estatus);
+	var dialog = bootbox.dialog({
+		message: '<p class="text-center mb-0"><i class="fas fa-spinfa-cog"></i> Consultando datos...</p>',
+		closeButton: false
+	});
 
-	//alert(select_area_prod);
-
-	$.post("ajax/op.php?op=listar_productos_produccion&select_area_prod="+select_area_prod,function(r){
-	$("#tbl_productos_prod").html(r);			        
+	$.post("ajax/op.php?op=listar_productos_produccion&select_area_prod="+select_area_prod+"&estatus="+select_estatus+"&offset="+offset+"&estatus_pedido="+select_estatus_pedido,function(r){
+	$("#tbl_productos_prod").html(r);	
+		dialog.modal('hide');		        
 	});
 }
 
@@ -1306,6 +1317,7 @@ function mostrar_prod_detalle()
 {
 	$("#div_op").hide();
 	$("#div_panel_prod").show();
+	
 }
 
 function listar_productos_op()

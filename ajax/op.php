@@ -2467,8 +2467,11 @@ switch ($_GET["op"])
 		case 'listar_productos_produccion':
 
 			$select_area_prod=$_GET['select_area_prod'];
+			$estatus=$_GET['estatus'];
+			$offset=$_GET['offset'];
+			$estatus_pedido=$_GET['estatus_pedido'];
 
-			$rspta = $opr->listar_productos_produccion($select_area_prod);
+			$rspta = $opr->listar_productos_produccion($select_area_prod,$estatus,$offset,$estatus_pedido);
 
 
 
@@ -2484,6 +2487,7 @@ switch ($_GET["op"])
 	                      <th>CANT. FAB.</th>
 	                      <th>% AVANCE</th>
 	                      <th>FECHA DE ENTREGA</th>
+						  <th>ESTATUS DE PEDIDO</th>
 	                    </tr> 
 
 	                  </thead>
@@ -2556,7 +2560,8 @@ switch ($_GET["op"])
 									<td>'.$reg->cant_tot.'</td>
 									<td>'.$av_real.'</td>
 									<td>'.$porc.' %</td>
-									<td>'.$reg->fecha_entrega.'</td>	                                
+									<td>'.$reg->fecha_entrega.'</td>
+									<td>'.$reg->estatus.'</td>                                
 	             </tr>
 
 

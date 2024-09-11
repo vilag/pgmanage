@@ -118,26 +118,62 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_panel_prod">
 
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="">
-                                                        <label>Área</label>
-                                                        <select  class="form-control" id="select_area_prod" onchange="listar_productos_produccion();">
-                                                 
-                                                          <option value="select">SELECCIONAR</option>
-                                                          <option value="HE">Herreria</option>
-                                                          <option value="PI">Pintura</option>
-                                                          <option value="PL">Plásticos</option>
-                                                          <option value="HO">Horno</option>
-                                                          <option value="EP">Ensamble Porcelanizado</option>
-                                                          <option value="EC">Ensamble Comercial</option>
-                                                          <option value="EM">Ensamble Muebles</option>
-                                                                                    
+                                                      <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                          <label>Área</label>
+                                                          <select  class="form-control" id="select_area_prod">
+                                                  
+                                                            <option value="select">SELECCIONAR</option>
+                                                            <option value="1">Herreria</option>
+                                                            <option value="2">Pintura</option>
+                                                            <option value="3">Plásticos</option>
+                                                            <option value="8">Horno</option>
+                                                            <option value="5">Ensamble Porcelanizado</option>
+                                                            <option value="6">Ensamble Comercial</option>
+                                                            <option value="7">Ensamble Muebles</option>
+                                                                                      
+                                                          </select>
+                                                      </div>
+                                                      <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                        <label for="">Estatus de producto</label>
+                                                        <select  class="form-control" id="select_estatus">
+                                                  
+                                                            <option value="">SELECCIONAR</option>
+                                                            <option value="1">Terminados</option>
+                                                            <option value="0">En proceso</option>
+                          
                                                         </select>
+                                                      </div>
+                                                      <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                                        <label for="">Estatus de pedido</label>
+                                                        <select  class="form-control" id="select_estatus_pedido" disabled>
+                                                  
+                                                            <option value="0">Sin entregar</option>
+                                                            <option value="1">Entregados</option>
+                                                            
+                          
+                                                        </select>
+                                                      </div> 
+                                                      <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-top: 27px;">
+                                                        <button class="btn btn-primary" onclick="listar_productos_produccion();">Buscar</button>
+                                                      </div> 
                                                     </div>
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="">
                                                       <label>Tabla de avances</label>
                                                     </div>
+
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="">
-                                                      <table class="table table-bordered" id="tbl_productos_prod" style="width: 100%;">
-                                                      </table>
+                                                      <!-- <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados">
+                                                        <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida" onclick="back_pagina_salida();">Anterior</button>
+                                                        <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida">1</button>
+                                                        <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida" onclick="next_pagina_salida();">Siguiente</button>
+                                                      </div> -->
+                                                        <table class="table table-bordered" id="tbl_productos_prod" style="width: 100%;">
+                                                        </table>
+                                                      <!-- <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados2">
+                                                        <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_salida2" onclick="back_pagina_salida();">Anterior</button>
+                                                        <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_salida2">1</button>
+                                                        <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_salida2" onclick="next_pagina_salida();">Siguiente</button>
+                                                      </div> -->
                                                     </div>
 
                                                         

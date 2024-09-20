@@ -47,7 +47,7 @@ require 'header.php';
             <img src="images/img_grupo/LOGO.png" alt="" style="width: 80%;"> 
           </div>
           <div style="width: 50%; display: flex; align-items: center; justify-content: center; padding: 5px 50px; float: left;">
-            <img src="images/img_grupo/pg_completo.png" alt="" style="width: 50%;"> 
+            <img src="images/img_grupo/icono.png" alt="" style="width: 30%;"> 
           </div>   
           <div style="width: 50%; display: flex; align-items: center; justify-content: center; padding: 5px 50px; float: left;">
             <img src="images/img_grupo/logo_sin_fondo.png" alt="" style="width: 30%;"> 

@@ -44,7 +44,7 @@ require 'header.php';
         <!-- page content -->
         <div class="right_col" role="main">
           <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding: 5px 50px;">
-            <img src="images/img_grupo/logo2.png" alt="" style="width: 80%;"> 
+            <img src="images/img_grupo/gif_logo.png" alt="" style="width: 80%;"> 
           </div>
           <div style="width: 100%; display: flex; align-items: center; justify-content: center; padding: 5px 50px; float: left;">
             <img src="images/img_grupo/icono.png" alt="" style="width: 100px; margin: 20px;"> 

@@ -47,8 +47,10 @@ function init()
 
 
 	$("#div_op").show();
+
+
 	$("#div_prod").hide();
-	$("#div_panel_prod").hide();
+	$("#div_reportes").hide();
 	
 		
 	window.location.hash="no-back-button";
@@ -1315,9 +1317,9 @@ function listar_productos_produccion()
 
 function mostrar_prod_detalle()
 {
-	$("#div_op").hide();
-	$("#div_panel_prod").show();
 	
+	$("#div_panel_prod").show();
+	$("#div_reportes_op").hide();
 }
 
 function listar_productos_op()
@@ -1575,7 +1577,7 @@ function actualizar_exc()
 function mostrar_op_list()
 {
 	$("#div_op").show();
-	$("#div_panel_prod").hide();
+	$("#div_reportes").hide();
 }
 
 function mostrar_op()
@@ -2102,6 +2104,87 @@ function addProd_op(idpg_detped){
 	});
 
 	
-}	
+}
+
+function listar_op_estatus(){
+
+	
+
+	var area = $("#select_area_op").val();
+	var estatus = $("#select_area_estatus").val();
+	if (area>0 && estatus>0) {
+		var dialog = bootbox.dialog({
+			message: '<p class="text-center mb-0"><i class="fas fa-spinfa-cog"></i> Consultando datos...</p>',
+			closeButton: false
+		});
+		$.post("ajax/op.php?op=listar_op_estatus&area="+area+"&estatus="+estatus,function(r){
+		$("#tbl_op_estatus").html(r);
+				dialog.modal('hide');				
+		});
+	}else{
+		bootbox.alert("Por favor selecciona los valores de busqueda solicitados.");
+	}
+	
+}
+
+function mostrar_reportes(){
+
+	$("#div_op").hide();
+	$("#div_reportes").show();
+	$("#div_panel_prod").hide();
+	$("#div_reportes_op").hide();
+	
+}
+
+function mostrar_reportes_op(){
+
+	$("#div_op").hide();
+	$("#div_reportes").show();
+	$("#div_panel_prod").hide();
+	$("#div_reportes_op").show();
+	
+}
+
+
+function exportTableToExcel(tableID){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+	var area = $("#select_area_op").val();
+	if (area==1) {area="Herreria";}
+	if (area==2) {area="Pintura";}
+	if (area==3) {area="Plasticos";}
+	if (area==5) {area="EnsamblePorcelanizado";}
+	if (area==6) {area="EnsambleComercial";}
+	if (area==7) {area="EnsambleMueble";}
+	if (area==8) {area="Horno";}
+    
+    // Specify file name
+    // filename = filename?filename+'.xls':'excel_data.xls';
+	filename = "Reporte_OP"+"_"+area+'.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
 
 init();

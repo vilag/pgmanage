@@ -34,7 +34,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                               }
 
                             </style>
-
+        
 
         <!-- page content -->
         <div class="right_col" role="main" id="page_pedido">
@@ -49,28 +49,30 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                 <div class="x_panel">
                
 
-                                              <div class="x_content">
+                  <div class="x_content">
 
                     
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-                                                  <h5>Ordenes de producción</h5>
+                      <h5>Ordenes de producción</h5>
 
-                                                </div>
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    </div>
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                   <div class="form-group col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                                                    <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ordenes de producción" onclick="mostrar_op_list();" id="">OP</button>
-                                                    <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Productos" onclick="mostrar_prod_detalle();" id="">Productos</button>
+                                                    <button type="button" class="btn btn-primary"  onclick="mostrar_op_list();" id="">Registro de avances</button>
+                                                    
+                                                    <button type="button" class="btn btn-primary" id="" onclick="mostrar_reportes();">Reportes</button>
                                                     <!-- <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Productos pendientes de fabricación" onclick="" id="">Pendientes</button> -->
                                                     
                                                   </div>
-                                                  <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2" align="right">
+                                                  <!-- <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2" align="right">
                                                     <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Errores en OP" onclick="" id=""><h5 id="num_anom"></h5></button>
-                                                  </div>
-                                                </div>
+                                                  </div> -->
+                    </div>
 
 
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_op">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_op">
+                                                  
                                                   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="right">
 
                                                         <div class="btn-group">
@@ -113,15 +115,66 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     </div>
                                                     
                                                   </div>
-                                                </div>
+                    </div>
 
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_panel_prod">
+                                                
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_reportes">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <button style="background-color: #04a57c; color: #fff;" type="button" class="btn btn-secundary" data-toggle="tooltip" data-placement="top" title="Reportes de productos" onclick="mostrar_prod_detalle();" id="">Productos</button>
+                        <button style="background-color: #04a57c; color: #fff;" type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Reportes de OP's" onclick="mostrar_reportes_op();" id="">Ordenes de producción</button>
+                      </div>
+                                                
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_reportes_op">
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="margin: 20px 0px;">
+                            <h6>Generar reportes de produccion por Ordenes de producción.</h6>
+                        </div>
+                                                  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right;">
+                                                    <div class="btn-group">
+                                                      
+                                                      <select  class="form-control" id="select_area_op" style="margin-right: 10px;">
 
+                                                        <option value="select">Seleccionar área</option>
+                                                        <option value="1">Herreria</option>
+                                                        <option value="2">Pintura</option>
+                                                        <option value="3">Plásticos</option>
+                                                        <option value="8">Horno</option>
+                                                        <option value="5">Ensamble Porcelanizado</option>
+                                                        <option value="6">Ensamble Comercial</option>
+                                                        <option value="7">Ensamble Muebles</option>
+                                                                                  
+                                                      </select>
+                                                      <select  class="form-control" id="select_area_estatus" style="margin-right: 10px;">
+
+                                                        <option value="select">Seleccionar estatus</option>
+                                                        <option value="1">Terminados</option>
+                                                        <option value="2">En proceso</option>
+                                                        
+                                                                                  
+                                                      </select>
+                                                      <button style="margin-right: 10px;" type="button" class="btn btn-dark" onclick="listar_op_estatus()">Buscar</button>
+                                                      <button type="button" class="btn btn-dark" onclick="exportTableToExcel('tbl_op_estatus')">Exportar</button>
+                                                          <!-- <button type="button" class="btn btn-dark" id="btnExportarRep_op" onclick="exportTableToExcel();">Excel</button> -->
+                                                          
+                                                          
+                                                    </div>
+                                                    
+                                                   
+                                                    
+                                                  </div>
+                                                  
+                                                  <table class="table table-bordered" id="tbl_op_estatus" style="width: 100%;">
+                                                  </table>
+                      </div>  
+                                                  
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_panel_prod" >
+                        <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin: 20px 0px;">
+                            <h6>Generar reportes de produccion por Productos.</h6>
+                        </div>
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="">
                                                       <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                           <label>Área</label>
                                                           <select  class="form-control" id="select_area_prod">
-                                                  
+
                                                             <option value="select">SELECCIONAR</option>
                                                             <option value="1">Herreria</option>
                                                             <option value="2">Pintura</option>
@@ -136,21 +189,21 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                       <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                         <label for="">Estatus de producto</label>
                                                         <select  class="form-control" id="select_estatus">
-                                                  
+
                                                             <option value="">SELECCIONAR</option>
                                                             <option value="1">Terminados</option>
                                                             <option value="0">En proceso</option>
-                          
+
                                                         </select>
                                                       </div>
                                                       <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3">
                                                         <label for="">Estatus de pedido</label>
                                                         <select  class="form-control" id="select_estatus_pedido" disabled>
-                                                  
+
                                                             <option value="0">Sin entregar</option>
                                                             <option value="1">Entregados</option>
                                                             
-                          
+
                                                         </select>
                                                       </div> 
                                                       <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-top: 27px;">
@@ -180,10 +233,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                                                         
 
-                                                </div>
-
-
-                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_prod">
+                                                    </div>
+                      </div>
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_prod">
 
                                                   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="right">
 
@@ -214,14 +266,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <input type="number" class="form-control" value="0" id="input_fil_area">
                                                   </div>
 
-                                                </div>
+                      </div>
 
                                                   
-                                              </div>
+                    </div>
                                 
 
                     
-                                </div>
+                  </div>
 
 
                 </div>
@@ -912,7 +964,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
       </div>
     </div> 
-
+    
      
               
     <script src="vendors/jquery-knob/dist/jquery.knob.min.js"></script>

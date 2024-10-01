@@ -2646,6 +2646,87 @@ switch ($_GET["op"])
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
+
+		case 'listar_op_estatus':
+
+			$area=$_GET['area'];
+			$estatus=$_GET['estatus'];
+
+			$rspta = $opr->listar_op_estatus($area,$estatus);
+
+
+
+						echo '	<thead>
+	                              <tr>
+	                              	
+			
+	                              	<th>Área</th>
+	                              	<th>No. OP</th>
+	                              	<th>Fecha de registro</th>
+									<th>Áreas asignadas</th>
+									<th>Total OP</th>
+									<th>Requerido por área</th>
+									
+										
+									<th>Fabricado área</th>
+
+									<th>Avance área</th>
+									<th>Avance Total OP</th>
+									
+	                              	
+	                              	
+	                              </tr>
+	                            </thead>
+	                            <tbody>';
+
+			//$total=0;
+			while ($reg = $rspta->fetch_object())
+					{
+						$requerimiento_total_op = $reg->cant_areas*$reg->total_producto;
+						// $avance_area = ($reg->total_producto/$reg->avance_area)*100;
+						$avance_area = round(($reg->avance_area*100)/$reg->total_producto,1);
+						$avance_total = round(($reg->avance_total*100)/$requerimiento_total_op,1);
+						// $avance_total = ($requerimiento_total_op/$reg->avance_total)*100;
+						if ($area==1) {$area="Herreria";}
+						if ($area==2) {$area="Pintura";}
+						if ($area==3) {$area="Plásticos";}
+						if ($area==5) {$area="Ensamble (Porcelanizado)";}
+						if ($area==6) {$area="Ensamble (Comercial)";}
+						if ($area==7) {$area="Ensamble (Mueble)";}
+						if ($area==8) {$area="Horno";}
+
+						echo '
+
+								<tr>
+									<td>'.$area.'</td>
+	                                <td>'.$reg->no_op.'</td>
+	                                <td>'.$reg->fecha_registro.'</td>
+									<td>'.$reg->cant_areas.'</td>
+									<td>'.$requerimiento_total_op.'</td>
+									<td>'.$reg->total_producto.'</td>
+									
+									
+									<td>'.$reg->avance_area.'</td>
+
+									<td>'.$avance_area.'%</td>
+									<td>'.$avance_total.'%</td>
+	                                
+	                                
+	                             </tr>
+
+
+						';
+
+
+						
+					}
+
+						echo '</tbody>
+							  
+
+						';
+			
+		break;
 		
 
 	}

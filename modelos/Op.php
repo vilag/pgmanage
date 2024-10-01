@@ -1046,6 +1046,67 @@ Class Opr
 		$sql="UPDATE pg_detped SET op=(SELECT no_op FROM op WHERE idop='$idop') WHERE idpg_detped='$idpg_detped'";
 		return ejecutarConsulta($sql);
 	}
+
+	public function listar_op_estatus($area,$estatus)
+	{
+		if ($estatus==1) {
+			$condition = "(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area='$area')>=(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop)";
+		}
+		if ($estatus==2) {
+			$condition = "(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area='$area')<(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop)";
+		}
+
+		$sql_2="SELECT 
+		a.no_op, 
+		a.fecha_registro,
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop) as cant_areas,	
+		(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop) as total_producto,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area='$area') as avance_area,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop) as avance_total		
+		FROM op a WHERE (SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area='$area')>0 
+		AND
+		$condition
+		ORDER BY a.no_op DESC";
+		return ejecutarConsulta($sql_2);
+	
+	}
+
+	public function listar_op_estatus_()
+	{
+
+		$sql_2="SELECT 
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop) as areas,
+		a.no_op, a.fecha_registro,
+		(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop) as Total_Area,
+		((SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop)*(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop)) as Total_OP,		
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=1) as Herreria,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=1) as Avance_Herreria,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=2) as Pintura,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=2) as Avance_Pintura,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=3) as Plásticos,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=3) as Avance_Plasticos,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=5) as Ens_Porc,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=5) as Avance_Ens_Porc,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=6) as Ens_Com,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=6) as Avance_Ens_Com,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=7) as Ens_Mue,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=7) as Avance_Ens_Mue,
+
+		(SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area=8) as Horno,
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area=8) as Avance_Horno,
+
+		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop) as Avance_Total
+		
+		FROM op a LIMIT 10";
+		return ejecutarConsulta($sql_2);
+	
+	}
 	
 
 }

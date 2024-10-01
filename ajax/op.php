@@ -2664,7 +2664,7 @@ switch ($_GET["op"])
 	                              	<th>No. OP</th>
 	                              	<th>Fecha de registro</th>
 									<th>Áreas asignadas</th>
-									<th>Total OP</th>
+									<th>Total de productos OP</th>
 									<th>Requerido por área</th>
 									
 										

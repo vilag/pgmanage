@@ -126,7 +126,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                 
                       <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="div_reportes_op">
                         <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"  style="margin: 20px 0px;">
-                            <h6>Generar reportes de produccion por Ordenes de producción.</h6>
+                            <h6>Generar reportes de produccion por OP's.</h6>
                         </div>
                                                   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: right;">
                                                     <div class="btn-group">

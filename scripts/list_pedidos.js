@@ -4,7 +4,7 @@ var lugar = $("#lugar_user").text();
 var offset = 0;
 function init()
 {
-	location.href ="https://pgmanage.host/susp.php";
+	// location.href ="https://pgmanage.host/susp.php";
 	
 	document.getElementById("btn_paginado").style.display="block";
 	document.getElementById("btn_paginado2").style.display="block";

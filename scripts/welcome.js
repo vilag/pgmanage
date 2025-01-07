@@ -1,6 +1,6 @@
 function init()
 {
-	location.href ="https://pgmanage.host/susp.php";
+	// location.href ="https://pgmanage.host/susp.php";
 	//listar_pedidos();
 	llenar_anios()	
 	

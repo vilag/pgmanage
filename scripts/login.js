@@ -2,7 +2,7 @@ function init()
 {
 
   //alert("entra");
-  location.href ="https://pgmanage.host/susp.php";
+//   location.href ="https://pgmanage.host/susp.php";
 }
 
 

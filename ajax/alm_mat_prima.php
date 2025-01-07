@@ -345,14 +345,24 @@ switch ($_GET["op"])
 					{
 						echo '						
 							<tr>
-                                <td>'.$reg->identrada.'</td>
+                                <td id="tbl_ident_ent'.$reg->identrada.'">'.$reg->identrada.'</td>
                                 <td>ENTRADA</td>
-                                <td>'.$reg->nombre.'</td>	
-                                <td>'.$reg->cantidad.'</td> 
-                                <td>'.$reg->proveedor.'</td>
-                                <td>'.$reg->lote.'</td>
+                                <td id="tbl_nom_ent'.$reg->identrada.'">'.$reg->nombre.'</td>	
+                                <td id="tbl_cant_ent'.$reg->identrada.'">'.$reg->cantidad.'</td> 
+                                <td id="tbl_prov_ent'.$reg->identrada.'">'.$reg->proveedor.'</td>
+                                <td id="tbl_lote_ent'.$reg->identrada.'">'.$reg->lote.'</td>
                                 <td>'.$reg->fecha.'</td>
-                                <td>'.$reg->observacion.'</td>                               
+                                <td id="tbl_obs_ent'.$reg->identrada.'">'.$reg->observacion.'</td> 
+                                <td>
+                                    
+                                    <button type="button" class="btn" style="background-color: #283d61;" onclick="editar_entrada('.$reg->identrada.');">
+                                        <span class="glyphicon glyphicon-edit" aria-hidden="true" style="color: #fff;"></span>
+                                    </button>
+                                    <button type="button" class="btn" style="background-color: #cb0404;" onclick="borrar_entrada('.$reg->identrada.');">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: #fff;"></span>
+                                    </button>
+                                    
+                                </td>                               
 	                        </tr>
 						';						
 					}
@@ -500,11 +510,37 @@ switch ($_GET["op"])
 
 		break;
 
+        case 'updateEntradaAmp':
+		
+			$identrada = $_POST['identrada'];
+            $cantidad = $_POST['cantidad'];
+            $proveedor = $_POST['proveedor'];
+            $lote = $_POST['lote'];
+            $obs = $_POST['obs'];
+
+	 		$rspta=$alm_mat_prima->updateEntradaAmp($identrada,$cantidad,$proveedor,$lote,$obs);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+
+
+		break;
+
         case 'borrar_salida':
 		
 			$idsalida = $_POST['idsalida'];
 
 	 		$rspta=$alm_mat_prima->borrar_salida($idsalida);
+			echo json_encode($rspta);
+			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
+
+
+		break;
+
+        case 'borrar_entrada':
+		
+			$identrada = $_POST['identrada'];
+
+	 		$rspta=$alm_mat_prima->borrar_entrada($identrada);
 			echo json_encode($rspta);
 			//echo $rspta ? "Ingreso registrado" : "No se pudieron registrar todos los datos de ingreso";
 

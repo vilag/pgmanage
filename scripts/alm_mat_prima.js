@@ -698,12 +698,129 @@ function borrar_salida(idsalida){
     }else{
         bootbox.alert("Por el momento no tienes permisos para realizar esta acción, solicta los permisos con el administrador del sistema.");
     }
+   
+}
 
-    
+var dialog_edit_entrada;
+function editar_entrada(identrada){
 
+    if (idusuario==1) {
 
+        var nombre = $("#tbl_nom_ent"+identrada).text();
+        var cantidad = $("#tbl_cant_ent"+identrada).text();
+        var proveedor = $("#tbl_prov_ent"+identrada).text();
+        var lote = $("#tbl_lote_ent"+identrada).text();
+        // var no_control = $("#tbl_sal_cont"+identrada).text();
+        // var op = $("#tbl_sal_op"+identrada).text();
+        var obs = $("#tbl_obs_ent"+identrada).text();
 
-    
+        dialog_edit_entrada = bootbox.dialog({
+            message: '<div>'+
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<p style="margin: 0px;">Actualizar registro de entrada.</p>'+
+                            '<p style="margin-top: 10px;">ID: '+identrada+'</p>'+
+                            '<p style="margin-top: 10px;">NOMBRE: '+nombre+'</p>'+
+                        '</div>'+
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<label>Cantidad</label>'+
+                            '<input type="text" class="form-control" value="'+cantidad+'" id="input_upd_entrada_cant'+identrada+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<label>Proveedor</label>'+
+                            '<input type="text" class="form-control" value="'+proveedor+'" id="input_upd_entrada_prov'+identrada+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<label>Lote</label>'+
+                            '<input type="text" class="form-control" value="'+lote+'" id="input_upd_entrada_lote'+identrada+'">'+
+                        '</div>'+
+                       
+                        '<div class="form-group col-md-12 col-sm-12">'+
+                            '<label>Observación</label>'+
+                            '<input type="text" class="form-control" value="'+obs+'" id="input_upd_entrada_obs'+identrada+'">'+
+                        '</div>'+
+                        '<div class="form-group col-md-12 col-sm-12" style="padding: 20px; text-align: center;">'+
+                            '<button class="btn btn-secondary" onclick="cancelupdateEntradaAmp();">No Actualizar</button>'+
+                            '<button class="btn btn-primary" onclick="updateEntradaAmp('+identrada+');">Actualizar</button>'+
+                        '</div>'+
+                        
+                    '</div>',
+            closeButton: false
+        });
+
+    }else{
+        bootbox.alert("Por el momento no tienes permisos para realizar esta acción, solicta los permisos con el administrador del sistema.");
+    }
+
+}
+
+function updateEntradaAmp(identrada){
+    //alert(idsalida);
+    var cantidad = $("#input_upd_entrada_cant"+identrada).val();
+    var proveedor = $("#input_upd_entrada_prov"+identrada).val();
+    var lote = $("#input_upd_entrada_lote"+identrada).val();
+    // var control = $("#input_upd_salida_control"+identrada).val();
+    // var op = $("#input_upd_salida_op"+identrada).val();
+    var obs = $("#input_upd_entrada_obs"+identrada).val();
+
+    $.post("ajax/alm_mat_prima.php?op=updateEntradaAmp",{
+        identrada:identrada,
+        cantidad:cantidad,
+        proveedor:proveedor,
+        lote:lote,
+        obs:obs
+    },function(data, status)
+    {
+        data = JSON.parse(data);
+        
+        // var notificator = new Notification(document.querySelector('.notification'));
+        // notificator.info('Salida actualizada exitosamente.');
+        bootbox.alert("Entrada actualizada exitosamente.");
+        dialog_edit_entrada.modal('hide');
+        listar_movimientos();
+        listar_mov_entrada();
+                       
+    });
+}
+
+function cancelupdateEntradaAmp(){
+    dialog_edit_entrada.modal('hide');
+}
+
+function borrar_entrada(identrada){
+
+    if (idusuario==1) {
+        bootbox.confirm({
+            message: '¿Desea eliminar este registro de entrada?',
+            buttons: {
+            confirm: {
+            label: 'Si',
+            className: 'btn-success'
+            },
+            cancel: {
+            label: 'No',
+            className: 'btn-danger'
+            }
+            },
+            callback: function (result) {
+                if (result) {
+
+                    $.post("ajax/alm_mat_prima.php?op=borrar_entrada",{identrada:identrada},function(data, status)
+                    {
+                        data = JSON.parse(data);
+
+                        listar_movimientos();
+                        listar_mov_entrada();
+                        bootbox.alert("Entrada borrada exitosamente.");
+                                    
+                    });
+                    
+                }
+            }
+        });
+    }else{
+        bootbox.alert("Por el momento no tienes permisos para realizar esta acción, solicta los permisos con el administrador del sistema.");
+    }
+   
 }
 
 

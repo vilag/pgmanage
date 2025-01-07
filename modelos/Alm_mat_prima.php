@@ -244,9 +244,21 @@ Class Alm_mat_prima
 		return ejecutarConsulta($sql);
 	}
 
+	public function updateEntradaAmp($identrada,$cantidad,$proveedor,$lote,$obs)
+	{
+		$sql="UPDATE 10_entrada_alm_mat SET cantidad = '$cantidad', proveedor = '$proveedor', lote = '$lote', observacion='$obs' WHERE identrada='$identrada'";
+		return ejecutarConsulta($sql);
+	}
+
 	public function borrar_salida($idsalida)
 	{
 		$sql="UPDATE 10_salida_alm_mat SET estatus = 0 WHERE idsalida='$idsalida'";
+		return ejecutarConsulta($sql);
+	}
+
+	public function borrar_entrada($identrada)
+	{
+		$sql="UPDATE 10_entrada_alm_mat SET estatus = 0 WHERE identrada='$identrada'";
 		return ejecutarConsulta($sql);
 	}
 

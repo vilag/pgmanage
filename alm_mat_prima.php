@@ -374,6 +374,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                     <th><small><b>LOTE</b></small></th>
                                                     <th><small><b>FECHA</b></small></th>
                                                     <th><small><b>OBSERVACIÓN</b></small></th>
+                                                    <th><small><b>OPCIONES</b></small></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbl_entradas_prod">

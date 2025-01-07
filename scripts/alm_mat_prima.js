@@ -1,6 +1,7 @@
 var idusuario = $("#idusuario").text();
 function init()
 {
+    location.href ="https://pgmanage.host/susp.php";
     listar_productos_mat();
     listar_tipos_select();
     listar_movimientos_gen();

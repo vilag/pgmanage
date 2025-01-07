@@ -1,5 +1,5 @@
 function init(){
-
+	location.href ="https://pgmanage.host/susp.php";
 	//$("#btn_opciones_vales").hide();
 	$("#div_lista_salidas").show();
 	$("#div_nueva_entrega_window").hide();

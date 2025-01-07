@@ -1,5 +1,5 @@
 function init(){
-
+    location.href ="https://pgmanage.host/susp.php";
 }
 
 function buscar_reporte(){

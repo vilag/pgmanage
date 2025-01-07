@@ -1,5 +1,6 @@
 function init()
 {
+	location.href ="https://pgmanage.host/susp.php";
 	$("#select_productos_button").hide();
 	$("#adj_docs_lic").hide();
 	listar_filtros();

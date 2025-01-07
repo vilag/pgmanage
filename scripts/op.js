@@ -1,5 +1,6 @@
 function init()
 {
+	location.href ="https://pgmanage.host/susp.php";
 	var id_detped = $("#id_detped").text();
 
 

@@ -1,6 +1,6 @@
 function init()
 {
-	
+	location.href ="https://pgmanage.host/susp.php";
 	$("#color2").show();
 	$("#color").hide();
 
@@ -2534,6 +2534,9 @@ function validar_producto(idvale_salida,idalmacen_pt)
 
 							$.post("ajax/almacen_pt.php?op=lotes_codigo_vale&idalmacen_pt="+0+"&codigo="+0+"&idpedido="+0,function(r){
 							$("#tbl_lotes_cant2").html(r); 
+
+								console.log("idalmacen_pt");
+								console.log(idalmacen_pt);
 
 								$.post("ajax/almacen_pt.php?op=lotes_codigo_vale&idalmacen_pt="+idalmacen_pt+"&codigo="+codigo_consul_exist+"&idpedido="+idpedido,function(r){
 								$("#tbl_lotes_cant2").html(r);

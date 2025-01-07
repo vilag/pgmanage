@@ -258,7 +258,8 @@ Class Alm_mat_prima
 
 	public function borrar_entrada($identrada)
 	{
-		$sql="UPDATE 10_entrada_alm_mat SET estatus = 0 WHERE identrada='$identrada'";
+		$sql="DELETE FROM 10_entrada_alm_mat WHERE identrada='$identrada'";
+		// $sql="UPDATE 10_entrada_alm_mat SET estatus = 0 WHERE identrada='$identrada'";
 		return ejecutarConsulta($sql);
 	}
 

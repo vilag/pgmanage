@@ -1599,8 +1599,8 @@ Class Diseno
 		WHERE idpg_pedidos='$id_ped_temp' ";
 		ejecutarConsulta($sql2);
 
-		$sql4="UPDATE op_detalle_prod SET fecha_term='$fecha_entrega_upd2' WHERE no_control = (SELECT no_control FROM pg_pedidos WHERE idpg_pedidos = '$id_ped_temp')";
-		ejecutarConsulta($sql4);
+		$sql5="UPDATE op_detalle_prod SET fecha_term='$fecha_entrega_upd2' WHERE no_control = (SELECT no_control FROM pg_pedidos WHERE idpg_pedidos = '$id_ped_temp')";
+		ejecutarConsulta($sql5);
 
 		$sql3="UPDATE pg_pedidos p SET p.fecha_ent_cliente=IF(CONCAT(ELT(WEEKDAY(p.fecha_entrega) + 1, 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'))='Viernes',
 					(DATE_ADD(p.fecha_entrega,INTERVAL 3 DAY)),

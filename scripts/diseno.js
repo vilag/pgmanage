@@ -1876,8 +1876,9 @@ function guardar_pedido_tipo()
 function guardar_pedido()
 {
 	var empaquep =  $("#empaque").val();
+	var tipoPedido= $("select_tipo_pedido").val();
 
-	if (empaquep!="") {
+	if (empaquep!="" || tipoPedido==4) {
 		document.getElementById('btn_save_pedido').disabled = true;
 
 		var id_ped_temp = $("#id_ped_temp").val();

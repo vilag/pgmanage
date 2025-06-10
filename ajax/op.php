@@ -7,7 +7,7 @@ switch ($_GET["op"])
 	{
 
 		case 'consul_prod':
-		
+
 			$id_detped = $_POST['id_detped'];
 
 
@@ -17,7 +17,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'guardar_op':
-		
+
 			$id_detped = $_POST['id_detped'];
 			$ultimo_op = $_POST['ultimo_op'];
 			$prioridad = $_POST['prioridad'];
@@ -29,17 +29,17 @@ switch ($_GET["op"])
 			$empaque = $_POST['empaque'];
 			$cant_tot = $_POST['cant_tot'];
 
-			$fecha_inicio = $_POST['fecha_inicio'];	
+			$fecha_inicio = $_POST['fecha_inicio'];
 			$fecha_term = $_POST['fecha_term'];
 			$observ = $_POST['observ'];
-			
+
 
 
 			$rspta=$opr->guardar_op($id_detped,$ultimo_op,$prioridad,$no_control,$codigo,$producto,$empaque,$cant_tot,$fecha_inicio,$fecha_term,$observ);
 			echo json_encode($rspta);
 
 		break;
-		
+
 		case 'ult_op':
 
 			$rspta=$opr->ult_op();
@@ -48,9 +48,9 @@ switch ($_GET["op"])
 		break;
 
 		case 'update_op':
-		
-			$idop = $_POST['idop'];			
-			$prioridad = $_POST['prioridad'];			
+
+			$idop = $_POST['idop'];
+			$prioridad = $_POST['prioridad'];
 			$observ = $_POST['observ'];
 			$fecha1 = $_POST['fecha1'];
 			$fecha2 = $_POST['fecha2'];
@@ -85,18 +85,18 @@ switch ($_GET["op"])
 								                                    OP:<br>
 								                                    <label style="font-weight: bold; font-size: 20px;">'.$reg->no_op.'</label><br>
 							                                    </td>
-							                                   
-							                                   
+
+
 							                                  </tr>
-							                                  
+
 							                                </table>
 
-                                                          
+
                                                         </a>
                                                         <div id="collapseOne'.$reg->idop.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                                           <div class="panel-body">
-                                                          	
-                                                            
+
+
 
 
 						';
@@ -124,11 +124,11 @@ switch ($_GET["op"])
 							';
 						}
 
-						
+
 
 						echo '
 															<table class="table table-bordered" id="tbl_prod_detalle'.$reg->idop.'">
-                                                              
+
                                                             </table>
                                                           </div>
                                                         </div>
@@ -138,13 +138,13 @@ switch ($_GET["op"])
 						';
 
 
-						
+
 					}
 
-						
+
 		break;
 
-		
+
 
 		case 'listar_ops_area':
 
@@ -163,7 +163,7 @@ switch ($_GET["op"])
 	                              	<th width="20%">Área</th>
 	                              	<th width="20%">Fecha de inicio</th>
 	                              	<th width="40%">Fecha de termino</th>
-	                              	
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -193,7 +193,7 @@ switch ($_GET["op"])
 						echo '
 
 								<tr>
-									
+
 									<td>';
 
 						if ($idusuario<15) {
@@ -207,7 +207,7 @@ switch ($_GET["op"])
                                         </a>
 
 							';
-							
+
 						}
 
 
@@ -216,46 +216,46 @@ switch ($_GET["op"])
 								echo '
 
 							<button type="button" class="btn btn-dark" id="btn_ver_opdet" onclick="registro_avance('. $reg->idop_detalle.',\''.$reg->idop.'\',\''.$reg->area.'\')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>';
-							
-						}
-						
 
-						
+						}
+
+
+
 
 
 						echo '
 
 								</td>
-									<td>'.$reg->no_op.'</td>				
+									<td>'.$reg->no_op.'</td>
 									<td>'.$area.'</td>
-	                                
+
 	                                <td>'.$reg->fecha_inicio .'</td>
-	                                
+
 	                                <td>'.$reg->fecha_term .'</td>
-	                              
+
 	                            </tr>
 
 						';
 
-									
 
 
-						
-										
-                                        
 
 
-						
 
 
-						
+
+
+
+
+
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 
@@ -281,8 +281,8 @@ switch ($_GET["op"])
                                                         </a>
                                                         <div id="collapseOne'.$reg->idop.'" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                                           <div class="panel-body">
-                                                          	
-                                                            
+
+
 
 
 						';
@@ -296,11 +296,11 @@ switch ($_GET["op"])
 							';
 						}
 
-						
+
 
 						echo '
 															<table class="table table-bordered" id="tbl_prod_detalle'.$reg->idop.'">
-                                                              
+
                                                             </table>
                                                           </div>
                                                         </div>
@@ -310,14 +310,14 @@ switch ($_GET["op"])
 						';
 
 
-						
+
 					}
 
-						
+
 		break;
 
 		case 'consul_opexist':
-		
+
 			$id_detped = $_POST['id_detped'];
 
 
@@ -327,7 +327,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'set_op':
-		
+
 			$id_detped = $_POST['id_detped'];
 			$num_op = $_POST['num_op'];
 
@@ -338,7 +338,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_op_all':
-		
+
 			$idop_consul = $_POST['idop_consul'];
 
 
@@ -349,7 +349,7 @@ switch ($_GET["op"])
 
 
 		case 'consul_idop':
-		
+
 			$id_detped = $_POST['id_detped'];
 
 
@@ -360,7 +360,7 @@ switch ($_GET["op"])
 
 
 		case 'insert_check':
-		
+
 			$idop = $_POST['idop'];
 			$area = $_POST['area'];
 			$fecha_hora = $_POST['fecha_hora'];
@@ -370,7 +370,7 @@ switch ($_GET["op"])
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
-		
+
 
 		case 'listar_ops_detalles':
 
@@ -381,13 +381,13 @@ switch ($_GET["op"])
 
 
 						echo '	<thead>
-	                              
+
 	                              <tr>
-	                              	
+
 	                              	<th width="40%">Área</th>
-	                              
+
 	                              	<th width="30%">
-	                              	
+
 	                              	 Secuencia
 	                              	</th>
 	                              	<th width="15%"></th>
@@ -420,21 +420,21 @@ switch ($_GET["op"])
 							$area="";
 						}
 
-						
+
 
 						echo '
 
 								<tr>
-									
-													
+
+
 									<td>'.$area.'</td>
 
-									
+
 
 									<td>
-														<select  id="select_prioridad'.$reg->idop_detalle.'" class="form-control selectpicker" onchange="reordenar('.$reg->idop_detalle.',\''.$reg->prioridad.'\',\''.$id.'\');">  
+														<select  id="select_prioridad'.$reg->idop_detalle.'" class="form-control selectpicker" onchange="reordenar('.$reg->idop_detalle.',\''.$reg->prioridad.'\',\''.$id.'\');">
                                 <option value="'.$reg->prioridad.'">'.$consec.'</option>
-                                                                       
+
 						';
 
 
@@ -463,9 +463,9 @@ switch ($_GET["op"])
 									</td>
 
 									<td>
-												
+
                      <button type="button" class="btn btn-dark" onclick="eliminar_area_op('.$reg->idop_detalle.');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-                            
+
 									</td>
 
 									<td>
@@ -475,7 +475,7 @@ switch ($_GET["op"])
                       </a>
 
 									</td>
-	                                
+
 	                             </tr>
 
 						';
@@ -495,14 +495,14 @@ switch ($_GET["op"])
 							$conn->close();*/
 
 						$consec = $consec+1;
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 
@@ -518,11 +518,11 @@ switch ($_GET["op"])
 						echo '	<thead>
 	                              <tr>
 	                              	<th width="20%"></th>
-	                              	
+
 	                              	<th width="20%">Área</th>
 	                              	<th width="20%">Fecha limite</th>
 	                              	<th width="40%">Avance</th>
-	                              	
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -552,7 +552,7 @@ switch ($_GET["op"])
 						echo '
 
 								<tr>
-									
+
 									<td>';
 
 						if ($idusuario<15) {
@@ -566,7 +566,7 @@ switch ($_GET["op"])
                                         </a>
 
 							';
-							
+
 						}
 
 
@@ -575,50 +575,50 @@ switch ($_GET["op"])
 								echo '
 
 							<button type="button" class="btn btn-dark" id="btn_ver_opdet" onclick="registro_avance('. $reg->idop_detalle.',\''.$reg->idop.'\',\''.$reg->area.'\')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>';
-							
-						}
-						
 
-						
+						}
+
+
+
 
 
 						echo '
 
 								</td>
-													
+
 									<td>'.$area.'</td>
-	                                
+
 	                                <td>'.$reg->hora_inicio .'</td>
-	                                
+
 	                                <td></td>
-	                              
+
 	                            </tr>
 
 						';
 
-									
 
 
-						
-										
-                                        
 
 
-						
 
 
-						
+
+
+
+
+
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 		case 'consul_area':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -628,7 +628,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_area2':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -638,7 +638,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_area3':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -647,10 +647,10 @@ switch ($_GET["op"])
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
-		
+
 
 		case 'consul_area5':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -660,7 +660,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_area6':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -670,7 +670,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_area7':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -680,7 +680,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_area8':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -689,10 +689,10 @@ switch ($_GET["op"])
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
-		
+
 
 		case 'guadar_op_det':
-		
+
 			$idop = $_POST['idop'];
 			$id_detped = $_POST['id_detped'];
 			$no_control = $_POST['no_control'];
@@ -705,7 +705,7 @@ switch ($_GET["op"])
 			$observaciones = $_POST['observaciones'];
 			$medida = $_POST['medida'];
 			$color = $_POST['color'];
-			$iddetalle_pedido = $_POST['iddetalle_pedido'];		
+			$iddetalle_pedido = $_POST['iddetalle_pedido'];
 
 			$rspta=$opr->guadar_op_det($idop,$id_detped,$no_control,$codigo,$producto,$empaque,$cantidad,$fecha_inicio,$fecha_term,$observaciones,$medida,$color,$iddetalle_pedido);
 			echo json_encode($rspta);
@@ -722,19 +722,19 @@ switch ($_GET["op"])
 
 						echo '	<thead>
 	                              <tr>
-	                              	
-	                              	
-	                              	
+
+
+
 	                              	<th>Cant.</th>
 	                              	<th>Producto</th>
-	                              	
-	                              	
-	                              	
+
+
+
 	                              	<th>Fechas</th>
-	                              	
+
 	                              	<th>Observ.</th>
 	                              	<th>Quitar</th>
-	                              	
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -743,15 +743,15 @@ switch ($_GET["op"])
 			while ($reg = $rspta->fetch_object())
 					{
 
-						
+
 
 						echo '
 
 								<tr>
-									
-									
-													
-									
+
+
+
+
 	                                <td>'.$reg->cant_tot.'</td>
 	                                <td>
 	                                	<b>'.$reg->codigo.'</b><br>
@@ -760,15 +760,15 @@ switch ($_GET["op"])
 	                                	No. Control: <b>'.$reg->no_control.'</b><br>
 	                                	Empaque: <b>'.$reg->empaque.'</b>
 	                                </td>
-	                                
-	                               
-	                                
-	                                
+
+
+
+
 	                                <td>
 	                                	Fecha ini.: <br> '.$reg->fecha_inicio.' <br>
 	                                	Fecha Term.: <br> '.$reg->fecha_term.'
 	                                </td>
-	                                
+
 	                                <td>'.$reg->observ.'</td>
 	                                <td><span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor:pointer;" onclick="quitar_prod_op('.$reg->idop_detalle_prod.',\''.$reg->idpg_detped.'\');"></span></td>
 	                             </tr>
@@ -777,18 +777,18 @@ switch ($_GET["op"])
 						';
 
 
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 		case 'quitar_prod_op':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			$idpg_detped = $_POST['idpg_detped'];
 			//$area = $_POST['area'];
@@ -798,7 +798,7 @@ switch ($_GET["op"])
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
-		
+
 
 		case 'listar_prod_avance':
 
@@ -818,10 +818,10 @@ switch ($_GET["op"])
 
 						echo '
 							<option value="'.$reg->idop_detalle_prod.'">'. $reg->no_control .' - '.$reg->codigo.' - '.$reg->producto.'    ('.$reg->estatus.')</option>
-						';	
+						';
 					}
 
-			
+
 		break;
 
 		case 'cargar_campos_avance':
@@ -860,7 +860,7 @@ switch ($_GET["op"])
 						}
 
 						echo '
-							
+
 
 
 												<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -897,19 +897,19 @@ switch ($_GET["op"])
                                                     </div>
 
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		                                               
+
 		                                                  	<label>Empacado</label>
-		                                                    <select  id="option_empaque'.$reg->idop_detalle_prod.'" class="form-control selectpicker" onchange="guardar_estatus_empaque('.$reg->idop_detalle_prod.');" disabled>  
+		                                                    <select  id="option_empaque'.$reg->idop_detalle_prod.'" class="form-control selectpicker" onchange="guardar_estatus_empaque('.$reg->idop_detalle_prod.');" disabled>
 		                                                      <option value="">Seleccionar</option>
 		                                                      <option value="1">Si</option>
-		                                                      <option value="2">No</option>                                          
-		                                                    </select> 
-		                                               
-		                                                    
+		                                                      <option value="2">No</option>
+		                                                    </select>
+
+
 		                                             </div>
-                                                    
+
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                      
+
                                                       <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.',\''.$reg->idop.'\',\''.$reg->estatus_op.'\',\''.$reg->idpg_detped.'\')" disabled><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span></button>
 
                                                       <button type="button" class="btn btn-primary"  id="btn_extra'.$reg->idop_detalle_prod.'" onclick="abrir_extra('.$reg->idop_detalle_prod.')" '.$disabled_ex.'>Excedente</button>
@@ -919,9 +919,9 @@ switch ($_GET["op"])
                       									$("#eti_activ_btn'.$reg->idop_detalle_prod.'").hide();
                     								  </script>
                                                     </div>
-                                                    
 
-                                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+
+                                                    <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="progress">
                                                           <div class="progress-bar progress-bar-striped" role="progressbar" style="width: '.$porcentaje.'%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                                                         </div>
@@ -929,7 +929,7 @@ switch ($_GET["op"])
 
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
                                                         <label>'.$porcentaje.'%</label>
-                                                       
+
                                                     </div>
 
                                                  </div>
@@ -937,10 +937,10 @@ switch ($_GET["op"])
 
 
 
-						';	
+						';
 					}
 
-			
+
 		break;
 
 
@@ -960,7 +960,7 @@ switch ($_GET["op"])
 		// 				$porcentaje = ($avance/$requeridos)*100;
 
 		// 				echo '
-							
+
 
 
 		// 										<div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -979,8 +979,8 @@ switch ($_GET["op"])
         //                                               <input type="number" class="form-control" id="cantidad_avance'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
         //                                               <input type="hidden" class="form-control" id="cantidad_avance_ant'.$reg->idop_detalle_prod.'" value="'.$reg->avance.'">
         //                                             </div>
-                                                    
-                                                    
+
+
         //                                             <div class="form-group col-lg-2 col-md-2 col-sm-2 col-xs-2">
         //                                               <label>_</label>
         //                                               <button type="button" class="btn btn-primary"  id="btn_save_avance'.$reg->idop_detalle_prod.'" onclick="guardar_avance_prod('.$reg->idop_detalle_prod.')">Guardar</button>
@@ -990,7 +990,7 @@ switch ($_GET["op"])
         //                                               <button type="button" class="btn btn-primary"  id="" onclick="cargar_historial_avances('.$reg->idop_detalle_prod.')">Historial</button>
         //                                             </div>
 
-        //                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+        //                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
         //                                                 <div class="progress">
         //                                                   <div class="progress-bar progress-bar-striped" role="progressbar" style="width: '.$porcentaje.'%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
         //                                                 </div>
@@ -998,7 +998,7 @@ switch ($_GET["op"])
 
         //                                             <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" align="center">
         //                                                 <label>_</label>
-                                                       
+
         //                                             </div>
 
         //                                          </div>
@@ -1006,14 +1006,14 @@ switch ($_GET["op"])
 
 
 
-		// 				';	
+		// 				';
 		// 			}
 
-			
+
 		// break;
 
 		case 'buscar_op':
-		
+
 			$idop_detalle = $_POST['idop_detalle'];
 			//$area = $_POST['area'];
 
@@ -1023,7 +1023,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_estatus_op':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -1033,7 +1033,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_estatus_op2':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			//$area = $_POST['area'];
 
@@ -1043,7 +1043,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'buscar_op_detalle':
-		
+
 			$idop_detalle = $_POST['idop_detalle'];
 			//$area = $_POST['area'];
 
@@ -1053,7 +1053,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'update_op_area':
-		
+
 			$idop_detalle = $_POST['idop_detalle'];
 
 			$lote_r = $_POST['lote_r'];
@@ -1075,7 +1075,7 @@ switch ($_GET["op"])
 			$real_fecha2 = $_POST['real_fecha2'];
 			$real_hora2 = $_POST['real_hora2'];
 			$prod_aprob_r = $_POST['prod_aprob_r'];
-		
+
 
 			$rspta=$opr->update_op_area($idop_detalle,$lote_r,$cant_r,$maquina_r,$ciclo_r,$productividad_r,$cumplimiento_r,$diferencia_r,$entregas_r,$reproceso_r,$desperdicio_r,$merma_r,$observ_area_r,$real_fecha1,$real_hora1,$real_fecha2,$real_hora2,$prod_aprob_r);
 			echo json_encode($rspta);
@@ -1083,7 +1083,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consulta_op':
-		
+
 			$idop = $_POST['idop'];
 			//$area = $_POST['area'];
 
@@ -1093,7 +1093,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'guardar_avance_prod':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			$avance = $_POST['avance'];
 			$fecha_hora = $_POST['fecha_hora'];
@@ -1122,22 +1122,23 @@ switch ($_GET["op"])
 
 						echo '	<thead>
 	                              <tr>
-	                              	
-	                              	
+
+
 	                              	<th>Fecha/hora</th>
 	                              	<th>Cantidad entregada</th>
-	                              	<th>Total</th>
-	                              	<th>Avance</th>
-	                              	<th>%</th>
+	                              	
 	                              	<th>Lote</th>
 	                              	<th>Comentario</th>
 	                              	<th>Eliminar</th>
-	                              	
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
 
 			//$total=0;
+			// <th>Total</th>
+	        //                       	<th>Avance</th>
+	        //                       	<th>%</th>
 			while ($reg = $rspta->fetch_object())
 					{
 
@@ -1159,7 +1160,7 @@ switch ($_GET["op"])
 						}elseif ($reg->ultimo_avance>=0) {
 							$ultimo_avance=$reg->ultimo_avance;
 						}
-						
+
 						$cantidad_capt = ($reg->avance+$cant_exc)-$ultimo_avance;*/
 
 
@@ -1168,12 +1169,10 @@ switch ($_GET["op"])
 
 															<tr>
 																	<td>'.$reg->fecha_hora.'</td>
-	                                <td>	                                
+	                                <td>
 	                                <input type="number" name="" id="cant_entregada'.$reg->idavance_prod.'" class="form-control" value="'.$reg->cant_capt.'" onchange="upd_cant_avance_prod('.$reg->idavance_prod.');" disabled>
 	                                </td>
-	                                <td>'.$reg->cant_tot.'</td>
-	                                <td>'.$reg->avance.'</td>
-	                                <td>'.$porcentaje.'%</td>
+	                                
 	                                <td>'.$reg->lote.'</td>
 	                                <td>'.$reg->comentario.'</td>
 	                                <td><button type="button" class="btn btn-dark" id="" onclick="borrar_avance('.$reg->idavance_prod.');"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: white;"></span></button></td>
@@ -1183,16 +1182,18 @@ switch ($_GET["op"])
 						';
 
 
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
-		break;
 
+		break;
+					// <td>'.$reg->cant_tot.'</td>
+	                //                 <td>'.$reg->avance.'</td>
+	                //                 <td>'.$porcentaje.'%</td>
 
 		case 'cargar_excedentes':
 
@@ -1205,15 +1206,15 @@ switch ($_GET["op"])
 
 						echo '	<thead>
 	                              <tr>
-	                              	
-	                              	
+
+
 	                              	<th>Fecha/hora</th>
 	                              	<th>Cantidad excedente</th>
 	                              	<th>Lote</th>
 									<th>Eliminar</th>
-	                              
-	                              	
-	                              	
+
+
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -1222,38 +1223,38 @@ switch ($_GET["op"])
 			while ($reg = $rspta->fetch_object())
 					{
 
-						
+
 
 						echo '
 
 								<tr>
-									
-									
-													
+
+
+
 									<td>'.$reg->fecha_hora.'</td>
-	                                
+
 	                                <td>'.$reg->cantidad.'</td>
 	                                <td>'.$reg->lote.'</td>
 	                                <td><button type="button" class="btn btn-dark" id="" onclick="borrar_excedente('.$reg->idop_detalle_exc.');"><span class="glyphicon glyphicon-trash" aria-hidden="true" style="color: white;"></span></button></td>
-	                                
+
 	                             </tr>
 
 
 						';
 
 
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 		case 'consul_area_avance':
-		
+
 			$idusuario = $_POST['idusuario'];
 
 			$rspta=$opr->consul_area_avance($idusuario);
@@ -1262,7 +1263,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consultar_iddetped':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 
 			$rspta=$opr->consultar_iddetped($idop_detalle_prod);
@@ -1271,7 +1272,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'cantidades':
-		
+
 			$pedido = $_POST['pedido'];
 
 			$rspta=$opr->cantidades($pedido);
@@ -1280,7 +1281,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'buscar_cant_areas':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 
 			$rspta=$opr->buscar_cant_areas($idop_detalle_prod);
@@ -1290,7 +1291,7 @@ switch ($_GET["op"])
 
 
 		case 'contar_avance_tot':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 
 			$rspta=$opr->contar_avance_tot($idop_detalle_prod);
@@ -1299,7 +1300,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'consul_avance_calc':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			$area_num = $_POST['area_num'];
 
@@ -1335,7 +1336,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==2) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "#000000";
@@ -1368,7 +1369,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==3) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "";
@@ -1401,7 +1402,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==5) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "";
@@ -1434,7 +1435,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==6) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "";
@@ -1467,7 +1468,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==7) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "";
@@ -1500,7 +1501,7 @@ switch ($_GET["op"])
 						}
 
 						if ($id==8) {
-							
+
 							$backg_titulo1 = "";
 							$color_titulo1 = "";
 							$backg_titulo2 = "";
@@ -1537,8 +1538,8 @@ switch ($_GET["op"])
 
 						echo '	<thead>
 	                              <tr>
-	                              	
-	                              	
+
+
 	                              	<th width="11%">Codigo</th>
 	                              	<th width="8%" align="center" style="background: '. $backg_titulo1 .'; color: '. $color_titulo1 .';">Herreria</th>
 	                              	<th width="8%" align="center" style="background: '. $backg_titulo2 .'; color: '. $color_titulo2 .';">Pintura</th>
@@ -1547,12 +1548,12 @@ switch ($_GET["op"])
 	                              	<th width="8%" align="center" style="background: '. $backg_titulo5 .'; color: '. $color_titulo5 .';">Ens. P.</th>
 	                              	<th width="8%" align="center" style="background: '. $backg_titulo6 .'; color: '. $color_titulo6 .';">Ens. C.</th>
 	                              	<th width="8%" align="center" style="background: '. $backg_titulo7 .'; color: '. $color_titulo7 .';">Ens. M.</th>
-	                              	
+
 	                              	<th width="8%" align="center">OP</th>
 	                              	<th width="8%" align="center">No.<br> Control</th>
 	                              	<th width="8%" align="center">Cantidad</th>
 	                              	<th width="9%" align="center">Fecha <br> de entrega</th>
-	                              		
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -1641,7 +1642,7 @@ switch ($_GET["op"])
 						}elseif ($reg->$av_capt_Ensamble_M>0) {
 							$av_capt_Ensamble_M=$reg->$av_capt_Ensamble_M;
 						}
-						
+
 						if ($reg->$av_capt_Horno=="" OR $reg->$av_capt_Horno==null) {
 							$av_capt_Horno=0;
 						}elseif ($reg->$av_capt_Horno>0) {
@@ -1670,8 +1671,8 @@ switch ($_GET["op"])
 						}
 						if ($reg->Herreria_exist>0) {
 							$etiqueta1='Avance';
-							$herreria_req=$reg->cant_tot.' | ';	
-							$porc1=round((($reg->av_real_he/$reg->cant_tot)*100),1).'%';						
+							$herreria_req=$reg->cant_tot.' | ';
+							$porc1=round((($reg->av_real_he/$reg->cant_tot)*100),1).'%';
 						}elseif ($reg->Herreria_exist==0 OR $reg->Herreria_exist=='') {
 							$etiqueta1='';
 							$herreria_req = '';
@@ -1680,7 +1681,7 @@ switch ($_GET["op"])
 						}
 
 
-						
+
 						if ($reg->Pintura>=$reg->cant_tot) {
 							$back2="#67D858";
 						}elseif ($reg->Pintura<$reg->cant_tot OR $reg->Pintura=='') {
@@ -1788,19 +1789,19 @@ switch ($_GET["op"])
 							$porc7="";
 						}
 
-						
-						
+
+
 						echo '
 
 								<tr>
-									
+
 	                                <td>
 
 	                                	<b>'.$reg->codigo.'</b><br>
 	                                	<small>'.$reg->producto.'</small>
 
-	                                </td>	                                
-	                                <td align="center" style="background: '.$back1.';">                           		
+	                                </td>
+	                                <td align="center" style="background: '.$back1.';">
 	                                		'.$etiqueta1.'
 			                             	<h2 style="margin-top: 0; margin-bottom: 0;"><b>'.$porc1.'</b></h2><br>
 			                             	'.$herreria_req.$av_real_he.'
@@ -1833,27 +1834,27 @@ switch ($_GET["op"])
 	                                		'.$etiqueta6.'
 			                             	<h2 style="margin-top: 0; margin-bottom: 0;"><b>'.$porc6.'</b></h2><br>
 	                                		'.$ensamble_m_req.$av_real_em.'</td>
-	                                
+
 	                                <td align="center">'.$reg->no_op.'</td>
-	                                <td align="center">'.$reg->no_control.'</td> 
+	                                <td align="center">'.$reg->no_control.'</td>
 	                                <td align="center">'.$reg->cant_tot.'</td>
 	                                <td align="center">'.$reg->fecha_entrega.'</td>
-	                                
-	                                
+
+
 	                             </tr>
 						';
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 		case 'eliminar_area_op':
-		
+
 			$idop_detalle = $_POST['idop_detalle'];
 
 			$rspta=$opr->eliminar_area_op($idop_detalle);
@@ -1862,7 +1863,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'guardar_estatus_empaque':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			$option_empaque = $_POST['option_empaque'];
 			$fecha_hora = $_POST['fecha_hora'];
@@ -1873,7 +1874,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'guardar_extra':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
 			$idavance_prod = $_POST['idavance_prod'];
 			$cantidad_exc = $_POST['cantidad_exc'];
@@ -1888,11 +1889,11 @@ switch ($_GET["op"])
 		break;
 
 		case 'ult_idavance':
-		
+
 			$idop_detalle_prod = $_POST['idop_detalle_prod'];
-			
+
 			$area_num = $_POST['area_num'];
-			
+
 
 			$rspta=$opr->ult_idavance($idop_detalle_prod,$area_num);
 			echo json_encode($rspta);
@@ -1900,7 +1901,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'buscar_idop':
-		
+
 			$no_op_buscar = $_POST['no_op_buscar'];
 
 			$rspta=$opr->buscar_idop($no_op_buscar);
@@ -1923,12 +1924,12 @@ switch ($_GET["op"])
 						if ($idusuario==1 OR $idusuario==8 OR $idusuario==24) {
 							echo '<a href="#" onclick="abrir_modal_reg_areas('.$idop.');"><h1>+</h1></a>';
 						}
-						
+
 						echo '<div><hr width="100%"></div>';
 
 			while ($reg = $rspta->fetch_object())
 					{
-						
+
 						$avance = ($reg->avance_op/$reg->cant_req)*100;
 						$avance = round($avance,1);
 
@@ -1956,15 +1957,15 @@ switch ($_GET["op"])
 									<strong style="font-size: 15px;">'.$reg->nom_area.'</strong><br>
 									Requeridos: <b>'.$reg->cant_req.'</b> --
 									Fabricados: <b id="avance_fabricados'.$reg->idop_detalle.'">'.$reg->avance_op.'</b>
-									
+
                                 	<div class="progress" style="height:10px; width: 70%; margin-bottom: 10px; position: absolute;">
 		                                <div class="progress-bar" role="progressbar" style="width: '.$avance.'%; background: #'.$color_avance.';" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
 		                                </div>
-		                                
+
 					                </div>
 					                <div style="float: right;">
-					                	
-										
+
+
 
 						';
 
@@ -1981,7 +1982,7 @@ switch ($_GET["op"])
 						'	;
 						}
 
-						
+
 
 
 						echo '
@@ -1993,28 +1994,28 @@ switch ($_GET["op"])
 					                <div style="float: right; margin-right: 20px; margin-top: 5px;">
 					                	<b style="font-size: 20px;">'.$avance.'%</b>
 					                </div>
-					                
+
 					                <div>
 					                	<hr width="100%">
 					                </div>
-					                
-					                
+
+
 					            </div>
 
 						';
 
-						
 
-						
-						
+
+
+
 					}
 
-					
-			
+
+
 		break;
 
 		case 'consul_depend':
-		
+
 			$idop = $_POST['idop'];
 			$area_num = $_POST['area_num'];
 			//$cantidad_indep_avance = $_POST['cantidad_indep_avance'];
@@ -2025,7 +2026,7 @@ switch ($_GET["op"])
 		break;
 
 		case 'contar_errores_op':
-	
+
 
 			$rspta=$opr->contar_errores_op();
 			echo json_encode($rspta);
@@ -2034,7 +2035,7 @@ switch ($_GET["op"])
 
 
 		case 'reordenar':
-			
+
 			$idop_detalle = $_POST['idop_detalle'];
 			$select_prioridad = $_POST['select_prioridad'];
 			$prioridad = $_POST['prioridad'];
@@ -2047,19 +2048,19 @@ switch ($_GET["op"])
 
 
 		case 'consul_area_entrega':
-			
+
 			$idop = $_POST['idop'];
-	
+
 			$rspta=$opr->consul_area_entrega($idop);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'select_op':
-			
+
 			$idpg_detped = $_POST['idpg_detped'];
 			$val_select = $_POST['val_select'];
-	
+
 			$rspta=$opr->select_op($idpg_detped,$val_select);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
@@ -2079,7 +2080,7 @@ switch ($_GET["op"])
 	                              <tr align="center" >
 	                                <th colspan="3"></th>
 	                                <th colspan="2" style="background-color: #6E7174; color: #FFF;">Observaciones</th>
-	                              	
+
 	                                <th></th>
 	                                <th></th>
 	                              </tr>
@@ -2088,7 +2089,7 @@ switch ($_GET["op"])
 	                                <th width="20%" >DET. PEDIDO</th>
 	                                <th width="20%" >PRODUCTO</th>
 	                              	<th width="10%" >CANT.</th>
-	                              	
+
 	                                <th width="15%" >PROD.</th>
 	                                <th width="15%" >PEDIDO</th>
 	                                <th width="15%" >DOCS.</th>
@@ -2134,7 +2135,7 @@ switch ($_GET["op"])
 							$vis2 = "hidden";
 						}
 
-					
+
 
 
 						echo '
@@ -2152,56 +2153,56 @@ switch ($_GET["op"])
 										Medida: '.$reg->medida.',<br> Color:  '.$reg->color.' <br>
 									</td>
 									<td align="center"><b style="font-size: 20px;">'.$reg->cantidad.'</b></td>
-	                               
-	                                
+
+
 	                                <td style="padding: 15px;"><small>'.$observacion_prod.'</small></td>
 	                                <td align="center"><button type="button" class="btn btn-dark" id="" onclick="ver_observ_gen('.$reg->idpg_pedidos.');" style="visibility: '.$vis.';">Observ. Pedido</button></td>
 	                                <td align="center"><button type="button" class="btn btn-dark" id="" onclick="ver_documentos_ped('.$reg->idpg_pedidos.');" style="visibility: '.$vis2.';">Docs.</button></td>
 
 	                <td align="center"><button type="button" class="btn" id="" onclick="quitar_prod_confirm('.$reg->idpg_detped.');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-	                                
-	                                
-	                                
+
+
+
 	                             </tr>
 
 
 						';
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 
 		case 'quitar_prod_confirm':
-			
+
 			$idpg_detped = $_POST['idpg_detped'];
 			//$val_select = $_POST['val_select'];
-	
+
 			$rspta=$opr->quitar_prod_confirm($idpg_detped);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'contar_ops':
-			
+
 			//$idpg_detped = $_POST['idpg_detped'];
 			//$val_select = $_POST['val_select'];
-	
+
 			$rspta=$opr->contar_ops();
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'registrar_op':
-			
+
 			$nueva_op = $_POST['nueva_op'];
 			$fecha_hora = $_POST['fecha_hora'];
-	
+
 			$rspta=$opr->registrar_op($nueva_op,$fecha_hora);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
@@ -2232,7 +2233,7 @@ switch ($_GET["op"])
 							$password = "A=tSXZ4z";
 							//$password = "";
 							$dbname = "u690371019_pgmanage";
-							
+
 							$conn = new mysqli($servername, $username, $password, $dbname);
 
 
@@ -2252,7 +2253,7 @@ switch ($_GET["op"])
 									//$idpg_detped = $row['idpg_detped'];
 									$no_control = $row['no_control'];
 									$codigo = $row['codigo'];
-									
+
 									$descripcion = $row['descripcion'];
 									$empaque = $row['empaque'];
 									$cantidad = $row['cantidad'];
@@ -2280,7 +2281,7 @@ switch ($_GET["op"])
 									echo '<b>_________</b><br>';*/
 
 
-									$sql="INSERT INTO op_detalle_prod 
+									$sql="INSERT INTO op_detalle_prod
 									(idop,idpg_detped,no_control,codigo,producto,empaque,cant_tot,fecha_inicio,fecha_term,observ,medida,color,iddetalle_pedido) VALUES ('$idop','$idpg_detped','$no_control','$codigo','$descripcion','$empaque','$cantidad','$fecha_pedido','$fecha_entrega','$observacion','$medida','$color','$iddetalle_pedido')";
 									$result = $conn->query($sql);
 
@@ -2289,67 +2290,67 @@ switch ($_GET["op"])
 
 
 							$conn->close();
-						
 
 
 
 
-						
+
+
 					}
 
-						
-			
+
+
 		break;
 
 		case 'consul_select_op':
-			
+
 			$idpg_detped = $_POST['idpg_detped'];
-	
+
 			$rspta=$opr->consul_select_op($idpg_detped);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'consul_seleccion':
-			
+
 			//$idpg_detped = $_POST['idpg_detped'];
-	
+
 			$rspta=$opr->consul_seleccion();
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'validar_creacion_op':
-			
+
 			$idop = $_POST['idop'];
-	
+
 			$rspta=$opr->validar_creacion_op($idop);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'validar_creacion_op2':
-			
+
 			$idop = $_POST['idop'];
-	
+
 			$rspta=$opr->validar_creacion_op2($idop);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'borrar_op':
-			
+
 			$idop = $_POST['idop'];
-	
+
 			$rspta=$opr->borrar_op($idop);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'activar_op':
-			
+
 			$idop = $_POST['idop'];
-	
+
 			$rspta=$opr->activar_op($idop);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
@@ -2393,9 +2394,9 @@ switch ($_GET["op"])
 									FROM pg_detped pd WHERE pd.idpg_detped='$idpg_detped'";
 									$result9 = mysqli_query($conn, $sql9);
 									$row = mysqli_fetch_assoc($result9);
-								
+
 									$no_control = $row['no_control'];
-									$codigo = $row['codigo'];									
+									$codigo = $row['codigo'];
 									$descripcion = $row['descripcion'];
 									$empaque = $row['empaque'];
 									$cantidad = $row['cantidad'];
@@ -2406,58 +2407,58 @@ switch ($_GET["op"])
 									$color = $row['color'];
 									$iddetalle_pedido = $row['iddetalle_pedido'];
 
-									$sql="INSERT INTO op_detalle_prod 
+									$sql="INSERT INTO op_detalle_prod
 									(idop,idpg_detped,no_control,codigo,producto,empaque,cant_tot,fecha_inicio,fecha_term,observ,medida,color,iddetalle_pedido) VALUES ('$idop','$idpg_detped','$no_control','$codigo','$descripcion','$empaque','$cantidad','$fecha_pedido','$fecha_entrega','$observacion','$medida','$color','$iddetalle_pedido')";
 									$result = $conn->query($sql);
 
-									
+
 
 
 						$conn->close();
-						
 
 
 
 
-						
+
+
 					}
 
-						
-			
+
+
 		break;
 
 		case 'cancelar_prod':
-			
+
 			$idop_prod = $_POST['idop_prod'];
-	
+
 			$rspta=$opr->cancelar_prod($idop_prod);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'borrar_avance':
-			
+
 			$idavance_prod = $_POST['idavance_prod'];
-	
+
 			$rspta=$opr->borrar_avance($idavance_prod);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'borrar_excedente':
-			
+
 			$idop_detalle_exc = $_POST['idop_detalle_exc'];
-	
+
 			$rspta=$opr->borrar_excedente($idop_detalle_exc);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
 		case 'upd_cant_avance_prod':
-			
+
 			$idavance_prod = $_POST['idavance_prod'];
 			$cantidad = $_POST['cantidad'];
-	
+
 			$rspta=$opr->upd_cant_avance_prod($idavance_prod,$cantidad);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
@@ -2480,7 +2481,7 @@ switch ($_GET["op"])
 	                    <tr>
 	                    	<th>#</th>
 	                      <th>PRODUCTO</th>
-	                      <th>ÁREA</th>                              	
+	                      <th>ÁREA</th>
 	                      <th>OP</th>
 	                      <th>No. CONTROL</th>
 	                      <th>CANT. REQ.</th>
@@ -2488,7 +2489,7 @@ switch ($_GET["op"])
 	                      <th>% AVANCE</th>
 	                      <th>FECHA DE ENTREGA</th>
 						  <th>ESTATUS DE PEDIDO</th>
-	                    </tr> 
+	                    </tr>
 
 	                  </thead>
 	                  <tbody>';
@@ -2561,21 +2562,21 @@ switch ($_GET["op"])
 									<td>'.$av_real.'</td>
 									<td>'.$porc.' %</td>
 									<td>'.$reg->fecha_entrega.'</td>
-									<td>'.$reg->estatus.'</td>                                
+									<td>'.$reg->estatus.'</td>
 	             </tr>
 
 
 						';
 
 						 $consec =  $consec+1;
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
 
 		case 'addProdOp':
@@ -2604,10 +2605,10 @@ switch ($_GET["op"])
 								<b id="color_p'.$reg->idpg_detped.'">'.$reg->color.'</b>
 								<b id="iddetalle_pedido_p'.$reg->idpg_detped.'">'.$reg->iddetalle_pedido.'</b>
 							</p>
-						';	
+						';
 					}
 
-			
+
 		break;
 
 		// <p style="padding: 5px; background-color: #ccc;">idpg_detped: '.$reg->idpg_detped.'</p>
@@ -2625,7 +2626,7 @@ switch ($_GET["op"])
 		// 					<p style="padding: 5px; background-color: #ccc;">iddetalle_pedido: '.$reg->iddetalle_pedido.'</p>
 
 		case 'addProd_op':
-		
+
 			$idop = $_POST['idop'];
 			$idpg_detped = $_POST['idpg_detped'];
 			$no_control = $_POST['no_control'];
@@ -2658,23 +2659,23 @@ switch ($_GET["op"])
 
 						echo '	<thead>
 	                              <tr>
-	                              	
-			
+
+
 	                              	<th>Área</th>
 	                              	<th>No. OP</th>
 	                              	<th>Fecha de registro</th>
 									<th>Áreas asignadas</th>
 									<th>Total de productos OP</th>
 									<th>Requerido por área</th>
-									
-										
+
+
 									<th>Fabricado área</th>
 
 									<th>Avance área</th>
 									<th>Avance Total OP</th>
-									
-	                              	
-	                              	
+
+
+
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -2704,30 +2705,30 @@ switch ($_GET["op"])
 									<td>'.$reg->cant_areas.'</td>
 									<td>'.$requerimiento_total_op.'</td>
 									<td>'.$reg->total_producto.'</td>
-									
-									
+
+
 									<td>'.$reg->avance_area.'</td>
 
 									<td>'.$avance_area.'%</td>
 									<td>'.$avance_total.'%</td>
-	                                
-	                                
+
+
 	                             </tr>
 
 
 						';
 
 
-						
+
 					}
 
 						echo '</tbody>
-							  
+
 
 						';
-			
+
 		break;
-		
+
 
 	}
 

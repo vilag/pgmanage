@@ -1123,7 +1123,7 @@ switch ($_GET["op"])
 						echo '	<thead>
 	                              <tr>
 
-
+									<th>#</th>	
 	                              	<th>Fecha/hora</th>
 	                              	<th>Cantidad entregada</th>
 	                              	
@@ -1139,6 +1139,7 @@ switch ($_GET["op"])
 			// <th>Total</th>
 	        //                       	<th>Avance</th>
 	        //                       	<th>%</th>
+			$consec = 0;
 			while ($reg = $rspta->fetch_object())
 					{
 
@@ -1162,13 +1163,14 @@ switch ($_GET["op"])
 						}
 
 						$cantidad_capt = ($reg->avance+$cant_exc)-$ultimo_avance;*/
-
-
+						
+						$consec = $consec+1;
 
 						echo '
 
-															<tr>
-																	<td>'.$reg->fecha_hora.'</td>
+							<tr>
+									<td>'.$consec.'</td>
+									<td>'.$reg->fecha_hora.'</td>
 	                                <td>
 	                                <input type="number" name="" id="cant_entregada'.$reg->idavance_prod.'" class="form-control" value="'.$reg->cant_capt.'" onchange="upd_cant_avance_prod('.$reg->idavance_prod.');" disabled>
 	                                </td>
@@ -1181,9 +1183,11 @@ switch ($_GET["op"])
 
 						';
 
-
+						
 
 					}
+
+					
 
 						echo '</tbody>
 

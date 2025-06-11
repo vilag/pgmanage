@@ -285,7 +285,7 @@ Class Opr
 		odp.codigo,
 		odp.producto,
 		odp.cant_tot,
-		(SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance,
+		(SELECT SUM(cant_capt) FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area') as avance,
 		odp.idpg_detped,
 		pdp.idpg_detalle_pedidos,
 		pdp.idpg_pedidos,
@@ -297,7 +297,7 @@ Class Opr
 		INNER JOIN op a ON odp.idop = a.idop
 		WHERE odp.idop_detalle_prod='$id'";
 
-		// 
+		// (SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$id' AND area='$area' ORDER BY idavance_prod DESC LIMIT 1) as avance,
 		//(SELECT SUM(cant_capt) FROM op_avance_prod WHERE idop = odp.idop AND area = '$area') as avance,
 
 		// $sql="SELECT odp.idop,
@@ -491,8 +491,8 @@ Class Opr
 
 	public function consul_avance_calc($idop_detalle_prod,$area_num)
 	{
-
-		$sql="SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area='$area_num' ORDER BY idavance_prod DESC LIMIT 1";
+		//$sql="SELECT avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area='$area_num' ORDER BY idavance_prod DESC LIMIT 1";
+		$sql="SELECT sum(cant_capt) as avance FROM op_avance_prod WHERE idop_detalle_prod='$idop_detalle_prod' AND area='$area_num'";
 		return ejecutarConsultaSimpleFila($sql);
 	}
 

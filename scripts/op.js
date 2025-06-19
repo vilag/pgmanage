@@ -652,6 +652,8 @@ function ver_id()
 			$.post("ajax/op.php?op=cargar_campos_avance&id="+idop_detalle_prod+"&area="+area_num+"&idusuario="+idusuario,function(r){
 			$("#box_productos_avance").html(r);
 
+				console.log(idop_detalle_prod);
+				console.log(area_num);
 
 				$.post("ajax/op.php?op=cargar_historial_avances&id="+idop_detalle_prod+"&area="+area_num,function(r){
 				$("#tbl_hist_avances").html(r);
@@ -1243,8 +1245,10 @@ function calcular_avance(idop_detalle_prod,idop)
 		data = JSON.parse(data);
 
 			//alert(data);
+			// console.log("data");
+			// console.log(data.avance);
 
-			if (data==null) {
+			if (data==null || data.avance==null) {
 				var avance = 0;
 			}else{
 				var avance = data.avance;
@@ -1253,6 +1257,9 @@ function calcular_avance(idop_detalle_prod,idop)
 			if (avance=="") {
 				avance=0;
 			}
+
+			// console.log("avance");
+			// console.log(avance);
 
 		  var avance_nuevo = parseInt(cantidad_indep_avance)+parseInt(avance);
 		  $("#cantidad_avance"+idop_detalle_prod).val(avance_nuevo);

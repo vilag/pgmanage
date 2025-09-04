@@ -6,6 +6,106 @@ $reportes=new Reportes();
 switch ($_GET["op"])
 	{
 
+		case 'llenar_anios':
+			$rspta = $reportes->llenar_anios();
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+		case 'llenar_meses':
+			$anio_actual = $_POST['anio_actual'];
+			$rspta = $reportes->llenar_meses($anio_actual);
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+		case 'listar_pedidos':
+			$mes_actual = $_POST['mes_actual'];
+			$anio_actual = $_POST['anio_actual'];
+			$tipo = $_POST['tipos_consulta_pedidos'];
+			$rspta = $reportes->listar_pedidos($mes_actual,$anio_actual,$tipo);
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		case 'buscar_pedidos_fabricados':
+
+			$fecha_ini = $_GET['fecha_ini'];
+			$fecha_fin = $_GET['fecha_fin'];
+			$rspta = $reportes->buscar_pedidos_fabricados($fecha_ini,$fecha_fin);
+						echo '	<thead>
+	                              <tr style="background: #034343; color: white;">
+	                              	<th>FECHA DE PEDIDO</th>
+	                              	<th>FECHA DE ENTREGA AL CLIENTE</th>
+	                                <th>TIPO DE PEDIDO</th>
+	                                <th>ORIGEN</th>
+	                                <th>CONTROL</th>
+	                                <th>CLIENTE</th>
+	                                <th>ESTATUS</th>  
+	                              </tr>
+	                            </thead>
+	                            <tbody>';
+			while ($reg = $rspta->fetch_object())
+					{
+
+						echo '
+
+									 <tr>
+						                <td>'.$reg->fecha_pedido.'</td>
+		                                <td>'.$reg->fecha_ent_cli.'</td>
+		                                <td>'.$reg->tipo.'</td>
+		                                <td>'.$reg->lugar.'</td>
+		                                <td>'.$reg->no_control.'</td>
+		                                <td>'.$reg->nombre_cli.'</td>
+		                                <td>'.$reg->estatus.'</td>
+		                             </tr>
+						';
+						
+					}
+						echo '</tbody>
+						';
+		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		case 'listar_pedidos_entregados':
 

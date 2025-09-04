@@ -6383,7 +6383,7 @@ function listar_terminados()
 	//var variable = 1;
 
 	$.post("ajax/diseno.php?op=abrir_terminados",function(r){
-	$("#tbl_terminados").html(r);
+	$("#tbl_terminados_old").html(r);
 
 			        
 	});

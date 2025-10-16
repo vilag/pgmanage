@@ -911,7 +911,11 @@ function ver_productos2(identrega,idpedido)
 
 		$("#numero_entrega").text("No. salida: "+data.no_entrega);
 		$("#cliente_ent").text("Cliente: "+data.nom_cliente);
-		$("#direccion_ent2").text("Dirección de entrega: "+data.direccion+" Col. "+data.colonia+", "+data.municipio+", "+data.estado+", CP: "+data.cp);
+		var colonia = data.colonia;
+		if (data.colonia==null || data.colonia=="") {
+			colonia = "";
+		}
+		$("#direccion_ent2").text("Dirección de entrega: "+data.direccion+" Col. "+colonia+", "+data.municipio+", "+data.estado+", CP: "+data.cp);
 		$("#contacto_ent2").text("Contacto: "+data.contacto);
 		$("#observ_salida").val(data.observaciones);
 

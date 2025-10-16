@@ -414,8 +414,26 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 <input type="text" class="form-control" id="contacto_new_e">
                               </div>
                               <div class="form-group col-md-12 col-sm-12" align="">
-                                <label>Dirección de entrega:</label>
-                                <textarea class="form-control" id="dir_entrega_new_e" cols="40" rows="2" onkeyup=""></textarea>
+                                <label>Domicilio:</label>
+                                <input type="text" class="form-control" id="dir_entrega_new_e">
+                                <!-- <textarea class="form-control" id="dir_entrega_new_e" onkeyup=""></textarea> -->
+                              </div>
+                              <div class="form-group col-md-6 col-sm-6" align="">
+                                <label>Colonia:</label>
+                                <input type="text" class="form-control" id="colonia_new_e">
+                                <!-- <textarea class="form-control" id="dir_entrega_new_e" onkeyup=""></textarea> -->
+                              </div>
+                              <div class="form-group col-md-6 col-sm-6" align="">
+                                <label>Municipio:</label>
+                                <input type="text" class="form-control" id="municipio_new_e">
+                              </div>
+                              <div class="form-group col-md-6 col-sm-6" align="">
+                                <label>Estado:</label>
+                                <input type="text" class="form-control" id="estado_new_e">
+                              </div>
+                              <div class="form-group col-md-6 col-sm-6" align="">
+                                <label>CP:</label>
+                                <input type="text" class="form-control" id="cp_new_e">
                               </div>
                               <div class="form-group col-md-4 col-sm-4" align="">
                                 <label>Teléfono:</label>

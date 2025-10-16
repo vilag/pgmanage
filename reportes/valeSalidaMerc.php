@@ -158,8 +158,21 @@ if ($_SESSION['Produccion']==1 || $_SESSION['administrador']==1 || $_SESSION['Ad
                 <tr align="center">
                    
                     <td class="margenes fondo" style="text-align: left; font-size: 11px;" width="10%">DOMICILIO:</td>
-                    <td class="margenes" width="92%" colspan="5" style="text-align: left;"><?php echo $reg->direccion; ?></td>
-                                      
+                    <td class="margenes" style="text-align: left;"><?php echo $reg->direccion; ?></td>
+                    <td class="margenes fondo" style="text-align: left; font-size: 11px;" width="10%">COLONIA:</td>
+                    <td class="margenes" style="text-align: left;"><?php echo $reg->colonia; ?></td>    
+                    <td class="margenes fondo" style="text-align: left; font-size: 11px;" width="10%">MUNICIPIO:</td>
+                    <td class="margenes" style="text-align: left;"><?php echo $reg->municipio; ?></td>   
+                           
+                </tr>
+
+                <tr align="center">
+                   
+                  
+                    <td class="margenes fondo" style="text-align: left; font-size: 11px;" width="10%">ESTADO:</td>
+                    <td class="margenes" style="text-align: left;"><?php echo $reg->estado; ?></td>    
+                    <td class="margenes fondo" style="text-align: left; font-size: 11px;" width="10%">CP:</td>
+                    <td class="margenes" colspan="3" style="text-align: left;"><?php echo $reg->cp; ?></td>         
                 </tr>
                 
                 

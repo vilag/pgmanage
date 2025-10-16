@@ -3115,12 +3115,12 @@ Class Diseno
 		return ejecutarConsulta($sql);
 	}
 
-	public function guardar_entrega($idsalida,$cliente_new_e,$contacto_new_e,$dir_entrega_new_e,$num_entregas,$telefono_new_e,$horario_new_e,$condic_new_e,$medio_new_e,$idpedido)
+	public function guardar_entrega($idsalida,$cliente_new_e,$contacto_new_e,$dir_entrega_new_e,$colonia_new_e,$municipio_new_e,$estado_new_e,$cp_new_e,$num_entregas,$telefono_new_e,$horario_new_e,$condic_new_e,$medio_new_e,$idpedido)
 	{
 		/*$sql2="UPDATE salidas SET nom='$cliente_new_e',dom='$dir_entrega_new_e',contacto='$contacto_new_e',tel='$telefono_new_e',horario='$horario_new_e',cond='$condic_new_e', medio='$medio_new_e' WHERE idsalida='$idsalida'";
         return ejecutarConsulta($sql2);*/
 
-		$sql="INSERT INTO salidas_entregas (idsalida,no_entrega,direccion,contacto,idpedido,nom_cliente,tel,horario,condiciones,medio) VALUES('$idsalida','$num_entregas','$dir_entrega_new_e','$contacto_new_e','$idpedido','$cliente_new_e','$telefono_new_e','$horario_new_e','$condic_new_e','$medio_new_e')";
+		$sql="INSERT INTO salidas_entregas (idsalida,no_entrega,direccion,colonia,municipio,estado,cp,contacto,idpedido,nom_cliente,tel,horario,condiciones,medio) VALUES('$idsalida','$num_entregas','$dir_entrega_new_e','$colonia_new_e','$municipio_new_e','$estado_new_e','$cp_new_e','$contacto_new_e','$idpedido','$cliente_new_e','$telefono_new_e','$horario_new_e','$condic_new_e','$medio_new_e')";
 		$idingresonew=ejecutarConsulta_retornarID($sql);
 
 		$sql_id="SELECT * FROM salidas_entregas WHERE identrega='$idingresonew'";
@@ -3161,7 +3161,7 @@ Class Diseno
 	public function llenar_vale_salida($id)
 	{
 
-		$sql="SELECT se.no_entrega, se.nom_cliente,se.contacto,se.direccion,se.tel,se.horario,se.condiciones,se.medio,se.observaciones,
+		$sql="SELECT se.no_entrega, se.nom_cliente,se.contacto,se.direccion,se.colonia,se.municipio,se.estado,se.cp,se.tel,se.horario,se.condiciones,se.medio,se.observaciones,
 		(SELECT DATE(fecha_salida) FROM salidas WHERE idsalida=se.idsalida) as fecha_salida
 		FROM salidas_entregas se WHERE identrega='$id'";
 		return ejecutarConsulta($sql);

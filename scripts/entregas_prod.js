@@ -538,7 +538,13 @@ function buscar_control_add()
 		var forma_entrega = data.forma_entrega;
 
 
-		$("#dir_entrega_new_e").val(calle_ent+" "+numero_ent+" "+interior_ent+" Col. "+colonia_ent+", "+ciudad_ent+" "+estado_ent+", CP: "+cp_ent);
+		// $("#dir_entrega_new_e").val(calle_ent+" "+numero_ent+" "+interior_ent+" Col. "+colonia_ent+", "+ciudad_ent+" "+estado_ent+", CP: "+cp_ent);
+		$("#dir_entrega_new_e").val(calle_ent+" "+numero_ent+" "+interior_ent);
+		$("#colonia_new_e").val(colonia_ent);
+		$("#municipio_new_e").val(ciudad_ent);
+		$("#estado_new_e").val(estado_ent);
+		$("#cp_new_e").val(cp_ent);
+
 		$("#telefono_new_e").val(telefono_ent);
 		$("#horario_new_e").val(hora1+" - "+hora2);
 		$("#condic_new_e").val(condiciones);
@@ -597,6 +603,8 @@ function limpiar_post_guardado()
 
 function guardar_entrega()
 {
+	// alert("guarda en");
+	// return;
 	document.getElementById('btn_guardar_entrega').disabled = true;
 	//medir_tiempo();
 					//var idpedido = $("#idpedido_salida").val();
@@ -605,7 +613,14 @@ function guardar_entrega()
 					
 					var cliente_new_e = $("#cliente_new_e").val();
 					var contacto_new_e = $("#contacto_new_e").val();
+
 					var dir_entrega_new_e = $("#dir_entrega_new_e").val();
+					var colonia_new_e = $("#colonia_new_e").val();
+					var municipio_new_e = $("#municipio_new_e").val();
+					var estado_new_e = $("#estado_new_e").val();
+					var cp_new_e = $("#cp_new_e").val();
+
+					
 
 					var telefono_new_e = $("#telefono_new_e").val();
 					var horario_new_e = $("#horario_new_e").val();
@@ -654,6 +669,10 @@ function guardar_entrega()
 													cliente_new_e:cliente_new_e,
 													contacto_new_e:contacto_new_e,
 													dir_entrega_new_e:dir_entrega_new_e,
+													colonia_new_e:colonia_new_e,
+													municipio_new_e:municipio_new_e,
+													estado_new_e:estado_new_e,
+													cp_new_e:cp_new_e,
 													num_entregas:num_entregas,
 													telefono_new_e:telefono_new_e,
 													horario_new_e:horario_new_e,
@@ -892,7 +911,7 @@ function ver_productos2(identrega,idpedido)
 
 		$("#numero_entrega").text("No. salida: "+data.no_entrega);
 		$("#cliente_ent").text("Cliente: "+data.nom_cliente);
-		$("#direccion_ent2").text("Dirección de entrega: "+data.direccion);
+		$("#direccion_ent2").text("Dirección de entrega: "+data.direccion+" Col. "+data.colonia+", "+data.municipio+", "+data.estado+", CP: "+data.cp);
 		$("#contacto_ent2").text("Contacto: "+data.contacto);
 		$("#observ_salida").val(data.observaciones);
 

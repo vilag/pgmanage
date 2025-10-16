@@ -8073,7 +8073,13 @@ switch ($_GET["op"])
 			$idsalida = $_POST['idsalida'];
 			$cliente_new_e = $_POST['cliente_new_e'];
 			$contacto_new_e = $_POST['contacto_new_e'];
+
 			$dir_entrega_new_e = $_POST['dir_entrega_new_e'];
+			$colonia_new_e = $_POST['colonia_new_e'];
+			$municipio_new_e = $_POST['municipio_new_e'];
+			$estado_new_e = $_POST['estado_new_e'];
+			$cp_new_e = $_POST['cp_new_e'];
+
 			$num_entregas = $_POST['num_entregas'];			
 			$telefono_new_e = $_POST['telefono_new_e'];
 			$horario_new_e = $_POST['horario_new_e'];
@@ -8081,7 +8087,7 @@ switch ($_GET["op"])
 			$medio_new_e = $_POST['medio_new_e'];
 			$idpedido = $_POST['idpedido'];
 
-			$rspta=$diseno->guardar_entrega($idsalida,$cliente_new_e,$contacto_new_e,$dir_entrega_new_e,$num_entregas,$telefono_new_e,$horario_new_e,$condic_new_e,$medio_new_e,$idpedido);
+			$rspta=$diseno->guardar_entrega($idsalida,$cliente_new_e,$contacto_new_e,$dir_entrega_new_e, $colonia_new_e, $municipio_new_e,$estado_new_e,$cp_new_e,$num_entregas,$telefono_new_e,$horario_new_e,$condic_new_e,$medio_new_e,$idpedido);
 	 		echo json_encode($rspta);
 	 		
 		break;

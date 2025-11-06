@@ -2950,8 +2950,19 @@ function cargar_doc()
 	var idpedido = $("#idpedido_doc").val();
 	var tipo_doc = $("#tipo_doc").val();
 	var ar_comprob = $("#ar_comprob").val();
-
 	var ar_comprob = ar_comprob.substr(12);
+
+	function contieneCaracterEspecial(cadena) {
+		const regex = /[^a-zA-Z0-9\s._]/;
+		return regex.test(cadena);
+	}
+
+	if (contieneCaracterEspecial(ar_comprob)==true) {
+		bootbox.alert("El nombre del archivo no debe contener caracteres especiales.");
+		return;
+	}
+	
+	//return;
 
 	$.post("ajax/diseno.php?op=consul_nom_arch",{idpedido:idpedido,ar_comprob:ar_comprob},function(data, status)
 	{

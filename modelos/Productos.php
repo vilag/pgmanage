@@ -10,6 +10,13 @@ Class Productos
 
 	}
 
+	public function listar_tabla_productos()
+	{
+
+		$sql="SELECT * FROM productos_clasif WHERE estatus=1";
+		return ejecutarConsulta($sql);			
+	}
+
 	public function listar_productos()
 	{
 

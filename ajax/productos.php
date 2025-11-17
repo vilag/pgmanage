@@ -6,6 +6,16 @@ $productos=new Productos();
 switch ($_GET["op"])
 	{
 
+		case 'listar_tabla_productos':
+
+			$rspta = $productos->listar_tabla_productos();
+			$pila = array();	
+			while ($reg = $rspta->fetch_object())
+			{
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
 
 		case 'listar_productos':
 			

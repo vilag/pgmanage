@@ -35,9 +35,46 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                             </style>
 
+        <div class="right_col" role="main" id="content_reporte_productos">
+          <div class="row">
+            <div class="x_panel">
+              <div class="x_content">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                  <h2>REPORTE DE PRODUCTOS</h2>
+                </div>
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; justify-content: right;">
+                  <button type="button" class="btn btn-primary" onclick="mostrar_contents_iniciales();">Consultar productos</button>
+                </div>
+                <div class="col-md-12 col-sm-12" style="padding-top: 10px; display: flex; justify-content: right;">
+                  <button id="sheetjsexport" style="padding: 5px 15px; background-color: #076649ff; color: #ffffff; border: none !important; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);">Exportar a excel</button>
+                </div>
+                <div class="col-md-12 col-sm-12" style="padding-top: 10px; display: flex; justify-content: left;">
+                  <span id="total_productos_reporte"></span>&nbsp; Productos Encontrados
+                </div>
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="col-md-12 col-sm-12" style="margin-top: 15px; height: 500px; overflow: scroll;"> 
+                    <table class="table table-striped" id="TableToExport">
+                      <thead>
+                        <tr>
+                          <th>No.</th>
+                          <th>Código</th>
+                          <th>Nombre</th>
+                          <th>Estatus</th>
+                        </tr>
+                      </thead>
+                        <tbody id="tbl_productos_reporte">
+                                
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- page content -->
-        <div class="right_col" role="main" id="page_pedido">
+        <div class="right_col" role="main" id="content_consulta_productos">
 
           <div class="">
             
@@ -187,13 +224,8 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                       <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6" align="right">
                                                
                                                         <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Agregar producto" onclick="nuevo_producto();">Nuevo</button>
-                                                        <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Agregar producto" onclick="abrir_reclasif_blank();">Clasif.</button>
-                                                        <!--<button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ver productos fabricados" onclick="abrir_consultar();">Consultar</button>
-                                                        <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Ver productos fabricados" onclick="listar_productos_fabricados();">Fabricados</button>
-                                                        <button type="button" class="btn btn-dark" onclick="abrir_pro_vendidos();" id="">Pedidos</button>-->
-                       
-                                                        <!--<button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="" onclick="update_prod_clasif();" id="act_product">Actualizar</button>-->
-                                                                      
+                                                        <button type="button" class="btn btn-dark" data-toggle="tooltip" data-placement="top" title="Agregar producto" onclick="abrir_reclasif_blank();">Clasif.</button> 
+                                                        <button type="button" class="btn btn-primary" onclick="abrir_content_reporte_prod();">Reporte de productos</button>              
                                                       </div>
                                                       
                                                     </div>
@@ -676,7 +708,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
     </div>
 
     
-              
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>                                              
 
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

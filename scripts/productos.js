@@ -1,6 +1,15 @@
+document.getElementById("sheetjsexport").addEventListener('click', function() {
+  /* Create worksheet from HTML DOM TABLE */
+  var wb = XLSX.utils.table_to_book(document.getElementById("TableToExport"));
+  /* Export to file (start a download) */
+  //var tipo_consulta = $("#tipo_consulta").text();
+  XLSX.writeFile(wb, "Reporte_de_productos.xlsx");
+});
+
 var tipo_action = "";
 function init()
 {
+	mostrar_contents_iniciales();
 	// location.href ="https://pgmanage.host/susp.php";
 	//listar_productos();
 	listar_tipos();
@@ -34,6 +43,46 @@ function init()
 		}, 500);
 	}, 500);
 
+}
+
+function mostrar_contents_iniciales(){
+	document.getElementById("content_reporte_productos").style.display="none";
+	document.getElementById("content_consulta_productos").style.display="block";
+}
+
+function abrir_content_reporte_prod(){
+	document.getElementById("content_reporte_productos").style.display="block";
+	document.getElementById("content_consulta_productos").style.display="none";
+	listar_tabla_productos();
+}
+
+function listar_tabla_productos(){
+	$.post("ajax/productos.php?op=listar_tabla_productos",function(data, status)
+	{
+		data = JSON.parse(data);
+        //console.log(data);
+        //return;
+		$("#total_productos_reporte").text(data.length);
+        var element = document.getElementById("tbl_productos_reporte");
+        while (element.firstChild) {
+          element.removeChild(element.firstChild);
+        }
+        var productos_reporte = data;
+        for (var index = 0; index < productos_reporte.length; index++) {
+			if (productos_reporte[index].estatus==1) {
+				var estatus_tbl = "Activo";
+			}
+            var fila='<tr>'+
+                '<td>'+(index+1)+'</td>'+
+                '<td>'+productos_reporte[index].codigo_match+'</td>'+
+                '<td>'+productos_reporte[index].descripcion+'</td>'+
+                '<td>'+estatus_tbl+'</td>'+
+                '</tr>';
+            $('#tbl_productos_reporte').append(fila);
+        }
+        //console.log(pedidos);
+       
+	});
 }
 
 function listar_productos()

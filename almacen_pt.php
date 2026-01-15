@@ -65,7 +65,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                 </div>
                                                   
                                                 <div class="btn-group">
-                                                  <button type="button" class="btn btn-dark" id="" onclick="codigos_alm_pt();"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></span></button>
+                                                  <button type="button" class="btn btn-dark" id="" onclick="codigos_alm_pt(1);"><span class="glyphicon glyphicon-search" aria-hidden="true" style="color: white;"></span></span></button>
                                                   <button type="button" class="btn btn-dark" id="nuevo_prod_pt" onclick="nuevo_prod_alm();"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: white;"></span></button>
                                                 </div>
                                            
@@ -96,7 +96,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                           <div class="form-group col-md-12 col-sm-12" id="box_codigos" style="overflow:scroll; max-height: 300px; width:100%;" style="width: 20px;">
 
                                           </div>
+                                          <div id="content_paginado_box_codigos" style="padding: 20px 10px;">
 
+                                          </div>
+                                          <style>
+                                            .estilo_pagina{
+                                              background-color: rgba(42, 130, 245, 0.5);
+                                            }
+                                          </style>
                                         </div>
 
                                   </div>
@@ -297,7 +304,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
 
                                         <div class="form-group col-md-6 col-sm-6">
-
+                                            
                                               <h1 id="codigo_ficha"></h1>
                                               <h3 class="name_title" id="cantidad_ficha"></h3>
                                               <p>
@@ -305,8 +312,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                 <label>Tipo: <strong id="tipo_ficha"></strong></label><br>
                                                 <label>Color: <strong id="color_ficha"></strong></label><br>
                                                 <label>Medidas: <strong id="medidas_ficha"></strong></label><br>
+                                                <label>Ubicación: <strong id="ubicacion_ficha"></strong></label>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="editar_ubicacion();" style="padding: 5px 20px; border: none; background-color: #0351b8; color: #fff; border-radius: 5px; box-shadow: 5px 5px 5px rgba(0, 61, 173, 0.5);">Editar</button>
                                               </p>
-                                          
+                                            <input type="hidden" id="id_reg_edit_prod_alm">
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6" align="center">
                                                   <div class="x_title">

@@ -8,18 +8,41 @@
 
 		}
 
-		public function codigos_alm_pt($id)
+		// public function codigos_alm_pt_new($codigo)
+		// {
+		// 		//Query lenta identificada
+		// 		$sql="SELECT ap.idalmacen_pt,ap.idproducto,ap.codigo,ap.nombre,ap.cantidad,
+		// 		(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Entrada') as cant_entrada, 
+		// 		(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Salida') as cant_salida
+		// 		FROM almacen_pt ap WHERE ap.codigo LIKE '%".$codigo."%' OR ap.nombre LIKE '%".$codigo."%' ORDER BY ap.codigo asc LIMIT 20 offset $offset";
+		// 		//return ejecutarConsultaSimpleFila($sql);
+		// 		return ejecutarConsulta($sql);
+			
+
+						
+		// }
+
+		public function codigos_alm_pt_count($codigo)
+		{
+				//Query lenta identificada
+				$sql="SELECT count(ap.codigo) as cant
+				FROM almacen_pt ap WHERE ap.codigo LIKE '%".$codigo."%' OR ap.nombre LIKE '%".$codigo."%' ORDER BY ap.codigo asc";
+				return ejecutarConsultaSimpleFila($sql);
+				//return ejecutarConsulta($sql);
+			
+
+						
+		}
+
+		public function codigos_alm_pt($id,$offset)
 		{
 				//Query lenta identificada
 				$sql="SELECT ap.idalmacen_pt,ap.idproducto,ap.codigo,ap.nombre,ap.cantidad,
 				(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Entrada') as cant_entrada, 
 				(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Salida') as cant_salida
 				FROM almacen_pt ap WHERE ap.codigo LIKE '%".$id."%' OR ap.nombre LIKE '%".$id."%' ORDER BY ap.codigo asc";
-				//return ejecutarConsultaSimpleFila($sql);
-				return ejecutarConsulta($sql);
-			
-
-						
+				//return ejecutarConsultaSimpleFila($sql); LIMIT 20 offset $offset
+				return ejecutarConsulta($sql);				
 		}
 
 		public function concidencias($codigo)
@@ -67,7 +90,7 @@
 		public function select_prod($idalmacen_pt)
 		{
 
-			$sql="SELECT ap.idalmacen_pt,ap.idproducto,ap.tipo,ap.codigo,ap.codigo_alm,ap.nombre,ap.medidas,ap.alto,ap.largo,ap.ancho,ap.color,ap.cantidad,ap.stat, 
+			$sql="SELECT ap.idalmacen_pt,ap.idproducto,ap.tipo,ap.codigo,ap.codigo_alm,ap.nombre,ap.medidas,ap.alto,ap.largo,ap.ancho,ap.color,ap.cantidad,ap.stat,ap.ubicacion, 
 			(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Entrada') as cant_entrada, 
 			(SELECT IFNULL(sum(cantidad),0) FROM almacen_pt_ed WHERE idalmacen_pt=ap.idalmacen_pt AND movimiento='Salida') as cant_salida
 			FROM almacen_pt ap WHERE ap.idalmacen_pt='$idalmacen_pt'";
@@ -795,6 +818,12 @@
 		public function borrar_registro($idalmacen_pt_ed)
 		{
 			$sql = "DELETE FROM almacen_pt_ed WHERE idalmacen_pt_ed='$idalmacen_pt_ed'";
+			return ejecutarConsulta($sql);
+		}
+
+		public function actualizar_ubicacion_prod($idalmacen_pt,$ubicacion)
+		{
+			$sql = "UPDATE almacen_pt SET ubicacion='$ubicacion' WHERE idalmacen_pt='$idalmacen_pt'";
 			return ejecutarConsulta($sql);
 		}
 

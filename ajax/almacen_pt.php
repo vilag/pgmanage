@@ -6,11 +6,28 @@
 
 	switch ($_GET["op"]) {
 		
+		// case 'codigos_alm_pt_new':
+        //     $codigo = $_POST['codigo'];
+		// 	$rspta = $almacen_pt->codigos_alm_pt_new($codigo);
+		// 	$pila = array();	
+		// 	while ($reg = $rspta->fetch_object())
+		// 	{
+		// 		array_push($pila, $reg);
+		// 	}
+		// 	echo json_encode($pila);
+		// break;
+
+		case 'codigos_alm_pt_count':
+            $codigo = $_POST['codigo'];
+			$rspta=$almacen_pt->codigos_alm_pt_count($codigo);
+			echo json_encode($rspta);
+		break;
 
 		case 'codigos_alm_pt':
 			$id=$_GET['id'];
+			$offset=$_GET['offset'];
 
-			$rspta = $almacen_pt->codigos_alm_pt($id);
+			$rspta = $almacen_pt->codigos_alm_pt($id,$offset);
 
 			echo '
 						<div class="form-group col-md-12 col-sm-12">
@@ -2533,7 +2550,15 @@
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 		
-
+		case 'actualizar_ubicacion_prod':
+			
+			$idalmacen_pt = $_POST['idalmacen_pt'];
+			$ubicacion = $_POST['ubicacion'];
+										
+			$rspta=$almacen_pt->actualizar_ubicacion_prod($idalmacen_pt,$ubicacion);
+			echo json_encode($rspta);
+	 		//echo $rspta ? "Anulada" : "No se puede anular";
+		break;
 
 	}
 

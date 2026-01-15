@@ -22,12 +22,24 @@ function init()
 	
 }
 
-function codigos_alm_pt()
+
+// function codigos_alm_pt(){
+// 	var codigo = $("#text_busc").val();
+	
+// 	$.post("ajax/almacen_pt.php?op=codigos_alm_pt_new",{codigo:codigo},function(data, status)
+// 	{
+// 		data = JSON.parse(data);
+//         console.log(data);
+        
+//     });
+// }
+var offset = 0;
+function codigos_alm_pt(pag)
 {
 
 	var codigo = $("#text_busc").val();
 
-	$.post("ajax/almacen_pt.php?op=codigos_alm_pt&id="+codigo,function(r){
+	$.post("ajax/almacen_pt.php?op=codigos_alm_pt&id="+codigo+"&offset="+offset,function(r){
 	        $("#box_codigos").html(r);
 
 	       // concidencias();
@@ -66,6 +78,32 @@ function codigos_alm_pt()
 
 					$("#coincidencias_reg").show();
 					$("#formulario_reg").hide();
+
+
+		$.post("ajax/almacen_pt.php?op=codigos_alm_pt_count",{codigo:codigo},function(data, status)
+		{
+			data = JSON.parse(data);
+
+			var paginas = parseInt(data.cant)/100;
+
+			for (var index = 0; index < paginas; index++) {
+				var no_pagina = index+1;
+					var fila='<div id="pag'+no_pagina+'" style="width: 30px; height: 30px; margin: 2px; border: #ccc 1px solid; display: flex; justify-content: center; align-items: center; float: left;">'+
+						'<span>'+no_pagina+'</span>'+
+					'</div>';
+					$('#content_paginado_box_codigos').append(fila);
+				
+
+				if (pag==no_pagina) {
+					document.getElementById("pag"+pag).classList.add('estilo_pagina');
+				}else{
+					document.getElementById("pag"+pag).classList.remove('estilo_pagina');
+				}
+				
+			}
+
+			
+		});
 
 
 	});
@@ -548,7 +586,7 @@ function select_prod(idalmacen_pt,idproducto)
 		$.post("ajax/almacen_pt.php?op=select_prod",{idalmacen_pt:idalmacen_pt},function(data, status)
 		{
 			data = JSON.parse(data);
-
+			$("#id_reg_edit_prod_alm").val(data.idalmacen_pt);
 			$("#codigo").val(data.codigo);
 			$("#codigo_ficha").text(data.codigo);
 
@@ -561,7 +599,8 @@ function select_prod(idalmacen_pt,idproducto)
 			$("#descripcion_ficha").text(data.nombre);
 			//document.getElementById('nombre').disabled = true;
 			$("#medidas").val(data.medidas);
-			$("#medidas_ficha").val(data.medidas);
+			$("#medidas_ficha").text(data.medidas);
+			$("#ubicacion_ficha").text(data.ubicacion);
 			$("#alto").val(data.alto);
 			$("#ancho").val(data.ancho);
 			$("#largo").val(data.largo);
@@ -596,6 +635,52 @@ function select_prod(idalmacen_pt,idproducto)
 			});
 			
 		});
+}
+
+var dialog_update_u;
+function editar_ubicacion(){
+	// var idalmacen_pt = $("#id_reg_edit_prod_alm").val();
+	var codigo_ficha = $("#codigo_ficha").text();
+	var descripcion_ficha = $("#descripcion_ficha").text();
+	var ubicacion_ficha = $("#ubicacion_ficha").text();
+
+	dialog_update_u = bootbox.dialog({
+                message: '<div style="width: 100%; height: 300px;">'+
+                    '<div style="width: 100%; text-align: center; padding: 15px;">'+
+                        '<span>Actualizar ubicación de producto</span>'+
+                    '</div>'+
+					'<div style="width: 100%; padding: 15px;">'+
+                        '<span>Código: </span><b>'+codigo_ficha+'</b><br>'+
+						'<span>Descripción: </span><b>'+descripcion_ficha+'</b>'+
+                    '</div>'+
+					'<div style="width: 100%; padding: 5px 15px 15px 15px; display: flex; flex-direction: column;">'+
+                        '<label>Ubicación: </label>'+
+						'<input id="ubicacion_prod_update" type="text" value="'+ubicacion_ficha+'" style="height: 30px;">'+
+                    '</div>'+
+                    '<div style="width: 100%; text-align: center; padding: 15px;">'+
+                        '<button onclick="actualizar_ubicacion_prod();" style="margin: 2px; padding: 5px 15px; background-color: #013f9b; color: #fff; border: none; border-radius: 5px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);">Guardar</button>'+
+                        '<button style="margin: 2px; padding: 5px 15px; background-color: #013f9b; color: #fff; border: none; border-radius: 5px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);" onclick="cerrar_update_prod_ub();">Cancelar</button>'+
+                    '</div>'+
+                '</div>',
+                closeButton: false
+    });
+}
+
+function cerrar_update_prod_ub(){
+	dialog_update_u.modal('hide');
+}
+
+function actualizar_ubicacion_prod(){
+	var idalmacen_pt = $("#id_reg_edit_prod_alm").val();
+	var ubicacion = $("#ubicacion_prod_update").val();
+	var idproducto = $("#idproducto_clasif").val();
+
+	$.post("ajax/almacen_pt.php?op=actualizar_ubicacion_prod",{idalmacen_pt:idalmacen_pt,ubicacion:ubicacion},function(data, status)
+	{
+		data = JSON.parse(data);
+		select_prod(idalmacen_pt,idproducto)
+		cerrar_update_prod_ub();
+	});
 }
 
 

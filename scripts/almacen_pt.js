@@ -639,6 +639,13 @@ function select_prod(idalmacen_pt,idproducto)
 
 var dialog_update_u;
 function editar_ubicacion(){
+	var idusuario = $("#idusuario").text();
+
+	if (idusuario!=1 && idusuario!=22) {
+		bootbox.alert("No tiene permisos para realizar esta acción.");
+		return;
+	}
+
 	// var idalmacen_pt = $("#id_reg_edit_prod_alm").val();
 	var codigo_ficha = $("#codigo_ficha").text();
 	var descripcion_ficha = $("#descripcion_ficha").text();

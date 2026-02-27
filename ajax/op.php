@@ -2677,8 +2677,8 @@ switch ($_GET["op"])
 
 									<th>Fabricado área</th>
 
-									<th>Avance área</th>
-									<th>Avance Total OP</th>
+									<th>% Avance área</th>
+									<th>% Avance Total OP</th>
 
 
 

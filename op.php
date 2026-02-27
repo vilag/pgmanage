@@ -151,8 +151,11 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                         
                                                                                   
                                                       </select>
+                                                      <input id="fecha_ini_rep_op" type="date" class="form-control" placeholder="Desde">
+                                                      <input id="fecha_fin_rep_op" type="date" class="form-control" placeholder="Hasta">
                                                       <button style="margin-right: 10px;" type="button" class="btn btn-dark" onclick="listar_op_estatus()">Buscar</button>
-                                                      <button type="button" class="btn btn-dark" onclick="exportTableToExcel('tbl_op_estatus')">Exportar</button>
+                                                      <button id="exportar_rep_xlsx" type="button" class="btn btn-dark">Exportar</button>
+                                                      <!-- <button type="button" class="btn btn-dark" onclick="exportTableToExcel('tbl_op_estatus')">Exportar</button> -->
                                                           <!-- <button type="button" class="btn btn-dark" id="btnExportarRep_op" onclick="exportTableToExcel();">Excel</button> -->
                                                           
                                                           
@@ -966,7 +969,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
     </div> 
     
      
-              
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>          
     <script src="vendors/jquery-knob/dist/jquery.knob.min.js"></script>
     <script src="vendors/jquery/dist/jquery.min.js"></script>
     <!-- Bootstrap -->

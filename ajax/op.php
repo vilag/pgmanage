@@ -2656,8 +2656,10 @@ switch ($_GET["op"])
 
 			$area=$_GET['area'];
 			$estatus=$_GET['estatus'];
+			$fecha_ini=$_GET['fecha_ini'];
+			$fecha_fin=$_GET['fecha_fin'];
 
-			$rspta = $opr->listar_op_estatus($area,$estatus);
+			$rspta = $opr->listar_op_estatus($area,$estatus,$fecha_ini,$fecha_fin);
 
 
 

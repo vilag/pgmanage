@@ -1050,7 +1050,7 @@ Class Opr
 		return ejecutarConsulta($sql);
 	}
 
-	public function listar_op_estatus($area,$estatus)
+	public function listar_op_estatus($area,$estatus,$fecha_ini,$fecha_fin)
 	{
 		if ($estatus==1) {
 			$condition = "(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area='$area')>=(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop)";
@@ -1066,7 +1066,7 @@ Class Opr
 		(SELECT sum(cant_tot) FROM op_detalle_prod WHERE idop = a.idop) as total_producto,
 		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop AND area='$area') as avance_area,
 		(SELECT sum(cant_capt) FROM op_avance_prod WHERE idop = a.idop) as avance_total		
-		FROM op a WHERE (SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area='$area')>0 
+		FROM op a WHERE (SELECT count(idop_detalle) FROM op_detalle WHERE idop = a.idop AND area='$area')>0 AND DATE(a.fecha_registro)>='$fecha_ini' AND DATE(a.fecha_registro)<='$fecha_fin'
 		AND
 		$condition
 		ORDER BY a.no_op DESC";

@@ -2120,12 +2120,17 @@ function listar_op_estatus(){
 
 	var area = $("#select_area_op").val();
 	var estatus = $("#select_area_estatus").val();
-	if (area>0 && estatus>0) {
+	var fecha_ini = $("#fecha_ini_rep_op").val();
+	var fecha_fin = $("#fecha_fin_rep_op").val();
+	// console.log(fecha_ini);
+	// console.log(fecha_fin);
+	// return;
+	if (area>0 && estatus>0 && fecha_ini != "" && fecha_fin != "") {
 		var dialog = bootbox.dialog({
 			message: '<p class="text-center mb-0"><i class="fas fa-spinfa-cog"></i> Consultando datos...</p>',
 			closeButton: false
 		});
-		$.post("ajax/op.php?op=listar_op_estatus&area="+area+"&estatus="+estatus,function(r){
+		$.post("ajax/op.php?op=listar_op_estatus&area="+area+"&estatus="+estatus+"&fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin,function(r){
 		$("#tbl_op_estatus").html(r);
 				dialog.modal('hide');				
 		});
@@ -2152,6 +2157,23 @@ function mostrar_reportes_op(){
 	$("#div_reportes_op").show();
 	
 }
+
+document.getElementById("exportar_rep_xlsx").addEventListener('click', function() {
+  /* Create worksheet from HTML DOM TABLE */
+  var wb = XLSX.utils.table_to_book(document.getElementById("tbl_op_estatus"));
+
+  	var area = $("#select_area_op").val();
+	if (area==1) {area="Herreria";}
+	if (area==2) {area="Pintura";}
+	if (area==3) {area="Plasticos";}
+	if (area==5) {area="EnsamblePorcelanizado";}
+	if (area==6) {area="EnsambleComercial";}
+	if (area==7) {area="EnsambleMueble";}
+	if (area==8) {area="Horno";}
+  /* Export to file (start a download) */
+  //var tipo_consulta = $("#tipo_consulta").text();
+  XLSX.writeFile(wb, "Reporte_OP"+"_"+area+".xlsx");
+});
 
 
 function exportTableToExcel(tableID){

@@ -271,7 +271,11 @@ switch ($_GET["op"]){
 
 			$rspta = $list_pedidos->listar_pedidos_v2_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul);
 
-				
+			if (!$rspta) {
+				global $conexion;
+				echo '<div class="alert alert-danger" style="margin:10px;">Error al ejecutar la búsqueda. Intente con un rango de fechas menor.</div>';
+				break;
+			}
 
 			while ($reg = $rspta->fetch_object())
 					{

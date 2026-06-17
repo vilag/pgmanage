@@ -504,8 +504,7 @@
 				return ejecutarConsulta($sql);
 
 			}
-				
-		return ejecutarConsulta($sql);
+
 		}
 
 		public function buscar_control($idpedido)

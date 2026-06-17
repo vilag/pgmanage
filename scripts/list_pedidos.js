@@ -5,6 +5,18 @@ var offset = 0;
 var modo_actual = 'ini'; // 'ini' | 'v2' | 'consul'
 var lugar_actual = '';
 var consul_lugar = '', consul_valor = '', consul_nombre = '', consul_fecha1 = '', consul_fecha2 = '';
+var total_pedidos = 0;
+
+function mostrar_info_paginado(total, page_size) {
+	total = parseInt(total) || 0;
+	if (total === 0) {
+		$("#info_paginado").text("Sin resultados");
+		return;
+	}
+	var inicio = offset + 1;
+	var fin = Math.min(offset + page_size, total);
+	$("#info_paginado").text("Mostrando " + inicio + " - " + fin + " de " + total);
+}
 function init()
 {
 	// location.href ="https://pgmanage.host/susp.php";
@@ -61,6 +73,8 @@ function init()
 			{
 			data = JSON.parse(data);
 
+				total_pedidos = data.num_pedidos;
+				mostrar_info_paginado(total_pedidos, 20);
 				buscar_pedido_ini();
 				contar_prod_sinrev();
 				cargar_notif();
@@ -83,9 +97,10 @@ function siguiente_bloque(){
 	document.getElementById("btn_sig_paginado").disabled = true;
 	document.getElementById("btn_sig_paginado2").disabled = true;
 
-	function _habilitar_sig() {
+	function _habilitar_sig(ps) {
 		const element = document.getElementById("div_lista_pedidos");
 		element.scrollTo(0, 0);
+		mostrar_info_paginado(total_pedidos, ps);
 		document.getElementById("btn_sig_paginado").disabled = false;
 		document.getElementById("btn_sig_paginado2").disabled = false;
 	}
@@ -97,7 +112,7 @@ function siguiente_bloque(){
 		$("#num_pagina2").text(conteo_pp);
 		$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
 			$("#div_lista_pedidos").html(r);
-			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_sig(); });
+			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_sig(20); });
 		});
 	} else if (modo_actual === 'v2') {
 		offset = offset + 50;
@@ -106,7 +121,7 @@ function siguiente_bloque(){
 		$("#num_pagina2").text(conteo_pp);
 		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar_actual+"&offset="+offset,function(r){
 			$("#div_lista_pedidos").html(r);
-			_habilitar_sig();
+			_habilitar_sig(50);
 		});
 	} else if (modo_actual === 'consul') {
 		offset = offset + 50;
@@ -115,7 +130,7 @@ function siguiente_bloque(){
 		$("#num_pagina2").text(conteo_pp);
 		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+consul_lugar+"&valor_consulta="+consul_valor+"&nombre_cliente="+consul_nombre+"&fecha1_consul="+consul_fecha1+"&fecha2_consul="+consul_fecha2+"&offset="+offset,function(r){
 			$("#div_lista_pedidos").html(r);
-			_habilitar_sig();
+			_habilitar_sig(50);
 		});
 	}
 }
@@ -125,9 +140,10 @@ function anterior_bloque(){
 		document.getElementById("btn_ant_paginado").disabled = true;
 		document.getElementById("btn_ant_paginado2").disabled = true;
 
-		function _habilitar_ant() {
+		function _habilitar_ant(ps) {
 			const element = document.getElementById("div_lista_pedidos");
 			element.scrollTo(0, 0);
+			mostrar_info_paginado(total_pedidos, ps);
 			document.getElementById("btn_ant_paginado").disabled = false;
 			document.getElementById("btn_ant_paginado2").disabled = false;
 		}
@@ -139,7 +155,7 @@ function anterior_bloque(){
 			$("#num_pagina2").text(conteo_pp);
 			$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
 				$("#div_lista_pedidos").html(r);
-				$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_ant(); });
+				$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_ant(20); });
 			});
 		} else if (modo_actual === 'v2') {
 			offset = offset - 50;
@@ -148,7 +164,7 @@ function anterior_bloque(){
 			$("#num_pagina2").text(conteo_pp);
 			$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar_actual+"&offset="+offset,function(r){
 				$("#div_lista_pedidos").html(r);
-				_habilitar_ant();
+				_habilitar_ant(50);
 			});
 		} else if (modo_actual === 'consul') {
 			offset = offset - 50;
@@ -157,7 +173,7 @@ function anterior_bloque(){
 			$("#num_pagina2").text(conteo_pp);
 			$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+consul_lugar+"&valor_consulta="+consul_valor+"&nombre_cliente="+consul_nombre+"&fecha1_consul="+consul_fecha1+"&fecha2_consul="+consul_fecha2+"&offset="+offset,function(r){
 				$("#div_lista_pedidos").html(r);
-				_habilitar_ant();
+				_habilitar_ant(50);
 			});
 		}
 	}
@@ -1124,6 +1140,11 @@ function buscar_valores()
 		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+lugar+"&valor_consulta="+valor_consulta+"&nombre_cliente="+nombre_cliente+"&fecha1_consul="+fecha1_consul+"&fecha2_consul="+fecha2_consul+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 	    		buscar_pedido_ini();
+	    		$.get("ajax/list_pedidos.php?op=contar_pedidos_consul&lugar="+lugar+"&valor_consulta="+valor_consulta+"&nombre_cliente="+nombre_cliente+"&fecha1_consul="+fecha1_consul+"&fecha2_consul="+fecha2_consul,function(data){
+	    			data = JSON.parse(data);
+	    			total_pedidos = data.num_pedidos;
+	    			mostrar_info_paginado(total_pedidos, 50);
+	    		});
 	    });
 
 	});
@@ -3287,6 +3308,8 @@ function filtro_option1()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });
@@ -3320,6 +3343,8 @@ function filtro_option2()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });
@@ -3353,6 +3378,8 @@ function filtro_option3()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });
@@ -3386,6 +3413,8 @@ function filtro_option4()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });
@@ -3419,6 +3448,8 @@ function filtro_option5()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });
@@ -3454,6 +3485,8 @@ function filtro_option6()
 	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
+					total_pedidos = data.num_pedidos;
+					mostrar_info_paginado(total_pedidos, 50);
 					buscar_pedido_ini();
 			});
 	    });

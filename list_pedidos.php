@@ -182,6 +182,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                             <button class="btn btn-sm btn-secondary" type="button" id="num_pagina" style="font-size: 10px;">1</button>
                             <button class="btn btn-sm btn-primary" type="button" onclick="siguiente_bloque();" style="font-size: 10px;" id="btn_sig_paginado">Siguiente</button>
                           </div>
+                          <div class="col-sm-12" id="info_paginado" style="text-align: center; font-size: 11px; color: #666; padding: 4px 0;"></div>
                           <div class="col-sm-12 mail_list_column" id="div_lista_pedidos" style="overflow:scroll;height:1400px; width:100%;">
 
                           </div>

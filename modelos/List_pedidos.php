@@ -31,7 +31,7 @@
 							
 		}
 
-		public function listar_pedidos_v2($estatus,$idusuario,$lugar)
+		public function listar_pedidos_v2($estatus,$idusuario,$lugar,$offset=0)
 		{
 
 			// $sql="SELECT p.idpg_pedidos, p.no_control, p.fecha_pedido, p.no_pedido, p.tipo, c.nombre as nom_cliente, u.lugar, p.estatus
@@ -70,24 +70,24 @@
 				$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest,p.observaciones,
 				(SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,
 				(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod 
-				FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 $estatus $estatus_2 ORDER BY p.fecha_pedido desc";
+				FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 $estatus $estatus_2 ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 				//return ejecutarConsultaSimpleFila($sql);
 				return ejecutarConsulta($sql);
 
 			}elseif ($lugar<>'Fabrica' AND $lugar<>'Ventas Alterno') {
 
-				$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 $estatus $estatus_2 AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc";
+				$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 $estatus $estatus_2 AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 				//return ejecutarConsultaSimpleFila($sql);
 				return ejecutarConsulta($sql);
 
-				
-				
+
+
 			}
 
-							
+
 		}
 
-		public function listar_pedidos_v2_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul)
+		public function listar_pedidos_v2_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul,$offset=0)
 		{
 
 			if ($valor_consulta==1) {
@@ -95,13 +95,13 @@
 
 				if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
 					
-					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY) ORDER BY p.fecha_pedido desc";
+					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY) ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 
 				}elseif ($lugar<>'Fabrica' AND $lugar<>'Ventas Alterno') {
 
-					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY) AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc";
+					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY) AND u.lugar='$lugar' ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 
@@ -115,13 +115,13 @@
 
 				if ($lugar=='Fabrica') {
 					
-					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND c.nombre LIKE '%".$nombre_cliente."%'  ORDER BY p.fecha_pedido desc";
+					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND c.nombre LIKE '%".$nombre_cliente."%'  ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 
 				}elseif ($lugar<>'Fabrica') {
 
-					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND u.lugar='$lugar' AND c.nombre LIKE '%".$nombre_cliente."%' ORDER BY p.fecha_pedido desc";
+					$sql="SELECT p.coment_vencim,p.tipo, p.idpg_pedidos,DATE(p.fecha_pedido) as fecha_pedido,DATE(p.fecha_entrega) as fecha_entrega,c.nombre as nom_cliente,p.estatus, DATEDIFF(DATE(p.fecha_entrega),DATE(p.fecha_pedido)) as diferencia_total,DATEDIFF(NOW(),DATE(p.fecha_pedido)) as avance, DATEDIFF(DATE(p.fecha_entrega),NOW()) as faltan,p.no_pedido,p.color_status,u.lugar,p.no_control,p.color_barra,p.porc_av,p.dias_rest, (SELECT count(iddocumentos) FROM documentos WHERE idpedido=p.idpg_pedidos AND nombre<>'Autorizacion de entrega sin factura o recibo') as docs,p.observaciones,(SELECT det_forma_entrega FROM dir_entregas_esp WHERE idpedido=p.idpg_pedidos) as det_forma_entrega,(SELECT count(idavance_prod) FROM op_avance_prod WHERE idpedido=p.idpg_pedidos AND comentario<>'') as num_obs_prod FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario  WHERE p.estatus2=1 AND u.lugar='$lugar' AND c.nombre LIKE '%".$nombre_cliente."%' ORDER BY p.fecha_pedido desc LIMIT 50 OFFSET $offset";
 					//return ejecutarConsultaSimpleFila($sql);
 					return ejecutarConsulta($sql);
 					
@@ -133,6 +133,25 @@
 				
 
 							
+		}
+
+		public function contar_pedidos_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul)
+		{
+			if ($valor_consulta==1) {
+				if ($lugar=='Fabrica' OR $lugar=='Ventas Alterno') {
+					$sql="SELECT COUNT(*) as total FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY)";
+				} else {
+					$sql="SELECT COUNT(*) as total FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus2=1 AND p.fecha_pedido >= '$fecha1_consul 00:00:00' AND p.fecha_pedido < DATE_ADD('$fecha2_consul', INTERVAL 1 DAY) AND u.lugar='$lugar'";
+				}
+			} elseif ($valor_consulta==2) {
+				if ($lugar=='Fabrica') {
+					$sql="SELECT COUNT(*) as total FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus2=1 AND c.nombre LIKE '%".$nombre_cliente."%'";
+				} else {
+					$sql="SELECT COUNT(*) as total FROM pg_pedidos p INNER JOIN clientes c ON p.idcliente = c.idcliente INNER JOIN usuario u ON p.idusuario=u.idusuario WHERE p.estatus2=1 AND u.lugar='$lugar' AND c.nombre LIKE '%".$nombre_cliente."%'";
+				}
+			}
+			$row = ejecutarConsultaSimpleFila($sql);
+			echo json_encode(array('num_pedidos' => $row['total']));
 		}
 
 		public function buscar_pedido($idpg_pedidos)

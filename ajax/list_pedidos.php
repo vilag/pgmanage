@@ -65,9 +65,9 @@ switch ($_GET["op"]){
 			$estatus=$_GET['estatus'];
 			$idusuario=$_GET['idusuario'];
 			$lugar=$_GET['lugar'];
-			// $offset=$_GET['offset'];
+			$offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 
-			$rspta = $list_pedidos->listar_pedidos_v2($estatus,$idusuario,$lugar);
+			$rspta = $list_pedidos->listar_pedidos_v2($estatus,$idusuario,$lugar,$offset);
 				
 
 			while ($reg = $rspta->fetch_object())
@@ -268,8 +268,9 @@ switch ($_GET["op"]){
 			$fecha2_consul=$_GET['fecha2_consul'];
 			//$idusuario=$_GET['idusuario'];
 			$lugar=$_GET['lugar'];
+			$offset = isset($_GET['offset']) ? (int)$_GET['offset'] : 0;
 
-			$rspta = $list_pedidos->listar_pedidos_v2_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul);
+			$rspta = $list_pedidos->listar_pedidos_v2_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul,$offset);
 
 			if (!$rspta) {
 				global $conexion;
@@ -1617,6 +1618,17 @@ switch ($_GET["op"]){
 			$rspta=$list_pedidos->contar_pedidos($lugar,$estatus);
 			echo json_encode($rspta);
 	 		//echo $rspta ? "Anulada" : "No se puede anular";
+		break;
+
+		case 'contar_pedidos_consul':
+
+			$lugar = $_GET['lugar'];
+			$valor_consulta = $_GET['valor_consulta'];
+			$nombre_cliente = $_GET['nombre_cliente'];
+			$fecha1_consul = $_GET['fecha1_consul'];
+			$fecha2_consul = $_GET['fecha2_consul'];
+
+			$list_pedidos->contar_pedidos_consul($lugar,$valor_consulta,$nombre_cliente,$fecha1_consul,$fecha2_consul);
 		break;
 
 		case 'buscar_idpg_pedidos':

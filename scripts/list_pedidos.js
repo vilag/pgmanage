@@ -2,10 +2,18 @@ var idusuario=$("#idusuario").text();
 var estatus_tabla = 1;
 var lugar = $("#lugar_user").text();
 var offset = 0;
+var modo_actual = 'ini'; // 'ini' | 'v2' | 'consul'
+var lugar_actual = '';
+var consul_lugar = '', consul_valor = '', consul_nombre = '', consul_fecha1 = '', consul_fecha2 = '';
 function init()
 {
 	// location.href ="https://pgmanage.host/susp.php";
 	
+	modo_actual = 'ini';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
 	document.getElementById("btn_paginado").style.display="block";
 	document.getElementById("btn_paginado2").style.display="block";
 	$("#li_buscar_control").show();
@@ -74,74 +82,85 @@ var conteo_pp = 1;
 function siguiente_bloque(){
 	document.getElementById("btn_sig_paginado").disabled = true;
 	document.getElementById("btn_sig_paginado2").disabled = true;
-	// var idusuario=$("#idusuario").text();
-	offset = offset + 20;
-	conteo_pp++;
-	$("#num_pagina").text(conteo_pp);
-	$("#num_pagina2").text(conteo_pp);
 
-	$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
-		$("#div_lista_pedidos").html(r);
+	function _habilitar_sig() {
+		const element = document.getElementById("div_lista_pedidos");
+		element.scrollTo(0, 0);
+		document.getElementById("btn_sig_paginado").disabled = false;
+		document.getElementById("btn_sig_paginado2").disabled = false;
+	}
 
-		var estatus = estatus_tabla;
-
-		$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
-		{
-		data = JSON.parse(data);
-
-			
-
-			const element = document.getElementById("div_lista_pedidos");
-			element.scrollTo(0, 0);
-
-			document.getElementById("btn_sig_paginado").disabled = false;
-			document.getElementById("btn_sig_paginado2").disabled = false;
-
+	if (modo_actual === 'ini') {
+		offset = offset + 20;
+		conteo_pp++;
+		$("#num_pagina").text(conteo_pp);
+		$("#num_pagina2").text(conteo_pp);
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
+			$("#div_lista_pedidos").html(r);
+			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_sig(); });
 		});
-		
-		
-	});
-
+	} else if (modo_actual === 'v2') {
+		offset = offset + 50;
+		conteo_pp++;
+		$("#num_pagina").text(conteo_pp);
+		$("#num_pagina2").text(conteo_pp);
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar_actual+"&offset="+offset,function(r){
+			$("#div_lista_pedidos").html(r);
+			_habilitar_sig();
+		});
+	} else if (modo_actual === 'consul') {
+		offset = offset + 50;
+		conteo_pp++;
+		$("#num_pagina").text(conteo_pp);
+		$("#num_pagina2").text(conteo_pp);
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+consul_lugar+"&valor_consulta="+consul_valor+"&nombre_cliente="+consul_nombre+"&fecha1_consul="+consul_fecha1+"&fecha2_consul="+consul_fecha2+"&offset="+offset,function(r){
+			$("#div_lista_pedidos").html(r);
+			_habilitar_sig();
+		});
+	}
 }
 
 function anterior_bloque(){
-	
-	// var idusuario=$("#idusuario").text();
-	//alert(offset);
-	if (offset>0) {
+	if (offset > 0) {
 		document.getElementById("btn_ant_paginado").disabled = true;
 		document.getElementById("btn_ant_paginado2").disabled = true;
-		offset = offset - 20;
-		
-		conteo_pp--;
-		
-		
-		$("#num_pagina").text(conteo_pp);
-		$("#num_pagina2").text(conteo_pp);
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
-			$("#div_lista_pedidos").html(r);
+		function _habilitar_ant() {
+			const element = document.getElementById("div_lista_pedidos");
+			element.scrollTo(0, 0);
+			document.getElementById("btn_ant_paginado").disabled = false;
+			document.getElementById("btn_ant_paginado2").disabled = false;
+		}
 
-			var estatus = estatus_tabla;
-
-			$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
-			{
-			data = JSON.parse(data);
-
-				
-
-				const element = document.getElementById("div_lista_pedidos");
-				element.scrollTo(0, 0);
-
-				document.getElementById("btn_ant_paginado").disabled = false;
-				document.getElementById("btn_ant_paginado2").disabled = false;
-
+		if (modo_actual === 'ini') {
+			offset = offset - 20;
+			conteo_pp--;
+			$("#num_pagina").text(conteo_pp);
+			$("#num_pagina2").text(conteo_pp);
+			$.post("ajax/list_pedidos.php?op=listar_pedidos_ini&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset="+offset,function(r){
+				$("#div_lista_pedidos").html(r);
+				$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(){ _habilitar_ant(); });
 			});
-			
-			
-		});
+		} else if (modo_actual === 'v2') {
+			offset = offset - 50;
+			conteo_pp--;
+			$("#num_pagina").text(conteo_pp);
+			$("#num_pagina2").text(conteo_pp);
+			$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar_actual+"&offset="+offset,function(r){
+				$("#div_lista_pedidos").html(r);
+				_habilitar_ant();
+			});
+		} else if (modo_actual === 'consul') {
+			offset = offset - 50;
+			conteo_pp--;
+			$("#num_pagina").text(conteo_pp);
+			$("#num_pagina2").text(conteo_pp);
+			$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+consul_lugar+"&valor_consulta="+consul_valor+"&nombre_cliente="+consul_nombre+"&fecha1_consul="+consul_fecha1+"&fecha2_consul="+consul_fecha2+"&offset="+offset,function(r){
+				$("#div_lista_pedidos").html(r);
+				_habilitar_ant();
+			});
+		}
 	}
-
 }
 
 function selec_tipo_busqueda()
@@ -1071,38 +1090,43 @@ function valid_nom_cli()
 }
 
 function buscar_valores()
-{	
+{
 	var fecha1_consul = $("#fecha1_consul").val();
 	var fecha2_consul = $("#fecha2_consul").val();
 	var nombre_cliente = $("#nombre_cliente").val();
 	var valor_consulta = $("#valor_consulta").val();
-	//alert(valor_consulta);
 
+	modo_actual = 'consul';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 
-		var estatus_tabla = 1;
-		//$("#estatus_pedido").val("1");
-		//alert(estatus_tabla);
-		var idusuario=$("#idusuario").text();
-		$("#estatus_pedido").val("1");
+	estatus_tabla = 1;
+	var idusuario=$("#idusuario").text();
+	$("#estatus_pedido").val("1");
 
-		$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
-		{
-		data = JSON.parse(data);
+	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
+	{
+	data = JSON.parse(data);
 
-			var lugar = data.lugar;
-			$("#lugar_user").text(lugar);
+		var lugar = data.lugar;
+		$("#lugar_user").text(lugar);
 
-			$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+lugar+"&valor_consulta="+valor_consulta+"&nombre_cliente="+nombre_cliente+"&fecha1_consul="+fecha1_consul+"&fecha2_consul="+fecha2_consul,function(r){
-		    $("#div_lista_pedidos").html(r);
+		consul_lugar = lugar;
+		consul_valor = valor_consulta;
+		consul_nombre = nombre_cliente;
+		consul_fecha1 = fecha1_consul;
+		consul_fecha2 = fecha2_consul;
 
-		    		buscar_pedido_ini();
-			    				    	
-		                     
-		    });
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2_consul&lugar="+lugar+"&valor_consulta="+valor_consulta+"&nombre_cliente="+nombre_cliente+"&fecha1_consul="+fecha1_consul+"&fecha2_consul="+fecha2_consul+"&offset=0",function(r){
+	    $("#div_lista_pedidos").html(r);
+	    		buscar_pedido_ini();
+	    });
 
-		});	
-
-	
+	});
 }
 
 function update_observ()
@@ -3239,39 +3263,32 @@ function cont_num_vencidos()
 
 function filtro_option1()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
-	//$("#estatus_tabla").val("1");
-
-	// var estatus_tabla=1;
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
+	estatus_tabla = 1;
 	$("#estatus_pedido").val("1");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Sin entregar");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-
-
 					buscar_pedido_ini();
-			    	
-
 			});
-	                     
 	    });
 
 	});
@@ -3279,38 +3296,32 @@ function filtro_option1()
 }
 function filtro_option2()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 	estatus_tabla=2;
 	$("#estatus_pedido").val("2");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Listos para entrega");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-			
-
 					buscar_pedido_ini();
-			    	
-
 			});
-	                     
 	    });
 
 	});
@@ -3318,37 +3329,32 @@ function filtro_option2()
 }
 function filtro_option3()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 	estatus_tabla=3;
 	$("#estatus_pedido").val("3");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Entregados");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-
 					buscar_pedido_ini();
-			    	
-
 			});
-	                     
 	    });
 
 	});
@@ -3356,35 +3362,32 @@ function filtro_option3()
 }
 function filtro_option4()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 	estatus_tabla=4;
 	$("#estatus_pedido").val("4");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Pendientes");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-
 					buscar_pedido_ini();
-			  
 			});
-	                     
 	    });
 
 	});
@@ -3392,36 +3395,32 @@ function filtro_option4()
 }
 function filtro_option5()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 	estatus_tabla=5;
 	$("#estatus_pedido").val("5");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Cancelados");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-
 					buscar_pedido_ini();
-			    	
-
 			});
-	                     
 	    });
 
 	});
@@ -3431,37 +3430,32 @@ function filtro_option5()
 
 function filtro_option6()
 {
-	document.getElementById("btn_paginado").style.display="none";
-	document.getElementById("btn_paginado2").style.display="none";
+	modo_actual = 'v2';
+	offset = 0;
+	conteo_pp = 1;
+	$("#num_pagina").text(1);
+	$("#num_pagina2").text(1);
+	document.getElementById("btn_paginado").style.display="";
+	document.getElementById("btn_paginado2").style.display="";
 	estatus_tabla=0;
 	$("#estatus_pedido").val("0");
 	var idusuario=$("#idusuario").text();
-
-	//$("#text_estatus").text("Todo");
 
 	$.post("ajax/diseno.php?op=consul_lugar",{idusuario:idusuario},function(data, status)
 	{
 	data = JSON.parse(data);
 
 		var lugar = data.lugar;
-		//alert(lugar);
+		lugar_actual = lugar;
 
-		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar,function(r){
+		$.post("ajax/list_pedidos.php?op=listar_pedidos_v2&estatus="+estatus_tabla+"&idusuario="+idusuario+"&lugar="+lugar+"&offset=0",function(r){
 	    $("#div_lista_pedidos").html(r);
 
-	    	var estatus = estatus_tabla;
-
-	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus},function(data, status)
+	    	$.post("ajax/list_pedidos.php?op=contar_pedidos",{lugar:lugar,estatus:estatus_tabla},function(data, status)
 			{
 			data = JSON.parse(data);
-
-
-
 					buscar_pedido_ini();
-			    
-
 			});
-	                     
 	    });
 
 	});

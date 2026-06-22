@@ -250,3 +250,73 @@ function ver_pedidos_pendientes()
 
 init();
 
+
+// =====================================================
+// REPORTE: PRODUCTOS POR PEDIDO
+// =====================================================
+
+document.getElementById("btn_export_prod").addEventListener('click', function() {
+    var wb = XLSX.utils.table_to_book(document.getElementById("TableProdToExport"));
+    var anio = $("#select_anio_prod").val();
+    XLSX.writeFile(wb, "productos_pedidos_" + anio + ".xlsx");
+});
+
+function listar_anios_prod() {
+    $.post("ajax/reportes.php?op=llenar_anios_prod", function(data) {
+        data = JSON.parse(data);
+        var element = document.getElementById("select_anio_prod");
+        while (element.firstChild) element.removeChild(element.firstChild);
+        data.sort(function(a, b) { return b.anios - a.anios; });
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].anios > 0) {
+                var opt = '<option value="' + data[i].anios + '">' + data[i].anios + '</option>';
+                $('#select_anio_prod').append(opt);
+            }
+        }
+        // no auto-load: el usuario debe hacer clic en Buscar
+    });
+}
+
+function listar_productos_pedidos(anio) {
+    document.getElementById("msg_inicio_prod").style.display = "none";
+    document.getElementById("loader_prod").style.display = "block";
+    document.getElementById("contenedor_tabla_prod").style.display = "none";
+    document.getElementById("cant_prod_enc").innerText = "";
+    document.getElementById("lbl_prod_enc").innerText = "";
+    var element = document.getElementById("tbl_prod_pedidos");
+    while (element.firstChild) element.removeChild(element.firstChild);
+
+    $.post("ajax/reportes.php?op=listar_productos_pedidos", { anio: anio }, function(data) {
+        document.getElementById("loader_prod").style.display = "none";
+        document.getElementById("contenedor_tabla_prod").style.display = "block";
+        data = JSON.parse(data);
+        document.getElementById("cant_prod_enc").innerText = data.length + " productos";
+        document.getElementById("lbl_prod_enc").innerText = "encontrados para el año " + anio;
+        for (var i = 0; i < data.length; i++) {
+            var d = data[i];
+            var fila = '<tr>' +
+                '<td>' + (i + 1) + '</td>' +
+                '<td>' + (d.fecha_pedido   || '') + '</td>' +
+                '<td>' + (d.no_control     || '') + '</td>' +
+                '<td>' + (d.no_op          || 'NA') + '</td>' +
+                '<td>' + (d.areas_op       || 'NA') + '</td>' +
+                '<td>' + (d.cantidad       || '') + '</td>' +
+                '<td>' + (d.codigo         || '') + '</td>' +
+                '<td>' + (d.descripcion    || '') + '</td>' +
+                '<td>' + (d.fecha_entrega  || '') + '</td>' +
+                '<td>' + (d.vendedor       || '') + '</td>' +
+                '<td>' + (d.estatus        || '') + '</td>' +
+                '<td>' + (d.cliente        || '') + '</td>' +
+                '</tr>';
+            $('#tbl_prod_pedidos').append(fila);
+        }
+    });
+}
+
+function listar_productos_pedidos_new() {
+    var anio = $("#select_anio_prod").val();
+    listar_productos_pedidos(anio);
+}
+
+listar_anios_prod();
+

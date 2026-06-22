@@ -238,6 +238,25 @@ switch ($_GET["op"])
 				
 			break;
 
+		case 'llenar_anios_prod':
+			$rspta = $reportes->llenar_anios_prod();
+			$pila = array();
+			while ($reg = $rspta->fetch_object()) {
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+
+		case 'listar_productos_pedidos':
+			$anio = $_POST['anio'];
+			$rspta = $reportes->listar_productos_pedidos($anio);
+			$pila = array();
+			while ($reg = $rspta->fetch_object()) {
+				array_push($pila, $reg);
+			}
+			echo json_encode($pila);
+		break;
+
 	}
 
 ?>

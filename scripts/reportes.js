@@ -320,3 +320,43 @@ function listar_productos_pedidos_new() {
 
 listar_anios_prod();
 
+function buscar_no_control(valor) {
+    var filas = document.querySelectorAll('#tbl_prod_pedidos tr');
+    var valor_limpio = valor.trim().toLowerCase();
+    var primera_coincidencia = null;
+    var total = 0;
+
+    filas.forEach(function(fila) {
+        var celda = fila.cells[2]; // columna No. Control (índice 2)
+        if (!celda) return;
+        var texto = celda.textContent.trim().toLowerCase();
+        var coincide = valor_limpio !== '' && texto === valor_limpio;
+
+        fila.style.backgroundColor = coincide ? '#fff3cd' : '';
+        fila.style.fontWeight      = coincide ? 'bold'    : '';
+
+        if (coincide) {
+            total++;
+            if (!primera_coincidencia) primera_coincidencia = fila;
+        }
+    });
+
+    var lbl = document.getElementById('lbl_resultado_busqueda');
+    if (valor_limpio === '') {
+        lbl.textContent = '';
+        return;
+    }
+
+    if (primera_coincidencia) {
+        lbl.textContent = total + ' fila(s) encontrada(s)';
+        lbl.style.color = '#076649';
+        var contenedor = document.getElementById('contenedor_tabla_prod');
+        // scroll al row dentro del contenedor
+        var offsetRelativo = primera_coincidencia.offsetTop - contenedor.offsetTop;
+        contenedor.scrollTop = offsetRelativo - 40;
+    } else {
+        lbl.textContent = 'No. Control no encontrado';
+        lbl.style.color = '#c0392b';
+    }
+}
+

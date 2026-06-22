@@ -237,6 +237,20 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 <b id="cant_prod_enc" style="background-color: #1d4e85ff; color:#fff; padding:4px 10px; border-radius:3px;"></b>&nbsp;<b id="lbl_prod_enc"></b>
                               </div>
 
+                              <div class="col-md-12 col-sm-12" style="margin-top: 15px;">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="input-group">
+                                    <input type="number" id="buscador_control" class="form-control" placeholder="Buscar No. Control..." min="1" step="1" oninput="buscar_no_control(this.value)">
+                                    <span class="input-group-btn">
+                                      <button class="btn btn-default" type="button" onclick="buscar_no_control(document.getElementById('buscador_control').value)">
+                                        <i class="fa fa-search"></i>
+                                      </button>
+                                    </span>
+                                  </div>
+                                  <small id="lbl_resultado_busqueda" style="color:#888;"></small>
+                                </div>
+                              </div>
+
                               <div class="col-md-12 col-sm-12" id="loader_prod" style="display:none; padding: 20px; text-align: center;">
                                 <i class="fa fa-spinner fa-spin fa-2x"></i>&nbsp;Cargando datos...
                               </div>

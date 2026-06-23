@@ -329,22 +329,26 @@ function aplicar_orden() {
     var tbody = document.getElementById('tbl_prod_pedidos');
     var rows  = Array.from(tbody.querySelectorAll('tr'));
 
+    var reDate = /^\d{4}[-\/]\d{2}[-\/]\d{2}$|^\d{2}[-\/]\d{2}[-\/]\d{4}$/;
+    var reNum  = /^-?[\d,]+(\.\d+)?$/;
+
     rows.sort(function(a, b) {
         var aVal = a.cells[colIndex] ? a.cells[colIndex].textContent.trim() : '';
         var bVal = b.cells[colIndex] ? b.cells[colIndex].textContent.trim() : '';
 
-        // Numérico
-        var aNum = parseFloat(aVal.replace(/,/g, ''));
-        var bNum = parseFloat(bVal.replace(/,/g, ''));
-        if (!isNaN(aNum) && !isNaN(bNum) && aVal !== '' && bVal !== '') {
-            return dir === 'asc' ? aNum - bNum : bNum - aNum;
+        // Fecha (YYYY-MM-DD o DD/MM/YYYY) — debe ir antes que numérico
+        if (reDate.test(aVal) && reDate.test(bVal)) {
+            var aDate = new Date(aVal);
+            var bDate = new Date(bVal);
+            if (!isNaN(aDate) && !isNaN(bDate))
+                return dir === 'asc' ? aDate - bDate : bDate - aDate;
         }
 
-        // Fecha (formato YYYY-MM-DD o DD/MM/YYYY)
-        var aDate = new Date(aVal);
-        var bDate = new Date(bVal);
-        if (!isNaN(aDate) && !isNaN(bDate) && aVal.match(/\d{4}|\d{2}[\/\-]\d{2}/)) {
-            return dir === 'asc' ? aDate - bDate : bDate - aDate;
+        // Numérico puro
+        if (reNum.test(aVal) && reNum.test(bVal)) {
+            var aNum = parseFloat(aVal.replace(/,/g, ''));
+            var bNum = parseFloat(bVal.replace(/,/g, ''));
+            return dir === 'asc' ? aNum - bNum : bNum - aNum;
         }
 
         // Texto

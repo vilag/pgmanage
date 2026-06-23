@@ -1,17 +1,6 @@
 <?php
-$servername = 'localhost';
-$username = 'u690371019_pgmanage';
-//$username = 'root';
-$password = "A=tSXZ4z";
-//$password = "";
-$dbname = "u690371019_pgmanage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/config/Conexion.php';
+$conn = $conexion;
 
 //$sql = "SELECT * FROM pg_pedidos WHERE idpg_pedidos=94";
 
@@ -48,7 +37,7 @@ while ($anio1 <= $anio2) {
 	$lugar_b = $idlugar1;
 	//echo "año: " . $row["anio"]. "<br>";
 
-	if ($anio==0) {
+	if ($anio == 0) {
 
 		$sql3 = "INSERT INTO indicadores (anio) VALUES ('$anio1')";
 		$result3 = $conn->query($sql3);
@@ -58,13 +47,13 @@ while ($anio1 <= $anio2) {
 			$sql5 = "INSERT INTO ped_lugar_anio (idlugar,anio) VALUES ('$lugar_b','$anio1')";
 			$result5 = $conn->query($sql5);
 
-			$lugar_b=$lugar_b+1;
+			$lugar_b = $lugar_b + 1;
 		}
 
 		$lugar_b = $idlugar1;
 
-			
-	}elseif ($anio>0) {
+
+	} elseif ($anio > 0) {
 
 		$sql4 = "UPDATE indicadores SET 
 		num_pedidos=(SELECT count(p.idpg_pedidos) FROM pg_pedidos p WHERE p.estatus2=1 AND YEAR(p.fecha_pedido) = '$anio1' AND p.idcliente<>2509 AND p.idcliente<>2511 AND p.idcliente<>2512 AND p.tipo<>4),
@@ -88,10 +77,10 @@ while ($anio1 <= $anio2) {
 
 		while ($lugar_b <= $idlugar2) {
 			# code...
-			if ($lugar_b==1) {
-				$condicion='';
-			}elseif ($lugar_b>1) {
-				$condicion="AND (SELECT lugar FROM usuario WHERE idusuario=p.idusuario)=(SELECT nombre FROM lugares WHERE idlugar='$lugar_b')";
+			if ($lugar_b == 1) {
+				$condicion = '';
+			} elseif ($lugar_b > 1) {
+				$condicion = "AND (SELECT lugar FROM usuario WHERE idusuario=p.idusuario)=(SELECT nombre FROM lugares WHERE idlugar='$lugar_b')";
 			}
 
 			$sql6 = "UPDATE ped_lugar_anio SET 
@@ -112,18 +101,18 @@ while ($anio1 <= $anio2) {
 			";
 			$result5 = $conn->query($sql6);
 
-			$lugar_b=$lugar_b+1;
+			$lugar_b = $lugar_b + 1;
 		}
 
 		$lugar_b = $idlugar1;
 
-		
+
 	}
-		
 
-	$anio1 = $anio1+1;
 
-	
+	$anio1 = $anio1 + 1;
+
+
 }
 
 $sql7 = "INSERT INTO calculos (tipo, fecha) VALUES ('Calculos_ind', NOW())";
@@ -131,7 +120,7 @@ $result = $conn->query($sql7);
 
 //if ($result->num_rows > 0){
 
-	
+
 //}
 
 
@@ -141,7 +130,7 @@ $result = $conn->query($sql7);
 /*if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["idpg_pedidos"]. " - Control: " . $row["no_control"]. " - Pedido:" . $row["no_pedido"]. "<br>";
+	echo "id: " . $row["idpg_pedidos"]. " - Control: " . $row["no_control"]. " - Pedido:" . $row["no_pedido"]. "<br>";
   }
 } else {
   echo "0 results";

@@ -1,17 +1,6 @@
 <?php
-$servername = 'localhost';
-$username = 'u690371019_pgmanage';
-//$username = 'root';
-$password = "A=tSXZ4z";
-//$password = "";
-$dbname = "u690371019_pgmanage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/config/Conexion.php';
+$conn = $conexion;
 
 
 // $sql7 = "SELECT count(dp.idpg_detalle_pedidos) as num_sinrev FROM pg_detalle_pedidos dp INNER JOIN pg_pedidos p ON dp.idpg_pedidos=p.idpg_pedidos WHERE (SELECT IFNULL(sum(cantidad),0) FROM pg_detped WHERE iddetalle_pedido=dp.idpg_detalle_pedidos)<dp.cantidad AND p.estatus2=1 AND p.estatus<>'CANCELADO' AND p.estatus<>'ENTREGADO'";

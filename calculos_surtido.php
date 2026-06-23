@@ -1,17 +1,6 @@
 <?php
-$servername = 'localhost';
-$username = 'u690371019_pgmanage';
-//$username = 'root';
-$password = "A=tSXZ4z";
-//$password = "";
-$dbname = "u690371019_pgmanage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/config/Conexion.php';
+$conn = $conexion;
 
 $sql_pd1_vale = "
 SELECT pd.idpg_detped as id1,
@@ -46,10 +35,10 @@ $id2_apartado = $row['id2'];
 
 
 //$id_ini_base = $row['id_ini'];
-echo $id1_apartado." id1_apartado <br>";
-echo $id2_apartado." id2_apartado <br>";
+echo $id1_apartado . " id1_apartado <br>";
+echo $id2_apartado . " id2_apartado <br>";
 
-while ($id1_apartado<=$id2_apartado) {
+while ($id1_apartado <= $id2_apartado) {
 
 	$sql_consul_vale = "SELECT estatus,idpg_detped as idpg_detped_vale FROM vale_salida WHERE idpg_detped='$id1_apartado'";
 	$result_consul_vale = mysqli_query($conn, $sql_consul_vale);
@@ -57,7 +46,7 @@ while ($id1_apartado<=$id2_apartado) {
 	$estatus = $row['estatus'];
 	$idpg_detped_vale = $row['idpg_detped_vale'];
 
-	if ($estatus==1) {
+	if ($estatus == 1) {
 
 		$sql_upd_surtidos = "UPDATE pg_detped SET estatus = 'Surtido' WHERE idpg_detped='$idpg_detped_vale'";
 		$result_surtidos = $conn->query($sql_upd_surtidos);
@@ -65,7 +54,7 @@ while ($id1_apartado<=$id2_apartado) {
 	}
 
 
-	$id1_apartado = $id1_apartado+1;
+	$id1_apartado = $id1_apartado + 1;
 }
 
 //echo $result;
@@ -73,7 +62,7 @@ while ($id1_apartado<=$id2_apartado) {
 /*if ($result->num_rows > 0) {
   // output data of each row
   while($row = $result->fetch_assoc()) {
-    echo "id: " . $row["idpg_pedidos"]. " - Control: " . $row["no_control"]. " - Pedido:" . $row["no_pedido"]. "<br>";
+	echo "id: " . $row["idpg_pedidos"]. " - Control: " . $row["no_control"]. " - Pedido:" . $row["no_pedido"]. "<br>";
   }
 } else {
   echo "0 results";

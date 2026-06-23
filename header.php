@@ -51,16 +51,8 @@
     </script>
 
    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-   
     <!--<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>-->
     <script src="graficas/apexcharts.js"></script>
-   
-  
-    <!--<script src="http://codeseven.github.com/toastr/toastr.js"></script>
-    <link href="http://codeseven.github.com/toastr/toastr.css" rel="stylesheet"/>
-    <link href="http://codeseven.github.com/toastr/toastr-responsive.css" rel="stylesheet"/>-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,9 +63,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
-    <script src="js/excel/xlsx.full.min.js"></script>
-    <script src="js/excel/FileSaver.min.js"></script>
-    <script src="js/excel/tableexport.min.js"></script>
 
   
 
@@ -107,7 +96,7 @@
           width: 100%;
           height: 100%;
           z-index: 9999;
-          background: url('images/pageLoader.gif') 50% 50% no-repeat rgb(249,249,249);
+          background: url('images/ajax-loader.gif') 50% 50% no-repeat rgb(249,249,249);
           opacity: .8;
       }
     </style>

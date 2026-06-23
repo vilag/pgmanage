@@ -89,8 +89,9 @@ function listar_pedidos(mes_actual,anio_actual,tipos_consulta_pedidos){
           element.removeChild(element.firstChild);
         }
         var pedidos = data;
+        var html = '';
         for (var index = 0; index < pedidos.length; index++) {
-            var fila='<tr>'+
+            html += '<tr>'+
                 '<td>'+(index+1)+'</td>'+
                 '<td>'+pedidos[index].no_control+'</td>'+
                 '<td>'+pedidos[index].fecha_pedido+'</td>'+
@@ -98,8 +99,8 @@ function listar_pedidos(mes_actual,anio_actual,tipos_consulta_pedidos){
                 '<td>'+pedidos[index].lugar+'</td>'+
                 '<td>'+pedidos[index].estatus+'</td>'+
                 '</tr>';
-            $('#tbl_pedidos').append(fila);
         }
+        document.getElementById('tbl_pedidos').innerHTML = html;
         //console.log(pedidos);
        
 	});
@@ -292,9 +293,10 @@ function listar_productos_pedidos(anio) {
         data = JSON.parse(data);
         document.getElementById("cant_prod_enc").innerText = data.length + " productos";
         document.getElementById("lbl_prod_enc").innerText = "encontrados para el año " + anio;
+        var html = '';
         for (var i = 0; i < data.length; i++) {
             var d = data[i];
-            var fila = '<tr>' +
+            html += '<tr>' +
                 '<td>' + (i + 1) + '</td>' +
                 '<td>' + (d.fecha_pedido   || '') + '</td>' +
                 '<td>' + (d.no_control     || '') + '</td>' +
@@ -308,8 +310,8 @@ function listar_productos_pedidos(anio) {
                 '<td>' + (d.estatus        || '') + '</td>' +
                 '<td>' + (d.cliente        || '') + '</td>' +
                 '</tr>';
-            $('#tbl_prod_pedidos').append(fila);
         }
+        document.getElementById('tbl_prod_pedidos').innerHTML = html;
     });
 }
 

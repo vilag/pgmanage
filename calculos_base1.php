@@ -1,17 +1,6 @@
 <?php
-$servername = 'localhost';
-$username = 'u690371019_pgmanage';
-//$username = 'root';
-$password = "A=tSXZ4z";
-//$password = "";
-$dbname = "u690371019_pgmanage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/config/Conexion.php';
+$conn = $conexion;
 
 
 //$sql = "SELECT * FROM pg_pedidos WHERE idpg_pedidos=94";

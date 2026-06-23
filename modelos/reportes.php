@@ -23,42 +23,30 @@ Class Reportes
 
 	public function listar_pedidos($mes_actual,$anio_actual,$tipo)
     {
+		$mes_actual  = intval($mes_actual);
+		$anio_actual = intval($anio_actual);
+		$fecha_ini   = sprintf('%04d-%02d-01', $anio_actual, $mes_actual);
+		$fecha_fin   = date('Y-m-d', mktime(0, 0, 0, $mes_actual + 1, 1, $anio_actual));
+
+		$base = "SELECT a.no_control, a.fecha_pedido, c.nombre as nombre_tipo, b.lugar, a.estatus
+			FROM pg_pedidos a
+			INNER JOIN usuario b ON a.idusuario=b.idusuario
+			INNER JOIN pg_tipo_pedido c ON a.tipo=c.idtipo
+			WHERE a.fecha_pedido >= '$fecha_ini' AND a.fecha_pedido < '$fecha_fin' AND a.estatus2=1";
+
 		if ($tipo==1) {
-			$sql="SELECT a.no_control, a.fecha_pedido, c.nombre as nombre_tipo, b.lugar, a.estatus
-			FROM pg_pedidos a
-			INNER JOIN usuario b ON a.idusuario=b.idusuario
-			INNER JOIN pg_tipo_pedido c ON a.tipo=c.idtipo
-			WHERE YEAR(a.fecha_pedido)='$anio_actual' AND MONTH(a.fecha_pedido)='$mes_actual' AND a.estatus2=1 AND a.estatus<>'CANCELADO' ORDER BY a.fecha_pedido desc";
-			return ejecutarConsulta($sql);
+			$sql = $base . " AND a.estatus<>'CANCELADO' ORDER BY a.fecha_pedido DESC";
+		} elseif ($tipo==2) {
+			$sql = $base . " AND a.estatus='ENTREGADO' ORDER BY a.fecha_pedido DESC";
+		} elseif ($tipo==3) {
+			$sql = $base . " AND a.estatus<>'CANCELADO' AND a.estatus<>'ENTREGADO' ORDER BY a.fecha_pedido DESC";
+		} elseif ($tipo==4) {
+			$sql = $base . " AND a.estatus='CANCELADO' ORDER BY a.fecha_pedido DESC";
+		} else {
+			return null;
 		}
 
-		if ($tipo==2) {
-			$sql="SELECT a.no_control, a.fecha_pedido, c.nombre as nombre_tipo, b.lugar, a.estatus
-			FROM pg_pedidos a
-			INNER JOIN usuario b ON a.idusuario=b.idusuario
-			INNER JOIN pg_tipo_pedido c ON a.tipo=c.idtipo
-			WHERE YEAR(a.fecha_pedido)='$anio_actual' AND MONTH(a.fecha_pedido)='$mes_actual' AND a.estatus2=1 AND a.estatus<>'CANCELADO' AND a.estatus='ENTREGADO' ORDER BY a.fecha_pedido desc";
-			return ejecutarConsulta($sql);
-		}
-
-		if ($tipo==3) {
-			$sql="SELECT a.no_control, a.fecha_pedido, c.nombre as nombre_tipo, b.lugar, a.estatus
-			FROM pg_pedidos a
-			INNER JOIN usuario b ON a.idusuario=b.idusuario
-			INNER JOIN pg_tipo_pedido c ON a.tipo=c.idtipo
-			WHERE YEAR(a.fecha_pedido)='$anio_actual' AND MONTH(a.fecha_pedido)='$mes_actual' AND a.estatus2=1 AND a.estatus<>'CANCELADO' AND a.estatus<>'ENTREGADO' ORDER BY a.fecha_pedido desc";
-			return ejecutarConsulta($sql);
-		}
-
-		if ($tipo==4) {
-			$sql="SELECT a.no_control, a.fecha_pedido, c.nombre as nombre_tipo, b.lugar, a.estatus
-			FROM pg_pedidos a
-			INNER JOIN usuario b ON a.idusuario=b.idusuario
-			INNER JOIN pg_tipo_pedido c ON a.tipo=c.idtipo
-			WHERE YEAR(a.fecha_pedido)='$anio_actual' AND MONTH(a.fecha_pedido)='$mes_actual' AND a.estatus2=1 AND a.estatus='CANCELADO' ORDER BY a.fecha_pedido desc";
-			return ejecutarConsulta($sql);
-		}
-
+		return ejecutarConsulta($sql);
     }
 
 

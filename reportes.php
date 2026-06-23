@@ -296,39 +296,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
               </div>
         </div>
 
-    <!-- <script src="node_modules/@mescius/spread-sheets/index.js"></script>
-        <script src="node_modules/@mescius/spread-sheets-io/index.js"></script>
-        <script src="node_modules/file-saver/dist/FileSaver.min.js"></script> -->
     <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
-
-    <script src="js/html2pdf.bundle.min.js"></script>
-
-    <script src="vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
+    <!-- Bootstrap JS (tabs y modales) -->
     <script src="vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- FastClick -->
-    <script src="vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="vendors/nprogress/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="vendors/iCheck/icheck.min.js"></script>
-    <!-- Datatables -->
-    <script src="vendors/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
-    <script src="vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
-    <script src="vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
-    <script src="vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
-    <script src="vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-    <script src="vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-
-    <script src="vendors/jszip/dist/jszip.min.js"></script>
-    <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
-    <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 
     <!-- Custom Theme Scripts -->
     <script type="text/javascript" src="scripts/reportes.js?v=<?php echo(rand()); ?>"></script>

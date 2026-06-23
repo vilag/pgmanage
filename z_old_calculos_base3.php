@@ -1,17 +1,6 @@
 <?php
-$servername = 'localhost';
-$username = 'u690371019_pgmanage';
-//$username = 'root';
-$password = "A=tSXZ4z";
-//$password = "";
-$dbname = "u690371019_pgmanage";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require_once __DIR__ . '/config/Conexion.php';
+$conn = $conexion;
 
 //Ultimo ajuste
 
@@ -52,7 +41,7 @@ if ($conn->connect_error) {
 
 
 // while ($id_ini<=$id_fin) {
-	
+
 // 		$sql13 = "SELECT p.cant_est, p.estatus, p.no_control, p.estatus2,
 // 		(SELECT sum(cantidad) FROM pg_detalle_pedidos WHERE idpg_pedidos=p.idpg_pedidos) as cant_detalle
 // 		FROM pg_pedidos p WHERE p.idpg_pedidos='$id_ini'";

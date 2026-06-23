@@ -225,12 +225,14 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                   <label for="">Año</label>
                                   <select class="form-control" id="select_anio_prod"></select>
                                 </div>
+                                <?php if ($_SESSION['administrador']==1): ?>
                                 <div class="col-md-2 col-sm-2" style="padding-top: 30px;">
                                   <button onclick="listar_productos_pedidos_new();" style="padding: 5px 15px; background-color: #1d4e85ff; color: #ffffff; border: none !important;">Buscar</button>
                                 </div>
                                 <div class="col-md-7 col-sm-7" style="padding-top: 30px; display: flex; justify-content: flex-end;">
                                   <button id="btn_export_prod" style="padding: 5px 15px; background-color: #076649ff; color: #ffffff; border: none !important; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);">Exportar a Excel</button>
                                 </div>
+                              <?php endif; ?>
                               </div>
 
                               <div class="col-md-12 col-sm-12" style="margin-top: 15px; padding-left: 20px;">
@@ -301,7 +303,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
     <script src="vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom Theme Scripts -->
-    <script type="text/javascript" src="scripts/reportes.js?v=<?php echo(rand()); ?>"></script>
+    <script type="text/javascript" src="scripts/reportes.js?v=<?php echo filemtime('scripts/reportes.js'); ?>"></script>
     <script src="build/js/custom.min.js"></script>
     <script src="public/js/bootbox.min.js"></script>
 

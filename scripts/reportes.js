@@ -155,14 +155,6 @@ function listar_pedidos_new(){
 
 
 
-function buscar_pedidos_fabricados(){
-    var fecha_ini = $("#fecha_ini_rep").val();
-	var fecha_fin = $("#fecha_fin_rep").val();
-    $.post("ajax/reportes.php?op=buscar_pedidos_fabricados&fecha_ini="+fecha_ini+"&fecha_fin="+fecha_fin,function(r){
-	$("#tbl_pedidos_reportes").html(r);
-			       
-	});
-}
 
 
 

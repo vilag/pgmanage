@@ -55,43 +55,6 @@ switch ($_GET["op"])
 
 
 
-		case 'buscar_pedidos_fabricados':
-
-			$fecha_ini = $_GET['fecha_ini'];
-			$fecha_fin = $_GET['fecha_fin'];
-			$rspta = $reportes->buscar_pedidos_fabricados($fecha_ini,$fecha_fin);
-						echo '	<thead>
-	                              <tr style="background: #034343; color: white;">
-	                              	<th>FECHA DE PEDIDO</th>
-	                              	<th>FECHA DE ENTREGA AL CLIENTE</th>
-	                                <th>TIPO DE PEDIDO</th>
-	                                <th>ORIGEN</th>
-	                                <th>CONTROL</th>
-	                                <th>CLIENTE</th>
-	                                <th>ESTATUS</th>  
-	                              </tr>
-	                            </thead>
-	                            <tbody>';
-			while ($reg = $rspta->fetch_object())
-					{
-
-						echo '
-
-									 <tr>
-						                <td>'.$reg->fecha_pedido.'</td>
-		                                <td>'.$reg->fecha_ent_cli.'</td>
-		                                <td>'.$reg->tipo.'</td>
-		                                <td>'.$reg->lugar.'</td>
-		                                <td>'.$reg->no_control.'</td>
-		                                <td>'.$reg->nombre_cli.'</td>
-		                                <td>'.$reg->estatus.'</td>
-		                             </tr>
-						';
-						
-					}
-						echo '</tbody>
-						';
-		break;
 
 
 
@@ -248,6 +211,11 @@ switch ($_GET["op"])
 		break;
 
 		case 'listar_productos_pedidos':
+			session_start();
+			if (!isset($_SESSION['administrador']) || $_SESSION['administrador'] != 1) {
+				echo json_encode(['error' => 'Sin permisos']);
+				exit;
+			}
 			$anio = $_POST['anio'];
 			$rspta = $reportes->listar_productos_pedidos($anio);
 			$pila = array();

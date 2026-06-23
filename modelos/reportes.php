@@ -52,10 +52,6 @@ Class Reportes
 
 
 
-	public function buscar_pedidos_fabricados($fecha_ini,$fecha_fin){
-		$sql="SELECT * FROM pg pedidos a WHERE estatus";
-		return ejecutarConsulta($sql);
-	}
 
 
 
@@ -92,39 +88,45 @@ Class Reportes
 	{
 		$anio     = intval($anio);
 		$anio_sig = $anio + 1;
-		$sql = "SELECT DISTINCT
-			DATE(p.fecha_pedido) AS fecha_pedido,
+		$sql = "SELECT
+			DATE(p.fecha_pedido)    AS fecha_pedido,
 			p.no_control,
 			COALESCE(o.no_op, 'NA') AS no_op,
 			COALESCE(
-				CASE od.area
-					WHEN 1 THEN 'HERRERIA'
-					WHEN 2 THEN 'PINTURA'
-					WHEN 3 THEN 'PLASTICOS'
-					WHEN 5 THEN 'ENSAMBLE PORCELANIZADO'
-					WHEN 6 THEN 'ENSAMBLE COMERCIAL'
-					WHEN 7 THEN 'ENSAMBLE MUEBLES'
-					WHEN 8 THEN 'HORNO'
-				END,
-			'NA') AS areas_op,
+				(SELECT CASE od2.area
+					WHEN '1' THEN 'HERRERIA'
+					WHEN '2' THEN 'PINTURA'
+					WHEN '3' THEN 'PLASTICOS'
+					WHEN '5' THEN 'ENSAMBLE PORCELANIZADO'
+					WHEN '6' THEN 'ENSAMBLE COMERCIAL'
+					WHEN '7' THEN 'ENSAMBLE MUEBLES'
+					WHEN '8' THEN 'HORNO'
+				END
+				FROM op_detalle od2
+				WHERE od2.idop = o.idop
+				ORDER BY od2.prioridad DESC
+				LIMIT 1),
+				'NA'
+			) AS areas_op,
 			dp.cantidad,
 			dp.codigo,
 			dp.descripcion,
-			DATE(p.fecha_entrega) AS fecha_entrega,
-			u.nombre AS vendedor,
+			(SELECT DATE(MAX(spf.fecha)) FROM estatus_pedido_fab spf WHERE spf.idpedido = p.idpg_pedidos) AS fecha_entrega,
+			u.nombre                AS vendedor,
 			p.estatus,
-			c.nombre AS cliente
+			c.nombre                AS cliente
 		FROM pg_pedidos p
-		INNER JOIN clientes c ON p.idcliente = c.idcliente
-		INNER JOIN usuario u ON p.idusuario = u.idusuario
-		INNER JOIN pg_detalle_pedidos dp ON p.idpg_pedidos = dp.idpg_pedidos
-		LEFT JOIN op_detalle_prod odp ON dp.idpg_detalle_pedidos = odp.iddetalle_pedido
-		LEFT JOIN op o ON odp.idop = o.idop AND o.estatus != 2
-		LEFT JOIN op_detalle od ON o.idop = od.idop
-		WHERE p.fecha_pedido >= '$anio-01-01' AND p.fecha_pedido < '$anio_sig-01-01'
-		AND p.estatus2 = 1
-		AND p.no_control IS NOT NULL AND p.no_control <> '' AND p.no_control <> '0'
-		ORDER BY p.fecha_pedido DESC, p.no_control, dp.idpg_detalle_pedidos, od.prioridad";
+		INNER JOIN clientes            c   ON p.idcliente             = c.idcliente
+		INNER JOIN usuario             u   ON p.idusuario             = u.idusuario
+		INNER JOIN pg_detalle_pedidos  dp  ON p.idpg_pedidos          = dp.idpg_pedidos
+		LEFT  JOIN op_detalle_prod     odp ON dp.idpg_detalle_pedidos = odp.iddetalle_pedido
+		LEFT  JOIN op                  o   ON odp.idop                = o.idop AND o.estatus != 2
+		WHERE  p.fecha_pedido >= '$anio-01-01'
+		AND    p.fecha_pedido  < '$anio_sig-01-01'
+		AND    p.estatus2 = 1
+		AND    p.no_control IS NOT NULL AND p.no_control <> '' AND p.no_control <> '0'
+		GROUP BY p.idpg_pedidos, dp.idpg_detalle_pedidos, o.idop
+		ORDER BY p.fecha_pedido DESC, p.no_control, dp.idpg_detalle_pedidos, o.idop";
 		return ejecutarConsulta($sql);
 	}
 

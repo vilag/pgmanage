@@ -598,7 +598,32 @@ Class Welcome
             return ejecutarConsulta($sql);
 
         }
-      
+
+    public function pedidos_por_mes($anio)
+    {
+        $anio = intval($anio);
+        $sql = "SELECT
+                    MONTH(fecha_pedido) AS mes,
+                    COUNT(*) AS total,
+                    SUM(CASE WHEN estatus = 'ENTREGADO' THEN 1 ELSE 0 END) AS entregados
+                FROM pg_pedidos
+                WHERE YEAR(fecha_pedido) = $anio
+                  AND estatus != 'CANCELADO'
+                  AND estatus2 = 1
+                GROUP BY MONTH(fecha_pedido)
+                ORDER BY mes ASC";
+        $result = ejecutarConsulta($sql);
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = [
+                'mes'        => (int)$row['mes'],
+                'total'      => (int)$row['total'],
+                'entregados' => (int)$row['entregados']
+            ];
+        }
+        return $data;
+    }
+
 }
  
 ?>

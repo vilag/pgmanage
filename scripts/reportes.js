@@ -285,6 +285,7 @@ function listar_productos_pedidos(anio) {
         data = JSON.parse(data);
         document.getElementById("cant_prod_enc").innerText = data.length + " productos";
         document.getElementById("lbl_prod_enc").innerText = "encontrados para el año " + anio;
+        document.getElementById("controles_orden_prod").style.display = "block";
         var html = '';
         for (var i = 0; i < data.length; i++) {
             var d = data[i];
@@ -313,6 +314,52 @@ function listar_productos_pedidos_new() {
 }
 
 listar_anios_prod();
+
+// ── Ordenamiento de tabla Productos por Pedido ──────────────────────────────
+var _sortDir = 'asc';
+
+function toggleSortDir() {
+    _sortDir = _sortDir === 'asc' ? 'desc' : 'asc';
+    document.getElementById('btn_toggle_dir').innerHTML = _sortDir === 'asc' ? '&#8593; Asc' : '&#8595; Desc';
+}
+
+function aplicar_orden() {
+    var colIndex = parseInt(document.getElementById('select_col_orden').value);
+    var dir = _sortDir;
+    var tbody = document.getElementById('tbl_prod_pedidos');
+    var rows  = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort(function(a, b) {
+        var aVal = a.cells[colIndex] ? a.cells[colIndex].textContent.trim() : '';
+        var bVal = b.cells[colIndex] ? b.cells[colIndex].textContent.trim() : '';
+
+        // Numérico
+        var aNum = parseFloat(aVal.replace(/,/g, ''));
+        var bNum = parseFloat(bVal.replace(/,/g, ''));
+        if (!isNaN(aNum) && !isNaN(bNum) && aVal !== '' && bVal !== '') {
+            return dir === 'asc' ? aNum - bNum : bNum - aNum;
+        }
+
+        // Fecha (formato YYYY-MM-DD o DD/MM/YYYY)
+        var aDate = new Date(aVal);
+        var bDate = new Date(bVal);
+        if (!isNaN(aDate) && !isNaN(bDate) && aVal.match(/\d{4}|\d{2}[\/\-]\d{2}/)) {
+            return dir === 'asc' ? aDate - bDate : bDate - aDate;
+        }
+
+        // Texto
+        return dir === 'asc'
+            ? aVal.localeCompare(bVal, 'es', { sensitivity: 'base' })
+            : bVal.localeCompare(aVal, 'es', { sensitivity: 'base' });
+    });
+
+    // Reinserta filas ordenadas y renueva columna #
+    rows.forEach(function(row, i) {
+        if (row.cells[0]) row.cells[0].textContent = i + 1;
+        tbody.appendChild(row);
+    });
+}
+// ────────────────────────────────────────────────────────────────────────────
 
 function buscar_no_control(valor) {
     var filas = document.querySelectorAll('#tbl_prod_pedidos tr');

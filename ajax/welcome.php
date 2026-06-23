@@ -775,8 +775,14 @@ switch ($_GET["op"]){
 			
 		break;
 
+		case 'pedidos_por_mes':
+			$anio = intval($_POST['anio']);
+			$rspta = $welcome->pedidos_por_mes($anio);
+			echo json_encode($rspta);
+		break;
+
 		case 'guardar_coment_vencim':
-		
+
 			$idpedido = $_POST['idpedido'];
 			$det_vencim = $_POST['det_vencim'];
 

@@ -253,6 +253,28 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                 </div>
                               </div>
 
+                              <!-- ORDENAMIENTO -->
+                              <div class="col-md-12 col-sm-12" id="controles_orden_prod" style="display:none; margin-top: 12px;">
+                                <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+                                  <label style="margin: 0; white-space: nowrap; font-weight: 600;">Ordenar por:</label>
+                                  <select class="form-control" id="select_col_orden" style="width: auto; display: inline-block;">
+                                    <option value="1">Fecha de alta</option>
+                                    <option value="2">No. Control</option>
+                                    <option value="3">O.P.</option>
+                                    <option value="4">Área</option>
+                                    <option value="5">Cantidad</option>
+                                    <option value="6">Código</option>
+                                    <option value="7">Descripción</option>
+                                    <option value="8">Fecha de entrega</option>
+                                    <option value="9">Vendedor</option>
+                                    <option value="10">Estatus</option>
+                                    <option value="11">Cliente</option>
+                                  </select>
+                                  <button id="btn_toggle_dir" onclick="toggleSortDir();" style="padding: 5px 14px; background-color: #555; color: #fff; border: none; border-radius: 3px; white-space: nowrap;">&#8593; Asc</button>
+                                  <button onclick="aplicar_orden();" style="padding: 5px 16px; background-color: #1d4e85; color: #fff; border: none; border-radius: 3px;">Ordenar</button>
+                                </div>
+                              </div>
+
                               <div class="col-md-12 col-sm-12" id="loader_prod" style="display:none; padding: 20px; text-align: center;">
                                 <i class="fa fa-spinner fa-spin fa-2x"></i>&nbsp;Cargando datos...
                               </div>

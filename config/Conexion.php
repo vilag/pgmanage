@@ -5,10 +5,12 @@ $conexion = new mysqli(DB_HOST,DB_USERNAME,DB_PASSWORD,DB_NAME);
 
 mysqli_query( $conexion, 'SET NAMES "'.DB_ENCODE.'"');
 
-//Si tenemos un posible error en la conexión lo mostramos
+//Si tenemos un posible error en la conexión lo devolvemos como JSON
 if (mysqli_connect_errno())
 {
-	printf("Falló conexión a la base de datos: %s\n",mysqli_connect_error());
+	header('Content-Type: application/json');
+	http_response_code(503);
+	echo json_encode(['error' => true, 'message' => 'Falló conexión a la base de datos: '.mysqli_connect_error()]);
 	exit();
 }
 

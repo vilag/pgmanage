@@ -1,6 +1,6 @@
 <?php 
 
-require "../config/Conexion.php";
+require_once "../config/Conexion.php";
 
 Class Alm_mat_prima
 {

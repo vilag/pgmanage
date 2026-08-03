@@ -20,12 +20,23 @@ function login()
             {"logina":logina,"clavea":clavea},
             function(data)
         {
-            data = JSON.parse(data);
+            try {
+                data = JSON.parse(data);
+            } catch (e) {
+                bootbox.alert("No se pudo conectar con el servidor. Intenta de nuevo en unos minutos.");
+                return;
+            }
+
+            if (data && data.error)
+            {
+                bootbox.alert("No se pudo conectar con el servidor. Intenta de nuevo en unos minutos.");
+                return;
+            }
 
            // alert(data);
            var idusuario = data.idusuario;
            //alert(idusuario);
-            
+
 
             if (data!=null)
             {

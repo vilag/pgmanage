@@ -1,6 +1,6 @@
 <?php 
 //Incluímos inicialmente la conexión a la base de datos
-require "../config/Conexion2.php";
+require_once "../config/Conexion2.php";
 
 Class Consulta
 {

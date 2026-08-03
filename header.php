@@ -381,13 +381,13 @@
                 <?php
                 if (($_SESSION['idusuario'] == 1) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] == 2) OR ($_SESSION['idusuario'] == 3) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 9) OR ($_SESSION['idusuario'] == 7) OR ($_SESSION['idusuario'] == 23)) {
 
-                  echo '
-                              
-                                <li><a href="zuno/vistas/ventas/ventas.php"> PG|TRACING</a></li>
-                                  
+                  // echo '
+                
+                  //               <li><a href="zuno/vistas/ventas/ventas.php"> PG|TRACING</a></li>
+                
 
-                          ';
-
+                  //         ';
+                
 
                 }
 

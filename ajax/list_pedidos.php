@@ -1110,7 +1110,7 @@ switch ($_GET["op"]) {
 				$visib_estat2 = "hidden";
 			}
 
-			if ($idusuario == 1) {
+			if ($idusuario == 1 OR $idusuario == 28) {
 				$display_update_c = "block";
 			} else {
 				$display_update_c = "none";

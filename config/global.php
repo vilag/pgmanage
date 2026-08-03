@@ -1,8 +1,8 @@
 <?php
 //Ip de la pc servidor de base de datos
 //define("DB_HOST","sql5c25c.carrierzone.com");
-define("DB_HOST", "localhost");
-//define("DB_HOST", "srv467.hstgr.io");
+//define("DB_HOST", "localhost");
+define("DB_HOST", "srv467.hstgr.io");
 
 //Nombre de la base de datos
 
@@ -16,7 +16,7 @@ define("DB_USERNAME", "u690371019_pgmanage");
 
 //Contraseña del usuario de la base de datos
 define("DB_PASSWORD", "A=tSXZ4z");
-//define("DB_PASSWORD", "");
+//define("DB_PASSWORD", "+y*U|yaXOs:8");
 
 //definimos la codificación de los caracteres
 define("DB_ENCODE", "utf8");

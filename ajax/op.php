@@ -113,7 +113,7 @@ switch ($_GET["op"]) {
 
 			*/
 
-			if (($idusuario == 1) OR ($idusuario == 7) OR ($idusuario == 8) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario == 24)) {
+			if (($idusuario == 1) OR ($idusuario == 7) OR ($idusuario == 8) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario == 24) OR ($idusuario == 28)) {
 
 				echo '
 															<a href="#" onclick="abrir_modal_reg_areas(' . $reg->idop . ');"><h1>+</h1></a>
@@ -193,7 +193,7 @@ switch ($_GET["op"]) {
 
 									<td>';
 
-			if ($idusuario < 15) {
+			if ($idusuario < 15 OR $idusuario == 28) {
 
 
 				echo '
@@ -208,7 +208,7 @@ switch ($_GET["op"]) {
 			}
 
 
-			if (($idusuario == 1) OR ($idusuario == 8) OR ($idusuario == 7) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario >= 15 AND $idusuario <= 21)) {
+			if (($idusuario == 1) OR ($idusuario == 28) OR ($idusuario == 8) OR ($idusuario == 7) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario >= 15 AND $idusuario <= 21)) {
 
 				echo '
 
@@ -283,7 +283,7 @@ switch ($_GET["op"]) {
 
 						';
 
-			if (($idusuario == 1) OR ($idusuario == 7) OR ($idusuario == 8) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14)) {
+			if (($idusuario == 1) OR ($idusuario == 28) OR ($idusuario == 7) OR ($idusuario == 8) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14)) {
 
 				echo '
 															<a href="#" onclick="abrir_modal_reg_areas(' . $reg->idop . ');"><h1>+</h1></a>
@@ -548,7 +548,7 @@ switch ($_GET["op"]) {
 
 									<td>';
 
-			if ($idusuario < 15) {
+			if ($idusuario < 15 OR $idusuario == 28) {
 
 
 				echo '
@@ -563,7 +563,7 @@ switch ($_GET["op"]) {
 			}
 
 
-			if (($idusuario == 1) OR ($idusuario == 4) OR ($idusuario == 8) OR ($idusuario == 7) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario >= 15 AND $idusuario <= 21) OR ($idusuario == 22)) {
+			if (($idusuario == 1) OR ($idusuario == 28) OR ($idusuario == 4) OR ($idusuario == 8) OR ($idusuario == 7) OR ($idusuario == 9) OR ($idusuario >= 11 AND $idusuario <= 12) OR ($idusuario == 14) OR ($idusuario >= 15 AND $idusuario <= 21) OR ($idusuario == 22)) {
 
 				echo '
 
@@ -1923,7 +1923,7 @@ switch ($_GET["op"]) {
 		$rspta = $opr->mostrar_op($idop);
 
 		echo '<b style="font-size: 20px;">OP: ' . $no_op . '</b>&nbsp;&nbsp;<b style="font-size: 20px; color: red;">' . $estat . '</b>';
-		if ($idusuario == 1 OR $idusuario == 8 OR $idusuario == 24) {
+		if ($idusuario == 1 OR $idusuario == 28 OR $idusuario == 8 OR $idusuario == 24) {
 			echo '<a href="#" onclick="abrir_modal_reg_areas(' . $idop . ');"><h1>+</h1></a>';
 		}
 

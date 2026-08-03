@@ -1016,9 +1016,9 @@ switch ($_GET["op"]) {
 		//$total=0;
 		while ($reg = $rspta->fetch_object()) {
 
-			if ($idusuario == 1) {
+			if ($idusuario == 1 OR $idusuario == 28) {
 				$visib = "visible;";
-			} elseif ($idusuario <> 1) {
+			} elseif ($idusuario <> 1 AND $idusuario <> 28) {
 
 				$estatus = $reg->estatus;
 

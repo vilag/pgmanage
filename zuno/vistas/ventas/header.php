@@ -40,8 +40,6 @@
         if (window.history.forward(1) != null) {window.history.forward(1);}
     </script>
 
-    <script type="text/javascript" src="http://h1.ripway.com/inacho/highslide-with-gallery.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://h1.ripway.com/inacho/highslide.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 

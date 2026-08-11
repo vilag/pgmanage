@@ -55,9 +55,6 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
         if (window.history.forward(1) != null) {window.history.forward(1);}
     </script>
 
-    <script type="text/javascript" src="http://h1.ripway.com/inacho/highslide-with-gallery.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://h1.ripway.com/inacho/highslide.css" />
-    
 
 
   </head>

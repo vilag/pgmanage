@@ -151,6 +151,66 @@ switch ($_GET["op"]) {
 		//echo $rspta ? "Anulada" : "No se puede anular";
 		break;
 
+	case 'historico_presalida':
+
+		$idalmacen_pt = $_GET['idalmacen_pt'];
+		$offset = $_GET['offset'];
+
+		$rspta = $almacen_pt->historico_presalida($idalmacen_pt, $offset);
+
+		echo '<thead>
+                                <tr style="font-size: 11px;">
+                                  <th style="padding: 4px;">FECHA</th>
+                                  <th style="padding: 4px;">VALE</th>
+                                  <th style="padding: 4px;">CONTROL</th>
+                                  <th style="padding: 4px;">LOTE</th>
+                                  <th style="padding: 4px;">OP</th>
+                                  <th style="padding: 4px;">CANT/DISP</th>
+                                  <th style="padding: 4px;">ESTATUS</th>
+                                </tr>
+                              </thead>
+                              <tbody>';
+
+		while ($reg = $rspta->fetch_object()) {
+
+			if ($reg->estatus == 0) {
+				$estatus = "Sin registrar";
+
+				if ($reg->estatus_vale == 1) {
+					$estatus .= ' <button type="button" class="btn btn-warning" style="font-size: 9px; padding: 2px 6px;" title="El vale ya fue surtido pero este registro no se actualizó. Da clic para corregirlo." onclick="corregir_estatus_presalida(' . $reg->idpresalida . ');">Actualizar</button>';
+				}
+			} elseif ($reg->estatus == 1) {
+				$estatus = "Registrado";
+			}
+
+			$fecha = substr($reg->fecha_hora_reg, 0, 10);
+
+			echo '
+									<tr style="font-size: 11px;">
+	                                  <td style="padding: 4px;">' . $fecha . '</td>
+	                                  <td style="padding: 4px;">' . $reg->no_vale . '</td>
+	                                  <td style="padding: 4px;">' . $reg->no_control . '</td>
+	                                  <td style="padding: 4px;">' . $reg->lote . '</td>
+	                                  <td style="padding: 4px;">' . $reg->op . '</td>
+	                                  <td style="padding: 4px;">' . $reg->cantidad . ' / ' . $reg->disponible . '</td>
+	                                  <td style="padding: 4px;">' . $estatus . '</td>
+	                                </tr>
+							';
+		}
+
+		echo '</tbody>';
+
+		break;
+
+	case 'corregir_estatus_presalida':
+
+		$idpresalida = $_POST['idpresalida'];
+
+		$rspta = $almacen_pt->corregir_estatus_presalida($idpresalida);
+		echo json_encode(array('ok' => $rspta ? true : false));
+
+		break;
+
 	case 'sub_codigo':
 
 		$codigo_nuevo = $_POST['codigo_nuevo'];
@@ -232,9 +292,9 @@ switch ($_GET["op"]) {
 	case 'listar_es':
 
 		$id = $_GET['id'];
-		//$num=$_GET['num'];
+		$offset = $_GET['offset'];
 
-		$rspta = $almacen_pt->listar_es($id);
+		$rspta = $almacen_pt->listar_es($id, $offset);
 
 
 

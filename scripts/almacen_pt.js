@@ -619,6 +619,8 @@ function select_prod(idalmacen_pt, idproducto) {
 
 		});
 
+		listar_re_alm();
+
 	});
 }
 
@@ -837,10 +839,21 @@ function listar_re_alm() {
 
 	var idalmacen_pt = $("#idalmacen_pt").val();
 
+	offset_mov = 0;
+	conteo_mov = 1;
+	$("#num_pag_mov").text(conteo_mov);
 
+	offset_presalida = 0;
+	conteo_presalida = 1;
+	$("#num_pag_presalida").text(conteo_presalida);
 
-	$.post("ajax/almacen_pt.php?op=listar_es&id=" + idalmacen_pt, function (r) {
+	$.post("ajax/almacen_pt.php?op=listar_es&id=" + idalmacen_pt + "&offset=" + offset_mov, function (r) {
 		$("#datatable_es").html(r);
+
+	});
+
+	$.post("ajax/almacen_pt.php?op=historico_presalida&idalmacen_pt=" + idalmacen_pt + "&offset=" + offset_presalida, function (r) {
+		$("#tbl_historico_presalida").html(r);
 
 	});
 }
@@ -1626,6 +1639,89 @@ function abrir_ventana_mov() {
 	$.post("ajax/almacen_pt.php?op=listar_es_todo&id=" + idalmacen_pt, function (r) {
 		$("#tbl_movimientos").html(r);
 
+	});
+}
+
+var offset_mov = 0;
+var conteo_mov = 1;
+
+function next_pagina_mov() {
+	document.getElementById("btn_siguiente_mov").disabled = true;
+	var idalmacen_pt = $("#idalmacen_pt").val();
+	offset_mov = offset_mov + 10;
+	conteo_mov++;
+	$("#num_pag_mov").text(conteo_mov);
+	$.post("ajax/almacen_pt.php?op=listar_es&id=" + idalmacen_pt + "&offset=" + offset_mov, function (r) {
+		$("#datatable_es").html(r);
+		document.getElementById("btn_siguiente_mov").disabled = false;
+
+	});
+}
+
+function back_pagina_mov() {
+	if (offset_mov > 0) {
+		document.getElementById("btn_anterior_mov").disabled = true;
+		var idalmacen_pt = $("#idalmacen_pt").val();
+		offset_mov = offset_mov - 10;
+		conteo_mov--;
+		$("#num_pag_mov").text(conteo_mov);
+		$.post("ajax/almacen_pt.php?op=listar_es&id=" + idalmacen_pt + "&offset=" + offset_mov, function (r) {
+			$("#datatable_es").html(r);
+			document.getElementById("btn_anterior_mov").disabled = false;
+
+		});
+	}
+}
+
+var offset_presalida = 0;
+var conteo_presalida = 1;
+
+function next_pagina_presalida() {
+	document.getElementById("btn_siguiente_presalida").disabled = true;
+	var idalmacen_pt = $("#idalmacen_pt").val();
+	offset_presalida = offset_presalida + 10;
+	conteo_presalida++;
+	$("#num_pag_presalida").text(conteo_presalida);
+	$.post("ajax/almacen_pt.php?op=historico_presalida&idalmacen_pt=" + idalmacen_pt + "&offset=" + offset_presalida, function (r) {
+		$("#tbl_historico_presalida").html(r);
+		document.getElementById("btn_siguiente_presalida").disabled = false;
+
+	});
+}
+
+function back_pagina_presalida() {
+	if (offset_presalida > 0) {
+		document.getElementById("btn_anterior_presalida").disabled = true;
+		var idalmacen_pt = $("#idalmacen_pt").val();
+		offset_presalida = offset_presalida - 10;
+		conteo_presalida--;
+		$("#num_pag_presalida").text(conteo_presalida);
+		$.post("ajax/almacen_pt.php?op=historico_presalida&idalmacen_pt=" + idalmacen_pt + "&offset=" + offset_presalida, function (r) {
+			$("#tbl_historico_presalida").html(r);
+			document.getElementById("btn_anterior_presalida").disabled = false;
+
+		});
+	}
+}
+
+function corregir_estatus_presalida(idpresalida) {
+	bootbox.confirm("El vale de esta salida ya fue surtido pero este registro se quedó como \"Sin registrar\". ¿Deseas corregir su estatus a \"Registrado\"?", function (result) {
+		if (result) {
+			var idalmacen_pt = $("#idalmacen_pt").val();
+
+			$.post("ajax/almacen_pt.php?op=corregir_estatus_presalida", { idpresalida: idpresalida }, function (data, status) {
+				data = JSON.parse(data);
+
+				if (data.ok) {
+					$.post("ajax/almacen_pt.php?op=historico_presalida&idalmacen_pt=" + idalmacen_pt + "&offset=" + offset_presalida, function (r) {
+						$("#tbl_historico_presalida").html(r);
+					});
+				} else {
+					bootbox.alert("No fue posible corregir el registro.");
+				}
+
+			});
+		}
 	});
 }
 

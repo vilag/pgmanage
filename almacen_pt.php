@@ -318,57 +318,95 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         </div>
                                         <div class="form-group col-md-6 col-sm-6" align="center">
                                                   <div class="x_title">
-                                                        
+
                                                         <div class="clearfix"></div>
                                                   </div>
                                                   <img src="images/marca/logo.png" alt="..." width="60%">
-                                                  
+
                                         </div>
 
-                                        
 
-                                       
 
-                                        
+                                        <div class="form-group col-md-12 col-sm-12" style="display: flex; flex-wrap: wrap;">
 
-                                         <div class="form-group col-md-4 col-sm-12">
-                                            <label>Lote:</label>
-                                            <input type="text" class="form-control" id="lote">              
+                                            <div style="width: 50%; box-sizing: border-box; padding-right: 15px;">
+
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Lote:</label>
+                                                    <input type="text" class="form-control" id="lote">
+                                                </div>
+
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>Orden de producción:</label>
+                                                    <input type="text" class="form-control" id="op">
+                                                </div>
+
+                                                <div class="form-group col-md-4 col-sm-12">
+                                                    <label>No. Control:</label>
+                                                    <input type="text" class="form-control" id="control">
+                                                </div>
+
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <label>Cantidad:</label>
+                                                    <input type="number" class="form-control" id="cantidad">
+                                                </div>
+
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <label>Comentario:</label>
+                                                    <input type="text" class="form-control" id="comentario">
+                                                </div>
+
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                    <label>Fecha:</label>
+                                                    <input type="date" class="form-control" id="fecha_registro_alm">
+                                                </div>
+
+                                                <div class="form-group col-md-12 col-sm-12">
+                                                  <label>_</label>
+                                                </div>
+
+                                                <div class="form-group col-md-12 col-sm-12" align="center">
+                                                    <button type="button" class="btn btn-dark btn-lg" id="btn_form_ped" onclick="guardar_registro();">Guardar</button>
+                                                </div>
+
+                                            </div>
+
+                                            <div style="width: 50%; box-sizing: border-box; padding-left: 15px;">
+
+                                                <div class="x_panel">
+                                                  <div class="x_title">
+                                                    <h6>Histórico en presalida</h6>
+                                                    <div class="clearfix"></div>
+                                                  </div>
+
+                                                  <p style="font-size: 12px; color: #777; padding: 0 15px;">Lotes de este producto que se han asignado para surtir vales de almacén. "Registrado" indica que la salida ya se aplicó al inventario; "Sin registrar" indica que aún está pendiente de guardarse.</p>
+
+                                                  <div class="x_content" style="border:0px solid #e5e5e5; overflow:scroll;height:auto; max-height: 500px;">
+                                                      <div class="row">
+                                                          <div class="col-sm-12">
+                                                            <div class="card-box table-responsive">
+
+                                                                <div class="form-group col-md-12 col-sm-12">
+                                                                    <table id="tbl_historico_presalida" class="table table-hover">
+
+                                                                    </table>
+                                                                </div>
+
+                                                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados_presalida">
+                                                                  <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_presalida" onclick="back_pagina_presalida();">Anterior</button>
+                                                                  <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_presalida">1</button>
+                                                                  <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_presalida" onclick="next_pagina_presalida();">Siguiente</button>
+                                                                </div>
+
+                                                            </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                </div>
+
+                                            </div>
+
                                         </div>
-
-                                        <div class="form-group col-md-4 col-sm-12">
-                                            <label>Orden de producción:</label>
-                                            <input type="text" class="form-control" id="op">              
-                                        </div>
-
-                                        <div class="form-group col-md-4 col-sm-12">
-                                            <label>No. Control:</label>
-                                            <input type="text" class="form-control" id="control">              
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-sm-12">
-                                            <label>Cantidad:</label>
-                                            <input type="number" class="form-control" id="cantidad">              
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-sm-12">
-                                            <label>Comentario:</label>
-                                            <input type="text" class="form-control" id="comentario">              
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-sm-12">
-                                            <label>Fecha:</label>
-                                            <input type="date" class="form-control" id="fecha_registro_alm">              
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-sm-12">
-                                          <label>_</label>
-                                        </div>
-
-                                        <div class="form-group col-md-12 col-sm-12" align="center">
-                                            <button type="button" class="btn btn-dark btn-lg" id="btn_form_ped" onclick="guardar_registro();">Guardar</button>
-                                        </div>
-    
 
                                     </div>
 
@@ -479,18 +517,18 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                         <div class="card-box table-responsive">
                                 <input type="hidden" class="form-control" id="estatus_tabla" value="3">
 
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;" id="btn_paginados_mov">
+                                  <button style="font-size: 10px;" class="btn btn-primary" id="btn_anterior_mov" onclick="back_pagina_mov();">Anterior</button>
+                                  <button style="font-size: 10px;" class="btn btn-secondary" id="num_pag_mov">1</button>
+                                  <button style="font-size: 10px;" class="btn btn-primary" id="btn_siguiente_mov" onclick="next_pagina_mov();">Siguiente</button>
+                                </div>
 
                                 <div class="form-group col-md-12 col-sm-12">
                                     <table id="datatable_es" class="table table-hover">
-                                      
+
                                     </table>
                                 </div>
 
-
-                                    
-
-
-                                
 
                                     </div>
                                   </div>
@@ -499,10 +537,9 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
 
                             </div>
-                    </div> 
+                    </div>
 
 
-                    
                   </div>
 
                 </div>
@@ -906,16 +943,16 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
 
                                               <div class="form-group col-md-12 col-sm-12">
                                                   <table id="tbl_movimientos" class="table table-hover">
-                                                    
+
                                                   </table>
                                               </div>
 
-                                             
+
 
                                             </div>
                                            </div>
                                       </div>
-                                  </div>         
+                                  </div>
 
 
                             </div>

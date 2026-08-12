@@ -865,8 +865,9 @@
 		public function consul_idpg_detped_estat($idpg_detped_vale)
 		{
 			$sql="SELECT estatus FROM vale_salida WHERE idpg_detped='$idpg_detped_vale'";
-			return ejecutarConsultaSimpleFila($sql);
-		}  
+			$rspta = ejecutarConsultaSimpleFila($sql);
+			return $rspta ?: ['estatus' => null];
+		}
 
 		public function quitar_prod_vale($idvale_salida,$idpg_detped)
 		{

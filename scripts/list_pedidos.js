@@ -1945,7 +1945,7 @@ function borrar_det_ped(idpg_detped, iddetalle_pedido, op, estatus) {
 
 	var idusuario = $("#idusuario").text();
 
-	if (idusuario == 4 || idusuario == 1 || idusuario == 28) {
+	if (idusuario == 4 || idusuario == 1 || idusuario == 28 || idusuario == 11) {
 
 		if (op == "") {
 
@@ -2181,9 +2181,9 @@ function edit_estatus(idpg_detped, op) {
 				$.post("ajax/list_pedidos.php?op=consul_idpg_detped_estat", { idpg_detped_vale: idpg_detped_vale }, function (data, status) {
 					data = JSON.parse(data);
 
-					var estat_envale = data.estatus;
+					var estat_envale = data ? data.estatus : null;
 
-					if (num_exist == 0 || estat_envale == 2 || estat_envale == 3) {
+					if (num_exist == 0 || estat_envale === null || estat_envale == 2 || estat_envale == 3) {
 
 						$("#btn_estatus_div" + idpg_detped).hide();
 						$("#select_div" + idpg_detped).show();
@@ -2351,7 +2351,7 @@ function abrir_envio_a_vale(idpg_detped, iddetalle_pedido, idpg_pedidos) {
 
 function guardar_det_ped(idpg_detped, iddetalle_pedido, idpg_pedidos) {
 	var idusuario = $("#idusuario").text();
-	if (idusuario == 1 || idusuario == 4 || idusuario == 28) {
+	if (idusuario == 1 || idusuario == 4 || idusuario == 28 || idusuario == 11) {
 		var estatus = $("#select_div" + idpg_detped).val();
 		var estatus2 = $("#estatus_detped" + idpg_detped).text();
 

@@ -27,6 +27,282 @@ if (!isset($_SESSION["nombre"])) {
         -moz-appearance: textfield;
 
       }
+
+      /* === Modal "Estatus de producto" (#modal_asign_estatus) === */
+      #modal_asign_estatus .modal-content {
+        border: 0;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 18px 50px rgba(15, 23, 42, .25);
+      }
+
+      #modal_asign_estatus .modal-header {
+        background: #f7f9fa;
+        border-bottom: 1px solid #e5e9ec;
+        padding: 18px 26px;
+      }
+
+      #modal_asign_estatus .modal-header .modal-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+        color: #37474f;
+        font-size: 19px;
+        margin: 0;
+      }
+
+      #modal_asign_estatus .modal-header .modal-title i {
+        color: #1e293b;
+      }
+
+      #modal_asign_estatus .close {
+        opacity: .5;
+        transition: opacity .15s;
+      }
+
+      #modal_asign_estatus .close:hover {
+        opacity: 1;
+      }
+
+      #modal_asign_estatus .modal-body {
+        padding: 22px 26px;
+        background: #fff;
+      }
+
+      #modal_asign_estatus .pgm-summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 18px;
+        background: #f7f9fa;
+        border: 1px solid #e5e9ec;
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      #modal_asign_estatus .pgm-control-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #f1f5f9;
+        color: #334155;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .3px;
+        padding: 5px 13px;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        margin-bottom: 14px;
+      }
+
+      #modal_asign_estatus .pgm-control-badge i {
+        color: #94a3b8;
+      }
+
+      #modal_asign_estatus .pgm-control-badge b {
+        font-size: 14px;
+        color: #0f172a;
+      }
+
+      #modal_asign_estatus .pgm-fields {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(170px, 1fr));
+        gap: 10px 30px;
+      }
+
+      #modal_asign_estatus .pgm-field label {
+        display: block;
+        font-size: 10.5px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        color: #95a5a6;
+        font-weight: 700;
+        margin-bottom: 2px;
+      }
+
+      #modal_asign_estatus .pgm-field .pgm-value {
+        font-size: 13.5px;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      #modal_asign_estatus .pgm-edit-icon {
+        color: #95a5a6;
+        cursor: pointer;
+        margin-left: 6px;
+        font-size: 12px;
+        transition: color .15s;
+      }
+
+      #modal_asign_estatus .pgm-edit-icon:hover {
+        color: #1e293b;
+      }
+
+      #modal_asign_estatus .pgm-add-btn {
+        white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: #1e293b;
+        color: #fff;
+        border: 1px solid #1e293b;
+        border-radius: 6px;
+        padding: 9px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background .15s, border-color .15s;
+      }
+
+      #modal_asign_estatus .pgm-add-btn:hover {
+        background: #0f172a;
+        border-color: #0f172a;
+        color: #fff;
+      }
+
+      #modal_asign_estatus .pgm-table-wrap {
+        border: 1px solid #e5e9ec;
+        border-radius: 8px;
+        overflow: auto;
+        max-height: 400px;
+      }
+
+      #modal_asign_estatus table.pgm-table {
+        width: 100%;
+        margin: 0;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+
+      #modal_asign_estatus table.pgm-table thead th {
+        position: sticky;
+        top: 0;
+        background: #f1f3f5;
+        color: #607080;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        font-weight: 700;
+        padding: 12px 14px;
+        border-bottom: 2px solid #e2e6ea;
+        z-index: 1;
+      }
+
+      #modal_asign_estatus table.pgm-table tbody td {
+        padding: 13px 14px;
+        font-size: 13px;
+        color: #37474f;
+        border-bottom: 1px solid #eef1f4;
+        vertical-align: middle;
+      }
+
+      #modal_asign_estatus table.pgm-table tbody tr:hover {
+        background: #f8fafb;
+      }
+
+      #modal_asign_estatus .pgm-save-indicator i {
+        font-size: 17px;
+      }
+
+      #modal_asign_estatus .pgm-status-btn {
+        border: 1px solid #334155;
+        border-radius: 6px;
+        padding: 6px 16px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #334155;
+        color: #fff;
+        letter-spacing: .3px;
+        transition: background .15s, border-color .15s;
+      }
+
+      #modal_asign_estatus .pgm-status-btn:hover {
+        background: #1e293b;
+        border-color: #1e293b;
+      }
+
+      #modal_asign_estatus .pgm-status-select {
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      #modal_asign_estatus .pgm-actions {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+      }
+
+      #modal_asign_estatus .pgm-action-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        color: #64748b;
+        font-size: 13px;
+        transition: background .15s, color .15s, border-color .15s;
+      }
+
+      #modal_asign_estatus .pgm-action-save:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+        color: #0f172a;
+      }
+
+      #modal_asign_estatus .pgm-action-delete:hover {
+        background: #fef2f2;
+        border-color: #fecaca;
+        color: #dc2626;
+      }
+
+      #modal_asign_estatus .pgm-action-link:hover {
+        background: #f8fafc;
+        border-color: #94a3b8;
+        color: #0f172a;
+      }
+
+      #modal_asign_estatus .pgm-action-link[disabled] {
+        opacity: .35;
+        cursor: not-allowed;
+      }
+
+      #modal_asign_estatus textarea.pgm-inline-edit {
+        border-radius: 8px;
+        font-size: 13px;
+      }
+
+      #modal_asign_estatus .pgm-obs-label {
+        color: #37474f;
+        cursor: pointer;
+        border-bottom: 1px dashed #cbd5e0;
+        padding-bottom: 1px;
+      }
+
+      #modal_asign_estatus .modal-footer {
+        background: #f7f9fa;
+        border-top: 1px solid #e5e9ec;
+        padding: 14px 26px;
+      }
+
+      #modal_asign_estatus .modal-footer .btn-secondary {
+        border-radius: 8px;
+        padding: 8px 20px;
+      }
+
+      @media (max-width: 640px) {
+        #modal_asign_estatus .pgm-fields {
+          grid-template-columns: 1fr;
+        }
+
+        #modal_asign_estatus .pgm-summary {
+          flex-direction: column;
+        }
+      }
     </style>
 
     <script type="text/javascript">
@@ -927,44 +1203,58 @@ if (!isset($_SESSION["nombre"])) {
         <div class="modal-content">
 
           <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">Estatus de producto</h4>
+            <h4 class="modal-title" id="myModalLabel"><i class="fa fa-tasks"></i> Estatus de producto</h4>
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
             </button>
           </div>
           <div class="modal-body">
 
-            <div class="col-md-12 col-sm-12">
-              <p style="font-size: 20px;">CONTROL: <b id="no_control_dividir"></b></p>
+            <input type="hidden" class="form-control" id="iddetalle_pedido" value="">
+
+            <div class="pgm-summary">
+              <div>
+                <div class="pgm-control-badge"><i class="fa fa-hashtag"></i> CONTROL <b id="no_control_dividir"></b>
+                </div>
+                <div class="pgm-fields">
+                  <div class="pgm-field">
+                    <label>Código</label>
+                    <div class="pgm-value" id="codigo_dividir"></div>
+                  </div>
+                  <div class="pgm-field">
+                    <label>Descripción</label>
+                    <div class="pgm-value" id="descrip_dividir"></div>
+                  </div>
+                  <div class="pgm-field">
+                    <label>Medidas</label>
+                    <div class="pgm-value" id="medidas_dividir"></div>
+                  </div>
+                  <div class="pgm-field">
+                    <label>Color</label>
+                    <div class="pgm-value" id="color_dividir"></div>
+                  </div>
+                  <div class="pgm-field">
+                    <label>Cantidad</label>
+                    <div class="pgm-value"><b id="cantidad_dividir"></b><i class="fa fa-edit pgm-edit-icon"
+                        title="Editar cantidad" onclick="edit_cant_total();"></i></div>
+                  </div>
+                  <div class="pgm-field">
+                    <label>Observaciones</label>
+                    <div class="pgm-value"><b id="observ_dividir_general"></b><i class="fa fa-edit pgm-edit-icon"
+                        title="Editar observaciones" onclick="edit_observ_total();"></i></div>
+                  </div>
+                </div>
+              </div>
+
+              <button id="" type="button" class="pgm-add-btn" data-toggle="tooltip" data-placement="top"
+                title="Agregar nuevo estatus" onclick="dividir_prod_ped();"><i class="fa fa-plus"></i> Nuevo
+                estatus</button>
             </div>
-            <div class="col-md-10 col-sm-10">
-              CODIGO: <b id="codigo_dividir"></b><br>
-              DESCRIPCIÓN: <b id="descrip_dividir"></b><br>
-              MEDIDAS: <b id="medidas_dividir"></b><br>
-              COLOR: <b id="color_dividir"></b><br>
-              CANTIDAD: <b id="cantidad_dividir"></b><i class="fa fa-edit" style="margin-left: 10px;"
-                onclick="edit_cant_total();"></i><br>
-              OBSERVACIONES: <b id="observ_dividir_general"></b><i class="fa fa-edit" style="margin-left: 10px;"
-                onclick="edit_observ_total();"></i>
-              <hr width="100%">
-              <input type="hidden" class="form-control" id="iddetalle_pedido" value="">
-            </div>
-            <div class="col-md-2">
 
-              <button id="" type="button" class="btn btn-sm btn-success btn-block" data-toggle="tooltip"
-                data-placement="top" title="Agregar nuevo estatus" onclick="dividir_prod_ped();">+</button>
-            </div>
-
-
-            <div class="col-md-12 col-sm-12"
-              style="border:0px solid #e5e5e5; overflow:scroll;height:auto; max-height: 400px;">
-
-
-              <table id="tbl_detalle_prod_tbl" class="table table-hover">
+            <div class="pgm-table-wrap">
+              <table id="tbl_detalle_prod_tbl" class="table pgm-table">
 
               </table>
             </div>
-
-
 
           </div>
           <div class="modal-footer">

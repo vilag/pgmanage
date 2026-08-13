@@ -1061,16 +1061,13 @@ switch ($_GET["op"]) {
 
 		echo '	<thead>
 	                              <tr>
-	                               	
-	                                <th width="5%"></th>
+	                                <th width="6%" class="text-center">Estado</th>
 	                                <th width="10%">Cant.</th>
-	                                <th width="20%">Observ.</th>
-	                                <th width="20%">Coment.</th>
-	                                <th width="10%">OP</th>
-	                                <th width="25%">Estatus</th>
-	                                <th width="5%">Guardar</th>
-	                                <th width="5%">Borrar</th>
-	                                <th></th>
+	                                <th width="22%">Observ.</th>
+	                                <th width="18%">Coment.</th>
+	                                <th width="8%">OP</th>
+	                                <th width="20%">Estatus</th>
+	                                <th width="16%" class="text-center">Acciones</th>
 	                              </tr>
 	                            </thead>
 	                            <tbody>';
@@ -1110,31 +1107,25 @@ switch ($_GET["op"]) {
 				$visib_estat2 = "hidden";
 			}
 
-			if ($idusuario == 1 OR $idusuario == 28) {
-				$display_update_c = "block";
-			} else {
-				$display_update_c = "none";
-			}
-
 			echo '
 								
 								<tr>
-									<td>
-										<span style="color: #900503; font-size: 20px; visibility: ' . $visib_estat2 . ';" id="eti_estat2' . $reg->idpg_detped . '"><i class="fa fa-close"></i></span>
-										<span style="color: #16BC05; font-size: 20px; visibility: ' . $visib_estat . ';" id="eti_estat1' . $reg->idpg_detped . '"><i class="fa fa-check"></i></span>
+									<td class="text-center">
+										<span class="pgm-save-indicator" style="color: #dc2626; visibility: ' . $visib_estat2 . ';" id="eti_estat2' . $reg->idpg_detped . '" title="Sin guardar"><i class="fa fa-times-circle"></i></span>
+										<span class="pgm-save-indicator" style="color: #16a34a; visibility: ' . $visib_estat . ';" id="eti_estat1' . $reg->idpg_detped . '" title="Guardado"><i class="fa fa-check-circle"></i></span>
 	                                </td>
 	                              
 	                                <td>
 	                                	
 	                                	<b id="eti_cant_prod' . $reg->idpg_detped . '" onmouseover="edit_cant(' . $reg->idpg_detped . ',\'' . $reg->op . '\');">' . $reg->cantidad . '</b>
-	                                	<textarea class="form-control" id="cant_prod_seg' . $reg->idpg_detped . '" cols="40" rows="3" style="display: ' . $display_update_c . ';" onmouseout="edit_cant_off(' . $reg->idpg_detped . ');" onkeyup="set_nosave(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\');">' . $reg->cantidad . '</textarea>
+	                                	<textarea class="form-control pgm-inline-edit" id="cant_prod_seg' . $reg->idpg_detped . '" cols="40" rows="3" style="display: none;" onmouseout="edit_cant_off(' . $reg->idpg_detped . ');" onkeyup="set_nosave(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\');">' . $reg->cantidad . '</textarea>
 
 	                                </td>
 
 	                                <td>
-	                                	<b id="eti_obs_prod' . $reg->idpg_detped . '" onmouseover="edit_obs(' . $reg->idpg_detped . ',\'' . $reg->op . '\');">________' . $observacion_prod . '_______</b>
+	                                	<b class="pgm-obs-label" id="eti_obs_prod' . $reg->idpg_detped . '" onmouseover="edit_obs(' . $reg->idpg_detped . ',\'' . $reg->op . '\');">' . $observacion_prod . '</b>
 
-	                                	<textarea class="form-control" id="obs_prod_seg' . $reg->idpg_detped . '" cols="40" rows="3" style="display: none;" onmouseout="edit_obs_off(' . $reg->idpg_detped . ');" onkeyup="set_nosave(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\');">' . $observacion_prod . '</textarea>
+	                                	<textarea class="form-control pgm-inline-edit" id="obs_prod_seg' . $reg->idpg_detped . '" cols="40" rows="3" style="display: none;" onmouseout="edit_obs_off(' . $reg->idpg_detped . ');" onkeyup="set_nosave(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\');">' . $observacion_prod . '</textarea>
 
 	                                </td>
 
@@ -1142,8 +1133,8 @@ switch ($_GET["op"]) {
 	                                
 	                                <td>' . $reg->op . '</td>
 	                                <td>
-	                                	<button id="btn_estatus_div' . $reg->idpg_detped . '" type="button" class="btn btn-dark" onmouseover="edit_estatus(' . $reg->idpg_detped . ',\'' . $reg->op . '\');"><span id="estatus_detped' . $reg->idpg_detped . '">' . $reg->estatus . '</span></button>
-	                                	<select  class="form-control" id="select_div' . $reg->idpg_detped . '" onchange="guardar_estatus1(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" style="display: none;" onmouseout="edit_estatus_off(' . $reg->idpg_detped . ');">
+	                                	<button id="btn_estatus_div' . $reg->idpg_detped . '" type="button" class="pgm-status-btn" onmouseover="edit_estatus(' . $reg->idpg_detped . ',\'' . $reg->op . '\');"><span id="estatus_detped' . $reg->idpg_detped . '">' . $reg->estatus . '</span></button>
+	                                	<select  class="form-control pgm-status-select" id="select_div' . $reg->idpg_detped . '" onchange="guardar_estatus1(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" style="display: none;" onmouseout="edit_estatus_off(' . $reg->idpg_detped . ');">
                                                  
 					                      <option value="">Seleccionar</option>
 					                      <option value="Produccion">Producción</option>
@@ -1157,21 +1148,14 @@ switch ($_GET["op"]) {
 
 	                               
 
-	                                <td>
-	                                	<button type="button" class="btn btn-info" onclick="guardar_det_ped(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" id="" ><i class="fa fa-save"></i></button>
-	                                	
+	                                <td class="text-center">
+	                                	<div class="pgm-actions">
+	                                		<button type="button" class="pgm-action-btn pgm-action-save" onclick="guardar_det_ped(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" title="Guardar"><i class="fa fa-save"></i></button>
+	                                		<button type="button" class="pgm-action-btn pgm-action-delete" onclick="borrar_det_ped(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->op . '\',\'' . $reg->estatus . '\');" title="Borrar"><i class="fa fa-trash"></i></button>
+	                                		<button type="button" class="pgm-action-btn pgm-action-link" onclick="abrir_envio_a_vale(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" ' . $disab_v . ' title="Enviar a vale de almacén"><i class="fa fa-external-link-square"></i></button>
+	                                	</div>
 	                                </td>
 
-	                                 <td>
-	                                	<button type="button" class="btn btn-danger" onclick="borrar_det_ped(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->op . '\',\'' . $reg->estatus . '\');" id="" ><i class="fa fa-trash"></i></button>
-	                                	
-	                                </td>
-
-	                                <td>
-	                                	<button type="button" class="btn" onclick="abrir_envio_a_vale(' . $reg->idpg_detped . ',\'' . $reg->iddetalle_pedido . '\',\'' . $reg->idpg_pedidos . '\');" id="" ' . $disab_v . ' title="Enviar a vale de almacén"><i class="fa fa-external-link-square"></i></button>
-	                                	
-	                                </td>
-	                                
 	                             </tr>
 
 
@@ -2236,10 +2220,17 @@ switch ($_GET["op"]) {
 
 	case 'buscar_prod_vale':
 
-
-
+		// Solo consulta - no debe borrar ni modificar nada (ver 'borrar_vale_salida' para la limpieza en cascada).
 		$idvales_almacen = $_GET['idvales_almacen'];
 
+		$rspta = $list_pedidos->buscar_prod_vale($idvales_almacen);
+
+		break;
+
+	case 'borrar_vale_salida':
+
+		// Limpieza en cascada tras borrar un vale: quita sus vale_salida y libera el estatus de los productos.
+		$idvales_almacen = $_GET['idvales_almacen'];
 
 		$rspta = $list_pedidos->buscar_prod_vale($idvales_almacen);
 
@@ -2248,36 +2239,13 @@ switch ($_GET["op"]) {
 			$idvale_salida = $reg->idvale_salida;
 			$idpg_detped = $reg->idpg_detped;
 
-
 			$conn = $conexion;
 
-
-
-			/*$sql_pre = "SELECT estatus FROM presalida WHERE idpresalida='$idpresalida'";
-			$result_pre = mysqli_query($conn, $sql_pre);
-			$row = mysqli_fetch_assoc($result_pre);
-
-			$estatus = $row['estatus'];*/
-
-			//if ($estatus==0) {
-
-			/*$sql="INSERT INTO almacen_pt_ed (idalmacen_pt,movimiento,cantidad,lote,fecha_hora,idsalida) VALUES('$idalmacen_pt','Salida','$cantidad','$lote','$fecha_hora','$identrega')";*/
 			$sql = "DELETE FROM vale_salida WHERE idvale_salida='$idvale_salida'";
 			$result = $conn->query($sql);
 
 			$sql2 = "UPDATE pg_detped SET estatus = '' WHERE idpg_detped='$idpg_detped'";
 			$result = $conn->query($sql2);
-
-
-			//}
-
-
-
-
-			/*$rspta2=$almacen_pt->guardar_salida($idalmacen_pt,$cantidad,$lote,$idpedido,$fecha_hora,$identrega);
-			echo json_encode($rspta2);*/
-
-			/*$sql="INSERT INTO (idalmacen_pt,movimiento,cantidad,lote,control,fecha_hora,idsalida) SELECT '$idalmacen_pt','Salida','$cantidad','$lote',no_control,'$fecha_hora', '$identrega' FROM pg_pedidos WHERE idpg_pedidos='$idpedido'";*/
 
 		}
 

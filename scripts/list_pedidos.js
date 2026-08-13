@@ -2267,15 +2267,10 @@ function edit_cant(idpg_detped, op) {
 }
 
 function edit_cant_off(idpg_detped) {
-	var idusuario = $("#idusuario").text();
-	if (idusuario != 28 && idusuario != 1) {
-		$("#eti_cant_prod" + idpg_detped).show();
-		$("#cant_prod_seg" + idpg_detped).hide();
-		var cant = $("#cant_prod_seg" + idpg_detped).val();
-		$("#eti_cant_prod" + idpg_detped).text(cant);
-	}
-
-
+	$("#eti_cant_prod" + idpg_detped).show();
+	$("#cant_prod_seg" + idpg_detped).hide();
+	var cant = $("#cant_prod_seg" + idpg_detped).val();
+	$("#eti_cant_prod" + idpg_detped).text(cant);
 }
 
 function abrir_envio_a_vale(idpg_detped, iddetalle_pedido, idpg_pedidos) {
@@ -4081,7 +4076,7 @@ function borrar_vale() {
 				$.post("ajax/list_pedidos.php?op=borrar_vale", { idvales_almacen: idvales_almacen }, function (data, status) {
 					data = JSON.parse(data);
 
-					$.post("ajax/list_pedidos.php?op=buscar_prod_vale&idvales_almacen=" + idvales_almacen, function (r) {
+					$.post("ajax/list_pedidos.php?op=borrar_vale_salida&idvales_almacen=" + idvales_almacen, function (r) {
 						$("#resum_acciones").html(r);
 
 
@@ -4348,6 +4343,8 @@ function edit_cant_total() {
 
 			}
 		});
+	} else {
+		bootbox.alert("No tiene permisos para realizar esta acción");
 	}
 
 

@@ -1254,6 +1254,7 @@ function calcular_avance2(idop_detalle_prod) {
 }
 
 var offset = 0;
+var filtros_reporte_prod = null;
 // var conteo_ps = 1;
 function listar_productos_produccion() {
 	// document.getElementById("btn_paginados").style.display="block";
@@ -1279,6 +1280,11 @@ function listar_productos_produccion() {
 
 	$.post("ajax/op.php?op=listar_productos_produccion&select_area_prod=" + select_area_prod + "&estatus=" + select_estatus + "&offset=" + offset + "&estatus_pedido=" + select_estatus_pedido, function (r) {
 		$("#tbl_productos_prod").html(r);
+		filtros_reporte_prod = {
+			area: $("#select_area_prod option:selected").text().trim().replace(/\s+/g, ""),
+			estatus: select_estatus == 1 ? "Terminados" : "EnProceso",
+			estatus_pedido: select_estatus_pedido == 1 ? "Entregados" : "SinEntregar"
+		};
 	}).fail(function () {
 		bootbox.alert("Ocurrió un error al consultar los datos.");
 	}).always(function () {
@@ -2090,6 +2096,17 @@ document.getElementById("exportar_rep_xlsx").addEventListener('click', function 
 	/* Export to file (start a download) */
 	//var tipo_consulta = $("#tipo_consulta").text();
 	XLSX.writeFile(wb, "Reporte_OP" + "_" + area + ".xlsx");
+});
+
+document.getElementById("exportar_prod_xlsx").addEventListener('click', function () {
+	if (filtros_reporte_prod == null || $("#tbl_productos_prod tbody tr").length == 0) {
+		bootbox.alert("No hay registros para exportar, realice una búsqueda primero.");
+		return;
+	}
+
+	var wb = XLSX.utils.table_to_book(document.getElementById("tbl_productos_prod"));
+	var f = filtros_reporte_prod;
+	XLSX.writeFile(wb, "Reporte_Productos_" + f.area + "_" + f.estatus + "_" + f.estatus_pedido + ".xlsx");
 });
 
 

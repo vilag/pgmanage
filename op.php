@@ -211,6 +211,7 @@ if ($_SESSION['administrador']==1 || $_SESSION['agente_ventas1']==1 || $_SESSION
                                                       </div> 
                                                       <div class="form-group col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding-top: 27px;">
                                                         <button class="btn btn-primary" onclick="listar_productos_produccion();">Buscar</button>
+                                                        <button id="exportar_prod_xlsx" type="button" class="btn btn-dark">Exportar a Excel</button>
                                                       </div> 
                                                     </div>
                                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12" id="">

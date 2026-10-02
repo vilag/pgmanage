@@ -1266,13 +1266,24 @@ function listar_productos_produccion() {
 	// alert(select_area_prod);
 	// alert(select_estatus);
 	var dialog = bootbox.dialog({
-		message: '<p class="text-center mb-0"><i class="fas fa-spinfa-cog"></i> Consultando datos...</p>',
+		message: '<p class="text-center mb-0"><i class="fas fa-spin fa-cog"></i> Consultando datos...</p>',
 		closeButton: false
+	});
+
+	// Bootstrap 4 ignora modal('hide') mientras la animación de apertura sigue en curso
+	var dialog_mostrado = false, consulta_terminada = false;
+	dialog.on('shown.bs.modal', function () {
+		dialog_mostrado = true;
+		if (consulta_terminada) dialog.modal('hide');
 	});
 
 	$.post("ajax/op.php?op=listar_productos_produccion&select_area_prod=" + select_area_prod + "&estatus=" + select_estatus + "&offset=" + offset + "&estatus_pedido=" + select_estatus_pedido, function (r) {
 		$("#tbl_productos_prod").html(r);
-		dialog.modal('hide');
+	}).fail(function () {
+		bootbox.alert("Ocurrió un error al consultar los datos.");
+	}).always(function () {
+		consulta_terminada = true;
+		if (dialog_mostrado) dialog.modal('hide');
 	});
 }
 

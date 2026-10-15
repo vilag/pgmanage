@@ -215,7 +215,7 @@
                 // ';  
                 // }
                 
-                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 23) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28)) {
+                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 23) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] == 29)) {
                   echo '    
                                 
                               <li><a><i class="fa fa-tasks"></i> Pedidos <span class="fa fa-chevron-down"></span></a>
@@ -228,7 +228,7 @@
 
 
 
-                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 23) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28)) {
+                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 23) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] == 29)) {
                   echo '     
                                   
 
@@ -297,7 +297,7 @@
 
 
 
-                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28)) {
+                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 6) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] == 29)) {
                   echo '    
                                 <li><a><i class="fa fa-search"></i> Consultar <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
@@ -313,7 +313,7 @@
 
 
 
-                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28)) {
+                if (($_SESSION['idusuario'] >= 1 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 26) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] == 29)) {
                   echo '     
                                   
                               </ul>
@@ -328,7 +328,7 @@
                 <?php
 
 
-                if (($_SESSION['idusuario'] == 1) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] >= 4 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] >= 14 AND $_SESSION['idusuario'] <= 21) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25)) {
+                if (($_SESSION['idusuario'] == 1) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] >= 4 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 22) OR ($_SESSION['idusuario'] >= 14 AND $_SESSION['idusuario'] <= 21) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 29)) {
                   echo '    
                                 <li><a><i class="fa fa-plus-square-o"></i> Producción <span class="fa fa-chevron-down"></span></a>
                                   <ul class="nav child_menu">
@@ -359,7 +359,7 @@
                         ';
                 }
 
-                if (($_SESSION['idusuario'] == 1) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] >= 4 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 18) OR ($_SESSION['idusuario'] >= 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25)) {
+                if (($_SESSION['idusuario'] == 1) OR ($_SESSION['idusuario'] == 28) OR ($_SESSION['idusuario'] >= 4 AND $_SESSION['idusuario'] <= 5) OR ($_SESSION['idusuario'] >= 7 AND $_SESSION['idusuario'] <= 12) OR ($_SESSION['idusuario'] == 14) OR ($_SESSION['idusuario'] == 18) OR ($_SESSION['idusuario'] >= 22) OR ($_SESSION['idusuario'] == 24) OR ($_SESSION['idusuario'] == 25) OR ($_SESSION['idusuario'] == 29)) {
                   echo '     
                                   </ul>
                                 </li>

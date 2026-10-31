@@ -1,1 +1,10 @@
-
+# Bloquea por internet la carpeta .git (código e historial) y archivos que no deben descargarse.
+# Hostinger ya bloquea /.git; esto lo asegura también en cualquier otro servidor (Docker, XAMPP).
+# No se bloquea todo lo que empieza con punto: /.well-known lo usa el certificado SSL.
+<IfModule mod_alias.c>
+RedirectMatch 404 /\.git(/|$)
+RedirectMatch 404 /\.(gitignore|dockerignore)$
+RedirectMatch 404 /sql/.*\.sql$
+# zuno ya no se usa (2026-10-29): se bloquea por completo. Sus archivos siguen en el servidor.
+RedirectMatch 404 /zuno(/|$)
+</IfModule>

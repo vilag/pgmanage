@@ -1,7 +1,8 @@
+<?php require_once "config/seguridad.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   
+
    
 
 

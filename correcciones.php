@@ -9,7 +9,7 @@ if (!isset($_SESSION["nombre"]))
 }
 else
 {
-require 'header.php';
+require 'header_selector.php';
 if ($_SESSION['administrador']==1)
 {
 ?>

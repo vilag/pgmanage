@@ -1,0 +1,7 @@
+# Configuración del módulo "Refrescar QA": contiene credenciales de producción y solo existe en QA
+config/entorno_qa.php
+
+# Conexión a la base de datos: cada servidor (producción, QA, equipo local) tiene la suya.
+# OJO: config/global.php todavía está en el historial de git; esta línea solo impide agregarlo de nuevo
+# si se deja de rastrear. Ver la guía de despliegue antes de quitarlo de git.
+config/global.php

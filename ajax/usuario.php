@@ -1,6 +1,11 @@
 <?php
-session_start(); 
+//Cookie de sesión no legible desde JavaScript y no enviada en peticiones iniciadas por otros sitios.
+//Aplica a la cookie que se crea o se regenera aquí (en el login), que es la que usa el resto del sistema.
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_samesite', 'Lax');
+session_start();
 require_once "../modelos/Usuario.php";
+require_once "../config/seguridad.php";
 
 $usuario=new Usuario();
 
@@ -35,18 +40,19 @@ switch ($_GET["op"]){
 	break;
 
 	case 'verificar':
-		$logina=$_POST['logina'];
-	    $clavea=$_POST['clavea'];
+		$logina=isset($_POST['logina']) ? $_POST['logina'] : '';
+	    $clavea=isset($_POST['clavea']) ? $_POST['clavea'] : '';
 
 	    //Hash SHA256 en la contraseña
 		//$clavehash=hash("SHA256",$clavea);
 
-		$rspta=$usuario->verificar($logina, $clavea);
-
-		$fetch=$rspta->fetch_object();	
+		$fetch=$usuario->verificar($logina, $clavea);
 
 		if (isset($fetch))
 	    {
+	        //Nuevo id de sesión al iniciar: un id conocido antes del login (fijación de sesión) deja de servir
+	        session_regenerate_id(true);
+
 	        //Declaramos las variables de sesión
 	        $_SESSION['idusuario']=$fetch->idusuario;
 	        $_SESSION['nombre']=$fetch->nombre;

@@ -6,7 +6,7 @@ session_start();
 if (!isset($_SESSION["nombre"])) {
   header("Location: login.php");
 } else {
-  require 'header.php';
+  require 'header_selector.php';
   if ($_SESSION['administrador'] == 1 || $_SESSION['agente_ventas1'] == 1 || $_SESSION['Administrativo'] == 1 || $_SESSION['consulta1'] == 1) {
     ?>
     <style>
